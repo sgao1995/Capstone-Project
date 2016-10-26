@@ -1,0 +1,88 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+
+\usepackage[round]{natbib}
+\title{CS 4ZP6A: Proof of Concept Plan\\Cat-and-Mouse Game}
+\author{\textbf{Team \#8, ClawSome Games}
+		\\ Yuan Gao (1330064)
+		\\ Su Gao (1330065)
+		\\ James Lee (1318125)
+		\\ James Zhu (1317457) 
+}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+\newpage
+\section{Introduction}
+\paragraph{}This Proof of Concept Plan will outline the major structural components (or modules) which will be integrated together to create the final Product.
+\paragraph{} Specifically, the challenges and  risks inherent in the development of these modules within the deliverance of the Product will be also be discussed, with a view to demonstrating that these can be overcome.
+
+\section{Demonstration Plan}
+\paragraph{} For the Proof of Concept Demonstration, the Development Team will present an executable form of the Product, which should be runnable within the desktop environment of the Microsoft Windows operating system and  be displayable to an audience through a display device (e.g. such as a projector).
+\paragraph{}In particular, the following points should be included and successfully demonstrated:
+\subsection{Basic Movement and Camera Controls}
+\subsubsection{\textbf{The User should be able to move their character freely and interact with the virtual environment (the so-called "Map") on a basic level.}}
+\paragraph{}This entails:
+
+\begin{enumerate}
+  \item The ability to move characters in the X, Y and Z axes, to the extent which is allowed by the terrain, the laws of physics and other physical constraints as defined in the environment.
+  \item All objects within the environment (including the characters) will be treated as Rigid Bodies, and be subjected to the laws of physics as defined for such objects by the Unity Engine.
+  \item The camera will be placed and be able to be moved around to display the environment (such as objects and other players, utilising varying perspectives and modes of operation.
+  \newline\textit{For example: Located in a fixed position behind the user.}
+\end{enumerate}
+
+\subsection{Basic Multiplayer Capabilities}
+\subsubsection{\textbf{The User should be able to connect to a shared game instance of up to a maximum of 4 other users through a networked connection, and see and interact in real-time within a common environment.}}
+\paragraph{}This entails:
+
+\begin{enumerate}
+  \item The ability to create and/or join an existing multiplayer session over the network which is hosted on a server.
+  \item The ability to see the user and sessional details (such as IP address, in-game ID, etc) of all players who are connected to the current multiplayer session.
+  \item The ability to join a Room to interact with all the players within the session in a common environment ("map")
+  \item The ability to exit a map while still remaining connected to a session.
+  \item The ability to exit the current multiplayer session.
+\end{enumerate}
+
+\subsection{Basic User Interface}
+\subsubsection{\textbf{The User should be able to start a new instance of, customise options for and end an instance of a game.}}
+\paragraph{}This entails:
+
+\begin{enumerate}
+  \item A \textbf{Main Menu} which should allow users to start a new game, adjust various in-game options and exit the game.
+  \item An \textbf{Option Menu} which should allow Users to set various game settings. Specifically, players should be able to:
+  
+  \begin{itemize}
+      \item Adjust the level of graphical fidelity to fit their personal preferences and particular hardware profile.
+      \item Toggle the input and levels of in-game audio (e.g. such as background music or SFX).
+  \end{itemize}
+  
+ \item A \textbf{New Game Menu} which should allow users to start a new game, either by creating a new multiplayer session or connecting to an existing session.
+ \item A \textbf{Multiplayer Hub} which should allow users to:
+ 
+  \begin{itemize}
+      \item See the users which are within the current session.
+      \item Enter a \textit{Ready} state to begin a new match within the session.
+      \item When all users are in the \textit{Ready} state, begin a new Match (by loading of the map, etc).
+  \end{itemize}
+\end{enumerate}
+
+\subsection{Demonstration Map}
+\subsubsection{\textbf{The User should be able to interact within a map environment.}}
+\paragraph{}This entails:
+
+\begin{enumerate}
+  \item A ground environment which will direct and limit the movements of a character, as appropriate.
+  \item Several map objects (such as trees) which a character may interact with physically (such as by bumping into them)
+  \item A statically-generated maze with basic materials (such as \textit{concrete, rock, stone. etc}.
+  \item A static sky box.
+\end{enumerate}
+
+\section{Conclusion}
+\paragraph{}The successful demonstration of the key structural components which will make up the Product, as outlined in this Proof of Concept Plan, should:
+\begin{itemize}
+    \item \textbf{Inform} the Customer (as well as other interested Parties) to a reasonable degree of the mitigation of risks, and thus, overall feasibility of this project going forward.
+    \item \textbf{Allow} for all Parties to provide suggestions and amendments to the Project earlier on in the development process.
+\end{itemize}
+\end{document}
