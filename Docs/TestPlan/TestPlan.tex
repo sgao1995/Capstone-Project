@@ -11,13 +11,13 @@
 }
 \usepackage[round]{natbib}
 \title{SE 3XA3: Test Plan\\Title of Project}
-\author{Team \#, Team Name
-		\\ Student 1 name and macid
-		\\ Student 2 name and macid
-		\\ Student 3 name and macid
+\author{\textbf{Team \#8, ClawSome Games}
+		\\ Yuan Gao (1330064)
+		\\ Su Gao (1330065)
+		\\ James Lee (1318125)
+		\\ James Zhu (1317457) 
 }
 \date{\today}
-\input{../Comments}
 \begin{document}
 \maketitle
 \pagenumbering{roman}
@@ -39,7 +39,9 @@ Date 2 & 1.1 & Notes\\
 This document ...
 \section{General Information}
 \subsection{Purpose}
+\paragraph{}The purpose of the Test Plan is to detail the testing process of the project. What to test, how to test each item, and when to test is discussed in detail below. 
 \subsection{Scope}
+\paragraph{}The first test plan will be to test the basic components of the game, making sure that key elements such as multiplayer are functional, as well as basic design concepts such as map generation, terrain, and physics. The first test plan will not involve "game balancing" concepts or detailed graphical testing. 
 \subsection{Acronyms, Abbreviations, and Symbols}
 	
 \begin{table}[hbp]
@@ -68,9 +70,13 @@ Term2 & Definition2\\
 \section{Plan}
 	
 \subsection{Software Description}
+\paragraph{}The game will be developed using the Unity game engine, using the Photon Unity Networking framework for enabling multiplayer design. C# will be used as our main coding language.
 \subsection{Test Team}
+\paragraph{}The project designers will supervise the testing process, acting as the leaders for the test team. Individuals unrelated to the creation of the project will be asked to test the game and provide insight on the basic testing elements that we are looking for. 
 \subsection{Automated Testing Approach}
+\paragraph{}Some automated testing can also be done, through creation of certain functions in the code. For example, if we wished to test our map creation algorithm, we could write a function to automatically create 100 or more different maps and test to see if each one matched our requirements. 
 \subsection{Testing Tools}
+\paragraph{}We will mainly use unity as our testing tool, as well as use ourselves and peers to review the code and make sure everything is working as planned.
 \subsection{Testing Schedule}
 		
 See Gantt Chart at the following url ...
@@ -110,27 +116,44 @@ How test will be performed:
 		
 \paragraph{Title for Test}
 \begin{enumerate}
-\item{test-id1\\}
-Type: 
+\item{}
+\textbf{Map Creation Test}
+
+Type: Static
 					
-Initial State: 
+Initial State: Match ready to be started.  
 					
-Input/Condition: 
+Input/Condition: User starts the match. 
 					
-Output/Result: 
+Output/Result: A map is automatically generated, and the user is placed in the map. 
 					
-How test will be performed: 
+How test will be performed: The game will be set up such that a match would be ready to be started. Upon starting the match, a map would be generated and the user placed in the map. If the map was generated successfully and follows all the map design guidelines (all areas accessible) then the test is a success. 
 					
-\item{test-id2\\}
-Type: Functional, Dynamic, Manual, Static etc.
+\item{}
+\textbf{Movement Test}
+
+Type: Functional
 					
-Initial State: 
+Initial State: The user's character will be placed at a random position in the maze.
 					
-Input: 
+Input: Keyboard and mouse inputs.
 					
-Output: 
+Result: The character on screen will move and turn accordingly.
 					
-How test will be performed: 
+How test will be performed: Users will be asked to start the game, where they would find their character in a random position in the maze. They would then be asked to perform certain keyboard and mouse inputs, causing the character to move and causing the camera to rotate as well. If the movements correspond to the correct input, then the test is a success. 
+
+\item{}
+\textbf{Collision Test}
+
+Type: Functional
+					
+Initial State: User's character is placed facing a wall.
+					
+Input: Keyboard input.
+					
+Result: The character will approach the wall and stop upon contact with the wall.  
+					
+How test will be performed: Participants will be asked to press the keyboard key corresponding to forward movement, either "W" or the up arrow key, and cause the character to move forwards towards a maze wall. If the character stops upon contact with the wall, then the test is a success. 
 \end{enumerate}
 \subsubsection{Area of Testing2}
 ...
