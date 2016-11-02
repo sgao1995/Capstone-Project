@@ -31,14 +31,12 @@
 \begin{tabularx}{\textwidth}{p{3cm}p{2cm}X}
 \toprule {\bf Date} & {\bf Version} & {\bf Notes}\\
 \midrule
-Date 1 & 1.0 & Notes\\
-Date 2 & 1.1 & Notes\\
+11/2/2016 & 1.0 & Test Plan 0\\
 \bottomrule
 \end{tabularx}
 \end{table}
 \newpage
 \pagenumbering{arabic}
-This document ...
 \section{General Information}
 \subsection{Purpose}
 \paragraph{}The purpose of the Test Plan is to detail the testing process of the project. What to test, how to test each item, and when to test is discussed in detail below. 
@@ -52,8 +50,8 @@ This document ...
 \toprule
 \textbf{Abbreviation} & \textbf{Definition} \\
 \midrule
-Abbreviation1 & Definition1\\
-Abbreviation2 & Definition2\\
+API & API stands for Application Programming Interfaces.\\
+PUN & PUN stands for Photon Unity Networking\\
 \bottomrule
 \end{tabularx}
 \end{table}
@@ -63,8 +61,8 @@ Abbreviation2 & Definition2\\
 \toprule
 \textbf{Term} & \textbf{Definition}\\
 \midrule
-Term1 & Definition1\\
-Term2 & Definition2\\
+Cat & One of the character the user can choose to play as in the game\\
+Mouse & The other character the user can choose to play as in the game\\
 \bottomrule
 \end{tabularx}
 \end{table}	
@@ -83,8 +81,6 @@ $\beta$ & Variable & Character movement speed bonuses, total movement speed = \t
 \bottomrule
 \end{tabularx}
 \end{table}
-
-\subsection{Overview of Document}
 \section{Plan}
 	
 \subsection{Software Description}
@@ -94,10 +90,22 @@ $\beta$ & Variable & Character movement speed bonuses, total movement speed = \t
 \subsection{Automated Testing Approach}
 \paragraph{}Some automated testing can also be done, through creation of certain functions in the code. For example, if we wished to test our map creation algorithm, we could write a function to automatically create 100 or more different maps and test to see if each one matched our requirements. 
 \subsection{Testing Tools}
-\paragraph{}We will mainly use unity as our testing tool, as well as use ourselves and peers to review the code and make sure everything is working as planned.
+\paragraph{}We will use Unity as our testing tool, as well as use ourselves and peers to review the code and game to make sure everything is working as planned. We will also need at least two computers to test the networking and multiplayer capabilities, and a facility with internet access (such as a classroom).
 \subsection{Testing Schedule}
-		
-See Gantt Chart at the following url ...
+\begin{table}[ht]
+\caption{\textbf{Testing Schedule}} \label{Table}
+\begin{tabularx}{\textwidth}{p{3cm}p{2cm}X}
+\toprule
+\textbf{Test Date} & \textbf{Testers} & \textbf{Objective} \\
+\midrule
+11/12/2016 & Creators of the game & Completion of a demo of the game. \\
+11/13/2016 & Creators of the game & Testing of all unit test cases. \\
+11/18/2016 & Player Testers & Testing of our proof of concept demo game. \\
+11/20/2016 & Creators of the game and Player Testers & Load Test.\\
+11/25/2016 & Creators of the game & Demonstration of proof of concept demo.\\
+\bottomrule
+\end{tabularx}
+\end{table}
 \section{System Test Description}
 	
 \subsection{Tests for Functional Requirements}
@@ -459,51 +467,114 @@ See Gantt Chart at the following url ...
 \end{mdframed}
 
 \subsection{Tests for Nonfunctional Requirements}
-\subsubsection{Area of Testing1}
-		
-\paragraph{Title for Test}
-\begin{enumerate}
-\item{}
-\textbf{Map Creation Test}
+\subsubsection{Look and Feel Test}
 
-Type: Static
-					
-Initial State: Match ready to be started.  
-					
-Input/Condition: User starts the match. 
-					
-Output/Result: A map is automatically generated, and the user is placed in the map. 
-					
-How test will be performed: The game will be set up such that a match would be ready to be started. Upon starting the match, a map would be generated and the user placed in the map. If the map was generated successfully and follows all the map design guidelines (all areas accessible) then the test is a success. 
-					
-\item{}
-\textbf{Movement Test}
+\begin{mdframed}[linewidth=1pt]
+\begin{tabularx}{\textwidth}{@{}p{3cm}X@{}}
+{\bf Test 3.2.1.1:} & {\bf Appearance Test}\\[\baselineskip]
+{\bf Description:} & How easy it is for users to navigate the interface upon looking at it.\\[0.5\baselineskip]
+{\bf Type:} & Static Unit Test\\[0.5\baselineskip]
+{\bf Tester(s):} & Game Testers\\[0.5\baselineskip]
+{\bf Initial State:} & User has not seen the interface for the game yet.\\[0.5\baselineskip]
+{\bf Input:} & Mouse, Keyboard to navigate through the interface.\\[0.5\baselineskip]
+{\bf Output:} & Game Menu State\\[0.5\baselineskip]
+{\bf Pass:} & Game tester has no problem navigating the interface.\\[0.5\baselineskip]
+{\bf How test will be performed:} & User will open the game, and will use their mouse and keyboard to navigate through the menu to access the game and lobby. The user must then look at the interface for both the Cat and the Mouse characters.
+\end{tabularx}
+\end{mdframed}
 
-Type: Functional
-					
-Initial State: The user's character will be placed at a random position in the maze.
-					
-Input: Keyboard and mouse inputs.
-					
-Result: The character on screen will move and turn accordingly.
-					
-How test will be performed: Users will be asked to start the game, where they would find their character in a random position in the maze. They would then be asked to perform certain keyboard and mouse inputs, causing the character to move and causing the camera to rotate as well. If the movements correspond to the correct input, then the test is a success. 
 
-\item{}
-\textbf{Collision Test}
 
-Type: Functional
-					
-Initial State: User's character is placed facing a wall.
-					
-Input: Keyboard input.
-					
-Result: The character will approach the wall and stop upon contact with the wall.  
-					
-How test will be performed: Participants will be asked to press the keyboard key corresponding to forward movement, either "W" or the up arrow key, and cause the character to move forwards towards a maze wall. If the character stops upon contact with the wall, then the test is a success. 
-\end{enumerate}
-\subsubsection{Area of Testing2}
-...
+\subsubsection{Usability Test}
+\begin{mdframed}[linewidth=1pt]
+\begin{tabularx}{\textwidth}{@{}p{3cm}X@{}}
+{\bf Test 3.2.2.1:} & {\bf Spelling and Grammar Test}\\[\baselineskip]
+{\bf Description:} & Check for correct spelling and grammar.\\[0.5\baselineskip]
+{\bf Type:} & Static Unit Test\\[0.5\baselineskip]
+{\bf Tester(s):} & Game Testers\\[0.5\baselineskip]
+{\bf Initial State:} & User has not read any text in our game.\\[0.5\baselineskip]
+{\bf Input:} & Mouse, Keyboard to navigate through the game.\\[0.5\baselineskip]
+{\bf Output:} & Game Menu State\\[0.5\baselineskip]
+{\bf Pass:} & Every piece of text must have perfect spelling and grammar.\\[0.5\baselineskip]
+{\bf How test will be performed:} & The user will navigate every interface in the game and check for any spelling and grammar mistakes. If any mistakes are found, the user will write down where they found the mistake and if it is a spelling or grammar mistake. 
+\end{tabularx}
+\end{mdframed}
+
+\begin{mdframed}[linewidth=1pt]
+\begin{tabularx}{\textwidth}{@{}p{3cm}X@{}}
+{\bf Test 3.2.2.2:} & {\bf Control Test}\\[\baselineskip]
+{\bf Description:} & How easy it is for users to figure out controls.\\[0.5\baselineskip]
+{\bf Type:} & Static Unit Test\\[0.5\baselineskip]
+{\bf Tester(s):} & Game Testers\\[0.5\baselineskip]
+{\bf Initial State:} & Users have entered a game of Cat and Mouse. \\[0.5\baselineskip]
+{\bf Input:} & Mouse, and Keyboard to play the game.\\[0.5\baselineskip]
+{\bf Output:} & Game Menu State\\[0.5\baselineskip]
+{\bf Pass:} & Controls must be easy to understand and use. Users should be able to realize that the mouse controls camera movement, and that the keyboard will control movement.\\[0.5\baselineskip]
+{\bf How test will be performed:} & Users will first need to join up a lobby and enter a game. After they enter a game, users should move the mouse to test the camera controls. Then, they need to use the keyboard controls (w,a,s,d,spacebar,etc.) to move the character around.
+\end{tabularx}
+\end{mdframed}				
+
+
+\subsubsection{Performance Test}
+\begin{mdframed}[linewidth=1pt]
+\begin{tabularx}{\textwidth}{@{}p{3cm}X@{}}
+{\bf Test 3.2.3.1:} & {\bf Speed and Latency Test}\\[\baselineskip]
+{\bf Description:} & Test of connection quality when playing a match.\\[0.5\baselineskip]
+{\bf Type:} & Static Unit Test\\[0.5\baselineskip]
+{\bf Tester(s):} & Game Testers\\[0.5\baselineskip]
+{\bf Initial State:} & Users playing a match of Cat and Mouse. \\[0.5\baselineskip]
+{\bf Input:} & Mouse and Keyboard to be able to play the game, internet speed of at least 1Mbps.\\[0.5\baselineskip]
+{\bf Output:} & Game Menu State\\[0.5\baselineskip]
+{\bf Pass:} & Measured ping must not exceed 100ms with internet speed of at least 1Mbps.\\[0.5\baselineskip]
+{\bf How test will be performed:} & Users will play a match of Cat and Mouse, in which ping will be displayed to them. As they are playing, developers will watch and record highest ping for each user. 
+\end{tabularx}
+\end{mdframed}
+
+
+\begin{mdframed}[linewidth=1pt]
+\begin{tabularx}{\textwidth}{@{}p{3cm}X@{}}
+{\bf Test 3.2.3.2:} & {\bf Fault Tolerance Test}\\[\baselineskip]
+{\bf Description:} & Test error messages regarding server connection.\\[0.5\baselineskip]
+{\bf Type:} & Static Unit Test\\[0.5\baselineskip]
+{\bf Tester(s):} & Game Testers\\[0.5\baselineskip]
+{\bf Initial State:} & Users must be in a match and connected to each other.\\[0.5\baselineskip]
+{\bf Input:} & Mouse, Keyboard to be able to interact with the game.\\[0.5\baselineskip]
+{\bf Output:} & Game Menu State\\[0.5\baselineskip]
+{\bf Pass:} & Error messages must be displayed when network connectivity has problems. To be more specific: An error message must appear if one user is unwillingly disconnected from a server (such as when their internet access is cut off) which explains why they were disconnected. Players who are not forcibly disconnected must still be able to play the game with no problems.\\[0.5\baselineskip]
+{\bf How test will be performed:} & After two users join the same match, one will purposely shut off their internet access and get an error message. The other will be testing if they are still in the match and are able to perform actions such as moving their camera and character. 
+\end{tabularx}
+\end{mdframed}
+
+
+\subsubsection{Operational and Environmental Test}
+\begin{mdframed}[linewidth=1pt]
+\begin{tabularx}{\textwidth}{@{}p{3cm}X@{}}
+{\bf Test 3.2.4.1:} & {\bf Operational System Test}\\[\baselineskip]
+{\bf Description:} & Test if the game works for a selection of Operating Systems.\\[0.5\baselineskip]
+{\bf Type:} & Static Unit Test\\[0.5\baselineskip]
+{\bf Tester(s):} & The creators of the game\\[0.5\baselineskip]
+{\bf Initial State:} & Executable for the game has not yet been executed on every Operating System we want to test it on.\\[0.5\baselineskip]
+{\bf Input:} & Computer running on Windows 7, computer running on Windows 8, Computer running on Windows 10. Mouse to click the executable file.\\[0.5\baselineskip]
+{\bf Output:} & Game Menu State\\[0.5\baselineskip]
+{\bf Pass:} & The game works on Windows 7, 8 and 10, and has no errors preventing it from being opened or played.\\[0.5\baselineskip]
+{\bf How test will be performed:} & Developer will run the executable on machines running Windows 7, 8, and 10. File will be transferred to every machine, and the executable file will be clicked on to run the game. When the game is open, the developer will check for any errors when navigating menus and joining a game. 
+\end{tabularx}
+\end{mdframed}
+
+\begin{mdframed}[linewidth=1pt]
+\begin{tabularx}{\textwidth}{@{}p{3cm}X@{}}
+{\bf Test 3.2.4.2:} & {\bf Graphics API Test}\\[\baselineskip]
+{\bf Description:} & Test if game works with certain graphics APIs.\\[0.5\baselineskip]
+{\bf Type:} & Static Unit Test\\[0.5\baselineskip]
+{\bf Tester(s):} & The creators of the game\\[0.5\baselineskip]
+{\bf Initial State:} & Game has not been played and tested with DirectX9 and DirectX11 graphics APIs.\\[0.5\baselineskip]
+{\bf Input:} & Computers that can use DirectX9 and DirectX11 graphics APIs. Mouse to click on the executable.\\[0.5\baselineskip]
+{\bf Output:} & Game Menu State\\[0.5\baselineskip]
+{\bf Pass:} & Game can be ran and played in DirectX9 and DirectX11.\\[0.5\baselineskip]
+{\bf How test will be performed:} & Developer will run the game on computers that have DirectX9 and DirectX11. The developer must check for if there are any problems with game objects after entering a game using both APIs.
+\end{tabularx}
+\end{mdframed}
+
 
 \section{Tests for Proof of Concept}
 We will have a proof of concept to demonstrate that our project ideas are possible.
@@ -524,7 +595,7 @@ We will have a proof of concept to demonstrate that our project ideas are possib
 
 \begin{mdframed}[linewidth=1pt]
 \begin{tabularx}{\textwidth}{@{}p{3cm}X@{}}
-{\bf Test 4.1.1:} & {\bf Player Load Test}\\[\baselineskip]
+{\bf Test 4.1.2:} & {\bf Player Load Test}\\[\baselineskip]
 {\bf Description:} & Test if game can handle amount of users that PUN states it can support. This is a risk because for the game to be successful, we want to ensure that the game can handle max amount of players. state\\[0.5\baselineskip]
 {\bf Type:} & Load Test\\[0.5\baselineskip]
 {\bf Tester(s):} & Game Testers\\[0.5\baselineskip]
@@ -537,7 +608,7 @@ We will have a proof of concept to demonstrate that our project ideas are possib
 
 \begin{mdframed}[linewidth=1pt]
 \begin{tabularx}{\textwidth}{@{}p{3cm}X@{}}
-{\bf Test 4.1.1:} & {\bf Player Interaction Test}\\[\baselineskip]
+{\bf Test 4.1.3:} & {\bf Player Interaction Test}\\[\baselineskip]
 {\bf Description:} & Test if player interactions are concurrent. Successful multiplayer interactions is necessary for the product to be successful. state\\[0.5\baselineskip]
 {\bf Type:} & Dynamic Unit Test\\[0.5\baselineskip]
 {\bf Tester(s):} & Game creators and Game Testers\\[0.5\baselineskip]
@@ -555,7 +626,7 @@ Players can use the w, a, s, and d keys to control the Cat or Mouse and should b
 
 \begin{mdframed}[linewidth=1pt]
 \begin{tabularx}{\textwidth}{@{}p{3cm}X@{}}
-{\bf Test 4.1.1:} & {\bf Proof of Concept Testing}\\[\baselineskip]
+{\bf Test 4.2.1:} & {\bf Proof of Concept Testing}\\[\baselineskip]
 {\bf Description:} & Test the demo of the game to show that all the risks can be overcome. state\\[0.5\baselineskip]
 {\bf Type:} & Proof of Concept\\[0.5\baselineskip]
 {\bf Tester(s):} & The creators of the game\\[0.5\baselineskip]
