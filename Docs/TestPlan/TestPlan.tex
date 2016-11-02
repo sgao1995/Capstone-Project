@@ -1,0 +1,585 @@
+\documentclass[12pt, titlepage]{article}
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{hyperref}
+\usepackage{mdframed}
+\mdfsetup{nobreak=true}
+\hypersetup{
+    colorlinks,
+    citecolor=black,
+    filecolor=black,
+    linkcolor=red,
+    urlcolor=blue
+}
+\usepackage[round]{natbib}
+\title{SE 3XA3: Test Plan\\Title of Project}
+\author{\textbf{Team \#8, ClawSome Games}
+		\\ Yuan Gao (1330064)
+		\\ Su Gao (1330065)
+		\\ James Lee (1318125)
+		\\ James Zhu (1317457) 
+}
+\date{\today}
+\begin{document}
+\maketitle
+\pagenumbering{roman}
+\tableofcontents
+\listoftables
+\listoffigures
+\begin{table}[bp]
+\caption{\bf Revision History}
+\begin{tabularx}{\textwidth}{p{3cm}p{2cm}X}
+\toprule {\bf Date} & {\bf Version} & {\bf Notes}\\
+\midrule
+Date 1 & 1.0 & Notes\\
+Date 2 & 1.1 & Notes\\
+\bottomrule
+\end{tabularx}
+\end{table}
+\newpage
+\pagenumbering{arabic}
+This document ...
+\section{General Information}
+\subsection{Purpose}
+\paragraph{}The purpose of the Test Plan is to detail the testing process of the project. What to test, how to test each item, and when to test is discussed in detail below. 
+\subsection{Scope}
+\paragraph{}The first test plan will be to test the basic components of the game, making sure that key elements such as multiplayer are functional, as well as basic design concepts such as map generation, terrain, and physics. The first test plan will not involve "game balancing" concepts or detailed graphical testing. 
+\subsection{Acronyms, Abbreviations, and Symbols}
+	
+\begin{table}[hbp]
+\caption{\textbf{Table of Abbreviations}} \label{Table}
+\begin{tabularx}{\textwidth}{p{3cm}X}
+\toprule
+\textbf{Abbreviation} & \textbf{Definition} \\
+\midrule
+Abbreviation1 & Definition1\\
+Abbreviation2 & Definition2\\
+\bottomrule
+\end{tabularx}
+\end{table}
+\begin{table}[!htbp]
+\caption{\textbf{Table of Definitions}} \label{Table}
+\begin{tabularx}{\textwidth}{p{3cm}X}
+\toprule
+\textbf{Term} & \textbf{Definition}\\
+\midrule
+Term1 & Definition1\\
+Term2 & Definition2\\
+\bottomrule
+\end{tabularx}
+\end{table}	
+
+\subsection{List of Constants and Variables}
+\begin{table}[ht]
+\caption{List of constants} \label{tab:constants}
+\begin{tabularx}{\textwidth}{p{3cm}p{2cm}X}
+\toprule {\bf Constant} & {\bf Value} & {\bf Description}\\
+\midrule
+\textit{v} & 1.0 & Character base walk speed\\
+$\beta$ & Variable & Character movement speed bonuses, total movement speed = \textit{v} \times $\beta$\\
+\textit{g} & 9.8 & Game gravity, accelerates the player downwards at 9.8 units per second if they are not on the ground\\
+\textit{j} & 10.0 & Character jump force\\
+\textit{c} & 60.0 & Camera sensitivity (degrees of rotation per inch of mouse movement)
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\subsection{Overview of Document}
+\section{Plan}
+	
+\subsection{Software Description}
+\paragraph{}The game will be developed using the Unity game engine, using the Photon Unity Networking framework for enabling multiplayer design. C# will be used as our main coding language.
+\subsection{Test Team}
+\paragraph{}The project designers will supervise the testing process, acting as the leaders for the test team. Individuals unrelated to the creation of the project will be asked to test the game and provide insight on the basic testing elements that we are looking for. 
+\subsection{Automated Testing Approach}
+\paragraph{}Some automated testing can also be done, through creation of certain functions in the code. For example, if we wished to test our map creation algorithm, we could write a function to automatically create 100 or more different maps and test to see if each one matched our requirements. 
+\subsection{Testing Tools}
+\paragraph{}We will mainly use unity as our testing tool, as well as use ourselves and peers to review the code and make sure everything is working as planned.
+\subsection{Testing Schedule}
+		
+See Gantt Chart at the following url ...
+\section{System Test Description}
+	
+\subsection{Tests for Functional Requirements}
+\subsubsection{Movement Input Tests}
+
+\begin{mdframed}[linewidth=1pt]
+\begin{tabularx}{\textwidth}{@{}p{3cm}X@{}}
+{\bf Test 3.1.1.1:} & {\bf Walk forward, starts from stationary}\\[\baselineskip]
+{\bf Description:} & Tests to see if the player walks forward when the corresponding forward key is pressed, when the player is initially standing still\\[0.5\baselineskip]
+{\bf Type:} & Dynamic Unit Test\\[0.5\baselineskip]
+{\bf Tester(s):} & The creators of the game\\[0.5\baselineskip]
+{\bf Initial State:} & Custom in game state with the player currently having a velocity of 0\\[0.5\baselineskip]
+{\bf Input:} & Keyboard button (W key or up arrow key) being pressed and held down for 1 second, then released\\[0.5\baselineskip]
+{\bf Output:} & Player velocity\\[0.5\baselineskip]
+{\bf Pass:} & Player moves forward with a velocity of \textit{v} + $\beta$
+\end{tabularx}
+\end{mdframed}
+					
+\begin{mdframed}[linewidth=1pt]
+\begin{tabularx}{\textwidth}{@{}p{3cm}X@{}}
+{\bf Test 3.1.1.2:} & {\bf Walk to the left, starts from stationary}\\[\baselineskip]
+{\bf Description:} & Tests to see if the player walks sideways to the left when the corresponding left key is pressed, when the player is initially standing still\\[0.5\baselineskip]
+{\bf Type:} & Dynamic Unit Test\\[0.5\baselineskip]
+{\bf Tester(s):} & The creators of the game\\[0.5\baselineskip]
+{\bf Initial State:} & Custom in game state with the player currently having a velocity of 0\\[0.5\baselineskip]
+{\bf Input:} & Keyboard button (A key or left arrow key) being pressed and held down for 1 second, then released\\[0.5\baselineskip]
+{\bf Output:} & Player velocity\\[0.5\baselineskip]
+{\bf Pass:} & Player moves to the left with a velocity of \textit{v} + $\beta$
+\end{tabularx}
+\end{mdframed}
+
+\begin{mdframed}[linewidth=1pt]
+\begin{tabularx}{\textwidth}{@{}p{3cm}X@{}}
+{\bf Test 3.1.1.3:} & {\bf Walk to the right, starts from stationary}\\[\baselineskip]
+{\bf Description:} & Tests to see if the player walks sideways to the right when the corresponding right key is pressed, when the player is initially standing still\\[0.5\baselineskip]
+{\bf Type:} & Dynamic Unit Test\\[0.5\baselineskip]
+{\bf Tester(s):} & The creators of the game\\[0.5\baselineskip]
+{\bf Initial State:} & Custom in game state with the player currently having a velocity of 0\\[0.5\baselineskip]
+{\bf Input:} & Keyboard button (D key or right arrow key) being pressed and held down for 1 second, then released\\[0.5\baselineskip]
+{\bf Output:} & Player velocity\\[0.5\baselineskip]
+{\bf Pass:} & Player moves to the right with a velocity of \textit{v} + $\beta$
+\end{tabularx}
+\end{mdframed}
+
+\begin{mdframed}[linewidth=1pt]
+\begin{tabularx}{\textwidth}{@{}p{3cm}X@{}}
+{\bf Test 3.1.1.4:} & {\bf Walk backwards, starts from stationary}\\[\baselineskip]
+{\bf Description:} & Tests to see if the player walks backwards when the corresponding backwards key is pressed, when the player is initially standing still\\[0.5\baselineskip]
+{\bf Type:} & Dynamic Unit Test\\[0.5\baselineskip]
+{\bf Tester(s):} & The creators of the game\\[0.5\baselineskip]
+{\bf Initial State:} & Custom in game state with the player currently having a velocity of 0\\[0.5\baselineskip]
+{\bf Input:} & Keyboard button (S key or down arrow key) being pressed and held down for 1 second, then released\\[0.5\baselineskip]
+{\bf Output:} & Player velocity\\[0.5\baselineskip]
+{\bf Pass:} & Player moves backwards with a velocity of \textit{v} + $\beta$
+\end{tabularx}
+\end{mdframed}
+
+\begin{mdframed}[linewidth=1pt]
+\begin{tabularx}{\textwidth}{@{}p{3cm}X@{}}
+{\bf Test 3.1.1.5:} & {\bf Continuous movement in one direction, when the same key is held down}\\[\baselineskip]
+{\bf Description:} & Tests to see if the player continues walking in a given direction when the corresponding key is pressed and held down, when the player is already walking in a given direction. For example, when the forwards key is held down when the player is already moving forwards, when the right key is held down when the player is already moving to the right, etc.\\[0.5\baselineskip]
+{\bf Type:} & Dynamic Unit Test\\[0.5\baselineskip]
+{\bf Tester(s):} & The creators of the game\\[0.5\baselineskip]
+{\bf Initial State:} & Custom in game state with the player currently having a velocity of \textit{v} + $\beta$ \\[0.5\baselineskip]
+{\bf Input:} & Keyboard button being pressed and held down for 3 seconds, then released\\[0.5\baselineskip]
+{\bf Output:} & Player velocity\\[0.5\baselineskip]
+{\bf Pass:} & Player continues moving in the given direction with a velocity of \textit{v} + $\beta$
+\end{tabularx}
+\end{mdframed}
+
+
+\begin{mdframed}[linewidth=1pt]
+\begin{tabularx}{\textwidth}{@{}p{3cm}X@{}}
+{\bf Test 3.1.1.6:} & {\bf Jump, while standing still}\\[\baselineskip]
+{\bf Description:} & Tests to see if the player performs a jumping action, changing their velocity in the Y axis\\[0.5\baselineskip]
+{\bf Type:} & Dynamic Unit Test\\[0.5\baselineskip]
+{\bf Tester(s):} & The creators of the game\\[0.5\baselineskip]
+{\bf Initial State:} & Custom in game state with the player currently having a velocity of 0\\[0.5\baselineskip]
+{\bf Input:} & Keyboard button for jumping (space) being pressed and released immediately\\[0.5\baselineskip]
+{\bf Output:} & Player velocity\\[0.5\baselineskip]
+{\bf Pass:} & Player's Y velocity increases by \textit{j}, and is then accelerated by \textit{-g} every second until the player reaches the ground again, where they first started
+\end{tabularx}
+\end{mdframed}
+
+\begin{mdframed}[linewidth=1pt]
+\begin{tabularx}{\textwidth}{@{}p{3cm}X@{}}
+{\bf Test 3.1.1.7:} & {\bf Jump, while already in motion in a given direction}\\[\baselineskip]
+{\bf Description:} & Tests to see if the player performs a jumping action, changing their velocity in the Y axis, while already moving in a given direction\\[0.5\baselineskip]
+{\bf Type:} & Dynamic Unit Test\\[0.5\baselineskip]
+{\bf Tester(s):} & The creators of the game\\[0.5\baselineskip]
+{\bf Initial State:} & Custom in game state with the player currently having a velocity of \textit{v} + $\beta$ in a given direction \\[0.5\baselineskip]
+{\bf Input:} & Keyboard button for a directional movement is being pressed and held down, then the keyboard button for jumping (space) is pressed and released immediately\\[0.5\baselineskip]
+{\bf Output:} & Player velocity\\[0.5\baselineskip]
+{\bf Pass:} & Player's velocity in the given direction would not change, staying at \textit{v} + $\beta$, but the player's Y velocity increases by \textit{j}, and is then accelerated by \textit{-g} every second until the player reaches the ground again. 
+\end{tabularx}
+\end{mdframed}
+
+\begin{mdframed}[linewidth=1pt]
+\begin{tabularx}{\textwidth}{@{}p{3cm}X@{}}
+{\bf Test 3.1.1.8:} & {\bf A change in direction}\\[\baselineskip]
+{\bf Description:} & Tests to see if the player will change directions when a different key is also pressed and held down than what was held down initially\\[0.5\baselineskip]
+{\bf Type:} & Dynamic Unit Test\\[0.5\baselineskip]
+{\bf Tester(s):} & The creators of the game\\[0.5\baselineskip]
+{\bf Initial State:} & Custom in game state with the player currently having a velocity of \textit{v} + $\beta$ in a given direction\\[0.5\baselineskip]
+{\bf Input:} & Keyboard button being pressed and held down for 3 seconds, then a different directional button being pressed and held down as well \\[0.5\baselineskip]
+{\bf Output:} & Player velocity\\[0.5\baselineskip]
+{\bf Pass:} & Player moves in the vector addition of the two directions corresponding to the keys pressed, with a velocity of \textit{v} + $\beta$
+\end{tabularx}
+\end{mdframed}
+
+\begin{mdframed}[linewidth=1pt]
+\begin{tabularx}{\textwidth}{@{}p{3cm}X@{}}
+{\bf Test 3.1.1.9:} & {\bf Returning to a stationary position, when originally in motion}\\[\baselineskip]
+{\bf Description:} & Tests to see if the player will stop moving when all keys are released\\[0.5\baselineskip]
+{\bf Type:} & Dynamic Unit Test\\[0.5\baselineskip]
+{\bf Tester(s):} & The creators of the game\\[0.5\baselineskip]
+{\bf Initial State:} & Custom in game state with the player currently having a velocity of \textit{v} + $\beta$ in any given direction\\[0.5\baselineskip]
+{\bf Input:} & Any keyboard button being pressed and held down for 3 seconds, then all buttons are released \\[0.5\baselineskip]
+{\bf Output:} & Player velocity\\[0.5\baselineskip]
+{\bf Pass:} & Player velocity becomes 0 and stops moving
+\end{tabularx}
+\end{mdframed}
+
+\subsubsection{Camera Input Tests}
+\begin{mdframed}[linewidth=1pt]
+\begin{tabularx}{\textwidth}{@{}p{3cm}X@{}}
+{\bf Test 3.1.2.1:} & {\bf Camera rotation along the Y axis, counterclockwise}\\[\baselineskip]
+{\bf Description:} & Tests to see if the game camera will rotate in a counterclockwise direction when the mouse is moved to the left\\[0.5\baselineskip]
+{\bf Type:} & Dynamic Unit Test\\[0.5\baselineskip]
+{\bf Tester(s):} & The creators of the game\\[0.5\baselineskip]
+{\bf Initial State:} & Custom in game state with the player currently having a velocity of 0, and camera positioned at a default of 0 rotation along both the X and Y axis\\[0.5\baselineskip]
+{\bf Input:} & The mouse is moved to the left by 1 inch\\[0.5\baselineskip]
+{\bf Output:} & Camera rotation\\[0.5\baselineskip]
+{\bf Pass:} & Camera rotates 60 degrees counterclockwise along the Y axis
+\end{tabularx}
+\end{mdframed}
+
+\begin{mdframed}[linewidth=1pt]
+\begin{tabularx}{\textwidth}{@{}p{3cm}X@{}}
+{\bf Test 3.1.2.2:} & {\bf Camera rotation along the Y axis, clockwise}\\[\baselineskip]
+{\bf Description:} & Tests to see if the game camera will rotate in a clockwise direction when the mouse is moved to the right\\[0.5\baselineskip]
+{\bf Type:} & Dynamic Unit Test\\[0.5\baselineskip]
+{\bf Tester(s):} & The creators of the game\\[0.5\baselineskip]
+{\bf Initial State:} & Custom in game state with the player currently having a velocity of 0, and camera positioned at a default of 0 rotation along both the X and Y axis\\[0.5\baselineskip]
+{\bf Input:} & The mouse is moved to the right by 1 inch\\[0.5\baselineskip]
+{\bf Output:} & Camera rotation\\[0.5\baselineskip]
+{\bf Pass:} & Camera rotates 60 degrees clockwise along the Y axis
+\end{tabularx}
+\end{mdframed}
+
+\begin{mdframed}[linewidth=1pt]
+\begin{tabularx}{\textwidth}{@{}p{3cm}X@{}}
+{\bf Test 3.1.2.3:} & {\bf Camera rotation along the X axis, backwards}\\[\baselineskip]
+{\bf Description:} & Tests to see if the game camera will rotate in a backwards direction when the mouse is moved upwards\\[0.5\baselineskip]
+{\bf Type:} & Dynamic Unit Test\\[0.5\baselineskip]
+{\bf Tester(s):} & The creators of the game\\[0.5\baselineskip]
+{\bf Initial State:} & Custom in game state with the player currently having a velocity of 0, and camera positioned at a default of 0 rotation along both the X and Y axis\\[0.5\baselineskip]
+{\bf Input:} & The mouse is moved forward by 1 inch\\[0.5\baselineskip]
+{\bf Output:} & Camera rotation\\[0.5\baselineskip]
+{\bf Pass:} & Camera rotates 60 degrees backwards along the X axis
+\end{tabularx}
+\end{mdframed}
+
+\begin{mdframed}[linewidth=1pt]
+\begin{tabularx}{\textwidth}{@{}p{3cm}X@{}}
+{\bf Test 3.1.2.4:} & {\bf Camera rotation along the X axis, forwards}\\[\baselineskip]
+{\bf Description:} & Tests to see if the game camera will rotate in a forward direction when the mouse is moved downwards\\[0.5\baselineskip]
+{\bf Type:} & Dynamic Unit Test\\[0.5\baselineskip]
+{\bf Tester(s):} & The creators of the game\\[0.5\baselineskip]
+{\bf Initial State:} & Custom in game state with the player currently having a velocity of 0, and camera positioned at a default of 0 rotation along both the X and Y axis\\[0.5\baselineskip]
+{\bf Input:} & The mouse is moved backward by 1 inch\\[0.5\baselineskip]
+{\bf Output:} & Camera rotation\\[0.5\baselineskip]
+{\bf Pass:} & Camera rotates 60 degrees forward along the X axis
+\end{tabularx}
+\end{mdframed}
+
+\begin{mdframed}[linewidth=1pt]
+\begin{tabularx}{\textwidth}{@{}p{3cm}X@{}}
+{\bf Test 3.1.2.5:} & {\bf Camera rotation across multiple axis at once}\\[\baselineskip]
+{\bf Description:} & Tests to see if the game camera will rotate in the correct fashion when the mouse is moved in a non basic direction such as to the top left,  top right, bottom left, and bottom right etc. \\[0.5\baselineskip]
+{\bf Type:} & Dynamic Unit Test\\[0.5\baselineskip]
+{\bf Tester(s):} & The creators of the game\\[0.5\baselineskip]
+{\bf Initial State:} & Custom in game state with the player currently having a velocity of 0, and camera positioned at a default of 0 rotation along both the X and Y axis\\[0.5\baselineskip]
+{\bf Input:} & The mouse is first moved 1/2 inch forwards and to the left, then 1/2 inch forwards and to the right, then 1/2 inch backwards and to the left, then 1/2 inch backwards and to the right\\[0.5\baselineskip]
+{\bf Output:} & Camera rotation\\[0.5\baselineskip]
+{\bf Pass:} & Camera rotates 30 degrees counterclockwise along the Y axis and 30 degrees backwards along the X axis, then camera rotates 30 degrees clockwise along the Y axis and 30 degrees backwards along the X axis, then camera rotates 30 degrees counterclockwise along the Y axis and 30 degrees forwards along the X axis, then camera rotates 30 degrees clockwise along the Y axis and 30 degrees forwards along the X axis.
+\end{tabularx}
+\end{mdframed}
+
+\begin{mdframed}[linewidth=1pt]
+\begin{tabularx}{\textwidth}{@{}p{3cm}X@{}}
+{\bf Test 3.1.2.6:} & {\bf Maximum camera rotation along the X axis, upwards}\\[\baselineskip]
+{\bf Description:} & Tests to see if the game camera will stop rotating once maximum rotation is achieved at 90 degrees upwards\\[0.5\baselineskip]
+{\bf Type:} & Dynamic Unit Test\\[0.5\baselineskip]
+{\bf Tester(s):} & The creators of the game\\[0.5\baselineskip]
+{\bf Initial State:} & Custom in game state with the player currently having a velocity of 0, and camera positioned at a default of 0 rotation along both the X and Y axis\\[0.5\baselineskip]
+{\bf Input:} & The mouse is moved forward by 2 inches\\[0.5\baselineskip]
+{\bf Output:} & Camera rotation\\[0.5\baselineskip]
+{\bf Pass:} & Camera rotates 90 degrees backwards along the X axis, and then stops
+\end{tabularx}
+\end{mdframed}
+
+\begin{mdframed}[linewidth=1pt]
+\begin{tabularx}{\textwidth}{@{}p{3cm}X@{}}
+{\bf Test 3.1.2.7:} & {\bf Maximum camera rotation along the X axis, downwards}\\[\baselineskip]
+{\bf Description:} & Tests to see if the game camera will stop rotating once maximum rotation is achieved at 90 degrees downwards\\[0.5\baselineskip]
+{\bf Type:} & Dynamic Unit Test\\[0.5\baselineskip]
+{\bf Tester(s):} & The creators of the game\\[0.5\baselineskip]
+{\bf Initial State:} & Custom in game state with the player currently having a velocity of 0, and camera positioned at a default of 0 rotation along both the X and Y axis\\[0.5\baselineskip]
+{\bf Input:} & The mouse is moved backwards by 2 inches\\[0.5\baselineskip]
+{\bf Output:} & Camera rotation\\[0.5\baselineskip]
+{\bf Pass:} & Camera rotates 90 degrees forwards along the X axis, and then stops
+\end{tabularx}
+\end{mdframed}
+
+\subsubsection{Map Tests}
+\begin{mdframed}[linewidth=1pt]
+\begin{tabularx}{\textwidth}{@{}p{3cm}X@{}}
+{\bf Test 3.1.3.1:} & {\bf Collision with the ground}\\[\baselineskip]
+{\bf Description:} & Tests to see if the player experiences collision with the ground when they perform movement actions in the maze\\[0.5\baselineskip]
+{\bf Type:} & Dynamic Unit Test\\[0.5\baselineskip]
+{\bf Tester(s):} & The creators of the game\\[0.5\baselineskip]
+{\bf Initial State:} & Custom in game state with the player currently having a velocity of 0, and camera positioned at a default of 0 rotation along both the X and Y axis\\[0.5\baselineskip]
+{\bf Input:} & Random direction keys are pressed and then released \\[0.5\baselineskip]
+{\bf Output:} & Player velocity\\[0.5\baselineskip]
+{\bf Pass:} & Player velocity changes in the appropriate directions, and the player never ends up with a Y position lower than the ground of the map
+\end{tabularx}
+\end{mdframed}
+
+\begin{mdframed}[linewidth=1pt]
+\begin{tabularx}{\textwidth}{@{}p{3cm}X@{}}
+{\bf Test 3.1.3.2:} & {\bf Collision with a wall}\\[\baselineskip]
+{\bf Description:} & Tests to see if the player experiences collision with walls that they encounter in the maze\\[0.5\baselineskip]
+{\bf Type:} & Dynamic Unit Test\\[0.5\baselineskip]
+{\bf Tester(s):} & The creators of the game\\[0.5\baselineskip]
+{\bf Initial State:} & Custom in game state with the player currently having a velocity of 0, and camera positioned at a default of 0 rotation along both the X and Y axis, with a wall directly in front of the player\\[0.5\baselineskip]
+{\bf Input:} & The forward keyboard key is pressed and held down for 1 second \\[0.5\baselineskip]
+{\bf Output:} & Player velocity\\[0.5\baselineskip]
+{\bf Pass:} & Player moves forwards with a velocity of \textit{v} + $\beta$, then upon reaching the wall the player's velocity becomes 0 and they stop moving
+\end{tabularx}
+\end{mdframed}
+
+\subsubsection{User Interface and Heads Up Display (HUD) Tests}
+\begin{mdframed}[linewidth=1pt]
+\begin{tabularx}{\textwidth}{@{}p{3cm}X@{}}
+{\bf Test 3.1.4.1:} & {\bf Minimap Accuracy Test}\\[\baselineskip]
+{\bf Description:} & Tests to see if the minimap at the side of the screen accurately depicts the area around the user\\[0.5\baselineskip]
+{\bf Type:} & Dynamic Unit Test\\[0.5\baselineskip]
+{\bf Tester(s):} & The creators of the game\\[0.5\baselineskip]
+{\bf Initial State:} & Custom in game state with the player currently having a velocity of 0, and camera positioned at a default of 0 rotation along both the X and Y axis\\[0.5\baselineskip]
+{\bf Input:} & The player presses keyboard direction keys to move around in the maze\\[0.5\baselineskip]
+{\bf Output:} & Minimap display\\[0.5\baselineskip]
+{\bf Pass:} & The player is able to use the minimap to navigate the maze correctly without getting stuck
+\end{tabularx}
+\end{mdframed}
+
+\begin{mdframed}[linewidth=1pt]
+\begin{tabularx}{\textwidth}{@{}p{3cm}X@{}}
+{\bf Test 3.1.4.2:} & {\bf Ability Use Test}\\[\baselineskip]
+{\bf Description:} & Tests to see if the abilities the player has can be used appropriately \\[0.5\baselineskip]
+{\bf Type:} & Dynamic Unit Test\\[0.5\baselineskip]
+{\bf Tester(s):} & The creators of the game\\[0.5\baselineskip]
+{\bf Initial State:} & Custom in game state with the player currently having a velocity of 0, and camera positioned at a default of 0 rotation along both the X and Y axis\\[0.5\baselineskip]
+{\bf Input:} & The player presses a keyboard key corresponding to an ability \\[0.5\baselineskip]
+{\bf Output:} & Game state\\[0.5\baselineskip]
+{\bf Pass:} & The player uses the corresponding ability, and the ability is put on a cooldown
+\end{tabularx}
+\end{mdframed}
+
+\begin{mdframed}[linewidth=1pt]
+\begin{tabularx}{\textwidth}{@{}p{3cm}X@{}}
+{\bf Test 3.1.4.3:} & {\bf Ability on Cooldown Use Test}\\[\baselineskip]
+{\bf Description:} & Tests to see if the game allows use of abilities currently on cooldown\\[0.5\baselineskip]
+{\bf Type:} & Dynamic Unit Test\\[0.5\baselineskip]
+{\bf Tester(s):} & The creators of the game\\[0.5\baselineskip]
+{\bf Initial State:} & Custom in game state with the player currently having a velocity of 0, and camera positioned at a default of 0 rotation along both the X and Y axis, and all player abilities on cooldown\\[0.5\baselineskip]
+{\bf Input:} & The player presses a keyboard key corresponding to an ability \\[0.5\baselineskip]
+{\bf Output:} & Game state\\[0.5\baselineskip]
+{\bf Pass:} & The ability is not cast, and a notification is displayed indicating that the ability is not yet ready to be used
+\end{tabularx}
+\end{mdframed}
+
+\begin{mdframed}[linewidth=1pt]
+\begin{tabularx}{\textwidth}{@{}p{3cm}X@{}}
+{\bf Test 3.1.4.4:} & {\bf Menu Buttons Test}\\[\baselineskip]
+{\bf Description:} & Tests to see if the buttons in game menus perform their required function\\[0.5\baselineskip]
+{\bf Type:} & Dynamic Unit Test\\[0.5\baselineskip]
+{\bf Tester(s):} & The creators of the game\\[0.5\baselineskip]
+{\bf Initial State:} & The game is at the main menu\\[0.5\baselineskip]
+{\bf Input:} & The player uses the mouse to select and press a button \\[0.5\baselineskip]
+{\bf Output:} & Game menu state\\[0.5\baselineskip]
+{\bf Pass:} & The corresponding game menu state is achieved: if new game was pressed, then the player is sent to the New Game Menu, if options was pressed, then the user is sent to an options screen, and if exit game was pressed, the game terminates
+\end{tabularx}
+\end{mdframed}
+
+\begin{mdframed}[linewidth=1pt]
+\begin{tabularx}{\textwidth}{@{}p{3cm}X@{}}
+{\bf Test 3.1.4.5:} & {\bf Options Menu Test}\\[\baselineskip]
+{\bf Description:} & Tests to see if the sliders and functions in the Options menu perform their required purpose\\[0.5\baselineskip]
+{\bf Type:} & Dynamic Unit Test\\[0.5\baselineskip]
+{\bf Tester(s):} & The creators of the game\\[0.5\baselineskip]
+{\bf Initial State:} & The game is in the options menu\\[0.5\baselineskip]
+{\bf Input:} & The player uses the mouse to select and press a button, or adjust a slider \\[0.5\baselineskip]
+{\bf Output:} & Game option menu state\\[0.5\baselineskip]
+{\bf Pass:} & The corresponding game menu state is achieved: if a different graphical setting was chosen, then that graphical setting is achieved (low, med, high), if the Audio slider was adjusted, then the audio levels adjust accordingly, if the user changed their keyboard hotkeys, then the changes are saved and used
+\end{tabularx}
+\end{mdframed}
+
+\begin{mdframed}[linewidth=1pt]
+\begin{tabularx}{\textwidth}{@{}p{3cm}X@{}}
+{\bf Test 3.1.4.6:} & {\bf New Game Menu Test: Creating a game}\\[\baselineskip]
+{\bf Description:} & Tests to see if the user can create a new multiplayer session\\[0.5\baselineskip]
+{\bf Type:} & Dynamic Unit Test\\[0.5\baselineskip]
+{\bf Tester(s):} & The creators of the game\\[0.5\baselineskip]
+{\bf Initial State:} & The game is in the New Game Menu\\[0.5\baselineskip]
+{\bf Input:} & The player presses the create new game button with the mouse \\[0.5\baselineskip]
+{\bf Output:} & Game menu state\\[0.5\baselineskip]
+{\bf Pass:} & The user is sent to the Multiplayer Hub, where they create and join a new Room, and are the only person inside that Room.
+\end{tabularx}
+\end{mdframed}
+
+\begin{mdframed}[linewidth=1pt]
+\begin{tabularx}{\textwidth}{@{}p{3cm}X@{}}
+{\bf Test 3.1.4.7:} & {\bf New Game Menu Test: Joining a game}\\[\baselineskip]
+{\bf Description:} & Tests to see if the user can join an existing multiplayer session\\[0.5\baselineskip]
+{\bf Type:} & Dynamic Unit Test\\[0.5\baselineskip]
+{\bf Tester(s):} & The creators of the game\\[0.5\baselineskip]
+{\bf Initial State:} & The game is in the New Game Menu\\[0.5\baselineskip]
+{\bf Input:} & The player presses the join game button with the mouse \\[0.5\baselineskip]
+{\bf Output:} & Game menu state\\[0.5\baselineskip]
+{\bf Pass:} & The user is sent to the Multiplayer Hub, where they join an already existing Room, and are not the only player in that Room. Each user can see the status of each other user in that Room.
+\end{tabularx}
+\end{mdframed}
+
+\begin{mdframed}[linewidth=1pt]
+\begin{tabularx}{\textwidth}{@{}p{3cm}X@{}}
+{\bf Test 3.1.4.8:} & {\bf Entering the Ready State}\\[\baselineskip]
+{\bf Description:} & Tests to see if the users can enter a ready state while in an existing game Room\\[0.5\baselineskip]
+{\bf Type:} & Dynamic Unit Test\\[0.5\baselineskip]
+{\bf Tester(s):} & The creators of the game\\[0.5\baselineskip]
+{\bf Initial State:} & The player is in a Room with 3 other users, all users have not selected the Ready option yet\\[0.5\baselineskip]
+{\bf Input:} & The player selects and presses the Ready button with the mouse \\[0.5\baselineskip]
+{\bf Output:} & Game menu state\\[0.5\baselineskip]
+{\bf Pass:} & The user enters the Ready state, and all other players in the same Room are able to see that the player is in the Ready state
+\end{tabularx}
+\end{mdframed}
+
+\begin{mdframed}[linewidth=1pt]
+\begin{tabularx}{\textwidth}{@{}p{3cm}X@{}}
+{\bf Test 3.1.4.9:} & {\bf Starting a game when all players are Ready}\\[\baselineskip]
+{\bf Description:} & Tests to see if a new game can be started once all players are in the Ready state\\[0.5\baselineskip]
+{\bf Type:} & Dynamic Unit Test\\[0.5\baselineskip]
+{\bf Tester(s):} & The creators of the game\\[0.5\baselineskip]
+{\bf Initial State:} & The player is in a Room with 3 other users, all users have selected the Ready option and are all in the Ready state\\[0.5\baselineskip]
+{\bf Input:} & The player selects and presses the Start Game button with the mouse \\[0.5\baselineskip]
+{\bf Output:} & Game menu state\\[0.5\baselineskip]
+{\bf Pass:} & The user as well as all other players in the same Room enter the game, where a map is generated, each player is sent to their respective spawn location, and the game begins
+\end{tabularx}
+\end{mdframed}
+
+\subsection{Tests for Nonfunctional Requirements}
+\subsubsection{Area of Testing1}
+		
+\paragraph{Title for Test}
+\begin{enumerate}
+\item{}
+\textbf{Map Creation Test}
+
+Type: Static
+					
+Initial State: Match ready to be started.  
+					
+Input/Condition: User starts the match. 
+					
+Output/Result: A map is automatically generated, and the user is placed in the map. 
+					
+How test will be performed: The game will be set up such that a match would be ready to be started. Upon starting the match, a map would be generated and the user placed in the map. If the map was generated successfully and follows all the map design guidelines (all areas accessible) then the test is a success. 
+					
+\item{}
+\textbf{Movement Test}
+
+Type: Functional
+					
+Initial State: The user's character will be placed at a random position in the maze.
+					
+Input: Keyboard and mouse inputs.
+					
+Result: The character on screen will move and turn accordingly.
+					
+How test will be performed: Users will be asked to start the game, where they would find their character in a random position in the maze. They would then be asked to perform certain keyboard and mouse inputs, causing the character to move and causing the camera to rotate as well. If the movements correspond to the correct input, then the test is a success. 
+
+\item{}
+\textbf{Collision Test}
+
+Type: Functional
+					
+Initial State: User's character is placed facing a wall.
+					
+Input: Keyboard input.
+					
+Result: The character will approach the wall and stop upon contact with the wall.  
+					
+How test will be performed: Participants will be asked to press the keyboard key corresponding to forward movement, either "W" or the up arrow key, and cause the character to move forwards towards a maze wall. If the character stops upon contact with the wall, then the test is a success. 
+\end{enumerate}
+\subsubsection{Area of Testing2}
+...
+
+\section{Tests for Proof of Concept}
+We will have a proof of concept to demonstrate that our project ideas are possible.
+\subsection{Risks}
+
+\begin{mdframed}[linewidth=1pt]
+\begin{tabularx}{\textwidth}{@{}p{3cm}X@{}}
+{\bf Test 4.1.1:} & {\bf Photon Unity Network Test}\\[\baselineskip]
+{\bf Description:} & Tests whether Photon Unity Network framework can be compiled on Windows 7 to Windows 10. This is a big risk because if Photon Unity Network framework does not compile on the desires OS we are using, then the game's multiplayer will not work. state\\[0.5\baselineskip]
+{\bf Type:} & Unit Test\\[0.5\baselineskip]
+{\bf Tester(s):} & The creators of the game\\[0.5\baselineskip]
+{\bf Initial State:} & Game is not yet launched.\\[0.5\baselineskip]
+{\bf Input:} & Using mouse to double left click on the game's executable.\\[0.5\baselineskip]
+{\bf Output:} & Game state\\[0.5\baselineskip]
+{\bf Pass:} & The game will compile and launch successfully on Windows 7, 8,and 10.
+\end{tabularx}
+\end{mdframed}
+
+\begin{mdframed}[linewidth=1pt]
+\begin{tabularx}{\textwidth}{@{}p{3cm}X@{}}
+{\bf Test 4.1.1:} & {\bf Player Load Test}\\[\baselineskip]
+{\bf Description:} & Test if game can handle amount of users that PUN states it can support. This is a risk because for the game to be successful, we want to ensure that the game can handle max amount of players. state\\[0.5\baselineskip]
+{\bf Type:} & Load Test\\[0.5\baselineskip]
+{\bf Tester(s):} & Game Testers\\[0.5\baselineskip]
+{\bf Initial State:} & Clients in multiplayer menu, not yet in server.\\[0.5\baselineskip]
+{\bf Input:} & Using mouse, click join server button to join a specific server.\\[0.5\baselineskip]
+{\bf Output:} & Game state\\[0.5\baselineskip]
+{\bf Pass:} & User's client will be in a multiplayer game. Game server should not crash when there is the max amount of players on simultaneously.
+\end{tabularx}
+\end{mdframed}
+
+\begin{mdframed}[linewidth=1pt]
+\begin{tabularx}{\textwidth}{@{}p{3cm}X@{}}
+{\bf Test 4.1.1:} & {\bf Player Interaction Test}\\[\baselineskip]
+{\bf Description:} & Test if player interactions are concurrent. Successful multiplayer interactions is necessary for the product to be successful. state\\[0.5\baselineskip]
+{\bf Type:} & Dynamic Unit Test\\[0.5\baselineskip]
+{\bf Tester(s):} & Game creators and Game Testers\\[0.5\baselineskip]
+{\bf Initial State:} & Two clients in same server in a state where they are facing each other and no actions are performed.\\[0.5\baselineskip]
+{\bf Input:} & Using mouse and keyboard, press 'w' key to move towards each other.\\[0.5\baselineskip]
+{\bf Output:} & Player Velocity\\[0.5\baselineskip]
+{\bf Pass:} & The two players should move towards and eventually bump into each other which will stop forward movement.
+\end{tabularx}
+\end{mdframed}
+
+\subsection{Proof of Concept Testing}
+The Proof of Concept demo will be a game that supports multiplayer. Multiplayer will be handled with the Photon Unity Network framework. 
+The game's menu will let players choose a server to join and then after successfully joining, they will be allowed to choose between using a Cat or a Mouse.
+Players can use the w, a, s, and d keys to control the Cat or Mouse and should be able to interact with each other in a server.
+
+\begin{mdframed}[linewidth=1pt]
+\begin{tabularx}{\textwidth}{@{}p{3cm}X@{}}
+{\bf Test 4.1.1:} & {\bf Proof of Concept Testing}\\[\baselineskip]
+{\bf Description:} & Test the demo of the game to show that all the risks can be overcome. state\\[0.5\baselineskip]
+{\bf Type:} & Proof of Concept\\[0.5\baselineskip]
+{\bf Tester(s):} & The creators of the game\\[0.5\baselineskip]
+{\bf Initial State:} & Game not yet open.\\[0.5\baselineskip]
+{\bf Input:} & Using mouse and keyboard to control character movement, camera movement, and menu navigation\\[0.5\baselineskip]
+{\bf Output:} & Game State\\[0.5\baselineskip]
+{\bf Pass:} & A game that uses PUN for multiplayer implementation. Players should be able to join a server and successfully interact with each other. Players can select between a cat and mouse character and successfully move the character and attached camera. The game should run on Windows 7, 8, and 10.
+\end{tabularx}
+\end{mdframed}
+
+
+\newpage
+\section{Appendix}
+
+\subsection{Usability Survey Questions}
+\paragraph{Testers should fill this survey after playing the game for 10-20 minutes}
+Select a number based on how much you agree with each of the question, 1 is highly disagree and 10 is highly agree. Please also write down why you agree or disagree with each question.
+
+\paragraph{The time to connect to a game was reasonable.}
+\paragraph{1 2 3 4 5 6 7 8 9 10}
+\paragraph{The controls are responsive and easy to learn.}
+\paragraph{1 2 3 4 5 6 7 8 9 10}
+\paragraph{The menu is easy to navigate through.}
+\paragraph{1 2 3 4 5 6 7 8 9 10}
+\paragraph{Game servers were stable and latency was not an issue.}
+\paragraph{1 2 3 4 5 6 7 8 9 10}
+\end{document}
