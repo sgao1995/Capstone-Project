@@ -77,7 +77,7 @@ Term2 & Definition2\\
 \midrule
 \textit{v} & 1.0 & Character base walk speed\\
 $\beta$ & Variable & Character movement speed bonuses, total movement speed = \textit{v} \times $\beta$\\
-\textit{g} & 9.8 & Game gravity, accelerates the player downwards at 9.8 units per second if they are not on the ground
+\textit{g} & 9.8 & Game gravity, accelerates the player downwards at 9.8 units per second if they are not on the ground\\
 \textit{j} & 10.0 & Character jump force\\
 \textit{c} & 60.0 & Camera sensitivity (degrees of rotation per inch of mouse movement)
 \bottomrule
@@ -178,7 +178,7 @@ See Gantt Chart at the following url ...
 {\bf Initial State:} & Custom in game state with the player currently having a velocity of 0\\[0.5\baselineskip]
 {\bf Input:} & Keyboard button for jumping (space) being pressed and released immediately\\[0.5\baselineskip]
 {\bf Output:} & Player velocity\\[0.5\baselineskip]
-{\bf Pass:} & Player's Y velocity increases by \textit{j}, and is then accelerated by /textit{-g} every second until the player reaches the ground again, where they first started
+{\bf Pass:} & Player's Y velocity increases by \textit{j}, and is then accelerated by \textit{-g} every second until the player reaches the ground again, where they first started
 \end{tabularx}
 \end{mdframed}
 
@@ -191,7 +191,7 @@ See Gantt Chart at the following url ...
 {\bf Initial State:} & Custom in game state with the player currently having a velocity of \textit{v} + $\beta$ in a given direction \\[0.5\baselineskip]
 {\bf Input:} & Keyboard button for a directional movement is being pressed and held down, then the keyboard button for jumping (space) is pressed and released immediately\\[0.5\baselineskip]
 {\bf Output:} & Player velocity\\[0.5\baselineskip]
-{\bf Pass:} & Player's velocity in the given direction would not change, staying at \textit{v} + $\beta$, but the player's Y velocity increases by \textit{j}, and is then accelerated by /textit{-g} every second until the player reaches the ground again. 
+{\bf Pass:} & Player's velocity in the given direction would not change, staying at \textit{v} + $\beta$, but the player's Y velocity increases by \textit{j}, and is then accelerated by \textit{-g} every second until the player reaches the ground again. 
 \end{tabularx}
 \end{mdframed}
 
