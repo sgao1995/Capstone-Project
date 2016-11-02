@@ -12,7 +12,7 @@
     urlcolor=blue
 }
 \usepackage[round]{natbib}
-\title{SE 3XA3: Test Plan\\Title of Project}
+\title{CS 4ZP6A: Test Plan\\Cat and Mouse Game}
 \author{\textbf{Team \#8, ClawSome Games}
 		\\ Yuan Gao (1330064)
 		\\ Su Gao (1330065)
@@ -463,6 +463,33 @@ $\beta$ & Variable & Character movement speed bonuses, total movement speed = \t
 {\bf Input:} & The player selects and presses the Start Game button with the mouse \\[0.5\baselineskip]
 {\bf Output:} & Game menu state\\[0.5\baselineskip]
 {\bf Pass:} & The user as well as all other players in the same Room enter the game, where a map is generated, each player is sent to their respective spawn location, and the game begins
+\end{tabularx}
+\end{mdframed}
+
+\subsubsection{Networking Test}
+\begin{mdframed}[linewidth=1pt]
+\begin{tabularx}{\textwidth}{@{}p{3cm}X@{}}
+{\bf Test 3.1.5.1:} & {\bf Joining Lobby Test}\\[\baselineskip]
+{\bf Description:} & Test to see if a user can join a lobby/server\\[0.5\baselineskip]
+{\bf Type:} & Dynamic Unit Test\\[0.5\baselineskip]
+{\bf Tester(s):} & The creators of the game and Game Testers\\[0.5\baselineskip]
+{\bf Initial State:} & The user is in game menu but not in a lobby/server yet. \\[0.5\baselineskip]
+{\bf Input:} & The player selects and presses the join server button with the mouse \\[0.5\baselineskip]
+{\bf Output:} & Game menu state\\[0.5\baselineskip]
+{\bf Pass:} & The user should now be in a menu asking them to choose between Cat or Mouse. They should also be able to see user info such as ping and IP address at the corner of their screen.
+\end{tabularx}
+\end{mdframed}
+
+\begin{mdframed}[linewidth=1pt]
+\begin{tabularx}{\textwidth}{@{}p{3cm}X@{}}
+{\bf Test 3.1.5.2:} & {\bf Leaving Lobby Test}\\[\baselineskip]
+{\bf Description:} & Test to see if user can successfully leave a server without errors\\[0.5\baselineskip]
+{\bf Type:} & Dynamic Unit Test\\[0.5\baselineskip]
+{\bf Tester(s):} & The creators of the game and Game Testers\\[0.5\baselineskip]
+{\bf Initial State:} & The player is in a server\\[0.5\baselineskip]
+{\bf Input:} & The player selects and presses the Leave Game button with the mouse. \\[0.5\baselineskip]
+{\bf Output:} & Game menu state\\[0.5\baselineskip]
+{\bf Pass:} & User should be back in the multiplayer server list menu. No errors should be displayed or occur.
 \end{tabularx}
 \end{mdframed}
 
