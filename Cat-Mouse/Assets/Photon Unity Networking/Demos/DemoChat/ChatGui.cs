@@ -93,6 +93,13 @@ public class ChatGui : MonoBehaviour, IChatClientListener
             this.chatClient.Service(); // make sure to call this regularly! it limits effort internally, so calling often is ok!
         }
 
+		// check if we are missing context, which means we got kicked out to get back to the Photon Demo hub.
+		if ( this.StateText == null)
+		{
+			Destroy(this.gameObject);
+			return;
+		}
+
         this.StateText.gameObject.SetActive(ShowState); // this could be handled more elegantly, but for the demo it's ok.
     }
 
