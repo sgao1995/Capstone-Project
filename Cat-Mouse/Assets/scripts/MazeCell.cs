@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using System;
 
 // a cell in the maze
 public class MazeCell : MonoBehaviour {
@@ -32,11 +33,19 @@ public class MazeCell : MonoBehaviour {
 		return edges[(int)direction];
 	}
 	
-	// During creation of the maze, return a random direction that has not been created yet
-	public MazeDirection RandomUninitializedDirection {
-		get {
-			// random number of "skips" for open edges
-			int numSkipEdge = Random.Range(0, 4 - initializedEdges);
+	// During creation of the maze, return a direction that has not been created yet
+	public MazeDirection UninitializedDirection (int seedNumber) {
+			// set number of "skips" for open edges
+			float generatedNoise = Mathf.PerlinNoise(coordinates.x/(float)seedNumber, coordinates.z/(float)seedNumber);
+			int numSkipEdge = (int)(generatedNoise * 1000) % 4;
+			int potentialSkips = numSkipEdge - initializedEdges;
+			if (potentialSkips < 0){
+				numSkipEdge = 0;
+			}
+			else{
+				numSkipEdge = potentialSkips;
+			}
+			//int numSkipEdge = Random.Range(0, 4 - initializedEdges);
 			// skip until 0 skips left, then create edge
 			for (int count = 0; count < 4; count++) {
 				if (edges[count] == null) {
@@ -46,7 +55,6 @@ public class MazeCell : MonoBehaviour {
 					numSkipEdge -= 1;
 				}
 			}
-			throw new System.InvalidOperationException("Fully initialized");
-		}
+			throw new System.InvalidOperationException("Fully initialized");	
 	}
 }

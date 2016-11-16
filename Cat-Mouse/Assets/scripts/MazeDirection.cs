@@ -13,13 +13,6 @@ public static class MazeDirections {
 
 	// only 4 main directions
 	public const int numDirections = 4;
-
-	// return a random value 
-	public static MazeDirection RandomValue {
-		get {
-			return (MazeDirection)Random.Range(0, numDirections);
-		}
-	}
 	
 	// vector form of the directions
 	private static IntVector2[] vectors = {

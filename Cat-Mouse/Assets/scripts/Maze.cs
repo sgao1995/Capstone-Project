@@ -9,20 +9,28 @@ public class Maze : MonoBehaviour {
 	private MazeCell[,] cells;
 	public MazeRoomSettings[] roomSettings;
 	private List<MazeRoom> rooms = new List<MazeRoom>();
-
-	// probability for arch to be created instead of regular wall
-	public float archProbability = 0.13f;
 	
 	// prefabs
 	public MazeCell cellPrefab;
 	public MazePassage passagePrefab;
 	public MazeWall[] wallPrefabs;
 	public MazeArch archPrefab;
+	
+	// set values to generate same maze every time
+	public static int mazeGenerationNumber = 8; // anything above 2 makes a decent maze (didnt test every number though), also dont go above the size
+	public static IntVector2 startPoint = new IntVector2(mazeGenerationNumber, mazeGenerationNumber);
+	public int roomTypeCount = 0;
 		
 	// creates a new room 
 	private MazeRoom CreateRoom (int roomType) {
 		MazeRoom newRoom = ScriptableObject.CreateInstance<MazeRoom>();
-		newRoom.settingsIndex = Random.Range(0, roomSettings.Length);
+		newRoom.settingsIndex = roomTypeCount;
+		if (roomTypeCount < roomSettings.Length -1){
+			roomTypeCount += 1;
+		}
+		else{
+			roomTypeCount = 0;
+		}
 		// exclude creating rooms of a certain roomType
 		if (newRoom.settingsIndex == roomType) {
 			newRoom.settingsIndex = (newRoom.settingsIndex + 1) % roomSettings.Length;
@@ -42,7 +50,7 @@ public class Maze : MonoBehaviour {
 		cells = new MazeCell[size.x, size.z];
 		// list of all the cells that are still not yet fully initialized
 		List<MazeCell> uninitializedCells = new List<MazeCell>();
-		MazeCell newCell = CreateCell(GenerateRandomCoords);
+		MazeCell newCell = CreateCell(startPoint);
 		newCell.Initialize(CreateRoom(-1));
 		uninitializedCells.Add(newCell);
 		while (uninitializedCells.Count > 0) {
@@ -52,14 +60,15 @@ public class Maze : MonoBehaviour {
 
 	// do the next step of the maze generation
 	private void GenerateNextStep (List<MazeCell> uninitializedCells) {
-		int currentIndex = uninitializedCells.Count - 1;
+		int currentIndex = uninitializedCells.Count -1;
 		MazeCell currentCell = uninitializedCells[currentIndex];
 		if (currentCell.IsFullyInitialized) {
 			uninitializedCells.RemoveAt(currentIndex);
 			return;
 		}
-		// move in random directions
-		MazeDirection direction = currentCell.RandomUninitializedDirection;
+		// move in set directions based on input number directions
+		MazeDirection direction = currentCell.UninitializedDirection(mazeGenerationNumber);
+		
 		IntVector2 coords = currentCell.coordinates + direction.ToIntVector2();
 		// if the coordinates are inside the maze, then...
 		if (ContainsCoordinates(coords)) {
@@ -95,15 +104,16 @@ public class Maze : MonoBehaviour {
 	
 	// make two cells have passages towards each other
 	private void CreatePassage (MazeCell firstCell, MazeCell secondCell, MazeDirection direction) {
-		// chance that an arch is created
-		float passageType = Random.value;
+		// use perlin noise to calculate where arches should be
+		float generatedNoise = Mathf.PerlinNoise((firstCell.coordinates.x * secondCell.coordinates.x)/(float)mazeGenerationNumber, (firstCell.coordinates.z * secondCell.coordinates.z)/(float)mazeGenerationNumber);
 		MazePassage prefabType;
-		if (passageType < archProbability){
+		if (generatedNoise < 0.2){
 			prefabType = archPrefab;
 		}
 		else{
 			prefabType = passagePrefab;
 		}
+
 		// instantiate it once for each cell
 		MazePassage passage = Instantiate(prefabType) as MazePassage;
 		passage.Initialize(firstCell, secondCell, direction);
@@ -120,20 +130,13 @@ public class Maze : MonoBehaviour {
 
 	// create a wall between two cells
 	private void CreateWall (MazeCell firstCell, MazeCell secondCell, MazeDirection direction) {
-		// get a random wall type
+		// set the wall type
 		MazeWall wall = Instantiate(wallPrefabs[Random.Range(0, wallPrefabs.Length)]) as MazeWall;
 		wall.Initialize(firstCell, secondCell, direction);
 		// instantiate it again for the other cell (if it exists)
 		if (secondCell != null) {
 			wall = Instantiate(wallPrefabs[Random.Range(0, wallPrefabs.Length)]) as MazeWall;
 			wall.Initialize(secondCell, firstCell, direction.GetOpposite());
-		}
-	}
-	
-	// a function to return a random cell in the coordinate range
-	public IntVector2 GenerateRandomCoords {
-		get {
-			return new IntVector2(Random.Range(0, size.x), Random.Range(0, size.z));
 		}
 	}
 
