@@ -27,13 +27,12 @@ public class GameManager : MonoBehaviour {
 	// start the game
 	private void BeginGame () {
 		// set minimap
-		Camera.main.clearFlags = CameraClearFlags.Skybox;
-		Camera.main.rect = new Rect (0f, 0f, 1f, 1f);
 		mazeInstance = Instantiate(mazePrefab) as Maze;
 		mazeInstance.StartMazeCreation();
 		IntVector2 spawnPoint = new IntVector2(0, 0);
-		Camera.main.clearFlags = CameraClearFlags.Depth;
-		Camera.main.rect = new Rect (0f, 0f, 0.5f, 0.5f);
-		Camera.main.transform.position = new Vector3(spawnPoint.x, 10, spawnPoint.z);
+		Camera.main.rect = new Rect (0f, 0f, 0.3f, 0.5f);
+		Camera.main.orthographic = true;
+		Camera.main.orthographicSize = 3;
+		Camera.main.transform.position = new Vector3(spawnPoint.x, 8, spawnPoint.z);
 	}
 }

@@ -1,11 +1,11 @@
-﻿
-Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2015
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cat-Mouse.CSharp.Plugins", "Cat-Mouse.CSharp.Plugins.csproj", "{22A12A36-6C1E-8F44-7505-37802F585BC0}"
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2008
+
+Project("{2F693834-5D0A-726C-53F5-0F5840C803B6}") = "Cat-Mouse", "Assembly-CSharp-firstpass.csproj", "{AFDABA21-C3DA-30CA-9C67-0606426251FE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cat-Mouse.CSharp", "Cat-Mouse.CSharp.csproj", "{232E75C8-AE13-4239-F07E-E31B03507963}"
+Project("{2F693834-5D0A-726C-53F5-0F5840C803B6}") = "Cat-Mouse", "Assembly-CSharp.csproj", "{37EE9EFF-2961-1BD6-47C3-18E03349BCAA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cat-Mouse.CSharp.Editor", "Cat-Mouse.CSharp.Editor.csproj", "{28F8F637-5005-52B8-0D69-CD11598F800E}"
+Project("{2F693834-5D0A-726C-53F5-0F5840C803B6}") = "Cat-Mouse", "Assembly-CSharp-Editor.csproj", "{8F347595-BF8D-9962-E09D-1053119549CB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -13,20 +13,23 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{22A12A36-6C1E-8F44-7505-37802F585BC0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{22A12A36-6C1E-8F44-7505-37802F585BC0}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{22A12A36-6C1E-8F44-7505-37802F585BC0}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{22A12A36-6C1E-8F44-7505-37802F585BC0}.Release|Any CPU.Build.0 = Release|Any CPU
-		{232E75C8-AE13-4239-F07E-E31B03507963}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{232E75C8-AE13-4239-F07E-E31B03507963}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{232E75C8-AE13-4239-F07E-E31B03507963}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{232E75C8-AE13-4239-F07E-E31B03507963}.Release|Any CPU.Build.0 = Release|Any CPU
-		{28F8F637-5005-52B8-0D69-CD11598F800E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{28F8F637-5005-52B8-0D69-CD11598F800E}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{28F8F637-5005-52B8-0D69-CD11598F800E}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{28F8F637-5005-52B8-0D69-CD11598F800E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AFDABA21-C3DA-30CA-9C67-0606426251FE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AFDABA21-C3DA-30CA-9C67-0606426251FE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AFDABA21-C3DA-30CA-9C67-0606426251FE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AFDABA21-C3DA-30CA-9C67-0606426251FE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{37EE9EFF-2961-1BD6-47C3-18E03349BCAA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{37EE9EFF-2961-1BD6-47C3-18E03349BCAA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{37EE9EFF-2961-1BD6-47C3-18E03349BCAA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{37EE9EFF-2961-1BD6-47C3-18E03349BCAA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8F347595-BF8D-9962-E09D-1053119549CB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8F347595-BF8D-9962-E09D-1053119549CB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8F347595-BF8D-9962-E09D-1053119549CB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8F347595-BF8D-9962-E09D-1053119549CB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(MonoDevelopProperties) = preSolution
+		StartupItem = Assembly-CSharp.csproj
 	EndGlobalSection
 EndGlobal

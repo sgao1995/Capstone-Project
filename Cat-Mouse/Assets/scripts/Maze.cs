@@ -11,8 +11,7 @@ public class Maze : MonoBehaviour {
 	private List<MazeRoom> rooms = new List<MazeRoom>();
 
 	// probability for arch to be created instead of regular wall
-	[Range(0f, 1f)]
-	public float archProbability;
+	public float archProbability = 0.13f;
 	
 	// prefabs
 	public MazeCell cellPrefab;
