@@ -51,6 +51,7 @@ public class NetworkManager : Photon.MonoBehaviour
         myCat.GetComponent<CatMovement>().enabled=true;
         myCat.transform.FindChild("CatCam").gameObject.SetActive(true);
         //myCat.GetComponent<NetworkPlayer>().enabled = false;
-
+        //enables minimap:
+        myCat.GetComponent<Minimap>().enabled = true;
     }
 }
