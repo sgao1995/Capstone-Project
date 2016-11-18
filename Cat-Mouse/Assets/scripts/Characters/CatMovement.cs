@@ -5,8 +5,12 @@ public class CatMovement : MonoBehaviour
 {
     public float speed = 15.0f; //speed value
     private Vector3 moveV; //vector to store movement
+    public Rigidbody catrb;
+    private int jumpForce = 3;//amount of jump force
+    private bool isJumping; //flag to check if user is already jumping or not
     void Start()
     {
+        catrb = GetComponent<Rigidbody>();
         Cursor.lockState = CursorLockMode.Locked; //cursor is gone from screen
     }
 
@@ -21,6 +25,16 @@ public class CatMovement : MonoBehaviour
         {
             Cursor.lockState = CursorLockMode.None; //if we press esc, cursor appears on screen
         }
-    }
+        //jump control
+        if (Input.GetKeyDown(KeyCode.Space) && isJumping == false)//if user press space and is not already jumping
+        {
+            catrb.velocity = new Vector3(0, jumpForce, 0);
+        }
+        isJumping = true;
 
+    }
+    void OnCollisionStay()
+    {
+        isJumping = false;   
+    }
 }
