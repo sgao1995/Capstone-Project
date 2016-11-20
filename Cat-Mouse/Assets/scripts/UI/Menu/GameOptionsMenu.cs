@@ -5,28 +5,29 @@ using UnityEngine.Events;
 using System.Collections;
 
 public class GameOptionsMenu : MonoBehaviour {
-    public Dropdown drpScreenResolution;  // Represents the Screen Resolution dropdown menu
-    public Toggle tglFullscreen;  // Stores the current Full Screen status of the game
+    public Dropdown drpScreenResolution;  // Represents the 'Screen Resolution' dropdown menu
+    public Toggle tglFullscreen;  // Stores the current 'Full Screen' status of the game
     private Resolution[] supportedScreenResolutions;  // Stores all the resolutions supported by the display device
 
     /* Stores all settings selected by the user */
     private Resolution setResolution;  // Stores the selected 'Screen Resolution' option
     private bool setFullScreen = false;  // Stores the selected 'Full Screen' option
 
-    /* 'Options' Menu actions */
+    /* 'Options' menu actions */
 
     /* Use this for initialisation */
     void Start()
     {
-        /* Retrieves and populates Screen Resolution dropdown with all supported screen resolutions */
+        /* Retrieves and populates 'Screen Resolution' dropdown with all supported screen resolutions */
         supportedScreenResolutions = Screen.resolutions;
 
         for (int i = 0; i < supportedScreenResolutions.Length; i++)
         {
             drpScreenResolution.options.Add(new Dropdown.OptionData(resolutionToString(supportedScreenResolutions[i])));
-            
-            /* Updates the dropdown with the current screen resolution */
-            if (Screen.currentResolution.width == supportedScreenResolutions[i].width && Screen.currentResolution.height == Screen.currentResolution.height)
+            drpScreenResolution.RefreshShownValue();  // Refreshes the selected resolution
+
+            /* Updates the 'Screen Resolution' dropdown with the current screen resolution */
+            if (Screen.currentResolution.width == supportedScreenResolutions[i].width && Screen.currentResolution.height == supportedScreenResolutions[i].height)
             {
                 drpScreenResolution.value = i;
             }
