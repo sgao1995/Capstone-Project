@@ -41,7 +41,8 @@
 \begin{tabularx}{\textwidth}{p{3cm}p{2cm}X}
 \toprule {\bf Date} & {\bf Version} & {\bf Notes}\\
 \midrule
-October 9, 2016 & 1.0 & First Draft\\
+Oct. 9, 2016 & 1.0 & First Draft\\
+Nov. 17, 2016 & 1.1 & Made document more abstract\\
 \bottomrule
 \end{tabularx}
 \end{table}
@@ -65,24 +66,24 @@ template~\citep{RobertsonAndRobertson2012}.
 \paragraph{} Game testers will be necessary, as we will need their feedback to help us improve the game's overall experience.
 \subsection{Mandated Constraints}
 \subsubsection{Solution Constraints}
-\textbf{Constraint 1:} Game must be created using the Unity 5 game engine.\\
-\textbf{Rationale:} The Unity 5 game engine will allow us to the develop the game faster as we do not have to create features such as shaders from scratch.\\
+\textbf{Constraint 1:} Game must be created using a game engine.\\
+\textbf{Rationale:} a game engine will allow us to the develop the game faster as we do not have to create features such as shaders from scratch.\\
 \textbf{Fit criterion:} The developers and customers confirm that the game is using the Unity 5 engine.
 \\\\
-\textbf{Constraint 2:} The product will use Photon Unity Networking (PUN).\\
-\textbf{Rationale:} Photon Unity Network allows us to create an online multiplayer game with a dedicated server, with better performance than the default networking feature built into Unity 5.\\
-\textbf{Fit criterion:} Multiplayer works, and it is using Photon Unity Networking. If the host leaves the game, it should not kick everyone else out of the game due to the dedicated server.
+\textbf{Constraint 2:} The product will have network capabilities.\\
+\textbf{Rationale:} A major part of our game is the multiplayer, therefore we need to be able to implement it. \\
+\textbf{Fit criterion:} Multiplayer works. If the host leaves the game, it should not kick everyone else out of the game due to the dedicated server.
 \\\\
 \textbf{Constraint 3:} Game will only be playable with computers that runs on a Windows Operating System from Windows 7 and onwards\\ 
 \textbf{Rationale:} To cater to Windows Operating System users.\\
 \textbf{Fit criterion:} Developers must confirm that the game runs on Windows Operating Systems (Windows 7 and onwards).
 
 \subsubsection{Implementation Environment of the Current System}
-\paragraph{}The game will be written in C\# and created with the Unity 5 game engine. Blender will be used to create 3D models and Photon Unity Networking (PUN) will be used to handle multiplayer. 
+\paragraph{}The game will be written in an object-oriented language and created a game engine. 3D modeling software will be used to create 3D models for use in game. 
 \subsubsection{Partner or Collaborative Applications}
 \paragraph{}\href{https://www.blender.org/}{Blender} for making the 3D models that will be used for characters and other objects in this game.
 \subsubsection{Off-the-Shelf Software}
-\paragraph{}Off-the-Shelf Software includes Unity 5 game engine, Photon Unity Networking, and Blender.
+\paragraph{}Off-the-Shelf Software may include Unity 5 game engine, Photon Unity Networking, and Blender.
 \subsubsection{Anticipated Workplace Environment}
 \paragraph{}Users will be using our product at home on their Personal Computers. Other environments include at school, in internet cafes, and public locations that people use their laptops in. We anticipate that most people will play this game at home, as it is not intended to be a game for mobile devices. The environment should not affect the game's visual and audio cues. 
 \subsubsection{Schedule Constraints}
@@ -240,13 +241,13 @@ This means that the users have proper internet access and hardware that meet the
 \\\\
 \textbf{Requirement 6:}  The Cat-and-Mouse Game should allow players to move their characters around the map as the environment allows. \\
 \textbf{Rationale:}  Ensuring freedom of movement encourages players to be adventurous and creative in their interactions with not only the game objectives, but other fellow participants as well.\\
-\textbf{Fit criterion:}  Individuals are able to move to any point in the map (subject to the natural laws of physics and defined boundaries).\\
+\textbf{Fit criterion:}  Individuals are able to move to any point in the map without going through walls or solid objects.\\
 \\\\
 \textbf{Requirement 7:}  The Cat-and-Mouse Game should allow players to attack and deal damage to the corresponding players on the opposing team. \\
 \textbf{Rationale:}  This allows for game progression, and encourages team cooperation by introducing a survival element to the gameplay.\\
 \textbf{Fit criterion:}  Players are able to wield various attack and defensive skills to cause damage to a player on the opposing team. The ability to utilise  skills is regulated by a Mana Indicator, which must be kept filled. Remaining Health is also indicated and upon reaching a certain level, the player "dies" and is (temporarily) unable to participate further in the match.\\
 \\\\
-\textbf{Requirement 8:}  The Cat-and-Mouse Game should allow teams to gain points through acomplishing certain in-game tasks or objectives, depending on the selected game mode.\\
+\textbf{Requirement 8:}  The Cat-and-Mouse Game should allow teams to gain points through acomplishing certain in-game tasks or objectives, depending on the selected game mode. Game modes include: capture the flag, escape the maze, and team deathmatch. killing opponents, capturing the flag, and killing cpu controlled monsters all give points.\\
 \textbf{Rationale:}  This allows for game progression, and a the competitive element encourages greater team cohesion in order to get ahead.\\
 \textbf{Fit criterion:}  Each team is granted points for accomplishing certain objectives over the course of a match. Dependent on the mode and parameters of the match, the game is considered "won" either when a Team attains the highest number of points after a certain period of time, a special condition has been fulfilled (e.g. capture the flag), or all members of the opposing Team have been eliminated.  \\
 \\\\
