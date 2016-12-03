@@ -6,7 +6,7 @@ public class Minimap : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		Camera.main.rect = new Rect (0f, 0f, 0.3f, 0.5f);
+		Camera.main.rect = new Rect (0f, 0f, 1f, 1f);
 		Camera.main.orthographic = true;
 		Camera.main.orthographicSize = 8;	
 	}
