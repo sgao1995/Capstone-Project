@@ -30,9 +30,5 @@ public class GameManager : MonoBehaviour {
 		mazeInstance = Instantiate(mazePrefab) as Maze;
 		mazeInstance.StartMazeCreation();
 		IntVector2 spawnPoint = new IntVector2(0, 0);
-		Camera.main.rect = new Rect (0f, 0f, 0.3f, 0.5f);
-		Camera.main.orthographic = true;
-		Camera.main.orthographicSize = 8;
-		Camera.main.transform.position = new Vector3(spawnPoint.x, 8, spawnPoint.z);
 	}
 }

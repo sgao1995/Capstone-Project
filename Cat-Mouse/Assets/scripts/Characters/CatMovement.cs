@@ -6,7 +6,7 @@ public class CatMovement : MonoBehaviour
     public float speed = 15.0f; //speed value
     private Vector3 moveV; //vector to store movement
     public Rigidbody catrb;
-    private int jumpForce = 3;//amount of jump force
+    private int jumpForce = 6;//amount of jump force
     private bool isJumping; //flag to check if user is already jumping or not
     void Start()
     {

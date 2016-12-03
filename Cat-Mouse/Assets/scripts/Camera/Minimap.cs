@@ -13,6 +13,6 @@ public class Minimap : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		Camera.main.transform.position = new Vector3 (this.transform.position.x, 16, this.transform.position.z);
+		Camera.main.transform.position = new Vector3 (this.transform.position.x, 8, this.transform.position.z);
 	}
 }
