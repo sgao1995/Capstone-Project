@@ -20,6 +20,7 @@ public class Maze : MonoBehaviour {
 	public static int mazeGenerationNumber = 8; // anything above 2 makes a decent maze (didnt test every number though), also dont go above the size
 	public static IntVector2 startPoint = new IntVector2(mazeGenerationNumber, mazeGenerationNumber);
 	public int roomTypeCount = 0;
+	public float cellSize = 1;
 		
 	// creates a new room 
 	private MazeRoom CreateRoom (int roomType) {
@@ -130,12 +131,30 @@ public class Maze : MonoBehaviour {
 
 	// create a wall between two cells
 	private void CreateWall (MazeCell firstCell, MazeCell secondCell, MazeDirection direction) {
+		
+		// use perlin noise to calculate wall type
+		float generatedNoise;
+		if (secondCell == null){
+			generatedNoise = Mathf.PerlinNoise((firstCell.coordinates.x * 1)/(float)mazeGenerationNumber, (firstCell.coordinates.z * 1)/(float)mazeGenerationNumber);
+		}
+		else{
+			generatedNoise = Mathf.PerlinNoise((firstCell.coordinates.x * secondCell.coordinates.x)/(float)mazeGenerationNumber, (firstCell.coordinates.z * secondCell.coordinates.z)/(float)mazeGenerationNumber);
+		}
+		MazeWall prefabType;
+		// torch
+		if (generatedNoise < 0.2){
+			prefabType = wallPrefabs[1];
+		}
+		else{
+			prefabType = wallPrefabs[0];
+		}
+		
 		// set the wall type
-		MazeWall wall = Instantiate(wallPrefabs[Random.Range(0, wallPrefabs.Length)]) as MazeWall;
+		MazeWall wall = Instantiate(prefabType) as MazeWall;
 		wall.Initialize(firstCell, secondCell, direction);
 		// instantiate it again for the other cell (if it exists)
 		if (secondCell != null) {
-			wall = Instantiate(wallPrefabs[Random.Range(0, wallPrefabs.Length)]) as MazeWall;
+			wall = Instantiate(prefabType) as MazeWall;
 			wall.Initialize(secondCell, firstCell, direction.GetOpposite());
 		}
 	}
