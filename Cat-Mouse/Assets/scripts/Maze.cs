@@ -16,6 +16,9 @@ public class Maze : MonoBehaviour {
 	public MazeWall[] wallPrefabs;
 	public MazeArch archPrefab;
 	
+	// puzzle room generation
+	public List<MazeRoom> puzzleRooms = new List<MazeRoom>();
+	
 	// set values to generate same maze every time
 	public static int mazeGenerationNumber = 8; // anything above 2 makes a decent maze (didnt test every number though), also dont go above the size
 	public static IntVector2 startPoint = new IntVector2(mazeGenerationNumber, mazeGenerationNumber);
@@ -26,7 +29,8 @@ public class Maze : MonoBehaviour {
 	private MazeRoom CreateRoom (int roomType) {
 		MazeRoom newRoom = ScriptableObject.CreateInstance<MazeRoom>();
 		newRoom.settingsIndex = roomTypeCount;
-		if (roomTypeCount < roomSettings.Length -1){
+		// reserve last room setting type for puzzle rooms
+		if (roomTypeCount < roomSettings.Length -2){
 			roomTypeCount += 1;
 		}
 		else{
@@ -34,7 +38,13 @@ public class Maze : MonoBehaviour {
 		}
 		// exclude creating rooms of a certain roomType
 		if (newRoom.settingsIndex == roomType) {
-			newRoom.settingsIndex = (newRoom.settingsIndex + 1) % roomSettings.Length;
+			if (newRoom.settingsIndex < roomSettings.Length -2){
+				newRoom.settingsIndex = newRoom.settingsIndex +1;	
+			}
+			else{
+				newRoom.settingsIndex = newRoom.settingsIndex -1;	
+			}
+
 		}
 		newRoom.roomSettings = roomSettings[newRoom.settingsIndex];
 		rooms.Add(newRoom);
@@ -57,6 +67,10 @@ public class Maze : MonoBehaviour {
 		while (uninitializedCells.Count > 0) {
 			GenerateNextStep(uninitializedCells);
 		}
+		// completed maze
+		CreatePuzzleRoom();
+		Debug.Log("donemaze, " + rooms.Count);
+		
 	}
 
 	// do the next step of the maze generation
@@ -174,5 +188,23 @@ public class Maze : MonoBehaviour {
 		temp.transform.localPosition =
 			new Vector3(coords.x - size.x * 0.5f + 0.5f, 0f, coords.z - size.z * 0.5f + 0.5f);
 		return temp;
+	}
+	
+	// generate the puzzle rooms
+	private void CreatePuzzleRoom(){
+		// go through puzzle room candidates, different sized rooms can hold different puzzles
+		// first cull small rooms from the list
+		for (int r = 0; r < rooms.Count; r++){
+			if (rooms[r].getCells().Count > 40 && rooms[r].getCells().Count < 50){
+				puzzleRooms.Add(rooms[r]);
+			}
+		}
+		Debug.Log(puzzleRooms.Count);
+		for (int r = 0; r < puzzleRooms.Count; r++){
+			puzzleRooms[r].roomSettings = roomSettings[roomSettings.Length -1];	
+			for (int c = 0; c < puzzleRooms[r].getCells().Count; c++){
+				puzzleRooms[r].getCells()[c].changeMaterial(puzzleRooms[r]);
+			}
+		}
 	}
 }

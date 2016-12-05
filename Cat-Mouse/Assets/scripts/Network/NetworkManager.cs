@@ -41,8 +41,6 @@ public class NetworkManager : Photon.MonoBehaviour
         {	
             mazeScript.StartMazeCreation(); 
         }
-        
-        IntVector2 spawnPoint = new IntVector2(0, 0);
     }
     void SpawnCat()
     {

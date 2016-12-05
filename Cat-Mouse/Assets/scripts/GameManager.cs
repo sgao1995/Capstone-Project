@@ -29,6 +29,5 @@ public class GameManager : MonoBehaviour {
 		// set minimap
 		mazeInstance = Instantiate(mazePrefab) as Maze;
 		mazeInstance.StartMazeCreation();
-		IntVector2 spawnPoint = new IntVector2(0, 0);
 	}
 }

@@ -23,7 +23,7 @@ public class CatCamMovement : MonoBehaviour {
         smoothnessV.y = Mathf.Lerp(smoothnessV.y,mousePos.y,1f/smoothness);
         mouseMov = mouseMov + smoothnessV;
         //clamp to limit movement of y axis
-        mouseMov.y = Mathf.Clamp(mouseMov.y, -30f, 0f);
+        mouseMov.y = Mathf.Clamp(mouseMov.y, -30f, 60f);
         transform.localRotation = Quaternion.AngleAxis(-mouseMov.y, Vector3.right); //inverted rotate up and down with camera
         cat.transform.localRotation = Quaternion.AngleAxis(mouseMov.x, cat.transform.up); //rotate the cat left/right
     }

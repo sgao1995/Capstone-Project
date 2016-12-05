@@ -14,4 +14,8 @@ public class MazeRoom : ScriptableObject {
 		cell.room = this;
 		cells.Add(cell);
 	}
+	
+	public List<MazeCell> getCells(){
+		return cells;
+	}
 }
