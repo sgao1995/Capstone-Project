@@ -20,10 +20,15 @@ public class Maze : MonoBehaviour {
 	public List<MazeRoom> puzzleRooms = new List<MazeRoom>();
 	
 	// set values to generate same maze every time
-	public static int mazeGenerationNumber = 8; // anything above 2 makes a decent maze (didnt test every number though), also dont go above the size
+	public static int mazeGenerationNumber = 5; // anything above 2 makes a decent maze (didnt test every number though), also dont go above the size
 	public static IntVector2 startPoint = new IntVector2(mazeGenerationNumber, mazeGenerationNumber);
 	public int roomTypeCount = 0;
 	public float cellSize = 1;
+	
+	// powerups
+	private List<Powerup> powerupList = new List<Powerup>();
+	private float powerupSpawnTimer = 5f;
+	public float powerupSpawnDelay = 5f;
 		
 	// creates a new room 
 	private MazeRoom CreateRoom (int roomType) {
@@ -70,6 +75,7 @@ public class Maze : MonoBehaviour {
 		// completed maze
 		CreatePuzzleRoom();
 		Debug.Log("donemaze, " + rooms.Count);
+		CreateExit();
 		
 	}
 
@@ -199,12 +205,41 @@ public class Maze : MonoBehaviour {
 				puzzleRooms.Add(rooms[r]);
 			}
 		}
+		// make sure there are only 3 puzzle rooms
+		int num = puzzleRooms.Count;
+		if (puzzleRooms.Count > 3){
+			for (int r = 0; r < num -3; r++){
+				puzzleRooms.RemoveAt(puzzleRooms.Count-1);
+			}
+		}
 		Debug.Log(puzzleRooms.Count);
+		// change the floor material for the rooms
 		for (int r = 0; r < puzzleRooms.Count; r++){
 			puzzleRooms[r].roomSettings = roomSettings[roomSettings.Length -1];	
 			for (int c = 0; c < puzzleRooms[r].getCells().Count; c++){
 				puzzleRooms[r].getCells()[c].changeMaterial(puzzleRooms[r]);
 			}
+		}
+		// 
+	}
+	
+	// generate the exit path
+	// exit door will always be at the edge of the map
+	private void CreateExit(){
+	}
+	
+	void Update(){
+		// spawn powerups when there are less than 5 in the maze
+		powerupSpawnTimer -= Time.deltaTime;
+		if (powerupSpawnTimer < 0 && powerupList.Count < 5){
+			// spawn a powerup
+			Vector3 spawnPos = new Vector3(Random.value, 0.5f, Random.value);
+			Quaternion spawnRot = new Quaternion(0f, 0f, 0f, 0f);
+			GameObject newGO = (GameObject)PhotonNetwork.Instantiate("Powerup", spawnPos, spawnRot, 0);
+			Powerup newPowerup = newGO.GetComponent<Powerup>();
+			newPowerup.setType(0);
+			powerupList.Add(newPowerup);
+			powerupSpawnTimer = powerupSpawnDelay;
 		}
 	}
 }

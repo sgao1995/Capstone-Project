@@ -50,7 +50,6 @@ public class MazeCell : MonoBehaviour {
 			else{
 				numSkipEdge = potentialSkips;
 			}
-			//int numSkipEdge = Random.Range(0, 4 - initializedEdges);
 			// skip until 0 skips left, then create edge
 			for (int count = 0; count < 4; count++) {
 				if (edges[count] == null) {

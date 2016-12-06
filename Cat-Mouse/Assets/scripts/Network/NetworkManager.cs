@@ -9,6 +9,7 @@ public class NetworkManager : Photon.MonoBehaviour
  public Maze mazePrefab;
 	private Maze mazeInstance;
     Spawn[] s;
+	private Powerup powerupsList;
     //private RoomInfo[] rList;
 	void Start () {
         PhotonNetwork.ConnectUsingSettings(VER);
@@ -33,7 +34,7 @@ public class NetworkManager : Photon.MonoBehaviour
     {
         Debug.Log("OnJoinedRoom");
         SpawnCat();
-        
+		SpawnMonsters();
        
         mazeInstance = Instantiate(mazePrefab) as Maze;
         var mazeScript = mazeInstance.GetComponent<Maze>();
@@ -52,4 +53,13 @@ public class NetworkManager : Photon.MonoBehaviour
         //enables minimap:
         myCat.GetComponent<Minimap>().enabled = true;
     }
+	void SpawnMonsters()
+	{
+		Spawn monsterSpawn = s[1];
+        GameObject monster = (GameObject)PhotonNetwork.Instantiate("Monster", monsterSpawn.transform.position, monsterSpawn.transform.rotation, 0);
+        monster.GetComponent<MonsterAI>().enabled=true;
+	}
+	public void destroy(){
+		
+	}
 }
