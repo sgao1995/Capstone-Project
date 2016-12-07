@@ -45,6 +45,9 @@ public class CatMovement : MonoBehaviour
 			attackCooldownTimer = attackCooldownDelay;
 			Attack();
 		}
+		if (Input.GetKeyDown(KeyCode.E)){
+			InteractWithObject();
+		}
 		
 		// move and rotate the player
         moveV.Set(Input.GetAxisRaw("Horizontal"), 0f, Input.GetAxisRaw("Vertical")); //set vector3 with wasd
@@ -79,6 +82,20 @@ public class CatMovement : MonoBehaviour
         while (i < hitColliders.Length) {
 			if (hitColliders[i].tag == "Monster"){
 				hitColliders[i].GetComponent<MonsterAI>().takeDamage(50);
+			}
+            i++;
+        }
+	}
+	
+	// allow the player to open and close doors
+	void InteractWithObject(){
+		Vector3 pushCenter = transform.position + transform.forward * 0.6f;
+		Collider[] hitColliders = Physics.OverlapSphere(pushCenter,0.8f);
+		// check the hitbox area
+        int i = 0;
+        while (i < hitColliders.Length) {
+			if (hitColliders[i].tag == "Door"){
+				hitColliders[i].transform.parent.GetComponent<MazeDoor>().Interact();
 			}
             i++;
         }

@@ -16,5 +16,12 @@ public struct IntVector2 {
 		num1.z += num2.z;
 		return num1;
 	}
+	
+	// operator for division
+	public static IntVector2 operator / (IntVector2 num1, int num2) {
+		num1.x /= num2;
+		num1.z /= num2;
+		return num1;
+    }
 }
 

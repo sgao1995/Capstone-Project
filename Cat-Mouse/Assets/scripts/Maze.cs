@@ -15,6 +15,7 @@ public class Maze : MonoBehaviour {
 	public MazePassage passagePrefab;
 	public MazeWall[] wallPrefabs;
 	public MazeArch archPrefab;
+	public MazeDoor doorPrefab;
 	
 	// puzzle room generation
 	public List<MazeRoom> puzzleRooms = new List<MazeRoom>();
@@ -73,7 +74,9 @@ public class Maze : MonoBehaviour {
 			GenerateNextStep(uninitializedCells);
 		}
 		// completed maze
+		CleanseWalls();
 		CreatePuzzleRoom();
+
 		Debug.Log("donemaze, " + rooms.Count);
 		CreateExit();
 		
@@ -114,13 +117,13 @@ public class Maze : MonoBehaviour {
 			CreateWall(currentCell, null, direction);
 		}
 	}
-
+	
 	// create a passage bewteen two cells in the same room
 	private void CreateSameRoomPassage (MazeCell firstCell, MazeCell secondCell, MazeDirection direction) {
 		MazePassage passage = Instantiate(passagePrefab) as MazePassage;
 		passage.Initialize(firstCell, secondCell, direction);
-		passage = Instantiate(passagePrefab) as MazePassage;
-		passage.Initialize(secondCell, firstCell, direction.GetOpposite());
+		//passage = Instantiate(passagePrefab) as MazePassage;
+		//passage.Initialize(secondCell, firstCell, direction.GetOpposite());
 	}
 	
 	// make two cells have passages towards each other
@@ -151,11 +154,10 @@ public class Maze : MonoBehaviour {
 
 	// create a wall between two cells
 	private void CreateWall (MazeCell firstCell, MazeCell secondCell, MazeDirection direction) {
-		
 		// use perlin noise to calculate wall type
 		float generatedNoise;
 		if (secondCell == null){
-			generatedNoise = Mathf.PerlinNoise((firstCell.coordinates.x * 1)/(float)mazeGenerationNumber, (firstCell.coordinates.z * 1)/(float)mazeGenerationNumber);
+			generatedNoise = 1;
 		}
 		else{
 			generatedNoise = Mathf.PerlinNoise((firstCell.coordinates.x * secondCell.coordinates.x)/(float)mazeGenerationNumber, (firstCell.coordinates.z * secondCell.coordinates.z)/(float)mazeGenerationNumber);
@@ -190,10 +192,91 @@ public class Maze : MonoBehaviour {
 		MazeCell temp = Instantiate(cellPrefab) as MazeCell;
 		cells[coords.x, coords.z] = temp;
 		temp.coordinates = coords;
+		temp.name = "Maze Cell " + coords.x + ", " + coords.z;
 		temp.transform.parent = transform;
 		temp.transform.localPosition =
 			new Vector3(coords.x - size.x * 0.5f + 0.5f, 0f, coords.z - size.z * 0.5f + 0.5f);
 		return temp;
+	}
+	
+	// returns a list of the existing walls between two cells
+	private List<Collider> ExistingWalls (MazeCell firstCell, MazeCell secondCell){
+		float avgX = (firstCell.transform.position.x + secondCell.transform.position.x)/2f;
+		float avgZ = (firstCell.transform.position.z + secondCell.transform.position.z)/2f;
+		Vector3 center = new Vector3(avgX, 0f, avgZ);
+		Collider[] collider = Physics.OverlapSphere(center,0.8f);
+		List<Collider> walls = new List<Collider>();
+
+		// check the hitbox area
+        int i = 0;
+        while (i < collider.Length) {
+			if (collider[i].tag == "Wall"){
+				walls.Add(collider[i]);
+			}
+            i++;
+        }
+	//	Debug.Log(walls.Count);
+	//	for (int a = 0; a < walls.Count; a++)
+	//		Debug.Log(walls[a]);
+	//	Debug.Log(" ");
+		return walls;
+	}
+	
+		// returns a list of the existing walls between two cells
+	private List<Collider> ExistingArches (MazeCell firstCell, MazeCell secondCell){
+		float avgX = (firstCell.transform.position.x + secondCell.transform.position.x)/2f;
+		float avgZ = (firstCell.transform.position.z + secondCell.transform.position.z)/2f;
+		Vector3 center = new Vector3(avgX, 0f, avgZ);
+		Vector3 aboveCenter = new Vector3(avgX, 4f, avgZ);
+		Collider[] collider = Physics.OverlapCapsule(center, aboveCenter,0.3f);
+		List<Collider> arches = new List<Collider>();
+
+		// check the hitbox area
+        int i = 0;
+        while (i < collider.Length) {
+			if (collider[i].tag == "Arch"){
+				arches.Add(collider[i]);
+			}
+            i++;
+        }
+		//Debug.Log(arches.Count);
+		//for (int a = 0; a < arches.Count; a++)
+		//	Debug.Log(arches[a]);
+		//Debug.Log(" ");
+		return arches;
+	}
+	
+	// cleanse duplicate walls, make the walls only 1 wall thick
+	private void CleanseWalls(){
+		// directional vectors
+		List<IntVector2> dir = new List<IntVector2>();
+		dir.Add(new IntVector2(0, 1));
+		dir.Add(new IntVector2(1, 0));
+		dir.Add(new IntVector2(0, -1));
+		dir.Add(new IntVector2(-1, 0));
+		
+		// storage list
+		List<Collider> existingWalls = new List<Collider>();
+		List<Collider> existingArches = new List<Collider>();		
+		for (int x = 0; x < size.x; x++){
+			for (int z = 0; z < size.z; z++){
+				for (int w = 0; w < 4; w++){
+					MazeCell currentCell = GetCell(new IntVector2(x, z));
+					if (ContainsCoordinates(new IntVector2(x, z) + dir[w])){
+						MazeCell neighbor = GetCell(new IntVector2(x, z) + dir[w]);
+						existingWalls = ExistingWalls(currentCell, neighbor);
+						existingArches = ExistingArches(currentCell, neighbor);
+						if (existingWalls.Count > 1){
+							Destroy(existingWalls[1].transform.parent.gameObject);
+						}
+						if (existingArches.Count > 1){
+							Destroy(existingArches[1].transform.parent.gameObject);
+						}
+					}
+
+				}
+			}
+		}
 	}
 	
 	// generate the puzzle rooms
@@ -212,7 +295,6 @@ public class Maze : MonoBehaviour {
 				puzzleRooms.RemoveAt(puzzleRooms.Count-1);
 			}
 		}
-		Debug.Log(puzzleRooms.Count);
 		// change the floor material for the rooms
 		for (int r = 0; r < puzzleRooms.Count; r++){
 			puzzleRooms[r].roomSettings = roomSettings[roomSettings.Length -1];	
@@ -220,7 +302,28 @@ public class Maze : MonoBehaviour {
 				puzzleRooms[r].getCells()[c].changeMaterial(puzzleRooms[r]);
 			}
 		}
-		// 
+		// for each arch check if it connects a normal room with a puzzle room
+		GameObject[] archList = GameObject.FindGameObjectsWithTag("ArchObject");
+		for (int a = 0; a < archList.Length; a++){
+			// add a door
+			MazeArch arch = archList[a].GetComponent<MazeArch>();
+			MazeCell cellOne;
+			MazeCell cellTwo;
+			MazeDirection dir;
+			if (arch.cell.room.roomSettings.floorMaterial == roomSettings[roomSettings.Length -1].floorMaterial){
+				Debug.Log("arch");
+				cellOne = arch.cell;
+				cellTwo = arch.otherCell;
+				dir = arch.direction;
+				MazePassage prefabType = doorPrefab; 
+				MazePassage passage = Instantiate(prefabType) as MazePassage;
+				passage.Initialize(cellOne, cellTwo, dir);
+				//passage = Instantiate(prefabType) as MazePassage;
+				//passage.Initialize(cellTwo, cellOne, dir.GetOpposite());
+			}
+		}
+		// create the puzzles in the rooms
+		// randomize 3 unique puzzles from the puzzle list
 	}
 	
 	// generate the exit path

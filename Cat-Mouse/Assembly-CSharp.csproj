@@ -131,6 +131,7 @@
      <Compile Include="Assets\scripts\MazeCell.cs" />
      <Compile Include="Assets\scripts\MazeCellEdge.cs" />
      <Compile Include="Assets\scripts\MazeDirection.cs" />
+     <Compile Include="Assets\scripts\MazeDoor.cs" />
      <Compile Include="Assets\scripts\MazePassage.cs" />
      <Compile Include="Assets\scripts\MazeRoom.cs" />
      <Compile Include="Assets\scripts\MazeRoomSettings.cs" />
