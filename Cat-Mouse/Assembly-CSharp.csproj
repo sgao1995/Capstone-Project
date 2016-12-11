@@ -126,6 +126,7 @@
      <Compile Include="Assets\scripts\Characters\MouseMovement.cs" />
      <Compile Include="Assets\scripts\GameManager.cs" />
      <Compile Include="Assets\scripts\IntVector2.cs" />
+     <Compile Include="Assets\scripts\LavaMovement.cs" />
      <Compile Include="Assets\scripts\Maze.cs" />
      <Compile Include="Assets\scripts\MazeArch.cs" />
      <Compile Include="Assets\scripts\MazeCell.cs" />
@@ -136,6 +137,7 @@
      <Compile Include="Assets\scripts\MazeRoom.cs" />
      <Compile Include="Assets\scripts\MazeRoomSettings.cs" />
      <Compile Include="Assets\scripts\MazeWall.cs" />
+     <Compile Include="Assets\scripts\Mine.cs" />
      <Compile Include="Assets\scripts\MonsterAI.cs" />
      <Compile Include="Assets\scripts\Network\NetworkManager.cs" />
      <Compile Include="Assets\scripts\Network\NetworkPlayer.cs" />

@@ -6,12 +6,5 @@ public class GUIManager : MonoBehaviour {
 	private float offset;
 	
 	void Awake(){
-		offset = 10;
-	}
-	
-	void OnGUI(){
-		if (Event.current.type == EventType.Repaint){
-			Graphics.DrawTexture(new Rect(Screen.width - 256 - offset, Screen.height -256 -offset, 256, 256), MiniMapTexture, MiniMapMaterial);
-		}
 	}
 }

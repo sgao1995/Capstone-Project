@@ -16,8 +16,13 @@ public class MazeCell : MonoBehaviour {
 	}
 	
 	// update material
-	public void changeMaterial (MazeRoom room) {
+	public void updateMaterial (MazeRoom room) {
 		transform.GetChild(0).GetComponent<Renderer>().material = room.roomSettings.floorMaterial;
+	}
+	
+	// change material
+	public void changeMaterial (Material mat) {	
+		transform.GetChild(0).GetComponent<Renderer>().material = mat;
 	}
 
 	// check to see if the cell creation is complete

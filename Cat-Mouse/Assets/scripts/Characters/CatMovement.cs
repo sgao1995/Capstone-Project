@@ -3,11 +3,11 @@ using System.Collections;
 
 public class CatMovement : MonoBehaviour
 {
-    private float speed = 3.0f; //speed value
-    private Vector3 moveV; //vector to store movement
-    public Rigidbody catrb;
-    private int jumpForce = 5;//amount of jump force
-    private bool isJumping; //flag to check if user is already jumping or not
+    // stats
+	private float speed = 3.0f; //speed value
+	private int jumpForce = 5;//amount of jump force
+	public float currentHealth;
+	private float maxHealth = 100;
 	
 	// movement speed
 	private int movementModifier = 1;
@@ -18,16 +18,29 @@ public class CatMovement : MonoBehaviour
 	private float attackCooldownDelay = 1f;
 	private float attackCooldownTimer = 1f;
 	
+	private Vector3 moveV; //vector to store movement
+    public Rigidbody catrb;
+    private bool isJumping; //flag to check if user is already jumping or not
+	private GameObject healthScaling;
+	
+	
 	// skills
 	
     void Start()
     {
         catrb = GetComponent<Rigidbody>();
         Cursor.lockState = CursorLockMode.Locked; //cursor is gone from screen
+		currentHealth = maxHealth;
+		healthScaling = GameObject.Find("GUI/HealthCurrent");
     }
 
     void FixedUpdate()
     {
+		// update GUI
+		// health is 150 units wide at full hp
+		RectTransform healthRect = healthScaling.GetComponent<RectTransform> ();
+		healthRect.sizeDelta = new Vector2(currentHealth * 1.5f,20f);
+		
 		// keyboard commands
 		if (Input.GetKeyDown("escape"))
         {
@@ -48,6 +61,9 @@ public class CatMovement : MonoBehaviour
 		if (Input.GetKeyDown(KeyCode.E)){
 			InteractWithObject();
 		}
+		if (Input.GetKeyDown(KeyCode.K)){
+			TakeDamage(5);
+		}
 		
 		// move and rotate the player
         moveV.Set(Input.GetAxisRaw("Horizontal"), 0f, Input.GetAxisRaw("Vertical")); //set vector3 with wasd
@@ -65,6 +81,18 @@ public class CatMovement : MonoBehaviour
 		}
 
     }
+	
+	public void TakeDamage(int amt){
+		currentHealth -= amt;
+		if (currentHealth <= 0){
+			currentHealth = 0;
+			Death();
+		}
+	}
+	
+	void Death(){
+		Debug.Log("player died");
+	}
 	
 	// attack in front of player
 	void Attack(){

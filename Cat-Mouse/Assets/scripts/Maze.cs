@@ -19,9 +19,12 @@ public class Maze : MonoBehaviour {
 	
 	// puzzle room generation
 	public List<MazeRoom> puzzleRooms = new List<MazeRoom>();
+	public Material lavaMat;
+	public List<Mine> mineList = new List<Mine>();
+	
 	
 	// set values to generate same maze every time
-	public static int mazeGenerationNumber = 5; // anything above 2 makes a decent maze (didnt test every number though), also dont go above the size
+	public static int mazeGenerationNumber = 40; // anything above 2 makes a decent maze (didnt test every number though), also dont go above the size
 	public static IntVector2 startPoint = new IntVector2(mazeGenerationNumber, mazeGenerationNumber);
 	public int roomTypeCount = 0;
 	public float cellSize = 1;
@@ -299,7 +302,7 @@ public class Maze : MonoBehaviour {
 		for (int r = 0; r < puzzleRooms.Count; r++){
 			puzzleRooms[r].roomSettings = roomSettings[roomSettings.Length -1];	
 			for (int c = 0; c < puzzleRooms[r].getCells().Count; c++){
-				puzzleRooms[r].getCells()[c].changeMaterial(puzzleRooms[r]);
+				puzzleRooms[r].getCells()[c].updateMaterial(puzzleRooms[r]);
 			}
 		}
 		// for each arch check if it connects a normal room with a puzzle room
@@ -311,19 +314,74 @@ public class Maze : MonoBehaviour {
 			MazeCell cellTwo;
 			MazeDirection dir;
 			if (arch.cell.room.roomSettings.floorMaterial == roomSettings[roomSettings.Length -1].floorMaterial){
-				Debug.Log("arch");
 				cellOne = arch.cell;
 				cellTwo = arch.otherCell;
 				dir = arch.direction;
 				MazePassage prefabType = doorPrefab; 
 				MazePassage passage = Instantiate(prefabType) as MazePassage;
 				passage.Initialize(cellOne, cellTwo, dir);
-				//passage = Instantiate(prefabType) as MazePassage;
-				//passage.Initialize(cellTwo, cellOne, dir.GetOpposite());
 			}
 		}
-		// create the puzzles in the rooms
-		// randomize 3 unique puzzles from the puzzle list
+	}
+	
+	// generate the puzzles in the puzzle rooms
+	public void GeneratePuzzles(List<int> activePuzzleTypes){
+		List<int> remainingPuzzleTypes = activePuzzleTypes;
+		for (int r = 0; r < 3; r++){
+			int puzzleType = activePuzzleTypes[r];
+			// floor is lava, jump from safe point to safe point
+			if (puzzleType == 0){
+				for (int c = 0; c < puzzleRooms[r].getCells().Count; c++){
+					// use Perlin noise to generate rocky areas
+					float generatedNoise;
+					MazeCell currentCell = puzzleRooms[r].getCells()[c];
+					generatedNoise = Mathf.PerlinNoise((currentCell.coordinates.x * currentCell.coordinates.x)/(float)mazeGenerationNumber, (currentCell.coordinates.z * currentCell.coordinates.z)/(float)mazeGenerationNumber);
+					if (generatedNoise < 0.5){
+						// lava
+						currentCell.changeMaterial(lavaMat);
+					}
+				}
+			}
+			// minefield
+			else if (puzzleType == 1){
+				float mineMultiplier = puzzleRooms[r].getCells().Count/25f;
+				// spawn mines of varying size and damage based on Perlin noise
+				// number of mines varies with room size
+				for (int c = 0; c < puzzleRooms[r].getCells().Count; c++){
+					MazeCell currentCell = puzzleRooms[r].getCells()[c];
+					float chanceForMine = Mathf.PerlinNoise((currentCell.coordinates.x * currentCell.coordinates.x)/(float)mazeGenerationNumber, (currentCell.coordinates.z * currentCell.coordinates.z)/(float)mazeGenerationNumber);
+					if (chanceForMine < 0.25f * mineMultiplier){
+						// generate a mine
+						float mineX = currentCell.transform.position.x + Mathf.PerlinNoise(currentCell.coordinates.x/(float)mazeGenerationNumber, currentCell.coordinates.x/(float)mazeGenerationNumber);
+						float mineZ = currentCell.transform.position.z + Mathf.PerlinNoise(currentCell.coordinates.z/(float)mazeGenerationNumber, currentCell.coordinates.z/(float)mazeGenerationNumber);
+						float mineSize = Mathf.PerlinNoise(c/(float)mazeGenerationNumber, c/(float)mazeGenerationNumber);
+						Vector3 spawnPos = new Vector3(mineX, 0f, mineZ);
+						Quaternion spawnRot = new Quaternion(0f, 0f, 0f, 0f);
+						GameObject newGO = (GameObject)PhotonNetwork.Instantiate("Mine", spawnPos, spawnRot, 0);
+						Mine newMine = newGO.GetComponent<Mine>();
+						newMine.setMine(mineSize);
+						mineList.Add(newMine);
+					}
+				}
+			}
+			// arrow room
+			else if (puzzleType == 2){
+				
+			}
+			// ball room, roll different color balls into different holes
+			else if (puzzleType == 3){
+				
+			}
+			// order room, arrange different cubes into the right order
+			else if (puzzleType == 4){
+				
+			}
+			// boss room, fight a strong monster
+			else if (puzzleType == 5){
+				
+			}
+		}
+		
 	}
 	
 	// generate the exit path

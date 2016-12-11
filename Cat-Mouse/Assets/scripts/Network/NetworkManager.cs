@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class NetworkManager : Photon.MonoBehaviour
 {
@@ -9,7 +10,8 @@ public class NetworkManager : Photon.MonoBehaviour
  public Maze mazePrefab;
 	private Maze mazeInstance;
     Spawn[] s;
-	private Powerup powerupsList;
+	List<int> allPuzzleTypes = new List<int>();
+	List<int> activePuzzleTypes = new List<int>();
     //private RoomInfo[] rList;
 	void Start () {
         PhotonNetwork.ConnectUsingSettings(VER);
@@ -24,6 +26,18 @@ public class NetworkManager : Photon.MonoBehaviour
     {
         Debug.Log("OnJoinedLobby");
         PhotonNetwork.JoinRandomRoom();
+		
+		// the types of puzzles for this game room
+		for (int p = 0; p < 6; p++){
+			allPuzzleTypes.Add(p);
+		}
+		for (int p = 0; p < 6; p++){
+			int getPuzzle = Random.Range(0, allPuzzleTypes.Count);
+		//	int getPuzzle = 1;
+			activePuzzleTypes.Add(allPuzzleTypes[getPuzzle]);
+			allPuzzleTypes.RemoveAt(getPuzzle);
+			Debug.Log(activePuzzleTypes);
+		}
     }
     void OnPhotonRandomJoinFailed()
     {
@@ -42,6 +56,7 @@ public class NetworkManager : Photon.MonoBehaviour
         {	
             mazeScript.StartMazeCreation(); 
         }
+		mazeInstance.GeneratePuzzles(activePuzzleTypes);
     }
     void SpawnCat()
     {
