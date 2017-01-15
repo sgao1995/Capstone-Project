@@ -21,6 +21,8 @@ public class Maze : MonoBehaviour {
 	public List<MazeRoom> puzzleRooms = new List<MazeRoom>();
 	public Material lavaMat;
 	public List<Mine> mineList = new List<Mine>();
+	public List<Hole> holeList = new List<Hole>();
+	public List<Ball> ballList = new List<Ball>();
 	
 	
 	// set values to generate same maze every time
@@ -370,7 +372,36 @@ public class Maze : MonoBehaviour {
 			}
 			// ball room, roll different color balls into different holes
 			else if (puzzleType == 3){
-				
+				// pick 6 areas
+				int[] itemCells = new int[6];
+				int counter = 0;
+				int index = 0;
+				while(index < 6){
+					counter++;
+					int cellWithHole = (int)(puzzleRooms[r].getCells().Count * Mathf.PerlinNoise(counter/(float)mazeGenerationNumber, counter/(float)mazeGenerationNumber));
+					if (itemCells.Contains(cellWithHole))
+						break;
+					itemCells[index] = cellWithHole;
+					index++;
+				}
+				// first 3 cells contain balls
+				for (int b = 0; b < 3; b++){
+					Vector3 spawnPos = new Vector3(puzzleRooms[r].getCells()[itemCells[b]].transform.position.x, 0f, puzzleRooms[r].getCells()[itemCells[b]].transform.position.z);
+					Quaternion spawnRot = new Quaternion(0f, 0f, 0f, 0f);
+					GameObject newGO = (GameObject)PhotonNetwork.Instantiate("Ball", spawnPos, spawnRot, 0);
+					Ball newBall = newGO.GetComponent<Ball>();
+					newBall.setBall(b+1, 1f/(b+1));
+					ballList.Add(newBall);
+				}
+				// last 3 cells contain holes
+				for (int h = 3; h < 6; h++){
+					Vector3 spawnPos = new Vector3(puzzleRooms[r].getCells()[itemCells[h]].transform.position.x, 0f, puzzleRooms[r].getCells()[itemCells[h]].transform.position.z);
+					Quaternion spawnRot = new Quaternion(0f, 0f, 0f, 0f);
+					GameObject newGO = (GameObject)PhotonNetwork.Instantiate("Hole", spawnPos, spawnRot, 0);
+					Hole newHole = newGO.GetComponent<Hole>();
+					newHole.setSize(1f/(h-2));
+					holeList.Add(newHole);
+				}
 			}
 			// order room, arrange different cubes into the right order
 			else if (puzzleType == 4){

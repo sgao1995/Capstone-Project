@@ -3,37 +3,92 @@ using System.Collections;
 
 public class CatMovement : MonoBehaviour
 {
-    // stats
+	private const int expToLevel2 = 100;
+	private const int expToLevel3 = 200;
+	private const int expToLevel4 = 400;
+	
+   // stats
+	private float level = 0;
+	private float currentEXP = 0;
+	public float power;
 	private float speed = 3.0f; //speed value
-	private int jumpForce = 5;//amount of jump force
+	private float jumpForce;//amount of jump force
 	public float currentHealth;
-	private float maxHealth = 100;
+	private float maxHealth;
+	private int skillPoints;
+	private int ultimateSkillPoints;
+	private int[] learnedSkills = {3, 4, 5, 6};
 	
 	// movement speed
 	private int movementModifier = 1;
 	private float movementModifierTimer = 10f;
 	
 	// attack
-	public float attackPower = 1;
-	private float attackCooldownDelay = 1f;
+	private float attackPower;
+	private float attackCooldownDelay;
 	private float attackCooldownTimer = 1f;
 	
 	private Vector3 moveV; //vector to store movement
     public Rigidbody catrb;
-    private bool isJumping; //flag to check if user is already jumping or not
+	
+	// jump variables
+	private bool isGrounded = false;
 	private GameObject healthScaling;
 	
-	
 	// skills
+	private float[] skillCooldownTimers = new float[4]; // the cooldown timer
+	private float[] skillCooldowns = new float[4]; // the max cooldown
 	
     void Start()
     {
         catrb = GetComponent<Rigidbody>();
         Cursor.lockState = CursorLockMode.Locked; //cursor is gone from screen
-		currentHealth = maxHealth;
 		healthScaling = GameObject.Find("GUI/HealthCurrent");
+			
+		LevelUp();
+
     }
 
+	// level up
+	public void LevelUp(){
+		level += 1;
+		if (level == 4)
+			ultimateSkillPoints += 1;
+		else
+			skillPoints += 1;
+		power = 5 + level * 5;
+		attackPower = power;
+		maxHealth = 80 + level * 20;
+		jumpForce = 2f + power / 25f;
+		attackCooldownDelay = 1.1f - power * 0.1f;
+		currentHealth = maxHealth;
+	}
+	
+	// execute a skill (not jump or attack)
+	public void useSkill(int skillCode){
+		switch (skillCode){
+			// skills 1 and 2 are passive
+			case 3: 
+				Debug.Log("use 3");
+				break;
+			case 4:
+				Debug.Log("use 4");
+				break;
+			case 5: 
+				Debug.Log("use 5");
+				break;
+			case 6:
+				Debug.Log("use 6");
+				break;
+			case 7: 
+				break;
+			case 8:
+				break;
+			case 9: 
+				break;
+		}
+	}
+	
     void FixedUpdate()
     {
 		// update GUI
@@ -46,29 +101,56 @@ public class CatMovement : MonoBehaviour
         {
             Cursor.lockState = CursorLockMode.None; //if we press esc, cursor appears on screen
         }
-        //jump control
-        if (Input.GetKeyDown(KeyCode.Space) && isJumping == false)//if user press space and is not already jumping
-        {	
-			// RIGHT NOW THE CURRENT JUMP BEHAVIOUR ALLOWS WALL CLIMBING
-            catrb.velocity = new Vector3(0, jumpForce, 0);       
-			isJumping = true;
-        }
+		// jump control
+		if (isGrounded){
+			moveV = new Vector3(0, 0, 0);
+			if (Input.GetKey(KeyCode.A)){
+				moveV = new Vector3(-1, 0, moveV.z);
+			}
+			if (Input.GetKey(KeyCode.D)){
+				moveV = new Vector3(1, 0, moveV.z);
+			}
+			if (Input.GetKey(KeyCode.W)){
+				moveV = new Vector3(moveV.x, 0, 1);				
+			}		
+			if (Input.GetKey(KeyCode.S)){
+				moveV = new Vector3(moveV.x, 0, -1);				
+			}
+			if (Input.GetKeyDown(KeyCode.Space)){
+				isGrounded = false;
+				Debug.Log(moveV.x +  " " + moveV.y + " " + moveV.z);
+				catrb.AddForce(new Vector3(0, jumpForce, 0));
+			}
+		}
+		moveV = moveV.normalized * speed * movementModifier * Time.deltaTime;
+		transform.Translate(moveV);
+
 		// left click
 		if (Input.GetMouseButtonDown(0) && attackCooldownTimer <= 0){
 			attackCooldownTimer = attackCooldownDelay;
 			Attack();
 		}
+		// skills
+		if (Input.GetKeyDown(KeyCode.Alpha1)){
+			useSkill(learnedSkills[0]);
+		}
+		if (Input.GetKeyDown(KeyCode.Alpha2)){
+			useSkill(learnedSkills[1]);
+		}
+		if (Input.GetKeyDown(KeyCode.Alpha3)){
+			useSkill(learnedSkills[2]);
+		}
+		if (Input.GetKeyDown(KeyCode.Alpha4)){
+			useSkill(learnedSkills[3]);
+		}
+		
+		// interactions
 		if (Input.GetKeyDown(KeyCode.E)){
 			InteractWithObject();
 		}
 		if (Input.GetKeyDown(KeyCode.K)){
 			TakeDamage(5);
 		}
-		
-		// move and rotate the player
-        moveV.Set(Input.GetAxisRaw("Horizontal"), 0f, Input.GetAxisRaw("Vertical")); //set vector3 with wasd
-        moveV = moveV.normalized * speed * movementModifier * Time.deltaTime; //multiply the normalized vector with speed and delta time
-        transform.Translate(moveV); //translate cat obj based on moveV vector
 		
 		// timer actions
 		if (movementModifierTimer > 0f)
@@ -82,6 +164,14 @@ public class CatMovement : MonoBehaviour
 
     }
 	
+	// 
+	void OnCollisionEnter(Collision collisionInfo){
+		if (collisionInfo.gameObject.tag == "MazeGround");{
+			isGrounded = true;
+		}
+	}
+	
+	// take a certain amount of damage
 	public void TakeDamage(int amt){
 		currentHealth -= amt;
 		if (currentHealth <= 0){
@@ -128,11 +218,6 @@ public class CatMovement : MonoBehaviour
             i++;
         }
 	}
-	
-    void OnCollisionStay()
-    {
-        isJumping = false;   
-    }
 	
 	// when player collides with powerup
 	void OnTriggerEnter(Collider obj){
