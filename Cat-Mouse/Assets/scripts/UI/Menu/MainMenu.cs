@@ -11,7 +11,8 @@ public class MainMenu : MonoBehaviour {
     /* 'New Game' Button - Creates a new game */
     public void btnNewGame_Click()
     {
-        SceneManager.LoadScene("catmousegame2", LoadSceneMode.Single);   // Loads the demonstration map
+        SceneManager.LoadScene("lobby", LoadSceneMode.Single);   // Loads the demonstration map
+        
     }
 
     /* 'Options' button - Opens the 'Options' Menu */
