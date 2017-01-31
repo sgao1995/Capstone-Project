@@ -33,20 +33,24 @@ public class CatMovement : MonoBehaviour
 	
 	// jump variables
 	private bool isGrounded = false;
-	private GameObject healthScaling;
 	
 	// skills
 	private float[] skillCooldownTimers = new float[4]; // the cooldown timer
 	private float[] skillCooldowns = new float[4]; // the max cooldown
-	
+
+    /* HUD state */
+    Vitality catVitality;  // Vitality System component
+
     void Start()
     {
         catrb = GetComponent<Rigidbody>();
         Cursor.lockState = CursorLockMode.Locked; //cursor is gone from screen
-		healthScaling = GameObject.Find("GUI/HealthCurrent");
-			
-		LevelUp();
 
+        LevelUp();  // Starts at the first level
+
+        /*  Finds and initialises the Vitality System component */
+       GameObject catVitalityGameObject = GameObject.Find("Vitality");
+       catVitality = catVitalityGameObject.GetComponent<Vitality>();
     }
 
 	// level up
@@ -91,13 +95,14 @@ public class CatMovement : MonoBehaviour
 	
     void FixedUpdate()
     {
-		// update GUI
-		// health is 150 units wide at full hp
-		RectTransform healthRect = healthScaling.GetComponent<RectTransform> ();
-		healthRect.sizeDelta = new Vector2(currentHealth * 1.5f,20f);
-		
-		// keyboard commands
-		if (Input.GetKeyDown("escape"))
+        /* Updates the HUD state */
+
+        /* Updates the Health Points attributes of the Cat */
+        catVitality.setMaxHealthPoints(maxHealth); // Updates the Maximum Health Points
+        catVitality.setCurrentHealthPoints(currentHealth);  // Updates the Current Health Points
+
+        // keyboard commands
+        if (Input.GetKeyDown("escape"))
         {
             Cursor.lockState = CursorLockMode.None; //if we press esc, cursor appears on screen
         }
