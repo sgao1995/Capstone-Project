@@ -2,6 +2,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
+using System;
 
 public class lobby : Photon.MonoBehaviour
 {
@@ -15,7 +17,7 @@ public class lobby : Photon.MonoBehaviour
     void Start()
     {
         PhotonNetwork.ConnectUsingSettings(VER);
-        roomName = "Room " + Random.Range(0, 20);
+        roomName = "Room " + UnityEngine.Random.Range(0, 20);
         /*SceneManager.sceneLoaded += (scene, loadscene) =>
          {
              if (SceneManager.GetActiveScene().name == "catmousegame3")
@@ -37,7 +39,7 @@ public class lobby : Photon.MonoBehaviour
     void SpawnCat()
     {
         
-        Spawn mys = s[Random.Range(0, s.Length)];
+        Spawn mys = s[UnityEngine.Random.Range(0, s.Length)];
         GameObject myCat = (GameObject)PhotonNetwork.Instantiate("Cat", mys.transform.position, mys.transform.rotation, 0);
         myCat.GetComponent<CatMovement>().enabled = true;
         myCat.transform.FindChild("CatCam").gameObject.SetActive(true);
@@ -70,10 +72,6 @@ public class lobby : Photon.MonoBehaviour
     {
         Debug.Log("OnJoinedRoom");
         PhotonNetwork.LoadLevel("catmousegame3");
-        //SpawnCat();
-        //SpawnMonsters();
-        //SpawnMaze();
-
     }
 
     private List<GameObject> roomPF = new List<GameObject>();
@@ -98,9 +96,10 @@ public class lobby : Photon.MonoBehaviour
                     Refresh();
                 }
                 break;
-            case "JoinBtn":
-                PhotonNetwork.JoinRandomRoom();
-                break;
+            //case "JoinBtn":
+                
+                //PhotonNetwork.JoinRoom();
+              //  break;
         }
     }
     void Refresh()
@@ -119,12 +118,37 @@ public class lobby : Photon.MonoBehaviour
             r.transform.SetParent(roomPreFab.transform.parent);
             r.GetComponent<RectTransform>().localScale = roomPreFab.GetComponent<RectTransform>().localScale;
             r.GetComponent<RectTransform>().position = new Vector3(roomPreFab.GetComponent<RectTransform>().position.x, roomPreFab.GetComponent<RectTransform>().position.y - (i * 55), roomPreFab.GetComponent<RectTransform>().position.z);
-            //r.transform.FindChild("RText").GetComponent<Text>().text = PhotonNetwork.GetRoomList()[i].name;
-           
+            r.transform.FindChild("RText").GetComponent<Text>().text = PhotonNetwork.GetRoomList()[i].name;
+            string roomName = r.transform.FindChild("RText").GetComponent<Text>().text;
+            r.GetComponent<Button>().onClick.AddListener(() => { PhotonNetwork.JoinRoom(roomName); });
             r.SetActive(true);
             roomPF.Add(r);
         }
     }
+
+   /* private void JoinRoom(string name)
+    {
+        bool anyRoom = false;
+        foreach (RoomInfo roomIndex in PhotonNetwork.GetRoomList())
+        {
+            if(name == roomIndex.name)
+            {
+                anyRoom = true;
+                break;
+            }else
+            {
+                anyRoom = false;
+            }
+        }
+        if(anyRoom == true)
+        {
+            PhotonNetwork.JoinRoom(roomName);
+        }else
+        {
+            Debug.LogError("there are no rooms");
+        }
+    }*/
+
     void join(string r)
     {
         PhotonNetwork.JoinRoom(r);
