@@ -26,7 +26,7 @@ public class CatCamMovement : MonoBehaviour {
     void Update()
     {
         CamControls();
-        CameraCollision();
+      //  CameraCollision();
     }
     void CamControls()
     {
