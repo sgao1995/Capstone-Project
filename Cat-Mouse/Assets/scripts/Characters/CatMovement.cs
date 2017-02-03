@@ -10,6 +10,7 @@ public class CatMovement : MonoBehaviour
    // stats
 	private float level = 0;
 	private float currentEXP = 0;
+    private float maxEXP;
 	public float power;
 	private float speed = 3.0f; //speed value
 	private float jumpForce;//amount of jump force
@@ -100,6 +101,10 @@ public class CatMovement : MonoBehaviour
         /* Updates the Health Points attributes of the Cat */
         catVitality.setMaxHealthPoints(maxHealth); // Updates the Maximum Health Points
         catVitality.setCurrentHealthPoints(currentHealth);  // Updates the Current Health Points
+
+        /* Updates the Experience Points attributes */
+        catVitality.setMaximumExperiencePoints(maxEXP);
+        catVitality.setCurrentExperiencePoints(currentEXP);
 
         // keyboard commands
         if (Input.GetKeyDown("escape"))

@@ -17,9 +17,11 @@ public class Vitality : MonoBehaviour {
     /* Character Experience Bar data */
     private float currentExperiencePoints;
     private float maxExperiencePoints;
+    private float experiencePointsRatio;
 
     /* Represents the objects within the Vitality System */
-    public RectTransform rectHealthCurrent;
+    public RectTransform rectHealthCurrent;  // current Health Bar
+    public RectTransform rectExperienceCurrent;  // current Experience Bar
 
     /* Constructs a new instance of the Vitality System and sets initial character values */
     void Start()
@@ -32,7 +34,7 @@ public class Vitality : MonoBehaviour {
     void Update()
     {
         rectHealthCurrent.sizeDelta = new Vector2((this.healthPointsRatio * 150), rectHealthCurrent.sizeDelta.y);
-        Debug.Log(rectHealthCurrent.sizeDelta.x);
+        rectExperienceCurrent.sizeDelta = new Vector2((this.experiencePointsRatio * 150), rectExperienceCurrent.sizeDelta.y);
     }
 
     /* Sets the current Health Points of the Character */
@@ -46,7 +48,6 @@ public class Vitality : MonoBehaviour {
             {
                 this.currentHealthPoints = healthPoints;  // Sets the current Health Points
                 this.healthPointsRatio = this.currentHealthPoints /  this.maxHealthPoints;  // Calculates the current Health Point ratio
-                Debug.Log("The current HP is: " + currentHealthPoints);
             }
         }
     }
@@ -60,13 +61,12 @@ public class Vitality : MonoBehaviour {
             this.maxHealthPoints = healthPoints;
 
             /* Checks if the specified health point value is less than the current health point value of the Character */
-            if (healthPoints > this.maxHealthPoints)
+            if (this.currentHealthPoints > this.maxHealthPoints)
             {
                 /* If so, make the current health point the value the same as the maximum health point value */
                 this.currentHealthPoints = this.maxHealthPoints;
             }
             this.healthPointsRatio = this.currentHealthPoints / this.maxHealthPoints;  // Calculates ratio
-            this.healthPointsRatio = 0.5f;
         }
     }
 
@@ -80,11 +80,29 @@ public class Vitality : MonoBehaviour {
     public void setCurrentExperiencePoints(float experiencePoints)
     {
         this.currentExperiencePoints = experiencePoints;
+
+        if (experiencePoints > 0)
+        {
+            if (experiencePoints <= this.maxExperiencePoints)
+            {
+                this.currentExperiencePoints = experiencePoints;
+                this.experiencePointsRatio = this.currentExperiencePoints / this.maxExperiencePoints;
+            }
+        }
     }
 
     /* Sets the maximum Experience Points of the Character */
     public void setMaximumExperiencePoints(float experiencePoints)
     {
-        this.maxExperiencePoints = experiencePoints;
+        if (experiencePoints > 0)
+        {
+            this.maxExperiencePoints = experiencePoints;
+
+            if (this.currentExperiencePoints > this.maxExperiencePoints)
+            {
+                this.currentExperiencePoints = this.maxExperiencePoints;
+            }
+            this.experiencePointsRatio = this.currentExperiencePoints / this.maxExperiencePoints;
+        }
     }
 }
