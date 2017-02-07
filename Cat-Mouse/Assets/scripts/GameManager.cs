@@ -1,8 +1,9 @@
 ﻿using UnityEngine;
+using UnityEngine.SceneManagement;
 using System.Collections;
 using System.Collections.Generic;
 
-public class GameManager : MonoBehaviour {
+public class GameManager : Photon.PunBehaviour {
     public Maze mazePrefab;
     private Maze mazeInstance;
     Spawn[] s;
@@ -12,6 +13,7 @@ public class GameManager : MonoBehaviour {
     private	void Start () {
         s = GameObject.FindObjectsOfType<Spawn>();
         PhotonNetwork.isMessageQueueRunning = true;
+        PhotonNetwork.automaticallySyncScene = true;
         for (int p = 0; p < 6; p++)
         {
             allPuzzleTypes.Add(p);
@@ -28,7 +30,27 @@ public class GameManager : MonoBehaviour {
         SpawnCat();
         SpawnMonsters();
     }
-
+    void OnGUI()
+    {
+        if (Input.GetKey(KeyCode.Escape))
+        {
+            GUILayout.BeginArea(new Rect(10, 10, 100, 100));
+            if (GUILayout.Button("EXITGAME"))
+            {
+                LeaveRoom();
+            }
+            GUILayout.EndArea();
+        }
+    }
+    void OnLeftRoom()
+    {
+        SceneManager.LoadScene("lobby", LoadSceneMode.Single);
+    }
+    void LeaveRoom()
+    {
+        PhotonNetwork.LeaveRoom();
+        PhotonNetwork.isMessageQueueRunning = false;
+    }
     void SpawnMaze()
     {
         mazeInstance = Instantiate(mazePrefab) as Maze;

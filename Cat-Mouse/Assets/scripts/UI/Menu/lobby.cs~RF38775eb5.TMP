@@ -18,7 +18,34 @@ public class lobby : Photon.MonoBehaviour
     {
         PhotonNetwork.ConnectUsingSettings(VER);
         roomName = "Room " + UnityEngine.Random.Range(0, 20);
-        PhotonNetwork.isMessageQueueRunning = true;
+    }
+    void SpawnMaze()
+    {
+        mazeInstance = Instantiate(mazePrefab) as Maze;
+        var mazeScript = mazeInstance.GetComponent<Maze>();
+        if (mazeScript != null)
+        {
+            mazeScript.StartMazeCreation();
+        }
+        mazeInstance.GeneratePuzzles(activePuzzleTypes);
+    }
+    void SpawnCat()
+    {
+        
+        Spawn mys = s[UnityEngine.Random.Range(0, s.Length)];
+        GameObject myCat = (GameObject)PhotonNetwork.Instantiate("Cat", mys.transform.position, mys.transform.rotation, 0);
+        myCat.GetComponent<CatMovement>().enabled = true;
+        myCat.transform.FindChild("CatCam").gameObject.SetActive(true);
+        //myCat.GetComponent<NetworkPlayer>().enabled = false;
+        //enables minimap:
+        myCat.GetComponent<Minimap>().enabled = true;
+    }
+    void SpawnMonsters()
+    {
+
+        Spawn monsterSpawn = s[1];
+        GameObject monster = (GameObject)PhotonNetwork.Instantiate("Monster", monsterSpawn.transform.position, monsterSpawn.transform.rotation, 0);
+        monster.GetComponent<MonsterAI>().enabled = true;
     }
     void OnGUI()
     {
@@ -37,7 +64,7 @@ public class lobby : Photon.MonoBehaviour
     void OnJoinedRoom()
     {
         Debug.Log("OnJoinedRoom");
-        PhotonNetwork.LoadLevel("Room");
+        PhotonNetwork.LoadLevel("catmousegame3");
     }
 
     private List<GameObject> roomPF = new List<GameObject>();
