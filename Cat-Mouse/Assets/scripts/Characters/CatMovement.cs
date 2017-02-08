@@ -40,7 +40,7 @@ public class CatMovement : MonoBehaviour
 	private float[] skillCooldowns = new float[4]; // the max cooldown
 
     /* HUD state */
-    Vitality catVitality;  // Vitality System component
+    public Vitality catVitality;  // Vitality System component
 
     void Start()
     {
@@ -96,15 +96,18 @@ public class CatMovement : MonoBehaviour
 	
     void FixedUpdate()
     {
-        /* Updates the HUD state */
+        
+        /* Updates the HUD state for the current player */
+        if (GetComponent<PhotonView>().isMine)
+        {
+            /* Updates the Health Points attributes of the Cat */
+            catVitality.setMaxHealthPoints(maxHealth); // Updates the Maximum Health Points
+            catVitality.setCurrentHealthPoints(currentHealth);  // Updates the Current Health Points
 
-        /* Updates the Health Points attributes of the Cat */
-        catVitality.setMaxHealthPoints(maxHealth); // Updates the Maximum Health Points
-        catVitality.setCurrentHealthPoints(currentHealth);  // Updates the Current Health Points
-
-        /* Updates the Experience Points attributes */
-        catVitality.setMaximumExperiencePoints(maxEXP);
-        catVitality.setCurrentExperiencePoints(currentEXP);
+            /* Updates the Experience Points attributes */
+            catVitality.setMaximumExperiencePoints(maxEXP);
+            catVitality.setCurrentExperiencePoints(currentEXP);
+        }
 
         // keyboard commands
         if (Input.GetKeyDown("escape"))
