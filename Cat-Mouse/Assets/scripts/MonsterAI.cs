@@ -45,10 +45,15 @@ public class MonsterAI : MonoBehaviour {
 		HP -= dmg;
 		// if hp goes below 0, monster dies
 		if (HP <= 0){
-			Destroy(this.gameObject);
+            Death();
+			
 		}
 	}
-	
+	public void Death()
+    {
+        Destroy(this.gameObject);
+        
+    }
 	// turn left 2 degrees
 	void TurnLeft(){
 		transform.Rotate (transform.up, -2f, Space.World);
