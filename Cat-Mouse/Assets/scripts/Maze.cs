@@ -390,6 +390,7 @@ public class Maze : MonoBehaviour {
 					Quaternion spawnRot = new Quaternion(0f, 0f, 0f, 0f);
 					GameObject newGO = (GameObject)PhotonNetwork.Instantiate("Ball", spawnPos, spawnRot, 0);
 					Ball newBall = newGO.GetComponent<Ball>();
+					Debug.Log("madeball");
 					newBall.setBall(b+1, 1f/(b+1));
 					ballList.Add(newBall);
 				}
