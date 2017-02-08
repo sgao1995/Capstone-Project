@@ -23,8 +23,9 @@ public class CatMovement : MonoBehaviour
 	// movement speed
 	private int movementModifier = 1;
 	private float movementModifierTimer = 10f;
-	
-	// attack
+
+    // attack
+    private Animator animator;
 	private float attackPower;
 	private float attackCooldownDelay;
 	private float attackCooldownTimer = 1f;
@@ -48,7 +49,7 @@ public class CatMovement : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked; //cursor is gone from screen
 
         LevelUp();  // Starts at the first level
-
+        animator = GetComponent<Animator>();
         /*  Finds and initialises the Vitality System component */
        GameObject catVitalityGameObject = GameObject.Find("Vitality");
        catVitality = catVitalityGameObject.GetComponent<Vitality>();
@@ -118,20 +119,25 @@ public class CatMovement : MonoBehaviour
 		if (isGrounded){
 			moveV = new Vector3(0, 0, 0);
 			if (Input.GetKey(KeyCode.A)){
-				moveV = new Vector3(-1, 0, moveV.z);
+                animator.Play("Unarmed-Strafe-Left");
+                moveV = new Vector3(-1, 0, moveV.z);
 			}
 			if (Input.GetKey(KeyCode.D)){
-				moveV = new Vector3(1, 0, moveV.z);
+                animator.Play("Unarmed-Strafe-Right");
+                moveV = new Vector3(1, 0, moveV.z);
 			}
 			if (Input.GetKey(KeyCode.W)){
+                animator.Play("Unarmed-Strafe-Forward");
 				moveV = new Vector3(moveV.x, 0, 1);				
 			}		
 			if (Input.GetKey(KeyCode.S)){
-				moveV = new Vector3(moveV.x, 0, -1);				
+                animator.Play("Unarmed-Strafe-Backward");
+                moveV = new Vector3(moveV.x, 0, -1);				
 			}
 			if (Input.GetKeyDown(KeyCode.Space)){
 				isGrounded = false;
 				Debug.Log(moveV.x +  " " + moveV.y + " " + moveV.z);
+                animator.Play("Unarmed-Jump");
 				catrb.AddForce(new Vector3(0, jumpForce, 0));
 			}
 		}
@@ -139,7 +145,8 @@ public class CatMovement : MonoBehaviour
 		transform.Translate(moveV);
 
 		// left click
-		if (Input.GetMouseButtonDown(0) && attackCooldownTimer <= 0){
+		if (Input.GetMouseButtonDown(0) && attackCooldownTimer <= 0 && !Input.GetKey(KeyCode.Escape))
+        {
 			attackCooldownTimer = attackCooldownDelay;
 			Attack();
 		}
@@ -200,12 +207,15 @@ public class CatMovement : MonoBehaviour
     // attack in front of player
     void Attack()
     {
-        // animation.Play("Attack_Arm");
-        //curAnim = "Attack_Arm";
-        //AttackCounter += 1;
+        animator.Play("Unarmed-Attack-L3");
+  
+    }
+    void DealDamage()
+    {
         Ray ray = new Ray(transform.position, transform.forward);
         RaycastHit hitInfo;
         Debug.Log("hitting");
+
         if (Physics.Raycast(ray, out hitInfo, 1))
         {
             Debug.Log("We hit: " + hitInfo.collider.name);
@@ -213,21 +223,37 @@ public class CatMovement : MonoBehaviour
             {
                 Debug.Log("Trying to hurt " + hitInfo.collider.transform.parent.name + " by calling script " + hitInfo.collider.transform.parent.GetComponent<MonsterAI>().name);
                 hitInfo.collider.transform.parent.GetComponent<MonsterAI>().SendMessage("takeDamage", 50);
+
+                if (hitInfo.collider.transform.parent.GetComponent<MonsterAI>().getHealth() <= 0)
+                {
+                    Debug.Log("got exp");
+
+                    currentEXP += 50;
+                    catVitality.setCurrentExperiencePoints(currentEXP);
+                    Debug.Log("current EXP is" + catVitality.getEXP());
+                }
             }
-            if (hitInfo.collider.name == "Cat_Test")
+            if (hitInfo.collider.name == "Cat_Test(Clone)")
             {
                 Debug.Log("Trying to hurt " + hitInfo.collider.transform.parent.name + " by calling script " + hitInfo.collider.transform.parent.GetComponent<CatMovement>().name);
                 hitInfo.collider.transform.parent.GetComponent<CatMovement>().SendMessage("TakeDamage", 50);
+                if (hitInfo.collider.transform.parent.GetComponent<CatMovement>().getHealth() <= 0)
+                {
+                    currentEXP += 100;
+                }
             }
-            if (hitInfo.collider.name == "Mouse_Test")
+            if (hitInfo.collider.name == "Mouse_Test(Clone)")
             {
                 Debug.Log("Trying to hurt " + hitInfo.collider.transform.parent.name + " by calling script " + hitInfo.collider.transform.parent.GetComponent<CatMovement>().name);
                 hitInfo.collider.transform.parent.GetComponent<CatMovement>().SendMessage("TakeDamage", 50);
+                if (hitInfo.collider.transform.parent.GetComponent<CatMovement>().getHealth() <= 0)
+                {
+                    currentEXP += 100;
+                }
             }
         }
-
     }
-
+    
     // allow the player to open and close doors
     void InteractWithObject(){
 		Vector3 pushCenter = transform.position + transform.forward * 0.6f;
@@ -267,16 +293,8 @@ public class CatMovement : MonoBehaviour
 			Destroy(obj.gameObject);
 		}
 	}
-    public void getExp(int expAmount, string killtype)
+    public float getHealth()
     {
-        if (killtype == "monster")
-        {
-            currentEXP += expAmount;
-        }
-        if (killtype == "mouse")
-        {
-            currentEXP += expAmount;
-        }
-        catVitality.setCurrentExperiencePoints(currentEXP);
+        return currentHealth;
     }
 }

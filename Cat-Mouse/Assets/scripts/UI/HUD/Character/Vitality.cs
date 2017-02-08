@@ -105,4 +105,8 @@ public class Vitality : MonoBehaviour {
             this.experiencePointsRatio = this.currentExperiencePoints / this.maxExperiencePoints;
         }
     }
+    public float getEXP()
+    {
+        return currentExperiencePoints;
+    }
 }

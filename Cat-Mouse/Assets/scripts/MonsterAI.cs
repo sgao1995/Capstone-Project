@@ -39,16 +39,26 @@ public class MonsterAI : MonoBehaviour {
 		playersInGame= GameObject.FindGameObjectsWithTag("Player");
 		agent = GetComponent<NavMeshAgent>();
 	}
-	
-	// take damage
-	public void takeDamage(float dmg){
-		HP -= dmg;
-		// if hp goes below 0, monster dies
-		if (HP <= 0){
+    public float getHealth()
+    {
+        return HP;
+    }
+    void takeDamage(float dmg)
+    {
+        transform.GetComponent<PhotonView>().RPC("changeHealth", PhotonTargets.AllBuffered, dmg);
+    }
+    // take damage
+    [PunRPC]
+    void changeHealth(float dmg)
+    {
+        HP -= dmg;
+        // if hp goes below 0, monster dies
+        if (HP <= 0)
+        {
             Death();
-			
-		}
-	}
+        }
+    }
+   
 	public void Death()
     {
         Destroy(this.gameObject);
