@@ -196,30 +196,40 @@ public class CatMovement : MonoBehaviour
 	void Death(){
 		Debug.Log("player died");
 	}
-	
-	// attack in front of player
-	void Attack(){
-		Vector3 attackCenter = transform.position + transform.forward * 0.8f;
-		Collider[] hitColliders = Physics.OverlapSphere(attackCenter,0.5f);
-        
-		// just to test where the attack hitbox is
-		/*
-		GameObject newGO = (GameObject)PhotonNetwork.Instantiate("Powerup", attackCenter, transform.rotation, 0);
-		Powerup newPowerup = newGO.GetComponent<Powerup>();
-		newPowerup.setType(0);*/
-		
-		// check the hitbox area
-        int i = 0;
-        while (i < hitColliders.Length) {
-			if (hitColliders[i].tag == "Monster"){
-				hitColliders[i].GetComponent<MonsterAI>().takeDamage(50);
-			}
-            i++;
+
+    // attack in front of player
+    void Attack()
+    {
+        // animation.Play("Attack_Arm");
+        //curAnim = "Attack_Arm";
+        //AttackCounter += 1;
+        Ray ray = new Ray(transform.position, transform.forward);
+        RaycastHit hitInfo;
+        Debug.Log("hitting");
+        if (Physics.Raycast(ray, out hitInfo, 1))
+        {
+            Debug.Log("We hit: " + hitInfo.collider.name);
+            if (hitInfo.collider.name == "Character")
+            {
+                Debug.Log("Trying to hurt " + hitInfo.collider.transform.parent.name + " by calling script " + hitInfo.collider.transform.parent.GetComponent<MonsterAI>().name);
+                hitInfo.collider.transform.parent.GetComponent<MonsterAI>().SendMessage("takeDamage", 50);
+            }
+            if (hitInfo.collider.name == "Cat_Test")
+            {
+                Debug.Log("Trying to hurt " + hitInfo.collider.transform.parent.name + " by calling script " + hitInfo.collider.transform.parent.GetComponent<CatMovement>().name);
+                hitInfo.collider.transform.parent.GetComponent<CatMovement>().SendMessage("TakeDamage", 50);
+            }
+            if (hitInfo.collider.name == "Mouse_Test")
+            {
+                Debug.Log("Trying to hurt " + hitInfo.collider.transform.parent.name + " by calling script " + hitInfo.collider.transform.parent.GetComponent<CatMovement>().name);
+                hitInfo.collider.transform.parent.GetComponent<CatMovement>().SendMessage("TakeDamage", 50);
+            }
         }
-	}
-	
-	// allow the player to open and close doors
-	void InteractWithObject(){
+
+    }
+
+    // allow the player to open and close doors
+    void InteractWithObject(){
 		Vector3 pushCenter = transform.position + transform.forward * 0.6f;
 		Collider[] hitColliders = Physics.OverlapSphere(pushCenter,0.8f);
 		// check the hitbox area
@@ -257,5 +267,16 @@ public class CatMovement : MonoBehaviour
 			Destroy(obj.gameObject);
 		}
 	}
-	
+    public void getExp(int expAmount, string killtype)
+    {
+        if (killtype == "monster")
+        {
+            currentEXP += expAmount;
+        }
+        if (killtype == "mouse")
+        {
+            currentEXP += expAmount;
+        }
+        catVitality.setCurrentExperiencePoints(currentEXP);
+    }
 }
