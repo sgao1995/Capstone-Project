@@ -16,8 +16,8 @@ public class NetworkPlayer : Photon.MonoBehaviour {
 
         }else
         {
-            transform.position = Vector3.Lerp(transform.position, rPosition, 10f * Time.deltaTime);
-            transform.rotation = Quaternion.Lerp(transform.rotation, rRotation, 10f * Time.deltaTime);
+            transform.position = Vector3.Lerp(transform.position, this.rPosition, 10f * Time.deltaTime);
+            transform.rotation = Quaternion.Lerp(transform.rotation, this.rRotation, 10f * Time.deltaTime);
         }
 	}
     public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
@@ -28,8 +28,8 @@ public class NetworkPlayer : Photon.MonoBehaviour {
             stream.SendNext(transform.rotation);
         }else
         {
-            rPosition = (Vector3)stream.ReceiveNext();
-            rRotation = (Quaternion)stream.ReceiveNext();
+            this.rPosition = (Vector3)stream.ReceiveNext();
+            this.rRotation = (Quaternion)stream.ReceiveNext();
         }
     }
 }

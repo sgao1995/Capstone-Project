@@ -34,9 +34,16 @@ public class lobby : Photon.MonoBehaviour
         Debug.Log("OnPhotonRandomJoinFailed");
         PhotonNetwork.CreateRoom(null);
     }
+    int playerWhoIsIt;
     void OnJoinedRoom()
     {
         Debug.Log("OnJoinedRoom");
+        if (PhotonNetwork.playerList.Length == 1)
+        {
+            playerWhoIsIt = PhotonNetwork.player.ID;
+        }
+
+        Debug.Log("playerWhoIsIt: " + playerWhoIsIt);
         PhotonNetwork.LoadLevel("Room");
     }
 
@@ -52,6 +59,7 @@ public class lobby : Photon.MonoBehaviour
                 {
                     RoomOptions roomOpt = new RoomOptions();
                     roomOpt.MaxPlayers = 4;
+
                     PhotonNetwork.CreateRoom(roomName, roomOpt, TypedLobby.Default);
                 }
                 //PhotonNetwork.JoinRandomRoom();
