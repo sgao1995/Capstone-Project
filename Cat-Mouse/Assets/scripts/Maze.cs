@@ -23,6 +23,7 @@ public class Maze : MonoBehaviour {
 	public List<Mine> mineList = new List<Mine>();
 	public List<Hole> holeList = new List<Hole>();
 	public List<Ball> ballList = new List<Ball>();
+	public List<Spike> spikeList = new List<Spike>();
 	
 	
 	// set values to generate same maze every time
@@ -326,6 +327,11 @@ public class Maze : MonoBehaviour {
 		}
 	}
 	
+	// spawn a key and a chest in each puzzle room
+	public void SpawnKeyChest(int room){
+		
+	}
+	
 	// generate the puzzles in the puzzle rooms
 	public void GeneratePuzzles(List<int> activePuzzleTypes){
 		List<int> remainingPuzzleTypes = activePuzzleTypes;
@@ -340,8 +346,9 @@ public class Maze : MonoBehaviour {
 					generatedNoise = Mathf.PerlinNoise((currentCell.coordinates.x * currentCell.coordinates.x)/(float)mazeGenerationNumber, (currentCell.coordinates.z * currentCell.coordinates.z)/(float)mazeGenerationNumber);
 					if (generatedNoise < 0.5){
 						// lava
+						currentCell.transform.GetChild(0).gameObject.tag = "Lava";
 						currentCell.changeMaterial(lavaMat);
-					}
+					}	
 				}
 			}
 			// minefield
@@ -357,18 +364,39 @@ public class Maze : MonoBehaviour {
 						float mineX = currentCell.transform.position.x + Mathf.PerlinNoise(currentCell.coordinates.x/(float)mazeGenerationNumber, currentCell.coordinates.x/(float)mazeGenerationNumber);
 						float mineZ = currentCell.transform.position.z + Mathf.PerlinNoise(currentCell.coordinates.z/(float)mazeGenerationNumber, currentCell.coordinates.z/(float)mazeGenerationNumber);
 						float mineSize = Mathf.PerlinNoise(c/(float)mazeGenerationNumber, c/(float)mazeGenerationNumber);
-						Vector3 spawnPos = new Vector3(mineX, 0f, mineZ);
+						Vector3 spawnPos = new Vector3(mineX, -0.45f, mineZ);
 						Quaternion spawnRot = new Quaternion(0f, 0f, 0f, 0f);
 						GameObject newGO = (GameObject)PhotonNetwork.Instantiate("Mine", spawnPos, spawnRot, 0);
 						Mine newMine = newGO.GetComponent<Mine>();
 						newMine.setMine(mineSize);
+						CapsuleCollider cap = newMine.GetComponent<CapsuleCollider>();
+						cap.center = new Vector3(0f, 0.5f, 0f);
+						cap.radius = 0.7f;
 						mineList.Add(newMine);
 					}
 				}
 			}
-			// arrow room
+			// spike room
 			else if (puzzleType == 2){
-				
+				float spikeMultiplier = puzzleRooms[r].getCells().Count/25f;
+				// spawn spikes
+				for (int c = 0; c < puzzleRooms[r].getCells().Count; c++){
+					MazeCell currentCell = puzzleRooms[r].getCells()[c];
+					float chanceForSpikes = Mathf.PerlinNoise((currentCell.coordinates.x * currentCell.coordinates.x)/(float)mazeGenerationNumber, (currentCell.coordinates.z * currentCell.coordinates.z)/(float)mazeGenerationNumber);
+					if (chanceForSpikes < 0.3f * spikeMultiplier){
+						// generate a set of spikes
+						float spikeX = currentCell.transform.position.x + Mathf.PerlinNoise(currentCell.coordinates.x/(float)mazeGenerationNumber, currentCell.coordinates.x/(float)mazeGenerationNumber);
+						float spikeZ = currentCell.transform.position.z + Mathf.PerlinNoise(currentCell.coordinates.z/(float)mazeGenerationNumber, currentCell.coordinates.z/(float)mazeGenerationNumber);
+						float spikeSize = 4*Mathf.PerlinNoise(c/(float)mazeGenerationNumber, c/(float)mazeGenerationNumber);
+						float spikeTimer = Mathf.PerlinNoise(c/(float)mazeGenerationNumber, c/(float)mazeGenerationNumber);
+						Vector3 spawnPos = new Vector3(spikeX, 0.0f, spikeZ);
+						Quaternion spawnRot = new Quaternion(0f, 0f, 0f, 0f);
+						GameObject newGO = (GameObject)PhotonNetwork.Instantiate("Spike", spawnPos, spawnRot, 0);
+						Spike newSpike = newGO.GetComponent<Spike>();
+						newSpike.setSpike(spikeSize, spikeTimer);
+						spikeList.Add(newSpike);
+					}
+				}
 			}
 			// ball room, roll different color balls into different holes
 			else if (puzzleType == 3){
@@ -434,5 +462,8 @@ public class Maze : MonoBehaviour {
 			powerupList.Add(newPowerup);
 			powerupSpawnTimer = powerupSpawnDelay;
 		}
+		
+		// if puzzle room is completed then spawn a key
+		
 	}
 }

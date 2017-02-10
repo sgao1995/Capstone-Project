@@ -35,6 +35,10 @@ public class CatMovement : MonoBehaviour
 	
 	// jump variables
 	private bool isGrounded = false;
+	// status effects
+	private bool onLava = false;
+	private bool onSpikes = false;
+	private bool alive = true;
 	
 	// skills
 	private float[] skillCooldownTimers = new float[4]; // the cooldown timer
@@ -97,7 +101,6 @@ public class CatMovement : MonoBehaviour
 	
     void FixedUpdate()
     {
-        
         /* Updates the HUD state for the current player */
         if (GetComponent<PhotonView>().isMine)
         {
@@ -109,13 +112,21 @@ public class CatMovement : MonoBehaviour
             catVitality.setMaximumExperiencePoints(maxEXP);
             catVitality.setCurrentExperiencePoints(currentEXP);
         }
+		
+		// status effects
+		if (onLava){
+			TakeDamage(0.5f);
+		}
+		if (onSpikes){
+			TakeDamage(0.2f);
+		}
 
         // keyboard commands
         if (Input.GetKeyDown("escape"))
         {
             Cursor.lockState = CursorLockMode.None; //if we press esc, cursor appears on screen
         }
-		// jump control
+		// movement control
 		if (isGrounded){
 			moveV = new Vector3(0, 0, 0);
 			if (Input.GetKey(KeyCode.A)){
@@ -169,7 +180,7 @@ public class CatMovement : MonoBehaviour
 			InteractWithObject();
 		}
 		if (Input.GetKeyDown(KeyCode.K)){
-			TakeDamage(5);
+			TakeDamage(5f);
 		}
 		
 		// timer actions
@@ -184,15 +195,8 @@ public class CatMovement : MonoBehaviour
 
     }
 	
-	// 
-	void OnCollisionEnter(Collision collisionInfo){
-		if (collisionInfo.gameObject.tag == "MazeGround");{
-			isGrounded = true;
-		}
-	}
-	
 	// take a certain amount of damage
-	public void TakeDamage(int amt){
+	public void TakeDamage(float amt){
 		currentHealth -= amt;
 		if (currentHealth <= 0){
 			currentHealth = 0;
@@ -202,6 +206,8 @@ public class CatMovement : MonoBehaviour
 	
 	void Death(){
 		Debug.Log("player died");
+		alive = false;
+		animator.Play("Unarmed-Death1");
 	}
 
     // attack in front of player
@@ -222,7 +228,7 @@ public class CatMovement : MonoBehaviour
             if (hitInfo.collider.name == "Character")
             {
                 Debug.Log("Trying to hurt " + hitInfo.collider.transform.parent.name + " by calling script " + hitInfo.collider.transform.parent.GetComponent<MonsterAI>().name);
-                hitInfo.collider.transform.parent.GetComponent<MonsterAI>().SendMessage("takeDamage", 50);
+                hitInfo.collider.transform.parent.GetComponent<MonsterAI>().SendMessage("takeDamage", 50f);
 
                 if (hitInfo.collider.transform.parent.GetComponent<MonsterAI>().getHealth() <= 0)
                 {
@@ -236,7 +242,7 @@ public class CatMovement : MonoBehaviour
             if (hitInfo.collider.name == "Cat_Test(Clone)")
             {
                 Debug.Log("Trying to hurt " + hitInfo.collider.transform.parent.name + " by calling script " + hitInfo.collider.transform.parent.GetComponent<CatMovement>().name);
-                hitInfo.collider.transform.parent.GetComponent<CatMovement>().SendMessage("TakeDamage", 50);
+                hitInfo.collider.transform.parent.GetComponent<CatMovement>().SendMessage("TakeDamage", 50f);
                 if (hitInfo.collider.transform.parent.GetComponent<CatMovement>().getHealth() <= 0)
                 {
                     currentEXP += 100;
@@ -245,7 +251,7 @@ public class CatMovement : MonoBehaviour
             if (hitInfo.collider.name == "Mouse_Test(Clone)")
             {
                 Debug.Log("Trying to hurt " + hitInfo.collider.transform.parent.name + " by calling script " + hitInfo.collider.transform.parent.GetComponent<CatMovement>().name);
-                hitInfo.collider.transform.parent.GetComponent<CatMovement>().SendMessage("TakeDamage", 50);
+                hitInfo.collider.transform.parent.GetComponent<CatMovement>().SendMessage("TakeDamage", 50f);
                 if (hitInfo.collider.transform.parent.GetComponent<CatMovement>().getHealth() <= 0)
                 {
                     currentEXP += 100;
@@ -266,6 +272,31 @@ public class CatMovement : MonoBehaviour
 			}
             i++;
         }
+	}
+	
+	// collision with objects
+	void OnCollisionEnter(Collision collisionInfo){
+		isGrounded = true;
+		if (collisionInfo.gameObject.tag == "Ground"){
+			onLava = false;
+		}
+		// if enters lava
+		if (collisionInfo.gameObject.tag == "Lava"){
+			onLava = true;
+		}
+		// if steps on a mine
+		if (collisionInfo.gameObject.tag == "Mine"){
+			Mine mine = collisionInfo.gameObject.GetComponent<Mine>();
+			TakeDamage(mine.mineSize * 50);
+			Destroy(collisionInfo.gameObject);
+		}
+	}
+	
+	// when player leaves the spikes
+	void onTriggerExit(Collider obj){
+		if (obj.tag == "Spike"){
+			onSpikes = false;
+		}
 	}
 	
 	// when player collides with powerup
@@ -291,6 +322,10 @@ public class CatMovement : MonoBehaviour
 			}
 			Debug.Log("destroy " + obj);
 			Destroy(obj.gameObject);
+		}
+		// put spikes here because we dont want spikes displacing the player
+		if (obj.tag == "Spike"){
+			onSpikes = true;
 		}
 	}
     public float getHealth()

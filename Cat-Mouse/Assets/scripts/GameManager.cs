@@ -59,7 +59,14 @@ public class GameManager : Photon.PunBehaviour {
         {
             mazeScript.StartMazeCreation();
         }
-        mazeInstance.GeneratePuzzles(activePuzzleTypes);
+		
+		List<int> tempTypes = new List<int>();
+		tempTypes.Add(0);		
+		tempTypes.Add(1);		
+		tempTypes.Add(2);
+		mazeInstance.GeneratePuzzles(tempTypes);
+		Debug.Log(tempTypes[0] + " " + tempTypes[1] + " " + tempTypes[2]);
+        //mazeInstance.GeneratePuzzles(activePuzzleTypes);
     }
     void SpawnCat()
     {

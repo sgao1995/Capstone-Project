@@ -33,10 +33,8 @@ public class NetworkManager : Photon.MonoBehaviour
 		}
 		for (int p = 0; p < 6; p++){
 			int getPuzzle = Random.Range(0, allPuzzleTypes.Count);
-		//	int getPuzzle = 1;
 			activePuzzleTypes.Add(allPuzzleTypes[getPuzzle]);
 			allPuzzleTypes.RemoveAt(getPuzzle);
-			Debug.Log(activePuzzleTypes);
 		}
     }
     void OnPhotonRandomJoinFailed()
