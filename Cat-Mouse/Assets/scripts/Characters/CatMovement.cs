@@ -239,7 +239,8 @@ public class CatMovement : MonoBehaviour
                     Debug.Log("got exp");
 
                     currentEXP += 50;
-                    catVitality.setCurrentExperiencePoints(currentEXP);
+                    //catVitality.setCurrentExperiencePoints(currentEXP);
+                    maxEXP += 50;
                     Debug.Log("current EXP is" + catVitality.getEXP());
                 }
             }
@@ -250,6 +251,7 @@ public class CatMovement : MonoBehaviour
                 if (hitInfo.collider.transform.parent.GetComponent<CatMovement>().getHealth() <= 0)
                 {
                     currentEXP += 100;
+                    maxEXP += 100;
                 }
             }
             if (hitInfo.collider.name == "Mouse_Test(Clone)")
@@ -259,6 +261,7 @@ public class CatMovement : MonoBehaviour
                 if (hitInfo.collider.transform.parent.GetComponent<CatMovement>().getHealth() <= 0)
                 {
                     currentEXP += 100;
+                    maxEXP += 100;
                 }
             }
         }
