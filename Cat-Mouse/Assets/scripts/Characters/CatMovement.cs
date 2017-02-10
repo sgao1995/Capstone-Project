@@ -298,7 +298,7 @@ public class CatMovement : MonoBehaviour
 		if (collisionInfo.gameObject.tag == "Mine"){
 			Mine mine = collisionInfo.gameObject.GetComponent<Mine>();
 			TakeDamage(mine.mineSize * 50);
-			Destroy(collisionInfo.gameObject);
+			PhotonNetwork.Destroy(collisionInfo.gameObject);
 		}
 	}
 	
@@ -330,8 +330,8 @@ public class CatMovement : MonoBehaviour
 			else if (pup.powerupType == 3){
 				
 			}
-			Debug.Log("destroy " + obj);
-			Destroy(obj.gameObject);
+			//Debug.Log("destroy " + obj);
+			PhotonNetwork.Destroy(obj.gameObject);
 		}
 		// put spikes here because we dont want spikes displacing the player
 		if (obj.tag == "Spike"){

@@ -29,6 +29,7 @@ public class GameManager : Photon.PunBehaviour {
         SpawnMaze();
         SpawnCat();
         SpawnMonsters();
+		SpawnKeysAndChests();
     }
     void OnGUI()
     {
@@ -66,11 +67,11 @@ public class GameManager : Photon.PunBehaviour {
 		tempTypes.Add(2);
 		mazeInstance.GeneratePuzzles(tempTypes);
 		Debug.Log(tempTypes[0] + " " + tempTypes[1] + " " + tempTypes[2]);
+		mazeInstance.GenerateChestLocations();
         //mazeInstance.GeneratePuzzles(activePuzzleTypes);
     }
     void SpawnCat()
     {
-
         Spawn mys = s[Random.Range(0, s.Length)];
         GameObject myCat = (GameObject)PhotonNetwork.Instantiate("Cat", mys.transform.position, mys.transform.rotation, 0);
         myCat.GetComponent<CatMovement>().enabled = true;
@@ -85,5 +86,20 @@ public class GameManager : Photon.PunBehaviour {
         GameObject monster = (GameObject)PhotonNetwork.Instantiate("Monster", monsterSpawn.transform.position, monsterSpawn.transform.rotation, 0);
         monster.GetComponent<MonsterAI>().enabled = true;
     }
+	// spawn the keys and chests in the puzzle rooms
+	void SpawnKeysAndChests()
+	{
+		List<float> keyLocations = mazeInstance.getKeySpawns();
+		List<int> chestLocations = mazeInstance.getChestSpawns();
+		// spawn each key and chest
+		for (int i = 0; i < 6; i+=2){
+			Vector3 keyPos = new Vector3(keyLocations[i], 1, keyLocations[i+1]);
+			Quaternion keyRot = new Quaternion(0f, 0f, 0f, 0f);
+			GameObject key = (GameObject)PhotonNetwork.Instantiate("Key", keyPos, keyRot, 0);
+			Vector3 chestPos = new Vector3(chestLocations[i], 0, chestLocations[i+1]);
+			Quaternion chestRot = new Quaternion(0f, 0f, 0f, 0f);
+			GameObject chest = (GameObject)PhotonNetwork.Instantiate("Chest", chestPos, chestRot, 0);
+		}
+	}
 
 }

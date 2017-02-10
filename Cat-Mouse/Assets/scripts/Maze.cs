@@ -25,7 +25,6 @@ public class Maze : MonoBehaviour {
 	public List<Ball> ballList = new List<Ball>();
 	public List<Spike> spikeList = new List<Spike>();
 	
-	
 	// set values to generate same maze every time
 	public static int mazeGenerationNumber = 40; // anything above 2 makes a decent maze (didnt test every number though), also dont go above the size
 	public static IntVector2 startPoint = new IntVector2(mazeGenerationNumber, mazeGenerationNumber);
@@ -36,6 +35,11 @@ public class Maze : MonoBehaviour {
 	private List<Powerup> powerupList = new List<Powerup>();
 	private float powerupSpawnTimer = 5f;
 	public float powerupSpawnDelay = 5f;
+	
+	// chests and keys
+	// format: [key1x, key1z, key2x, key2z, key3x, key3z]
+	private List<float> keyLocations = new List<float>();
+	private List<int> chestLocations = new List<int>();
 		
 	// creates a new room 
 	private MazeRoom CreateRoom (int roomType) {
@@ -319,11 +323,32 @@ public class Maze : MonoBehaviour {
 		}
 	}
 	
+	// return the key spawn locations
+	public List<float> getKeySpawns(){
+		return keyLocations;
+	}
+	
+	// return the chest spawn locations
+	public List<int> getChestSpawns(){
+		return chestLocations;
+	}
+	
+	// set the chests in random locations on the map
+	public void GenerateChestLocations(){
+		// for each chest
+		for (int c = 0; c < 3; c++){
+			// set location
+			chestLocations.Add((int)(size.x - 100*Mathf.PerlinNoise(c/(float)mazeGenerationNumber, c/(float)mazeGenerationNumber)));
+			chestLocations.Add((int)(size.z - 100*Mathf.PerlinNoise(c/(float)mazeGenerationNumber, c/(float)mazeGenerationNumber)));			
+		}
+	}
+	
 	// generate the puzzles in the puzzle rooms
 	public void GeneratePuzzles(List<int> activePuzzleTypes){
 		List<int> remainingPuzzleTypes = activePuzzleTypes;
 		for (int r = 0; r < 3; r++){
 			int puzzleType = activePuzzleTypes[r];
+			bool keyGenerated = false;
 			// floor is lava, jump from safe point to safe point
 			if (puzzleType == 0){
 				for (int c = 0; c < puzzleRooms[r].getCells().Count; c++){
@@ -335,7 +360,13 @@ public class Maze : MonoBehaviour {
 						// lava
 						currentCell.transform.GetChild(0).gameObject.tag = "Lava";
 						currentCell.changeMaterial(lavaMat);
-					}	
+					}
+					// spawn a key
+					else if (keyGenerated == false){
+						keyGenerated = true;
+						keyLocations.Add(currentCell.transform.position.x + Mathf.PerlinNoise(currentCell.coordinates.x/(float)mazeGenerationNumber, currentCell.coordinates.x/(float)mazeGenerationNumber));
+						keyLocations.Add(currentCell.transform.position.z + Mathf.PerlinNoise(currentCell.coordinates.z/(float)mazeGenerationNumber, currentCell.coordinates.z/(float)mazeGenerationNumber));
+					}
 				}
 			}
 			// minefield
@@ -361,6 +392,12 @@ public class Maze : MonoBehaviour {
 						cap.radius = 0.7f;
 						mineList.Add(newMine);
 					}
+					// spawn a key
+					else if (keyGenerated == false){
+						keyGenerated = true;
+						keyLocations.Add(currentCell.transform.position.x + Mathf.PerlinNoise(currentCell.coordinates.x/(float)mazeGenerationNumber, currentCell.coordinates.x/(float)mazeGenerationNumber));
+						keyLocations.Add(currentCell.transform.position.z + Mathf.PerlinNoise(currentCell.coordinates.z/(float)mazeGenerationNumber, currentCell.coordinates.z/(float)mazeGenerationNumber));
+					}
 				}
 			}
 			// spike room
@@ -382,6 +419,12 @@ public class Maze : MonoBehaviour {
 						Spike newSpike = newGO.GetComponent<Spike>();
 						newSpike.setSpike(spikeSize, spikeTimer);
 						spikeList.Add(newSpike);
+					}
+					// spawn a key
+					else if (keyGenerated == false){
+						keyGenerated = true;
+						keyLocations.Add(currentCell.transform.position.x + Mathf.PerlinNoise(currentCell.coordinates.x/(float)mazeGenerationNumber, currentCell.coordinates.x/(float)mazeGenerationNumber));
+						keyLocations.Add(currentCell.transform.position.z + Mathf.PerlinNoise(currentCell.coordinates.z/(float)mazeGenerationNumber, currentCell.coordinates.z/(float)mazeGenerationNumber));
 					}
 				}
 			}
