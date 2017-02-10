@@ -72,7 +72,7 @@ public class GameManager : Photon.PunBehaviour {
     {
 
         Spawn mys = s[Random.Range(0, s.Length)];
-        GameObject myCat = (GameObject)PhotonNetwork.Instantiate("Cat_Test", mys.transform.position, mys.transform.rotation, 0);
+        GameObject myCat = (GameObject)PhotonNetwork.Instantiate("Cat", mys.transform.position, mys.transform.rotation, 0);
         myCat.GetComponent<CatMovement>().enabled = true;
         myCat.transform.FindChild("CatCam").gameObject.SetActive(true);
         //myCat.GetComponent<NetworkPlayer>().enabled = false;

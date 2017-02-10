@@ -1,6 +1,6 @@
 fileFormatVersion: 2
-guid: aa66e3c586bf5e24da77b72c47381874
-timeCreated: 1484954896
+guid: aa2b7796a9c138f44925a661a6f0faff
+timeCreated: 1486766024
 licenseType: Free
 ModelImporter:
   serializedVersion: 19
@@ -57,8 +57,8 @@ ModelImporter:
     100098: B_Spine
     100100: B_Spine1
     100102: B_Spine2
-    100104: //RootNode
-    100106: Motion
+    100104: Motion
+    100106: //RootNode
     100108: RPG-Character-Mesh
     400000: B_Head
     400002: B_L_Calf
@@ -112,11 +112,10 @@ ModelImporter:
     400098: B_Spine
     400100: B_Spine1
     400102: B_Spine2
-    400104: //RootNode
-    400106: Motion
+    400104: Motion
+    400106: //RootNode
     400108: RPG-Character-Mesh
     4300000: RPG-Character-Mesh
-    7400000: Take 001
     9500000: //RootNode
     13700000: RPG-Character-Mesh
   materials:
@@ -575,7 +574,7 @@ ModelImporter:
         length: 0
         modified: 0
     skeleton:
-    - name: Elite(Clone)
+    - name: Mouse(Clone)
       position: {x: 0, y: 0, z: 0}
       rotation: {x: 0, y: 0, z: 0, w: 1}
       scale: {x: 1, y: 1, z: 1}
