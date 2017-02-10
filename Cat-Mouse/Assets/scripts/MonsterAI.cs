@@ -55,7 +55,11 @@ public class MonsterAI : MonoBehaviour {
         // if hp goes below 0, monster dies
         if (HP <= 0)
         {
-            Death();
+            if (this.gameObject != null)
+            {
+                transform.GetComponent<MonsterAI>().enabled = false;
+                Death();
+            }
         }
     }
    
