@@ -4,11 +4,6 @@ using System.Collections;
 public class MazeDoor : MazePassage {
 	public Transform hinge;
 	public bool doorOpen;
-	// initialize
-	//public override void Initialize (MazeCell cellOne, MazeCell cellTwo, MazeDirection direction) {
-	///	base.Initialize(cellOne, cellTwo, direction);
-	//	doorOpen = false;
-	//}
 
 	private static Quaternion
 		normalRotation = Quaternion.Euler(0f, -80f, 0f),

@@ -221,10 +221,6 @@ public class Maze : MonoBehaviour {
 			}
             i++;
         }
-	//	Debug.Log(walls.Count);
-	//	for (int a = 0; a < walls.Count; a++)
-	//		Debug.Log(walls[a]);
-	//	Debug.Log(" ");
 		return walls;
 	}
 	
@@ -233,8 +229,8 @@ public class Maze : MonoBehaviour {
 		float avgX = (firstCell.transform.position.x + secondCell.transform.position.x)/2f;
 		float avgZ = (firstCell.transform.position.z + secondCell.transform.position.z)/2f;
 		Vector3 center = new Vector3(avgX, 0f, avgZ);
-		Vector3 aboveCenter = new Vector3(avgX, 4f, avgZ);
-		Collider[] collider = Physics.OverlapCapsule(center, aboveCenter,0.3f);
+		Vector3 aboveCenter = new Vector3(avgX, 3f, avgZ);
+		Collider[] collider = Physics.OverlapCapsule(center, aboveCenter,0.7f);
 		List<Collider> arches = new List<Collider>();
 
 		// check the hitbox area
@@ -245,10 +241,6 @@ public class Maze : MonoBehaviour {
 			}
             i++;
         }
-		//Debug.Log(arches.Count);
-		//for (int a = 0; a < arches.Count; a++)
-		//	Debug.Log(arches[a]);
-		//Debug.Log(" ");
 		return arches;
 	}
 	
@@ -325,11 +317,6 @@ public class Maze : MonoBehaviour {
 				passage.Initialize(cellOne, cellTwo, dir);
 			}
 		}
-	}
-	
-	// spawn a key and a chest in each puzzle room
-	public void SpawnKeyChest(int room){
-		
 	}
 	
 	// generate the puzzles in the puzzle rooms

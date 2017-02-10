@@ -270,6 +270,12 @@ public class CatMovement : MonoBehaviour
 			if (hitColliders[i].tag == "Door"){
 				hitColliders[i].transform.parent.GetComponent<MazeDoor>().Interact();
 			}
+			if (hitColliders[i].tag == "Chest"){
+				hitColliders[i].transform.parent.GetComponent<Chest>().Interact();
+			}
+			if (hitColliders[i].tag == "Key"){
+				hitColliders[i].transform.parent.GetComponent<Key>().Interact();
+			}
             i++;
         }
 	}

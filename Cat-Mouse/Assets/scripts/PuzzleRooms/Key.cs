@@ -8,8 +8,9 @@ public class Key : MonoBehaviour {
 	
 	}
 	
-	// Update is called once per frame
-	void Update () {
-	
+	public void Interact(){
+		// need to figure out which mouse took the key
+		// then destroy the key
+		Destroy(this);
 	}
 }
