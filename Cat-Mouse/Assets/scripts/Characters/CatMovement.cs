@@ -120,6 +120,11 @@ public class CatMovement : MonoBehaviour
 		if (onSpikes){
 			TakeDamage(0.2f);
 		}
+		// dont let player move if they are on spikes
+		else{
+			moveV = moveV.normalized * speed * movementModifier * Time.deltaTime;
+			transform.Translate(moveV);
+		}
 
         // keyboard commands
         if (Input.GetKeyDown("escape"))
@@ -127,7 +132,7 @@ public class CatMovement : MonoBehaviour
             Cursor.lockState = CursorLockMode.None; //if we press esc, cursor appears on screen
         }
 		// movement control
-		if (isGrounded){
+		if (isGrounded && !onSpikes){
 			moveV = new Vector3(0, 0, 0);
 			if (Input.GetKey(KeyCode.A)){
                 animator.Play("Unarmed-Strafe-Left");
@@ -152,8 +157,7 @@ public class CatMovement : MonoBehaviour
 				catrb.AddForce(new Vector3(0, jumpForce, 0));
 			}
 		}
-		moveV = moveV.normalized * speed * movementModifier * Time.deltaTime;
-		transform.Translate(moveV);
+
 
 		// left click
 		if (Input.GetMouseButtonDown(0) && attackCooldownTimer <= 0 && !Input.GetKey(KeyCode.Escape))
@@ -299,7 +303,7 @@ public class CatMovement : MonoBehaviour
 	}
 	
 	// when player leaves the spikes
-	void onTriggerExit(Collider obj){
+	void OnTriggerExit(Collider obj){
 		if (obj.tag == "Spike"){
 			onSpikes = false;
 		}
