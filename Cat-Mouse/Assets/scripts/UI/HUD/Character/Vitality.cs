@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
 
 /* Class: Vitality.cs
@@ -22,6 +23,8 @@ public class Vitality : MonoBehaviour {
     /* Represents the objects within the Vitality System */
     public RectTransform rectHealthCurrent;  // current Health Bar
     public RectTransform rectExperienceCurrent;  // current Experience Bar
+    public Text textHealthMarker;  // Health Bar marker text
+    public Text textExperienceMarker;  // Experience Bar marker text
 
     /* Constructs a new instance of the Vitality System and sets initial character values */
     void Start()
@@ -33,8 +36,13 @@ public class Vitality : MonoBehaviour {
     /* Updates Vitality System UI Elements every frame */
     void Update()
     {
+        /* Updates Health Bar value */
         rectHealthCurrent.sizeDelta = new Vector2((this.healthPointsRatio * 150), rectHealthCurrent.sizeDelta.y);
+        textHealthMarker.text = Mathf.RoundToInt(this.currentHealthPoints) + " / " + Mathf.RoundToInt(this.maxHealthPoints);
+
+        /* Updates Experience Bar value */
         rectExperienceCurrent.sizeDelta = new Vector2((this.experiencePointsRatio * 150), rectExperienceCurrent.sizeDelta.y);
+        textExperienceMarker.text = Mathf.RoundToInt(this.currentExperiencePoints) + " / " + Mathf.RoundToInt(this.maxExperiencePoints);
     }
 
     /* Sets the current Health Points of the Character */
