@@ -10,6 +10,10 @@ public class matchSettings : Photon.PunBehaviour
 	void Start () {
         PhotonNetwork.isMessageQueueRunning = true;
         PhotonNetwork.automaticallySyncScene = true;
+        //if (PhotonNetwork.isMasterClient) {
+         //   GameObject StartBtn = GameObject.Find("Start Button");
+        //    StartBtn.SetActive(true);
+        //}
     }
 	
 	// Update is called once per frame

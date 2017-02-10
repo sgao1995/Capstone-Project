@@ -18,7 +18,7 @@ Platform assembly: C:\Users\SmugFug\Documents\GitHub\Cat-and-Mouse-Game\Cat-Mous
 Loading C:\Users\SmugFug\Documents\GitHub\Cat-and-Mouse-Game\Cat-Mouse\C&M_Data\Managed\UnityEngine.Networking.dll into Unity Child Domain
 Platform assembly: C:\Users\SmugFug\Documents\GitHub\Cat-and-Mouse-Game\Cat-Mouse\C&M_Data\Managed\Photon3Unity3D.dll (this message is harmless)
 Loading C:\Users\SmugFug\Documents\GitHub\Cat-and-Mouse-Game\Cat-Mouse\C&M_Data\Managed\Photon3Unity3D.dll into Unity Child Domain
-- Completed reload, in  0.068 seconds
+- Completed reload, in  0.073 seconds
 Platform assembly: C:\Users\SmugFug\Documents\GitHub\Cat-and-Mouse-Game\Cat-Mouse\C&M_Data\Managed\System.Core.dll (this message is harmless)
 Platform assembly: C:\Users\SmugFug\Documents\GitHub\Cat-and-Mouse-Game\Cat-Mouse\C&M_Data\Managed\System.dll (this message is harmless)
 desktop: 1920x1080 60Hz; virtual: 1920x1080 at 0,0
@@ -29,17 +29,85 @@ The referenced script on this Behaviour (Game Object 'Main Camera') is missing!
  
 (Filename:  Line: 1656)
 
-UnloadTime: 0.888524 ms
+UnloadTime: 1.496600 ms
 Setting up 2 worker threads for Enlighten.
-  Thread -> id: 2ef8 -> priority: 1 
-  Thread -> id: 38ec -> priority: 1 
+  Thread -> id: 2b90 -> priority: 1 
+  Thread -> id: 14a4 -> priority: 1 
 Unloading 7 Unused Serialized files (Serialized files now loaded: 0)
-UnloadTime: 7.177510 ms
+UnloadTime: 6.210355 ms
 
 Unloading 6 unused Assets to reduce memory usage. Loaded Objects now: 497.
-Total: 5.152337 ms (FindLiveObjects: 0.032034 ms CreateObjectMapping: 0.036111 ms MarkObjects: 0.279866 ms  DeleteObjects: 4.799956 ms)
+Total: 6.733685 ms (FindLiveObjects: 0.046013 ms CreateObjectMapping: 0.030287 ms MarkObjects: 0.315104 ms  DeleteObjects: 5.900492 ms)
 
 SwitchToProtocol: Udp PhotonNetwork.connected: False
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+OnJoinedLobby
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+OnJoinedLobby
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+OnJoinedLobby
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+OnJoinedLobby
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+OnJoinedLobby
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+OnJoinedLobby
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+OnJoinedLobby
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+OnJoinedLobby
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+OnJoinedLobby
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+OnJoinedLobby
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+OnJoinedLobby
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+OnJoinedLobby
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+OnJoinedLobby
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+OnJoinedLobby
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+OnJoinedLobby
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+OnJoinedLobby
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+OnJoinedLobby
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
 
@@ -60,16 +128,16 @@ playerWhoIsIt: 1
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
 
 Unloading 5 Unused Serialized files (Serialized files now loaded: 0)
-UnloadTime: 1.120339 ms
+UnloadTime: 1.066171 ms
 
 Unloading 114 unused Assets to reduce memory usage. Loaded Objects now: 460.
-Total: 0.608949 ms (FindLiveObjects: 0.029122 ms CreateObjectMapping: 0.036111 ms MarkObjects: 0.405966 ms  DeleteObjects: 0.136584 ms)
+Total: 0.657001 ms (FindLiveObjects: 0.040771 ms CreateObjectMapping: 0.042809 ms MarkObjects: 0.443243 ms  DeleteObjects: 0.128429 ms)
 
 Unloading 4 Unused Serialized files (Serialized files now loaded: 0)
-UnloadTime: 0.677969 ms
+UnloadTime: 0.777568 ms
 
 Unloading 13 unused Assets to reduce memory usage. Loaded Objects now: 555.
-Total: 0.640110 ms (FindLiveObjects: 0.032617 ms CreateObjectMapping: 0.029996 ms MarkObjects: 0.352090 ms  DeleteObjects: 0.224242 ms)
+Total: 0.693987 ms (FindLiveObjects: 0.046595 ms CreateObjectMapping: 0.029996 ms MarkObjects: 0.388201 ms  DeleteObjects: 0.228610 ms)
 
 System.Collections.Generic.List`1[System.Int32]
  
@@ -135,14 +203,6 @@ The referenced script on this Behaviour (Game Object 'Character') is missing!
  
 (Filename:  Line: 1656)
 
-0 0 -1
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
-
-0 0 1
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
-
 The referenced script on this Behaviour (Game Object '<null>') is missing!
  
 (Filename:  Line: 1656)
@@ -167,277 +227,6 @@ The referenced script on this Behaviour (Game Object 'Character') is missing!
  
 (Filename:  Line: 1656)
 
-player died
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
-
-player died
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
-
-player died
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
-
-player died
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
-
-player died
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
-
-player died
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
-
-player died
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
-
-player died
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
-
-player died
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
-
-player died
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
-
-player died
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
-
-player died
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
-
-player died
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
-
-player died
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
-
-player died
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
-
-player died
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
-
-player died
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
-
-player died
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
-
-player died
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
-
-player died
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
-
-player died
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
-
-destroy Powerup(Clone) (UnityEngine.SphereCollider)
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
-
-Received OnSerialization for view ID 2001. We have no such PhotonView! Ignored this if you're leaving a room. State: Joined
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
-
-Received OnSerialization for view ID 2002. We have no such PhotonView! Ignored this if you're leaving a room. State: Joined
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
-
-Received OnSerialization for view ID 2003. We have no such PhotonView! Ignored this if you're leaving a room. State: Joined
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
-
-Received OnSerialization for view ID 2004. We have no such PhotonView! Ignored this if you're leaving a room. State: Joined
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
-
-Received OnSerialization for view ID 2005. We have no such PhotonView! Ignored this if you're leaving a room. State: Joined
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
-
-Received OnSerialization for view ID 2006. We have no such PhotonView! Ignored this if you're leaving a room. State: Joined
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
-
-Received OnSerialization for view ID 2007. We have no such PhotonView! Ignored this if you're leaving a room. State: Joined
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
-
-Received OnSerialization for view ID 2008. We have no such PhotonView! Ignored this if you're leaving a room. State: Joined
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
-
-Received OnSerialization for view ID 2009. We have no such PhotonView! Ignored this if you're leaving a room. State: Joined
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
-
-Received OnSerialization for view ID 2010. We have no such PhotonView! Ignored this if you're leaving a room. State: Joined
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
-
-Received OnSerialization for view ID 2011. We have no such PhotonView! Ignored this if you're leaving a room. State: Joined
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
-
-Received OnSerialization for view ID 2012. We have no such PhotonView! Ignored this if you're leaving a room. State: Joined
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
-
-Received OnSerialization for view ID 2013. We have no such PhotonView! Ignored this if you're leaving a room. State: Joined
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
-
-Received OnSerialization for view ID 2014. We have no such PhotonView! Ignored this if you're leaving a room. State: Joined
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
-
-Received OnSerialization for view ID 2015. We have no such PhotonView! Ignored this if you're leaving a room. State: Joined
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
-
-Received OnSerialization for view ID 2016. We have no such PhotonView! Ignored this if you're leaving a room. State: Joined
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
-
-Received OnSerialization for view ID 2017. We have no such PhotonView! Ignored this if you're leaving a room. State: Joined
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
-
-Received OnSerialization for view ID 2018. We have no such PhotonView! Ignored this if you're leaving a room. State: Joined
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
-
-Received OnSerialization for view ID 2019. We have no such PhotonView! Ignored this if you're leaving a room. State: Joined
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
-
-Received OnSerialization for view ID 2020. We have no such PhotonView! Ignored this if you're leaving a room. State: Joined
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
-
-Received OnSerialization for view ID 2021. We have no such PhotonView! Ignored this if you're leaving a room. State: Joined
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
-
-Attack
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
-
-destroy Powerup(Clone) (UnityEngine.SphereCollider)
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
-
-destroy Powerup(Clone) (UnityEngine.SphereCollider)
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
-
-Attack
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
-
-destroy Powerup(Clone) (UnityEngine.SphereCollider)
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
-
-Attack
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
-
-Attack
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
-
-Attack
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
-
-Attack
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
-
-D3D11: Failed to create RenderTexture (64 x 64 fmt 39 aa 1), error 0x887a0005
- 
-(Filename:  Line: 308)
-
-D3D11: Failed to create RenderTexture (64 x 64 fmt 53 aa 1), error 0x887a0005
- 
-(Filename:  Line: 308)
-
-D3D11: Failed to create RenderTexture (64 x 64 fmt 39 aa 1), error 0x887a0005
- 
-(Filename:  Line: 308)
-
-D3D11: Failed to create RenderTexture (64 x 64 fmt 53 aa 1), error 0x887a0005
- 
-(Filename:  Line: 308)
-
-D3D11: Failed to create RenderTexture (16 x 16 fmt 39 aa 1), error 0x887a0005
- 
-(Filename:  Line: 308)
-
-D3D11: Failed to create RenderTexture (16 x 16 fmt 53 aa 1), error 0x887a0005
- 
-(Filename:  Line: 308)
-
-d3d11: failed to create vertex buffer of size 9248 [0x887A0005]
-d3d11: failed to create vertex buffer of size 9248 [0x887A0005]
-hitting
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
-
-d3d11: failed to create vertex buffer of size 9248 [0x887A0005]
-d3d11: failed to create vertex buffer of size 9248 [0x887A0005]
-d3d11: failed to create vertex buffer of size 9248 [0x887A0005]
-d3d11: failed to create vertex buffer of size 9248 [0x887A0005]
-d3d11: failed to create vertex buffer of size 9248 [0x887A0005]
-d3d11: failed to create vertex buffer of size 9248 [0x887A0005]
-d3d11: failed to create vertex buffer of size 9248 [0x887A0005]
-D3D11: Failed to create RenderTexture (64 x 64 fmt 39 aa 1), error 0x887a0005
- 
-(Filename:  Line: 308)
-
-D3D11: Failed to create RenderTexture (64 x 64 fmt 53 aa 1), error 0x887a0005
- 
-(Filename:  Line: 308)
-
-d3d11: failed to create vertex buffer of size 9248 [0x887A0005]
-d3d11: failed to create vertex buffer of size 9248 [0x887A0005]
-d3d11: failed to create vertex buffer of size 9248 [0x887A0005]
-d3d11: failed to create vertex buffer of size 9248 [0x887A0005]
-d3d11: failed to create vertex buffer of size 9248 [0x887A0005]
-D3D11: Failed to create RenderTexture (64 x 64 fmt 39 aa 1), error 0x887a0005
- 
-(Filename:  Line: 308)
-
-D3D11: Failed to create RenderTexture (64 x 64 fmt 53 aa 1), error 0x887a0005
- 
-(Filename:  Line: 308)
-
-d3d11: failed to create vertex buffer of size 9248 [0x887A0005]
-d3d11: failed to create vertex buffer of size 9248 [0x887A0005]
-d3d11: failed to create vertex buffer of size 9248 [0x887A0005]
-d3d11: failed to create vertex buffer of size 9248 [0x887A0005]
-d3d11: failed to create vertex buffer of size 9248 [0x887A0005]
 Animator.GotoState: State could not be found
  
 (Filename:  Line: 1101)
@@ -494,8 +283,174 @@ Invalid Layer Index '-1'
  
 (Filename:  Line: 697)
 
-d3d11: failed to create vertex buffer of size 9248 [0x887A0005]
-d3d11: failed to create vertex buffer of size 9248 [0x887A0005]
+Animator.GotoState: State could not be found
+ 
+(Filename:  Line: 1101)
+
+Invalid Layer Index '-1'
+ 
+(Filename:  Line: 697)
+
+Animator.GotoState: State could not be found
+ 
+(Filename:  Line: 1101)
+
+Invalid Layer Index '-1'
+ 
+(Filename:  Line: 697)
+
+Animator.GotoState: State could not be found
+ 
+(Filename:  Line: 1101)
+
+Invalid Layer Index '-1'
+ 
+(Filename:  Line: 697)
+
+Animator.GotoState: State could not be found
+ 
+(Filename:  Line: 1101)
+
+Invalid Layer Index '-1'
+ 
+(Filename:  Line: 697)
+
+Animator.GotoState: State could not be found
+ 
+(Filename:  Line: 1101)
+
+Invalid Layer Index '-1'
+ 
+(Filename:  Line: 697)
+
+Animator.GotoState: State could not be found
+ 
+(Filename:  Line: 1101)
+
+Invalid Layer Index '-1'
+ 
+(Filename:  Line: 697)
+
+Animator.GotoState: State could not be found
+ 
+(Filename:  Line: 1101)
+
+Invalid Layer Index '-1'
+ 
+(Filename:  Line: 697)
+
+Animator.GotoState: State could not be found
+ 
+(Filename:  Line: 1101)
+
+Invalid Layer Index '-1'
+ 
+(Filename:  Line: 697)
+
+Animator.GotoState: State could not be found
+ 
+(Filename:  Line: 1101)
+
+Invalid Layer Index '-1'
+ 
+(Filename:  Line: 697)
+
+Animator.GotoState: State could not be found
+ 
+(Filename:  Line: 1101)
+
+Invalid Layer Index '-1'
+ 
+(Filename:  Line: 697)
+
+Animator.GotoState: State could not be found
+ 
+(Filename:  Line: 1101)
+
+Invalid Layer Index '-1'
+ 
+(Filename:  Line: 697)
+
+Animator.GotoState: State could not be found
+ 
+(Filename:  Line: 1101)
+
+Invalid Layer Index '-1'
+ 
+(Filename:  Line: 697)
+
+Animator.GotoState: State could not be found
+ 
+(Filename:  Line: 1101)
+
+Invalid Layer Index '-1'
+ 
+(Filename:  Line: 697)
+
+Animator.GotoState: State could not be found
+ 
+(Filename:  Line: 1101)
+
+Invalid Layer Index '-1'
+ 
+(Filename:  Line: 697)
+
+Animator.GotoState: State could not be found
+ 
+(Filename:  Line: 1101)
+
+Invalid Layer Index '-1'
+ 
+(Filename:  Line: 697)
+
+Animator.GotoState: State could not be found
+ 
+(Filename:  Line: 1101)
+
+Invalid Layer Index '-1'
+ 
+(Filename:  Line: 697)
+
+Animator.GotoState: State could not be found
+ 
+(Filename:  Line: 1101)
+
+Invalid Layer Index '-1'
+ 
+(Filename:  Line: 697)
+
+Animator.GotoState: State could not be found
+ 
+(Filename:  Line: 1101)
+
+Invalid Layer Index '-1'
+ 
+(Filename:  Line: 697)
+
+Animator.GotoState: State could not be found
+ 
+(Filename:  Line: 1101)
+
+Invalid Layer Index '-1'
+ 
+(Filename:  Line: 697)
+
+Animator.GotoState: State could not be found
+ 
+(Filename:  Line: 1101)
+
+Invalid Layer Index '-1'
+ 
+(Filename:  Line: 697)
+
+Animator.GotoState: State could not be found
+ 
+(Filename:  Line: 1101)
+
+Invalid Layer Index '-1'
+ 
+(Filename:  Line: 697)
+
 Animator.GotoState: State could not be found
  
 (Filename:  Line: 1101)
@@ -580,1191 +535,15 @@ hitting
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
 
-Animator.GotoState: State could not be found
+Attack
  
-(Filename:  Line: 1101)
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
 
-Invalid Layer Index '-1'
+player died
  
-(Filename:  Line: 697)
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
 
-Animator.GotoState: State could not be found
+Attack
  
-(Filename:  Line: 1101)
-
-Invalid Layer Index '-1'
- 
-(Filename:  Line: 697)
-
-Animator.GotoState: State could not be found
- 
-(Filename:  Line: 1101)
-
-Invalid Layer Index '-1'
- 
-(Filename:  Line: 697)
-
-Animator.GotoState: State could not be found
- 
-(Filename:  Line: 1101)
-
-Invalid Layer Index '-1'
- 
-(Filename:  Line: 697)
-
-Animator.GotoState: State could not be found
- 
-(Filename:  Line: 1101)
-
-Invalid Layer Index '-1'
- 
-(Filename:  Line: 697)
-
-Animator.GotoState: State could not be found
- 
-(Filename:  Line: 1101)
-
-Invalid Layer Index '-1'
- 
-(Filename:  Line: 697)
-
-Animator.GotoState: State could not be found
- 
-(Filename:  Line: 1101)
-
-Invalid Layer Index '-1'
- 
-(Filename:  Line: 697)
-
-Animator.GotoState: State could not be found
- 
-(Filename:  Line: 1101)
-
-Invalid Layer Index '-1'
- 
-(Filename:  Line: 697)
-
-D3D11: Failed to create RenderTexture (32 x 32 fmt 39 aa 1), error 0x887a0005
- 
-(Filename:  Line: 308)
-
-D3D11: Failed to create RenderTexture (32 x 32 fmt 53 aa 1), error 0x887a0005
- 
-(Filename:  Line: 308)
-
-d3d11: failed to create vertex buffer of size 9248 [0x887A0005]
-d3d11: failed to create vertex buffer of size 9248 [0x887A0005]
-d3d11: failed to create vertex buffer of size 9248 [0x887A0005]
-d3d11: failed to create vertex buffer of size 9248 [0x887A0005]
-D3D11: Failed to create RenderTexture (32 x 32 fmt 39 aa 1), error 0x887a0005
- 
-(Filename:  Line: 308)
-
-D3D11: Failed to create RenderTexture (32 x 32 fmt 53 aa 1), error 0x887a0005
- 
-(Filename:  Line: 308)
-
-d3d11: failed to create vertex buffer of size 9248 [0x887A0005]
-D3D11: Failed to create RenderTexture (64 x 64 fmt 39 aa 1), error 0x887a0005
- 
-(Filename:  Line: 308)
-
-D3D11: Failed to create RenderTexture (64 x 64 fmt 53 aa 1), error 0x887a0005
- 
-(Filename:  Line: 308)
-
-D3D11: Failed to create RenderTexture (64 x 64 fmt 39 aa 1), error 0x887a0005
- 
-(Filename:  Line: 308)
-
-D3D11: Failed to create RenderTexture (64 x 64 fmt 53 aa 1), error 0x887a0005
- 
-(Filename:  Line: 308)
-
-Animator.GotoState: State could not be found
- 
-(Filename:  Line: 1101)
-
-Invalid Layer Index '-1'
- 
-(Filename:  Line: 697)
-
-Animator.GotoState: State could not be found
- 
-(Filename:  Line: 1101)
-
-Invalid Layer Index '-1'
- 
-(Filename:  Line: 697)
-
-Animator.GotoState: State could not be found
- 
-(Filename:  Line: 1101)
-
-Invalid Layer Index '-1'
- 
-(Filename:  Line: 697)
-
-Animator.GotoState: State could not be found
- 
-(Filename:  Line: 1101)
-
-Invalid Layer Index '-1'
- 
-(Filename:  Line: 697)
-
-Animator.GotoState: State could not be found
- 
-(Filename:  Line: 1101)
-
-Invalid Layer Index '-1'
- 
-(Filename:  Line: 697)
-
-Animator.GotoState: State could not be found
- 
-(Filename:  Line: 1101)
-
-Invalid Layer Index '-1'
- 
-(Filename:  Line: 697)
-
-Animator.GotoState: State could not be found
- 
-(Filename:  Line: 1101)
-
-Invalid Layer Index '-1'
- 
-(Filename:  Line: 697)
-
-Animator.GotoState: State could not be found
- 
-(Filename:  Line: 1101)
-
-Invalid Layer Index '-1'
- 
-(Filename:  Line: 697)
-
-Animator.GotoState: State could not be found
- 
-(Filename:  Line: 1101)
-
-Invalid Layer Index '-1'
- 
-(Filename:  Line: 697)
-
-Animator.GotoState: State could not be found
- 
-(Filename:  Line: 1101)
-
-Invalid Layer Index '-1'
- 
-(Filename:  Line: 697)
-
-Animator.GotoState: State could not be found
- 
-(Filename:  Line: 1101)
-
-Invalid Layer Index '-1'
- 
-(Filename:  Line: 697)
-
-Animator.GotoState: State could not be found
- 
-(Filename:  Line: 1101)
-
-Invalid Layer Index '-1'
- 
-(Filename:  Line: 697)
-
-Animator.GotoState: State could not be found
- 
-(Filename:  Line: 1101)
-
-Invalid Layer Index '-1'
- 
-(Filename:  Line: 697)
-
-Animator.GotoState: State could not be found
- 
-(Filename:  Line: 1101)
-
-Invalid Layer Index '-1'
- 
-(Filename:  Line: 697)
-
-Animator.GotoState: State could not be found
- 
-(Filename:  Line: 1101)
-
-Invalid Layer Index '-1'
- 
-(Filename:  Line: 697)
-
-Animator.GotoState: State could not be found
- 
-(Filename:  Line: 1101)
-
-Invalid Layer Index '-1'
- 
-(Filename:  Line: 697)
-
-Animator.GotoState: State could not be found
- 
-(Filename:  Line: 1101)
-
-Invalid Layer Index '-1'
- 
-(Filename:  Line: 697)
-
-Animator.GotoState: State could not be found
- 
-(Filename:  Line: 1101)
-
-Invalid Layer Index '-1'
- 
-(Filename:  Line: 697)
-
-Animator.GotoState: State could not be found
- 
-(Filename:  Line: 1101)
-
-Invalid Layer Index '-1'
- 
-(Filename:  Line: 697)
-
-Animator.GotoState: State could not be found
- 
-(Filename:  Line: 1101)
-
-Invalid Layer Index '-1'
- 
-(Filename:  Line: 697)
-
-Animator.GotoState: State could not be found
- 
-(Filename:  Line: 1101)
-
-Invalid Layer Index '-1'
- 
-(Filename:  Line: 697)
-
-Animator.GotoState: State could not be found
- 
-(Filename:  Line: 1101)
-
-Invalid Layer Index '-1'
- 
-(Filename:  Line: 697)
-
-Animator.GotoState: State could not be found
- 
-(Filename:  Line: 1101)
-
-Invalid Layer Index '-1'
- 
-(Filename:  Line: 697)
-
-Animator.GotoState: State could not be found
- 
-(Filename:  Line: 1101)
-
-Invalid Layer Index '-1'
- 
-(Filename:  Line: 697)
-
-Animator.GotoState: State could not be found
- 
-(Filename:  Line: 1101)
-
-Invalid Layer Index '-1'
- 
-(Filename:  Line: 697)
-
-Animator.GotoState: State could not be found
- 
-(Filename:  Line: 1101)
-
-Invalid Layer Index '-1'
- 
-(Filename:  Line: 697)
-
-Animator.GotoState: State could not be found
- 
-(Filename:  Line: 1101)
-
-Invalid Layer Index '-1'
- 
-(Filename:  Line: 697)
-
-Animator.GotoState: State could not be found
- 
-(Filename:  Line: 1101)
-
-Invalid Layer Index '-1'
- 
-(Filename:  Line: 697)
-
-Animator.GotoState: State could not be found
- 
-(Filename:  Line: 1101)
-
-Invalid Layer Index '-1'
- 
-(Filename:  Line: 697)
-
-Animator.GotoState: State could not be found
- 
-(Filename:  Line: 1101)
-
-Invalid Layer Index '-1'
- 
-(Filename:  Line: 697)
-
-Animator.GotoState: State could not be found
- 
-(Filename:  Line: 1101)
-
-Invalid Layer Index '-1'
- 
-(Filename:  Line: 697)
-
-Animator.GotoState: State could not be found
- 
-(Filename:  Line: 1101)
-
-Invalid Layer Index '-1'
- 
-(Filename:  Line: 697)
-
-Animator.GotoState: State could not be found
- 
-(Filename:  Line: 1101)
-
-Invalid Layer Index '-1'
- 
-(Filename:  Line: 697)
-
-Animator.GotoState: State could not be found
- 
-(Filename:  Line: 1101)
-
-Invalid Layer Index '-1'
- 
-(Filename:  Line: 697)
-
-Animator.GotoState: State could not be found
- 
-(Filename:  Line: 1101)
-
-Invalid Layer Index '-1'
- 
-(Filename:  Line: 697)
-
-Animator.GotoState: State could not be found
- 
-(Filename:  Line: 1101)
-
-Invalid Layer Index '-1'
- 
-(Filename:  Line: 697)
-
-Animator.GotoState: State could not be found
- 
-(Filename:  Line: 1101)
-
-Invalid Layer Index '-1'
- 
-(Filename:  Line: 697)
-
-Animator.GotoState: State could not be found
- 
-(Filename:  Line: 1101)
-
-Invalid Layer Index '-1'
- 
-(Filename:  Line: 697)
-
-Animator.GotoState: State could not be found
- 
-(Filename:  Line: 1101)
-
-Invalid Layer Index '-1'
- 
-(Filename:  Line: 697)
-
-Animator.GotoState: State could not be found
- 
-(Filename:  Line: 1101)
-
-Invalid Layer Index '-1'
- 
-(Filename:  Line: 697)
-
-Animator.GotoState: State could not be found
- 
-(Filename:  Line: 1101)
-
-Invalid Layer Index '-1'
- 
-(Filename:  Line: 697)
-
-Animator.GotoState: State could not be found
- 
-(Filename:  Line: 1101)
-
-Invalid Layer Index '-1'
- 
-(Filename:  Line: 697)
-
-Animator.GotoState: State could not be found
- 
-(Filename:  Line: 1101)
-
-Invalid Layer Index '-1'
- 
-(Filename:  Line: 697)
-
-Animator.GotoState: State could not be found
- 
-(Filename:  Line: 1101)
-
-Invalid Layer Index '-1'
- 
-(Filename:  Line: 697)
-
-Animator.GotoState: State could not be found
- 
-(Filename:  Line: 1101)
-
-Invalid Layer Index '-1'
- 
-(Filename:  Line: 697)
-
-Animator.GotoState: State could not be found
- 
-(Filename:  Line: 1101)
-
-Invalid Layer Index '-1'
- 
-(Filename:  Line: 697)
-
-d3d11: failed to create vertex buffer of size 9248 [0x887A0005]
-Animator.GotoState: State could not be found
- 
-(Filename:  Line: 1101)
-
-Invalid Layer Index '-1'
- 
-(Filename:  Line: 697)
-
-Animator.GotoState: State could not be found
- 
-(Filename:  Line: 1101)
-
-Invalid Layer Index '-1'
- 
-(Filename:  Line: 697)
-
-Animator.GotoState: State could not be found
- 
-(Filename:  Line: 1101)
-
-Invalid Layer Index '-1'
- 
-(Filename:  Line: 697)
-
-Animator.GotoState: State could not be found
- 
-(Filename:  Line: 1101)
-
-Invalid Layer Index '-1'
- 
-(Filename:  Line: 697)
-
-Animator.GotoState: State could not be found
- 
-(Filename:  Line: 1101)
-
-Invalid Layer Index '-1'
- 
-(Filename:  Line: 697)
-
-Animator.GotoState: State could not be found
- 
-(Filename:  Line: 1101)
-
-Invalid Layer Index '-1'
- 
-(Filename:  Line: 697)
-
-Animator.GotoState: State could not be found
- 
-(Filename:  Line: 1101)
-
-Invalid Layer Index '-1'
- 
-(Filename:  Line: 697)
-
-Animator.GotoState: State could not be found
- 
-(Filename:  Line: 1101)
-
-Invalid Layer Index '-1'
- 
-(Filename:  Line: 697)
-
-Animator.GotoState: State could not be found
- 
-(Filename:  Line: 1101)
-
-Invalid Layer Index '-1'
- 
-(Filename:  Line: 697)
-
-Animator.GotoState: State could not be found
- 
-(Filename:  Line: 1101)
-
-Invalid Layer Index '-1'
- 
-(Filename:  Line: 697)
-
-Animator.GotoState: State could not be found
- 
-(Filename:  Line: 1101)
-
-Invalid Layer Index '-1'
- 
-(Filename:  Line: 697)
-
-Animator.GotoState: State could not be found
- 
-(Filename:  Line: 1101)
-
-Invalid Layer Index '-1'
- 
-(Filename:  Line: 697)
-
-Animator.GotoState: State could not be found
- 
-(Filename:  Line: 1101)
-
-Invalid Layer Index '-1'
- 
-(Filename:  Line: 697)
-
-d3d11: failed to create vertex buffer of size 9248 [0x887A0005]
-D3D11: Failed to create RenderTexture (512 x 512 fmt 39 aa 1), error 0x887a0005
- 
-(Filename:  Line: 308)
-
-D3D11: Failed to create RenderTexture (512 x 512 fmt 53 aa 1), error 0x887a0005
- 
-(Filename:  Line: 308)
-
-d3d11: failed to create vertex buffer of size 9248 [0x887A0005]
-d3d11: failed to create vertex buffer of size 9248 [0x887A0005]
-d3d11: failed to create vertex buffer of size 9248 [0x887A0005]
-d3d11: failed to create vertex buffer of size 9248 [0x887A0005]
-d3d11: failed to create vertex buffer of size 9248 [0x887A0005]
-d3d11: failed to create vertex buffer of size 9248 [0x887A0005]
-Animator.GotoState: State could not be found
- 
-(Filename:  Line: 1101)
-
-Invalid Layer Index '-1'
- 
-(Filename:  Line: 697)
-
-Animator.GotoState: State could not be found
- 
-(Filename:  Line: 1101)
-
-Invalid Layer Index '-1'
- 
-(Filename:  Line: 697)
-
-D3D11: Failed to create RenderTexture (64 x 64 fmt 39 aa 1), error 0x887a0005
- 
-(Filename:  Line: 308)
-
-D3D11: Failed to create RenderTexture (64 x 64 fmt 53 aa 1), error 0x887a0005
- 
-(Filename:  Line: 308)
-
-d3d11: failed to create vertex buffer of size 9248 [0x887A0005]
-Animator.GotoState: State could not be found
- 
-(Filename:  Line: 1101)
-
-Invalid Layer Index '-1'
- 
-(Filename:  Line: 697)
-
-Animator.GotoState: State could not be found
- 
-(Filename:  Line: 1101)
-
-Invalid Layer Index '-1'
- 
-(Filename:  Line: 697)
-
-Animator.GotoState: State could not be found
- 
-(Filename:  Line: 1101)
-
-Invalid Layer Index '-1'
- 
-(Filename:  Line: 697)
-
-Animator.GotoState: State could not be found
- 
-(Filename:  Line: 1101)
-
-Invalid Layer Index '-1'
- 
-(Filename:  Line: 697)
-
-Animator.GotoState: State could not be found
- 
-(Filename:  Line: 1101)
-
-Invalid Layer Index '-1'
- 
-(Filename:  Line: 697)
-
-Animator.GotoState: State could not be found
- 
-(Filename:  Line: 1101)
-
-Invalid Layer Index '-1'
- 
-(Filename:  Line: 697)
-
-Animator.GotoState: State could not be found
- 
-(Filename:  Line: 1101)
-
-Invalid Layer Index '-1'
- 
-(Filename:  Line: 697)
-
-Animator.GotoState: State could not be found
- 
-(Filename:  Line: 1101)
-
-Invalid Layer Index '-1'
- 
-(Filename:  Line: 697)
-
-Animator.GotoState: State could not be found
- 
-(Filename:  Line: 1101)
-
-Invalid Layer Index '-1'
- 
-(Filename:  Line: 697)
-
-Animator.GotoState: State could not be found
- 
-(Filename:  Line: 1101)
-
-Invalid Layer Index '-1'
- 
-(Filename:  Line: 697)
-
-Animator.GotoState: State could not be found
- 
-(Filename:  Line: 1101)
-
-Invalid Layer Index '-1'
- 
-(Filename:  Line: 697)
-
-Animator.GotoState: State could not be found
- 
-(Filename:  Line: 1101)
-
-Invalid Layer Index '-1'
- 
-(Filename:  Line: 697)
-
-Animator.GotoState: State could not be found
- 
-(Filename:  Line: 1101)
-
-Invalid Layer Index '-1'
- 
-(Filename:  Line: 697)
-
-Animator.GotoState: State could not be found
- 
-(Filename:  Line: 1101)
-
-Invalid Layer Index '-1'
- 
-(Filename:  Line: 697)
-
-d3d11: failed to create vertex buffer of size 9248 [0x887A0005]
-D3D11: Failed to create RenderTexture (32 x 32 fmt 39 aa 1), error 0x887a0005
- 
-(Filename:  Line: 308)
-
-D3D11: Failed to create RenderTexture (32 x 32 fmt 53 aa 1), error 0x887a0005
- 
-(Filename:  Line: 308)
-
-d3d11: failed to create vertex buffer of size 9248 [0x887A0005]
-d3d11: failed to create vertex buffer of size 9248 [0x887A0005]
-d3d11: failed to create vertex buffer of size 9248 [0x887A0005]
-D3D11: Failed to create RenderTexture (16 x 16 fmt 39 aa 1), error 0x887a0005
- 
-(Filename:  Line: 308)
-
-D3D11: Failed to create RenderTexture (16 x 16 fmt 53 aa 1), error 0x887a0005
- 
-(Filename:  Line: 308)
-
-D3D11: Failed to create RenderTexture (64 x 64 fmt 39 aa 1), error 0x887a0005
- 
-(Filename:  Line: 308)
-
-D3D11: Failed to create RenderTexture (64 x 64 fmt 53 aa 1), error 0x887a0005
- 
-(Filename:  Line: 308)
-
-d3d11: failed to create vertex buffer of size 9248 [0x887A0005]
-D3D11: Failed to create RenderTexture (32 x 32 fmt 39 aa 1), error 0x887a0005
- 
-(Filename:  Line: 308)
-
-D3D11: Failed to create RenderTexture (32 x 32 fmt 53 aa 1), error 0x887a0005
- 
-(Filename:  Line: 308)
-
-d3d11: failed to create vertex buffer of size 9248 [0x887A0005]
-d3d11: failed to create vertex buffer of size 9248 [0x887A0005]
-d3d11: failed to create vertex buffer of size 9248 [0x887A0005]
-D3D11: Failed to create RenderTexture (256 x 256 fmt 39 aa 1), error 0x887a0005
- 
-(Filename:  Line: 308)
-
-D3D11: Failed to create RenderTexture (256 x 256 fmt 53 aa 1), error 0x887a0005
- 
-(Filename:  Line: 308)
-
-D3D11: Failed to create RenderTexture (256 x 256 fmt 39 aa 1), error 0x887a0005
- 
-(Filename:  Line: 308)
-
-D3D11: Failed to create RenderTexture (256 x 256 fmt 53 aa 1), error 0x887a0005
- 
-(Filename:  Line: 308)
-
-D3D11: Failed to create RenderTexture (256 x 256 fmt 39 aa 1), error 0x887a0005
- 
-(Filename:  Line: 308)
-
-D3D11: Failed to create RenderTexture (256 x 256 fmt 53 aa 1), error 0x887a0005
- 
-(Filename:  Line: 308)
-
-D3D11: Failed to create RenderTexture (256 x 256 fmt 39 aa 1), error 0x887a0005
- 
-(Filename:  Line: 308)
-
-D3D11: Failed to create RenderTexture (256 x 256 fmt 53 aa 1), error 0x887a0005
- 
-(Filename:  Line: 308)
-
-D3D11: Failed to create RenderTexture (256 x 256 fmt 39 aa 1), error 0x887a0005
- 
-(Filename:  Line: 308)
-
-D3D11: Failed to create RenderTexture (256 x 256 fmt 53 aa 1), error 0x887a0005
- 
-(Filename:  Line: 308)
-
-D3D11: Failed to create RenderTexture (256 x 256 fmt 39 aa 1), error 0x887a0005
- 
-(Filename:  Line: 308)
-
-D3D11: Failed to create RenderTexture (256 x 256 fmt 53 aa 1), error 0x887a0005
- 
-(Filename:  Line: 308)
-
-D3D11: Failed to create RenderTexture (256 x 256 fmt 39 aa 1), error 0x887a0005
- 
-(Filename:  Line: 308)
-
-D3D11: Failed to create RenderTexture (256 x 256 fmt 53 aa 1), error 0x887a0005
- 
-(Filename:  Line: 308)
-
-D3D11: Failed to create RenderTexture (256 x 256 fmt 39 aa 1), error 0x887a0005
- 
-(Filename:  Line: 308)
-
-D3D11: Failed to create RenderTexture (256 x 256 fmt 53 aa 1), error 0x887a0005
- 
-(Filename:  Line: 308)
-
-D3D11: Failed to create RenderTexture (256 x 256 fmt 39 aa 1), error 0x887a0005
- 
-(Filename:  Line: 308)
-
-D3D11: Failed to create RenderTexture (256 x 256 fmt 53 aa 1), error 0x887a0005
- 
-(Filename:  Line: 308)
-
-D3D11: Failed to create RenderTexture (256 x 256 fmt 39 aa 1), error 0x887a0005
- 
-(Filename:  Line: 308)
-
-D3D11: Failed to create RenderTexture (256 x 256 fmt 53 aa 1), error 0x887a0005
- 
-(Filename:  Line: 308)
-
-D3D11: Failed to create RenderTexture (64 x 64 fmt 39 aa 1), error 0x887a0005
- 
-(Filename:  Line: 308)
-
-D3D11: Failed to create RenderTexture (64 x 64 fmt 53 aa 1), error 0x887a0005
- 
-(Filename:  Line: 308)
-
-D3D11: Failed to create RenderTexture (256 x 256 fmt 39 aa 1), error 0x887a0005
- 
-(Filename:  Line: 308)
-
-D3D11: Failed to create RenderTexture (256 x 256 fmt 53 aa 1), error 0x887a0005
- 
-(Filename:  Line: 308)
-
-D3D11: Failed to create RenderTexture (256 x 256 fmt 39 aa 1), error 0x887a0005
- 
-(Filename:  Line: 308)
-
-D3D11: Failed to create RenderTexture (256 x 256 fmt 53 aa 1), error 0x887a0005
- 
-(Filename:  Line: 308)
-
-D3D11: Failed to create RenderTexture (256 x 256 fmt 39 aa 1), error 0x887a0005
- 
-(Filename:  Line: 308)
-
-D3D11: Failed to create RenderTexture (256 x 256 fmt 53 aa 1), error 0x887a0005
- 
-(Filename:  Line: 308)
-
-D3D11: Failed to create RenderTexture (256 x 256 fmt 39 aa 1), error 0x887a0005
- 
-(Filename:  Line: 308)
-
-D3D11: Failed to create RenderTexture (256 x 256 fmt 53 aa 1), error 0x887a0005
- 
-(Filename:  Line: 308)
-
-D3D11: Failed to create RenderTexture (256 x 256 fmt 39 aa 1), error 0x887a0005
- 
-(Filename:  Line: 308)
-
-D3D11: Failed to create RenderTexture (256 x 256 fmt 53 aa 1), error 0x887a0005
- 
-(Filename:  Line: 308)
-
-D3D11: Failed to create RenderTexture (256 x 256 fmt 39 aa 1), error 0x887a0005
- 
-(Filename:  Line: 308)
-
-D3D11: Failed to create RenderTexture (256 x 256 fmt 53 aa 1), error 0x887a0005
- 
-(Filename:  Line: 308)
-
-D3D11: Failed to create RenderTexture (256 x 256 fmt 39 aa 1), error 0x887a0005
- 
-(Filename:  Line: 308)
-
-D3D11: Failed to create RenderTexture (256 x 256 fmt 53 aa 1), error 0x887a0005
- 
-(Filename:  Line: 308)
-
-D3D11: Failed to create RenderTexture (256 x 256 fmt 39 aa 1), error 0x887a0005
- 
-(Filename:  Line: 308)
-
-D3D11: Failed to create RenderTexture (256 x 256 fmt 53 aa 1), error 0x887a0005
- 
-(Filename:  Line: 308)
-
-D3D11: Failed to create RenderTexture (256 x 256 fmt 39 aa 1), error 0x887a0005
- 
-(Filename:  Line: 308)
-
-D3D11: Failed to create RenderTexture (256 x 256 fmt 53 aa 1), error 0x887a0005
- 
-(Filename:  Line: 308)
-
-D3D11: Failed to create RenderTexture (256 x 256 fmt 39 aa 1), error 0x887a0005
- 
-(Filename:  Line: 308)
-
-D3D11: Failed to create RenderTexture (256 x 256 fmt 53 aa 1), error 0x887a0005
- 
-(Filename:  Line: 308)
-
-D3D11: Failed to create RenderTexture (256 x 256 fmt 39 aa 1), error 0x887a0005
- 
-(Filename:  Line: 308)
-
-D3D11: Failed to create RenderTexture (256 x 256 fmt 53 aa 1), error 0x887a0005
- 
-(Filename:  Line: 308)
-
-D3D11: Failed to create RenderTexture (256 x 256 fmt 39 aa 1), error 0x887a0005
- 
-(Filename:  Line: 308)
-
-D3D11: Failed to create RenderTexture (256 x 256 fmt 53 aa 1), error 0x887a0005
- 
-(Filename:  Line: 308)
-
-D3D11: Failed to create RenderTexture (256 x 256 fmt 39 aa 1), error 0x887a0005
- 
-(Filename:  Line: 308)
-
-D3D11: Failed to create RenderTexture (256 x 256 fmt 53 aa 1), error 0x887a0005
- 
-(Filename:  Line: 308)
-
-D3D11: Failed to create RenderTexture (256 x 256 fmt 39 aa 1), error 0x887a0005
- 
-(Filename:  Line: 308)
-
-D3D11: Failed to create RenderTexture (256 x 256 fmt 53 aa 1), error 0x887a0005
- 
-(Filename:  Line: 308)
-
-D3D11: Failed to create RenderTexture (256 x 256 fmt 39 aa 1), error 0x887a0005
- 
-(Filename:  Line: 308)
-
-D3D11: Failed to create RenderTexture (256 x 256 fmt 53 aa 1), error 0x887a0005
- 
-(Filename:  Line: 308)
-
-D3D11: Failed to create RenderTexture (256 x 256 fmt 39 aa 1), error 0x887a0005
- 
-(Filename:  Line: 308)
-
-D3D11: Failed to create RenderTexture (256 x 256 fmt 53 aa 1), error 0x887a0005
- 
-(Filename:  Line: 308)
-
-D3D11: Failed to create RenderTexture (256 x 256 fmt 39 aa 1), error 0x887a0005
- 
-(Filename:  Line: 308)
-
-D3D11: Failed to create RenderTexture (256 x 256 fmt 53 aa 1), error 0x887a0005
- 
-(Filename:  Line: 308)
-
-D3D11: Failed to create RenderTexture (256 x 256 fmt 39 aa 1), error 0x887a0005
- 
-(Filename:  Line: 308)
-
-D3D11: Failed to create RenderTexture (256 x 256 fmt 53 aa 1), error 0x887a0005
- 
-(Filename:  Line: 308)
-
-D3D11: Failed to create RenderTexture (256 x 256 fmt 39 aa 1), error 0x887a0005
- 
-(Filename:  Line: 308)
-
-D3D11: Failed to create RenderTexture (256 x 256 fmt 53 aa 1), error 0x887a0005
- 
-(Filename:  Line: 308)
-
-D3D11: Failed to create RenderTexture (256 x 256 fmt 39 aa 1), error 0x887a0005
- 
-(Filename:  Line: 308)
-
-D3D11: Failed to create RenderTexture (256 x 256 fmt 53 aa 1), error 0x887a0005
- 
-(Filename:  Line: 308)
-
-D3D11: Failed to create RenderTexture (256 x 256 fmt 39 aa 1), error 0x887a0005
- 
-(Filename:  Line: 308)
-
-D3D11: Failed to create RenderTexture (256 x 256 fmt 53 aa 1), error 0x887a0005
- 
-(Filename:  Line: 308)
-
-d3d11: failed to create vertex buffer of size 9248 [0x887A0005]
-D3D11: Failed to create RenderTexture (256 x 256 fmt 39 aa 1), error 0x887a0005
- 
-(Filename:  Line: 308)
-
-D3D11: Failed to create RenderTexture (256 x 256 fmt 53 aa 1), error 0x887a0005
- 
-(Filename:  Line: 308)
-
-d3d11: failed to create vertex buffer of size 9248 [0x887A0005]
-Animator.GotoState: State could not be found
- 
-(Filename:  Line: 1101)
-
-Invalid Layer Index '-1'
- 
-(Filename:  Line: 697)
-
-Animator.GotoState: State could not be found
- 
-(Filename:  Line: 1101)
-
-Invalid Layer Index '-1'
- 
-(Filename:  Line: 697)
-
-Animator.GotoState: State could not be found
- 
-(Filename:  Line: 1101)
-
-Invalid Layer Index '-1'
- 
-(Filename:  Line: 697)
-
-Animator.GotoState: State could not be found
- 
-(Filename:  Line: 1101)
-
-Invalid Layer Index '-1'
- 
-(Filename:  Line: 697)
-
-Animator.GotoState: State could not be found
- 
-(Filename:  Line: 1101)
-
-Invalid Layer Index '-1'
- 
-(Filename:  Line: 697)
-
-d3d11: failed to create vertex buffer of size 9248 [0x887A0005]
-d3d11: failed to create vertex buffer of size 9248 [0x887A0005]
-d3d11: failed to create vertex buffer of size 9248 [0x887A0005]
-Animator.GotoState: State could not be found
- 
-(Filename:  Line: 1101)
-
-Invalid Layer Index '-1'
- 
-(Filename:  Line: 697)
-
-D3D11: Failed to create RenderTexture (16 x 16 fmt 39 aa 1), error 0x887a0005
- 
-(Filename:  Line: 308)
-
-D3D11: Failed to create RenderTexture (16 x 16 fmt 53 aa 1), error 0x887a0005
- 
-(Filename:  Line: 308)
-
-d3d11: failed to create vertex buffer of size 9248 [0x887A0005]
-Animator.GotoState: State could not be found
- 
-(Filename:  Line: 1101)
-
-Invalid Layer Index '-1'
- 
-(Filename:  Line: 697)
-
-Animator.GotoState: State could not be found
- 
-(Filename:  Line: 1101)
-
-Invalid Layer Index '-1'
- 
-(Filename:  Line: 697)
-
-Animator.GotoState: State could not be found
- 
-(Filename:  Line: 1101)
-
-Invalid Layer Index '-1'
- 
-(Filename:  Line: 697)
-
-Animator.GotoState: State could not be found
- 
-(Filename:  Line: 1101)
-
-Invalid Layer Index '-1'
- 
-(Filename:  Line: 697)
-
-Animator.GotoState: State could not be found
- 
-(Filename:  Line: 1101)
-
-Invalid Layer Index '-1'
- 
-(Filename:  Line: 697)
-
-Animator.GotoState: State could not be found
- 
-(Filename:  Line: 1101)
-
-Invalid Layer Index '-1'
- 
-(Filename:  Line: 697)
-
-Animator.GotoState: State could not be found
- 
-(Filename:  Line: 1101)
-
-Invalid Layer Index '-1'
- 
-(Filename:  Line: 697)
-
-Animator.GotoState: State could not be found
- 
-(Filename:  Line: 1101)
-
-Invalid Layer Index '-1'
- 
-(Filename:  Line: 697)
-
-Animator.GotoState: State could not be found
- 
-(Filename:  Line: 1101)
-
-Invalid Layer Index '-1'
- 
-(Filename:  Line: 697)
-
-Animator.GotoState: State could not be found
- 
-(Filename:  Line: 1101)
-
-Invalid Layer Index '-1'
- 
-(Filename:  Line: 697)
-
-Animator.GotoState: State could not be found
- 
-(Filename:  Line: 1101)
-
-Invalid Layer Index '-1'
- 
-(Filename:  Line: 697)
-
-Animator.GotoState: State could not be found
- 
-(Filename:  Line: 1101)
-
-Invalid Layer Index '-1'
- 
-(Filename:  Line: 697)
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
 

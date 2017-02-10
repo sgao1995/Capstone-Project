@@ -65,7 +65,7 @@ public class MonsterAI : MonoBehaviour {
    
 	public void Death()
     {
-        Destroy(this.gameObject);
+        PhotonNetwork.Destroy(this.gameObject);
         
     }
 	// turn left 2 degrees
