@@ -27,7 +27,17 @@ public class GameManager : Photon.PunBehaviour {
             Debug.Log(activePuzzleTypes);
         }
         SpawnMaze();
-        SpawnCat();
+        System.Random random = new System.Random();
+        if (random.Next(0, 2) == 0)
+        {
+            SpawnMouse();
+        }
+        else
+        {
+            SpawnCat();
+        }
+        
+
         SpawnMonsters();
 		SpawnKeysAndChests();
     }
@@ -79,6 +89,16 @@ public class GameManager : Photon.PunBehaviour {
         //myCat.GetComponent<NetworkPlayer>().enabled = false;
         //enables minimap:
         myCat.GetComponent<Minimap>().enabled = true;
+    }
+    void SpawnMouse()
+    {
+        Spawn mys = s[Random.Range(0, s.Length)];
+        GameObject myMouse = (GameObject)PhotonNetwork.Instantiate("Mouse", mys.transform.position, mys.transform.rotation, 0);
+        myMouse.GetComponent<MouseMovement>().enabled = true;
+        myMouse.transform.FindChild("MouseCam").gameObject.SetActive(true);
+        //myMouse.GetComponent<NetworkPlayer>().enabled = false;
+        //enables minimap:
+        myMouse.GetComponent<Minimap>().enabled = true;
     }
     void SpawnMonsters()
     {

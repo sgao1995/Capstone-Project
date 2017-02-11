@@ -211,7 +211,7 @@ public class CatMovement : MonoBehaviour
 	void Death(){
 		Debug.Log("player died");
 		alive = false;
-		animator.Play("Unarmed-Death1");
+		//animator.Play("Unarmed-Death1");
 	}
 
     // attack in front of player
@@ -229,7 +229,7 @@ public class CatMovement : MonoBehaviour
         if (Physics.Raycast(ray, out hitInfo, 1))
         {
             Debug.Log("We hit: " + hitInfo.collider.name);
-            if (hitInfo.collider.name == "Character")
+            if (hitInfo.collider.name == "Character"||hitInfo.collider.name == "MonsterClone" ||hitInfo.collider.name =="Monster")
             {
                 Debug.Log("Trying to hurt " + hitInfo.collider.transform.parent.name + " by calling script " + hitInfo.collider.transform.parent.GetComponent<MonsterAI>().name);
                 hitInfo.collider.transform.parent.GetComponent<MonsterAI>().SendMessage("takeDamage", 50f);
@@ -244,7 +244,7 @@ public class CatMovement : MonoBehaviour
                     Debug.Log("current EXP is" + catVitality.getEXP());
                 }
             }
-            if (hitInfo.collider.name == "Cat_Test(Clone)")
+          /*  if (hitInfo.collider.name == "Cat(Clone)" || hitInfo.collider.name == "Cat")
             {
                 Debug.Log("Trying to hurt " + hitInfo.collider.transform.parent.name + " by calling script " + hitInfo.collider.transform.parent.GetComponent<CatMovement>().name);
                 hitInfo.collider.transform.parent.GetComponent<CatMovement>().SendMessage("TakeDamage", 50f);
@@ -253,12 +253,12 @@ public class CatMovement : MonoBehaviour
                     currentEXP += 100;
                     maxEXP += 100;
                 }
-            }
-            if (hitInfo.collider.name == "Mouse_Test(Clone)")
+            }*/
+            if (hitInfo.collider.name == "Mouse(Clone)")
             {
-                Debug.Log("Trying to hurt " + hitInfo.collider.transform.parent.name + " by calling script " + hitInfo.collider.transform.parent.GetComponent<CatMovement>().name);
-                hitInfo.collider.transform.parent.GetComponent<CatMovement>().SendMessage("TakeDamage", 50f);
-                if (hitInfo.collider.transform.parent.GetComponent<CatMovement>().getHealth() <= 0)
+                Debug.Log("Trying to hurt " + hitInfo.collider.transform.parent.name + " by calling script " + hitInfo.collider.transform.parent.GetComponent<MouseMovement>().name);
+                hitInfo.collider.transform.parent.GetComponent<MouseMovement>().SendMessage("TakeDamage", 50f);
+                if (hitInfo.collider.transform.parent.GetComponent<MouseMovement>().getHealth() <= 0)
                 {
                     currentEXP += 100;
                     maxEXP += 100;
