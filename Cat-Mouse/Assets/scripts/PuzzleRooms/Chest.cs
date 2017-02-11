@@ -3,23 +3,28 @@ using System.Collections;
 
 public class Chest : MonoBehaviour {
 	public Transform hinge;
-	bool chestOpen = false;
-	
-	private static Quaternion
-		normalRotation = Quaternion.Euler(0f, -80f, 0f);
+	public bool chestOpen = false;
+	bool chestOpening = false;
+	public float duration = 30f;
+	float newRot = 0;
 	
 	// open the chest
 	public void Interact(){
 		if (chestOpen == false){
-			OpenChest();
+			chestOpening = true;
 		}
 	}
 	
-	// give a puzzle piece
-	private void OpenChest(){
-		// give the mouse TEAM a random puzzle piece
-		Debug.Log("open chest");
-		chestOpen = true;
-		hinge.localRotation = normalRotation;
+	// animate chest opening
+	void Update(){
+		if (chestOpening){
+			newRot += 70f/duration;
+			if (newRot >= 70f + 70f/duration){
+				chestOpening = false;
+				chestOpen = true;
+			}
+			Quaternion newQuat = Quaternion.Euler(newRot, 0f, 0f);
+			hinge.localRotation = newQuat;
+		}
 	}
 }

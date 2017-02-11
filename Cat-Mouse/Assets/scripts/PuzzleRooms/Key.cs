@@ -11,6 +11,6 @@ public class Key : MonoBehaviour {
 	public void Interact(){
 		// need to figure out which mouse took the key
 		// then destroy the key
-		Destroy(this);
+		Debug.Log("Picked up Key");
 	}
 }

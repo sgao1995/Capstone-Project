@@ -28,7 +28,7 @@ public class GameManager : Photon.PunBehaviour {
         }
         SpawnMaze();
         SpawnCat();
-        SpawnMonsters();
+     //   SpawnMonsters();
 		SpawnKeysAndChests();
     }
     void OnGUI()
@@ -96,7 +96,7 @@ public class GameManager : Photon.PunBehaviour {
 			Vector3 keyPos = new Vector3(keyLocations[i], 1, keyLocations[i+1]);
 			Quaternion keyRot = new Quaternion(0f, 0f, 0f, 0f);
 			GameObject key = (GameObject)PhotonNetwork.Instantiate("Key", keyPos, keyRot, 0);
-			Vector3 chestPos = new Vector3(chestLocations[i], 0, chestLocations[i+1]);
+			Vector3 chestPos = new Vector3(chestLocations[i], 0.4f, chestLocations[i+1]);
 			Quaternion chestRot = new Quaternion(0f, 0f, 0f, 0f);
 			GameObject chest = (GameObject)PhotonNetwork.Instantiate("Chest", chestPos, chestRot, 0);
 		}
