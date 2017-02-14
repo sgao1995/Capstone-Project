@@ -8,9 +8,13 @@ public class Key : MonoBehaviour {
 		// need to figure out which mouse took the key
 		// then destroy the key
 		Debug.Log("Picked up Key");
-		PhotonNetwork.Destroy(this.gameObject);
-	}
-	
+        transform.GetComponent<PhotonView>().RPC("destroyKey", PhotonTargets.MasterClient);
+    }
+    [PunRPC]
+    void destroyKey()
+    {
+        PhotonNetwork.Destroy(this.gameObject);
+    }
 	// a rotating animation
 	void Update(){
 		rotation += 1.5f;

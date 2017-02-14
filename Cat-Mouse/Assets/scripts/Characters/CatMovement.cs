@@ -206,17 +206,24 @@ public class CatMovement : MonoBehaviour
 		}
 
     }
-	
-	// take a certain amount of damage
-	public void TakeDamage(float amt){
-		currentHealth -= amt;
-		if (currentHealth <= 0){
-			currentHealth = 0;
-			Death();
-		}
-	}
-	
-	void Death(){
+
+    // take a certain amount of damage
+    public void TakeDamage(float amt)
+    {
+        transform.GetComponent<PhotonView>().RPC("changeHealth", PhotonTargets.AllBuffered, amt);
+    }
+    [PunRPC]
+    void changeHealth(float dmg)
+    {
+        currentHealth -= dmg;
+        if (currentHealth <= 0)
+        {
+            currentHealth = 0;
+            Death();
+        }
+    }
+
+    void Death(){
 		Debug.Log("player died");
 		alive = false;
 		//animator.Play("Unarmed-Death1");
@@ -303,12 +310,23 @@ public class CatMovement : MonoBehaviour
 		if (collisionInfo.gameObject.tag == "Mine"){
 			Mine mine = collisionInfo.gameObject.GetComponent<Mine>();
 			TakeDamage(mine.mineSize * 50);
-			PhotonNetwork.Destroy(collisionInfo.gameObject);
-		}
+            transform.GetComponent<PhotonView>().RPC("destroyMine", PhotonTargets.MasterClient, collisionInfo);
+        }
 	}
-	
-	// when player leaves the spikes
-	void OnTriggerExit(Collider obj){
+    [PunRPC]
+    void destroyMine(Collision collisionInfo)
+    {
+
+        PhotonNetwork.Destroy(collisionInfo.gameObject);
+    }
+    [PunRPC]
+    void destroyPU(Collider obj)
+    {
+
+        PhotonNetwork.Destroy(obj.gameObject);
+    }
+    // when player leaves the spikes
+    void OnTriggerExit(Collider obj){
 		if (obj.tag == "Spike"){
 			onSpikes = false;
 		}
@@ -339,9 +357,9 @@ public class CatMovement : MonoBehaviour
 			else if (pup.powerupType == 3){
 				
 			}
-			//Debug.Log("destroy " + obj);
-			PhotonNetwork.Destroy(obj.gameObject);
-		}
+            //Debug.Log("destroy " + obj);
+            transform.GetComponent<PhotonView>().RPC("destroyPU", PhotonTargets.MasterClient, obj);
+    }
 		// put spikes here because we dont want spikes displacing the player
 		if (obj.tag == "Spike"){
 			onSpikes = true;

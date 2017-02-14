@@ -1,0 +1,639 @@
+Initialize engine version: 5.4.2f2 (b7e030c65c9b)
+GfxDevice: creating device client; threaded=1
+Direct3D:
+    Version:  Direct3D 11.0 [level 11.0]
+    Renderer: NVIDIA GeForce GTX 770 (ID=0x1184)
+    Vendor:   NVIDIA
+    VRAM:     2017 MB
+Begin MonoManager ReloadAssembly
+Platform assembly: C:\Users\SmugFug\Documents\GitHub\Cat-and-Mouse-Game\Cat-Mouse\C&M_Data\Managed\UnityEngine.dll (this message is harmless)
+Loading C:\Users\SmugFug\Documents\GitHub\Cat-and-Mouse-Game\Cat-Mouse\C&M_Data\Managed\UnityEngine.dll into Unity Child Domain
+Platform assembly: C:\Users\SmugFug\Documents\GitHub\Cat-and-Mouse-Game\Cat-Mouse\C&M_Data\Managed\Assembly-CSharp-firstpass.dll (this message is harmless)
+Loading C:\Users\SmugFug\Documents\GitHub\Cat-and-Mouse-Game\Cat-Mouse\C&M_Data\Managed\Assembly-CSharp-firstpass.dll into Unity Child Domain
+Platform assembly: C:\Users\SmugFug\Documents\GitHub\Cat-and-Mouse-Game\Cat-Mouse\C&M_Data\Managed\Assembly-CSharp.dll (this message is harmless)
+Loading C:\Users\SmugFug\Documents\GitHub\Cat-and-Mouse-Game\Cat-Mouse\C&M_Data\Managed\Assembly-CSharp.dll into Unity Child Domain
+Platform assembly: C:\Users\SmugFug\Documents\GitHub\Cat-and-Mouse-Game\Cat-Mouse\C&M_Data\Managed\UnityEngine.UI.dll (this message is harmless)
+Loading C:\Users\SmugFug\Documents\GitHub\Cat-and-Mouse-Game\Cat-Mouse\C&M_Data\Managed\UnityEngine.UI.dll into Unity Child Domain
+Platform assembly: C:\Users\SmugFug\Documents\GitHub\Cat-and-Mouse-Game\Cat-Mouse\C&M_Data\Managed\UnityEngine.Networking.dll (this message is harmless)
+Loading C:\Users\SmugFug\Documents\GitHub\Cat-and-Mouse-Game\Cat-Mouse\C&M_Data\Managed\UnityEngine.Networking.dll into Unity Child Domain
+Platform assembly: C:\Users\SmugFug\Documents\GitHub\Cat-and-Mouse-Game\Cat-Mouse\C&M_Data\Managed\Photon3Unity3D.dll (this message is harmless)
+Loading C:\Users\SmugFug\Documents\GitHub\Cat-and-Mouse-Game\Cat-Mouse\C&M_Data\Managed\Photon3Unity3D.dll into Unity Child Domain
+- Completed reload, in  0.073 seconds
+Platform assembly: C:\Users\SmugFug\Documents\GitHub\Cat-and-Mouse-Game\Cat-Mouse\C&M_Data\Managed\System.Core.dll (this message is harmless)
+Platform assembly: C:\Users\SmugFug\Documents\GitHub\Cat-and-Mouse-Game\Cat-Mouse\C&M_Data\Managed\System.dll (this message is harmless)
+desktop: 1920x1080 60Hz; virtual: 1920x1080 at 0,0
+<RI> Initializing input.
+<RI> Input initialized.
+<RI> Initialized touch support.
+The referenced script on this Behaviour (Game Object 'Main Camera') is missing!
+ 
+(Filename:  Line: 1656)
+
+UnloadTime: 1.046077 ms
+Setting up 2 worker threads for Enlighten.
+  Thread -> id: 4cd0 -> priority: 1 
+  Thread -> id: 12e0 -> priority: 1 
+Unloading 7 Unused Serialized files (Serialized files now loaded: 0)
+UnloadTime: 6.867939 ms
+
+Unloading 6 unused Assets to reduce memory usage. Loaded Objects now: 503.
+Total: 7.359525 ms (FindLiveObjects: 0.024754 ms CreateObjectMapping: 0.031743 ms MarkObjects: 0.614191 ms  DeleteObjects: 6.372567 ms)
+
+SwitchToProtocol: Udp PhotonNetwork.connected: False
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+OnJoinedLobby
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+OnJoinedLobby
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+OnJoinedRoom
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+playerWhoIsIt: 1
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+Unloading 5 Unused Serialized files (Serialized files now loaded: 0)
+UnloadTime: 0.947352 ms
+
+Unloading 121 unused Assets to reduce memory usage. Loaded Objects now: 459.
+Total: 0.622928 ms (FindLiveObjects: 0.033782 ms CreateObjectMapping: 0.043101 ms MarkObjects: 0.415868 ms  DeleteObjects: 0.128721 ms)
+
+Unloading 4 Unused Serialized files (Serialized files now loaded: 0)
+TerrainData is missing splat texture 1.
+ 
+(Filename:  Line: 206)
+
+UnloadTime: 0.688745 ms
+
+Unloading 13 unused Assets to reduce memory usage. Loaded Objects now: 579.
+Total: 0.750775 ms (FindLiveObjects: 0.054167 ms CreateObjectMapping: 0.031743 ms MarkObjects: 0.433341 ms  DeleteObjects: 0.230649 ms)
+
+System.Collections.Generic.List`1[System.Int32]
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+System.Collections.Generic.List`1[System.Int32]
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+System.Collections.Generic.List`1[System.Int32]
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+System.Collections.Generic.List`1[System.Int32]
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+System.Collections.Generic.List`1[System.Int32]
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+System.Collections.Generic.List`1[System.Int32]
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+donemaze, 148
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+0 1 2
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+The referenced script on this Behaviour (Game Object 'Character') is missing!
+ 
+(Filename:  Line: 1656)
+
+The referenced script on this Behaviour (Game Object '<null>') is missing!
+ 
+(Filename:  Line: 1656)
+
+The referenced script on this Behaviour (Game Object 'Character') is missing!
+ 
+(Filename:  Line: 1656)
+
+The referenced script on this Behaviour (Game Object 'Character') is missing!
+ 
+(Filename:  Line: 1656)
+
+Animator.GotoState: State could not be found
+ 
+(Filename:  Line: 1101)
+
+Invalid Layer Index '-1'
+ 
+(Filename:  Line: 697)
+
+Animator.GotoState: State could not be found
+ 
+(Filename:  Line: 1101)
+
+Invalid Layer Index '-1'
+ 
+(Filename:  Line: 697)
+
+Animator.GotoState: State could not be found
+ 
+(Filename:  Line: 1101)
+
+Invalid Layer Index '-1'
+ 
+(Filename:  Line: 697)
+
+Animator.GotoState: State could not be found
+ 
+(Filename:  Line: 1101)
+
+Invalid Layer Index '-1'
+ 
+(Filename:  Line: 697)
+
+Animator.GotoState: State could not be found
+ 
+(Filename:  Line: 1101)
+
+Invalid Layer Index '-1'
+ 
+(Filename:  Line: 697)
+
+Animator.GotoState: State could not be found
+ 
+(Filename:  Line: 1101)
+
+Invalid Layer Index '-1'
+ 
+(Filename:  Line: 697)
+
+Animator.GotoState: State could not be found
+ 
+(Filename:  Line: 1101)
+
+Invalid Layer Index '-1'
+ 
+(Filename:  Line: 697)
+
+Animator.GotoState: State could not be found
+ 
+(Filename:  Line: 1101)
+
+Invalid Layer Index '-1'
+ 
+(Filename:  Line: 697)
+
+Animator.GotoState: State could not be found
+ 
+(Filename:  Line: 1101)
+
+Invalid Layer Index '-1'
+ 
+(Filename:  Line: 697)
+
+Animator.GotoState: State could not be found
+ 
+(Filename:  Line: 1101)
+
+Invalid Layer Index '-1'
+ 
+(Filename:  Line: 697)
+
+Animator.GotoState: State could not be found
+ 
+(Filename:  Line: 1101)
+
+Invalid Layer Index '-1'
+ 
+(Filename:  Line: 697)
+
+Animator.GotoState: State could not be found
+ 
+(Filename:  Line: 1101)
+
+Invalid Layer Index '-1'
+ 
+(Filename:  Line: 697)
+
+Animator.GotoState: State could not be found
+ 
+(Filename:  Line: 1101)
+
+Invalid Layer Index '-1'
+ 
+(Filename:  Line: 697)
+
+Animator.GotoState: State could not be found
+ 
+(Filename:  Line: 1101)
+
+Invalid Layer Index '-1'
+ 
+(Filename:  Line: 697)
+
+Animator.GotoState: State could not be found
+ 
+(Filename:  Line: 1101)
+
+Invalid Layer Index '-1'
+ 
+(Filename:  Line: 697)
+
+Attack
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+Attack
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+Attack
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+Initialize engine version: 5.4.2f2 (b7e030c65c9b)
+GfxDevice: creating device client; threaded=1
+Direct3D:
+    Version:  Direct3D 11.0 [level 11.0]
+    Renderer: NVIDIA GeForce GTX 770 (ID=0x1184)
+    Vendor:   NVIDIA
+    VRAM:     2017 MB
+Begin MonoManager ReloadAssembly
+Platform assembly: C:\Users\SmugFug\Documents\GitHub\Cat-and-Mouse-Game\Cat-Mouse\C&M_Data\Managed\UnityEngine.dll (this message is harmless)
+Loading C:\Users\SmugFug\Documents\GitHub\Cat-and-Mouse-Game\Cat-Mouse\C&M_Data\Managed\UnityEngine.dll into Unity Child Domain
+Platform assembly: C:\Users\SmugFug\Documents\GitHub\Cat-and-Mouse-Game\Cat-Mouse\C&M_Data\Managed\Assembly-CSharp-firstpass.dll (this message is harmless)
+Loading C:\Users\SmugFug\Documents\GitHub\Cat-and-Mouse-Game\Cat-Mouse\C&M_Data\Managed\Assembly-CSharp-firstpass.dll into Unity Child Domain
+Platform assembly: C:\Users\SmugFug\Documents\GitHub\Cat-and-Mouse-Game\Cat-Mouse\C&M_Data\Managed\Assembly-CSharp.dll (this message is harmless)
+Loading C:\Users\SmugFug\Documents\GitHub\Cat-and-Mouse-Game\Cat-Mouse\C&M_Data\Managed\Assembly-CSharp.dll into Unity Child Domain
+Platform assembly: C:\Users\SmugFug\Documents\GitHub\Cat-and-Mouse-Game\Cat-Mouse\C&M_Data\Managed\UnityEngine.UI.dll (this message is harmless)
+Loading C:\Users\SmugFug\Documents\GitHub\Cat-and-Mouse-Game\Cat-Mouse\C&M_Data\Managed\UnityEngine.UI.dll into Unity Child Domain
+Platform assembly: C:\Users\SmugFug\Documents\GitHub\Cat-and-Mouse-Game\Cat-Mouse\C&M_Data\Managed\UnityEngine.Networking.dll (this message is harmless)
+Loading C:\Users\SmugFug\Documents\GitHub\Cat-and-Mouse-Game\Cat-Mouse\C&M_Data\Managed\UnityEngine.Networking.dll into Unity Child Domain
+Platform assembly: C:\Users\SmugFug\Documents\GitHub\Cat-and-Mouse-Game\Cat-Mouse\C&M_Data\Managed\Photon3Unity3D.dll (this message is harmless)
+Loading C:\Users\SmugFug\Documents\GitHub\Cat-and-Mouse-Game\Cat-Mouse\C&M_Data\Managed\Photon3Unity3D.dll into Unity Child Domain
+- Completed reload, in  0.086 seconds
+Platform assembly: C:\Users\SmugFug\Documents\GitHub\Cat-and-Mouse-Game\Cat-Mouse\C&M_Data\Managed\System.Core.dll (this message is harmless)
+Platform assembly: C:\Users\SmugFug\Documents\GitHub\Cat-and-Mouse-Game\Cat-Mouse\C&M_Data\Managed\System.dll (this message is harmless)
+desktop: 1920x1080 60Hz; virtual: 1920x1080 at 0,0
+<RI> Initializing input.
+<RI> Input initialized.
+<RI> Initialized touch support.
+Attack
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+The referenced script on this Behaviour (Game Object 'Main Camera') is missing!
+ 
+(Filename:  Line: 1656)
+
+UnloadTime: 1.438938 ms
+Setting up 2 worker threads for Enlighten.
+  Thread -> id: fb4 -> priority: 1 
+  Thread -> id: 5284 -> priority: 1 
+Unloading 7 Unused Serialized files (Serialized files now loaded: 0)
+UnloadTime: 7.471938 ms
+
+Unloading 6 unused Assets to reduce memory usage. Loaded Objects now: 503.
+Total: 6.740383 ms (FindLiveObjects: 0.082125 ms CreateObjectMapping: 0.043683 ms MarkObjects: 0.484597 ms  DeleteObjects: 6.072897 ms)
+
+SwitchToProtocol: Udp PhotonNetwork.connected: False
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+OnJoinedLobby
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+OnJoinedRoom
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+playerWhoIsIt: 0
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+Unloading 5 Unused Serialized files (Serialized files now loaded: 0)
+UnloadTime: 1.730745 ms
+
+Unloading 121 unused Assets to reduce memory usage. Loaded Objects now: 459.
+Total: 0.761551 ms (FindLiveObjects: 0.073679 ms CreateObjectMapping: 0.041062 ms MarkObjects: 0.505273 ms  DeleteObjects: 0.140661 ms)
+
+Unloading 4 Unused Serialized files (Serialized files now loaded: 0)
+TerrainData is missing splat texture 1.
+ 
+(Filename:  Line: 206)
+
+UnloadTime: 1.085683 ms
+
+Unloading 13 unused Assets to reduce memory usage. Loaded Objects now: 579.
+Total: 1.000937 ms (FindLiveObjects: 0.073388 ms CreateObjectMapping: 0.051837 ms MarkObjects: 0.571090 ms  DeleteObjects: 0.302873 ms)
+
+System.Collections.Generic.List`1[System.Int32]
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+System.Collections.Generic.List`1[System.Int32]
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+System.Collections.Generic.List`1[System.Int32]
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+System.Collections.Generic.List`1[System.Int32]
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+System.Collections.Generic.List`1[System.Int32]
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+System.Collections.Generic.List`1[System.Int32]
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+donemaze, 148
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+0 1 2
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+The referenced script on this Behaviour (Game Object 'Character') is missing!
+ 
+(Filename:  Line: 1656)
+
+The referenced script on this Behaviour (Game Object '<null>') is missing!
+ 
+(Filename:  Line: 1656)
+
+The referenced script on this Behaviour (Game Object 'Character') is missing!
+ 
+(Filename:  Line: 1656)
+
+The referenced script on this Behaviour (Game Object 'Character') is missing!
+ 
+(Filename:  Line: 1656)
+
+player died
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+Animator.GotoState: State could not be found
+ 
+(Filename:  Line: 1101)
+
+Invalid Layer Index '-1'
+ 
+(Filename:  Line: 697)
+
+Animator.GotoState: State could not be found
+ 
+(Filename:  Line: 1101)
+
+Invalid Layer Index '-1'
+ 
+(Filename:  Line: 697)
+
+Animator.GotoState: State could not be found
+ 
+(Filename:  Line: 1101)
+
+Invalid Layer Index '-1'
+ 
+(Filename:  Line: 697)
+
+Animator.GotoState: State could not be found
+ 
+(Filename:  Line: 1101)
+
+Invalid Layer Index '-1'
+ 
+(Filename:  Line: 697)
+
+Animator.GotoState: State could not be found
+ 
+(Filename:  Line: 1101)
+
+Invalid Layer Index '-1'
+ 
+(Filename:  Line: 697)
+
+Animator.GotoState: State could not be found
+ 
+(Filename:  Line: 1101)
+
+Invalid Layer Index '-1'
+ 
+(Filename:  Line: 697)
+
+Animator.GotoState: State could not be found
+ 
+(Filename:  Line: 1101)
+
+Invalid Layer Index '-1'
+ 
+(Filename:  Line: 697)
+
+Animator.GotoState: State could not be found
+ 
+(Filename:  Line: 1101)
+
+Invalid Layer Index '-1'
+ 
+(Filename:  Line: 697)
+
+Animator.GotoState: State could not be found
+ 
+(Filename:  Line: 1101)
+
+Invalid Layer Index '-1'
+ 
+(Filename:  Line: 697)
+
+Animator.GotoState: State could not be found
+ 
+(Filename:  Line: 1101)
+
+Invalid Layer Index '-1'
+ 
+(Filename:  Line: 697)
+
+Animator.GotoState: State could not be found
+ 
+(Filename:  Line: 1101)
+
+Invalid Layer Index '-1'
+ 
+(Filename:  Line: 697)
+
+Animator.GotoState: State could not be found
+ 
+(Filename:  Line: 1101)
+
+Invalid Layer Index '-1'
+ 
+(Filename:  Line: 697)
+
+Animator.GotoState: State could not be found
+ 
+(Filename:  Line: 1101)
+
+Invalid Layer Index '-1'
+ 
+(Filename:  Line: 697)
+
+Animator.GotoState: State could not be found
+ 
+(Filename:  Line: 1101)
+
+Invalid Layer Index '-1'
+ 
+(Filename:  Line: 697)
+
+Animator.GotoState: State could not be found
+ 
+(Filename:  Line: 1101)
+
+Invalid Layer Index '-1'
+ 
+(Filename:  Line: 697)
+
+Animator.GotoState: State could not be found
+ 
+(Filename:  Line: 1101)
+
+Invalid Layer Index '-1'
+ 
+(Filename:  Line: 697)
+
+Animator.GotoState: State could not be found
+ 
+(Filename:  Line: 1101)
+
+Invalid Layer Index '-1'
+ 
+(Filename:  Line: 697)
+
+Animator.GotoState: State could not be found
+ 
+(Filename:  Line: 1101)
+
+Invalid Layer Index '-1'
+ 
+(Filename:  Line: 697)
+
+Failed to 'network-remove' GameObject. Client is neither owner nor masterClient taking over for owner who left: View (0)1003 on Mine(Clone) 
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+player died
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+d3d11: failed to create vertex buffer of size 9248 [0x887A0005]
+d3d11: failed to create vertex buffer of size 9248 [0x887A0005]
+D3D11: Failed to create RenderTexture (32 x 32 fmt 39 aa 1), error 0x887a0005
+ 
+(Filename:  Line: 308)
+
+D3D11: Failed to create RenderTexture (32 x 32 fmt 53 aa 1), error 0x887a0005
+ 
+(Filename:  Line: 308)
+
+d3d11: failed to create index buffer of size 65536 [0x887A0005]
+d3d11: failed to create index buffer of size 65536 [0x887A0005]
+Crash!!!
+SymInit: Symbol-SearchPath: '.;C:\Users\SmugFug\Documents\GitHub\Cat-and-Mouse-Game\Cat-Mouse;C:\Users\SmugFug\Documents\GitHub\Cat-and-Mouse-Game\Cat-Mouse;C:\Windows;C:\Windows\system32;SRV*C:\websymbols*http://msdl.microsoft.com/download/symbols;', symOptions: 530, UserName: 'SmugFug'
+OS-Version: 10.0.14393 () 0x100-0x1
+C:\Users\SmugFug\Documents\GitHub\Cat-and-Mouse-Game\Cat-Mouse\C&M.exe:C&M.exe (00080000), size: 18583552 (result: 0), SymType: '-exported-', PDB: 'C:\Users\SmugFug\Documents\GitHub\Cat-and-Mouse-Game\Cat-Mouse\C&M.exe', fileVersion: 5.4.2.57392
+C:\Windows\SYSTEM32\ntdll.dll:ntdll.dll (77300000), size: 1581056 (result: 0), SymType: '-exported-', PDB: 'C:\Windows\SYSTEM32\ntdll.dll', fileVersion: 10.0.14393.447
+C:\Windows\System32\KERNEL32.DLL:KERNEL32.DLL (77130000), size: 917504 (result: 0), SymType: '-exported-', PDB: 'C:\Windows\System32\KERNEL32.DLL', fileVersion: 10.0.14393.0
+C:\Windows\System32\KERNELBASE.dll:KERNELBASE.dll (74130000), size: 1708032 (result: 0), SymType: '-exported-', PDB: 'C:\Windows\System32\KERNELBASE.dll', fileVersion: 10.0.14393.321
+C:\Windows\System32\GDI32.dll:GDI32.dll (76940000), size: 176128 (result: 0), SymType: '-exported-', PDB: 'C:\Windows\System32\GDI32.dll', fileVersion: 10.0.14393.206
+C:\Windows\System32\gdi32full.dll:gdi32full.dll (74500000), size: 1421312 (result: 0), SymType: '-exported-', PDB: 'C:\Windows\System32\gdi32full.dll', fileVersion: 10.0.14393.447
+C:\Windows\SYSTEM32\HID.DLL:HID.DLL (65780000), size: 40960 (result: 0), SymType: '-exported-', PDB: 'C:\Windows\SYSTEM32\HID.DLL', fileVersion: 10.0.14393.0
+C:\Windows\System32\USER32.dll:USER32.dll (747F0000), size: 1437696 (result: 0), SymType: '-exported-', PDB: 'C:\Windows\System32\USER32.dll', fileVersion: 10.0.14393.351
+C:\Windows\System32\msvcrt.dll:msvcrt.dll (73CF0000), size: 778240 (result: 0), SymType: '-exported-', PDB: 'C:\Windows\System32\msvcrt.dll', fileVersion: 7.0.14393.0
+C:\Windows\System32\win32u.dll:win32u.dll (76810000), size: 86016 (result: 0), SymType: '-exported-', PDB: 'C:\Windows\System32\win32u.dll', fileVersion: 10.0.14393.51
+C:\Windows\System32\ADVAPI32.dll:ADVAPI32.dll (73DF0000), size: 487424 (result: 0), SymType: '-exported-', PDB: 'C:\Windows\System32\ADVAPI32.dll', fileVersion: 10.0.14393.0
+C:\Windows\System32\sechost.dll:sechost.dll (76BB0000), size: 266240 (result: 0), SymType: '-exported-', PDB: 'C:\Windows\System32\sechost.dll', fileVersion: 10.0.14393.0
+C:\Windows\System32\RPCRT4.dll:RPCRT4.dll (76470000), size: 790528 (result: 0), SymType: '-exported-', PDB: 'C:\Windows\System32\RPCRT4.dll', fileVersion: 10.0.14393.82
+C:\Windows\System32\SspiCli.dll:SspiCli.dll (73CD0000), size: 122880 (result: 0), SymType: '-exported-', PDB: 'C:\Windows\System32\SspiCli.dll', fileVersion: 10.0.14393.187
+C:\Windows\System32\CRYPTBASE.dll:CRYPTBASE.dll (73CC0000), size: 40960 (result: 0), SymType: '-exported-', PDB: 'C:\Windows\System32\CRYPTBASE.dll', fileVersion: 10.0.14393.0
+C:\Windows\System32\bcryptPrimitives.dll:bcryptPrimitives.dll (73FF0000), size: 368640 (result: 0), SymType: '-exported-', PDB: 'C:\Windows\System32\bcryptPrimitives.dll', fileVersion: 10.0.14393.0
+C:\Windows\System32\WS2_32.dll:WS2_32.dll (769C0000), size: 405504 (result: 0), SymType: '-exported-', PDB: 'C:\Windows\System32\WS2_32.dll', fileVersion: 10.0.14393.206
+C:\Windows\System32\ole32.dll:ole32.dll (77210000), size: 958464 (result: 0), SymType: '-exported-', PDB: 'C:\Windows\System32\ole32.dll', fileVersion: 10.0.14393.447
+C:\Windows\SYSTEM32\VERSION.dll:VERSION.dll (73BE0000), size: 32768 (result: 0), SymType: '-exported-', PDB: 'C:\Windows\SYSTEM32\VERSION.dll', fileVersion: 10.0.14393.0
+C:\Windows\System32\combase.dll:combase.dll (742E0000), size: 2166784 (result: 0), SymType: '-exported-', PDB: 'C:\Windows\System32\combase.dll', fileVersion: 10.0.14393.351
+C:\Windows\System32\ucrtbase.dll:ucrtbase.dll (74050000), size: 917504 (result: 0), SymType: '-exported-', PDB: 'C:\Windows\System32\ucrtbase.dll', fileVersion: 10.0.14393.0
+C:\Windows\System32\SHLWAPI.dll:SHLWAPI.dll (76970000), size: 286720 (result: 0), SymType: '-exported-', PDB: 'C:\Windows\System32\SHLWAPI.dll', fileVersion: 10.0.14393.0
+C:\Windows\System32\SHELL32.dll:SHELL32.dll (75090000), size: 20811776 (result: 0), SymType: '-exported-', PDB: 'C:\Windows\System32\SHELL32.dll', fileVersion: 10.0.14393.447
+C:\Windows\System32\cfgmgr32.dll:cfgmgr32.dll (767C0000), size: 221184 (result: 0), SymType: '-exported-', PDB: 'C:\Windows\System32\cfgmgr32.dll', fileVersion: 10.0.14393.0
+C:\Windows\System32\windows.storage.dll:windows.storage.dll (74B20000), size: 5693440 (result: 0), SymType: '-exported-', PDB: 'C:\Windows\System32\windows.storage.dll', fileVersion: 10.0.14393.206
+C:\Windows\System32\powrprof.dll:powrprof.dll (747A0000), size: 282624 (result: 0), SymType: '-exported-', PDB: 'C:\Windows\System32\powrprof.dll', fileVersion: 10.0.14393.0
+C:\Windows\System32\kernel.appcore.dll:kernel.appcore.dll (76920000), size: 53248 (result: 0), SymType: '-exported-', PDB: 'C:\Windows\System32\kernel.appcore.dll', fileVersion: 10.0.14393.0
+C:\Windows\System32\shcore.dll:shcore.dll (74A10000), size: 557056 (result: 0), SymType: '-exported-', PDB: 'C:\Windows\System32\shcore.dll', fileVersion: 10.0.14393.0
+C:\Windows\System32\profapi.dll:profapi.dll (76800000), size: 61440 (result: 0), SymType: '-nosymbols-', PDB: 'C:\Windows\System32\profapi.dll', fileVersion: 10.0.14393.0
+C:\Windows\System32\OLEAUT32.dll:OLEAUT32.dll (76C80000), size: 606208 (result: 0), SymType: '-exported-', PDB: 'C:\Windows\System32\OLEAUT32.dll', fileVersion: 10.0.14393.447
+C:\Windows\System32\msvcp_win.dll:msvcp_win.dll (74AA0000), size: 503808 (result: 0), SymType: '-exported-', PDB: 'C:\Windows\System32\msvcp_win.dll', fileVersion: 10.0.14393.0
+C:\Windows\SYSTEM32\OPENGL32.dll:OPENGL32.dll (69AD0000), size: 917504 (result: 0), SymType: '-exported-', PDB: 'C:\Windows\SYSTEM32\OPENGL32.dll', fileVersion: 10.0.14393.0
+C:\Windows\System32\IMM32.dll:IMM32.dll (73DC0000), size: 151552 (result: 0), SymType: '-exported-', PDB: 'C:\Windows\System32\IMM32.dll', fileVersion: 10.0.14393.0
+C:\Windows\SYSTEM32\WINMM.dll:WINMM.dll (72E30000), size: 147456 (result: 0), SymType: '-exported-', PDB: 'C:\Windows\SYSTEM32\WINMM.dll', fileVersion: 10.0.14393.0
+C:\Windows\SYSTEM32\DNSAPI.dll:DNSAPI.dll (73BF0000), size: 507904 (result: 0), SymType: '-exported-', PDB: 'C:\Windows\SYSTEM32\DNSAPI.dll', fileVersion: 10.0.14393.206
+C:\Windows\SYSTEM32\IPHLPAPI.DLL:IPHLPAPI.DLL (72AE0000), size: 192512 (result: 0), SymType: '-exported-', PDB: 'C:\Windows\SYSTEM32\IPHLPAPI.DLL', fileVersion: 10.0.14393.0
+C:\Windows\SYSTEM32\WINHTTP.dll:WINHTTP.dll (6BCC0000), size: 655360 (result: 0), SymType: '-exported-', PDB: 'C:\Windows\SYSTEM32\WINHTTP.dll', fileVersion: 10.0.14393.351
+C:\Windows\System32\NSI.dll:NSI.dll (73E70000), size: 28672 (result: 0), SymType: '-exported-', PDB: 'C:\Windows\System32\NSI.dll', fileVersion: 10.0.14393.0
+C:\Windows\SYSTEM32\GLU32.dll:GLU32.dll (699C0000), size: 151552 (result: 0), SymType: '-exported-', PDB: 'C:\Windows\SYSTEM32\GLU32.dll', fileVersion: 10.0.14393.0
+C:\Windows\SYSTEM32\DDRAW.dll:DDRAW.dll (698D0000), size: 970752 (result: 0), SymType: '-exported-', PDB: 'C:\Windows\SYSTEM32\DDRAW.dll', fileVersion: 10.0.14393.447
+C:\Windows\SYSTEM32\WINMMBASE.dll:WINMMBASE.dll (72A70000), size: 143360 (result: 0), SymType: '-exported-', PDB: 'C:\Windows\SYSTEM32\WINMMBASE.dll', fileVersion: 10.0.14393.0
+C:\Windows\SYSTEM32\DCIMAN32.dll:DCIMAN32.dll (6A580000), size: 28672 (result: 0), SymType: '-exported-', PDB: 'C:\Windows\SYSTEM32\DCIMAN32.dll', fileVersion: 10.0.14393.0
+C:\Windows\system32\uxtheme.dll:uxtheme.dll (71CC0000), size: 479232 (result: 0), SymType: '-exported-', PDB: 'C:\Windows\system32\uxtheme.dll', fileVersion: 10.0.14393.0
+C:\Users\SmugFug\Documents\GitHub\Cat-and-Mouse-Game\Cat-Mouse\C&M_Data\Mono\mono.dll:mono.dll (10000000), size: 2293760 (result: 0), SymType: '-exported-', PDB: 'C:\Users\SmugFug\Documents\GitHub\Cat-and-Mouse-Game\Cat-Mouse\C&M_Data\Mono\mono.dll', fileVersion: 1.0.0.1
+C:\Windows\System32\PSAPI.DLL:PSAPI.DLL (767B0000), size: 24576 (result: 0), SymType: '-exported-', PDB: 'C:\Windows\System32\PSAPI.DLL', fileVersion: 10.0.14393.0
+C:\Windows\SYSTEM32\MSWSOCK.dll:MSWSOCK.dll (73A70000), size: 319488 (result: 0), SymType: '-exported-', PDB: 'C:\Windows\SYSTEM32\MSWSOCK.dll', fileVersion: 10.0.14393.0
+C:\Windows\System32\MSCTF.dll:MSCTF.dll (74660000), size: 1265664 (result: 0), SymType: '-exported-', PDB: 'C:\Windows\System32\MSCTF.dll', fileVersion: 10.0.14393.447
+C:\Windows\system32\dwmapi.dll:dwmapi.dll (71D40000), size: 126976 (result: 0), SymType: '-exported-', PDB: 'C:\Windows\system32\dwmapi.dll', fileVersion: 10.0.14393.206
+C:\Windows\SYSTEM32\d3d11.dll:d3d11.dll (66EF0000), size: 2289664 (result: 0), SymType: '-exported-', PDB: 'C:\Windows\SYSTEM32\d3d11.dll', fileVersion: 10.0.14393.351
+C:\Windows\SYSTEM32\dxgi.dll:dxgi.dll (66D40000), size: 540672 (result: 0), SymType: '-exported-', PDB: 'C:\Windows\SYSTEM32\dxgi.dll', fileVersion: 10.0.14393.0
+C:\Windows\System32\DriverStore\FileRepository\nv_dispi.inf_amd64_848dea456d3c865e\nvwgf2um.dll:nvwgf2um.dll (52200000), size: 20660224 (result: 0), SymType: '-exported-', PDB: 'C:\Windows\System32\DriverStore\FileRepository\nv_dispi.inf_amd64_848dea456d3c865e\nvwgf2um.dll', fileVersion: 21.21.13.7570
+C:\Windows\SYSTEM32\bcrypt.dll:bcrypt.dll (71880000), size: 110592 (result: 0), SymType: '-exported-', PDB: 'C:\Windows\SYSTEM32\bcrypt.dll', fileVersion: 10.0.14393.0
+C:\Windows\System32\clbcatq.dll:clbcatq.dll (76B20000), size: 540672 (result: 0), SymType: '-exported-', PDB: 'C:\Windows\System32\clbcatq.dll', fileVersion: 2001.12.10941.16384
+C:\Windows\System32\MMDevApi.dll:MMDevApi.dll (717F0000), size: 360448 (result: 0), SymType: '-exported-', PDB: 'C:\Windows\System32\MMDevApi.dll', fileVersion: 10.0.14393.0
+C:\Windows\System32\PROPSYS.dll:PROPSYS.dll (71AF0000), size: 1372160 (result: 0), SymType: '-exported-', PDB: 'C:\Windows\System32\PROPSYS.dll', fileVersion: 7.0.14393.0
+C:\Windows\System32\DEVOBJ.dll:DEVOBJ.dll (71630000), size: 139264 (result: 0), SymType: '-exported-', PDB: 'C:\Windows\System32\DEVOBJ.dll', fileVersion: 10.0.14393.0
+C:\Windows\SYSTEM32\wdmaud.drv:wdmaud.drv (715F0000), size: 233472 (result: 0), SymType: '-exported-', PDB: 'C:\Windows\SYSTEM32\wdmaud.drv', fileVersion: 10.0.14393.0
+C:\Windows\SYSTEM32\ksuser.dll:ksuser.dll (717E0000), size: 28672 (result: 0), SymType: '-exported-', PDB: 'C:\Windows\SYSTEM32\ksuser.dll', fileVersion: 10.0.14393.0
+C:\Windows\SYSTEM32\AVRT.dll:AVRT.dll (71510000), size: 36864 (result: 0), SymType: '-exported-', PDB: 'C:\Windows\SYSTEM32\AVRT.dll', fileVersion: 10.0.14393.0
+C:\Windows\SYSTEM32\AUDIOSES.DLL:AUDIOSES.DLL (71490000), size: 503808 (result: 0), SymType: '-exported-', PDB: 'C:\Windows\SYSTEM32\AUDIOSES.DLL', fileVersion: 10.0.14393.447
+C:\Windows\SYSTEM32\wintypes.dll:wintypes.dll (713C0000), size: 847872 (result: 0), SymType: '-exported-', PDB: 'C:\Windows\SYSTEM32\wintypes.dll', fileVersion: 10.0.14393.351
+C:\Windows\SYSTEM32\msacm32.drv:msacm32.drv (713B0000), size: 40960 (result: 0), SymType: '-exported-', PDB: 'C:\Windows\SYSTEM32\msacm32.drv', fileVersion: 10.0.14393.0
+C:\Windows\SYSTEM32\MSACM32.dll:MSACM32.dll (71390000), size: 98304 (result: 0), SymType: '-exported-', PDB: 'C:\Windows\SYSTEM32\MSACM32.dll', fileVersion: 10.0.14393.0
+C:\Windows\SYSTEM32\midimap.dll:midimap.dll (71380000), size: 32768 (result: 0), SymType: '-exported-', PDB: 'C:\Windows\SYSTEM32\midimap.dll', fileVersion: 10.0.14393.0
+C:\Windows\WinSxS\x86_microsoft.windows.common-controls_6595b64144ccf1df_6.0.14393.447_none_89c64d28dafea4b9\comctl32.dll:comctl32.dll (67120000), size: 2138112 (result: 0), SymType: '-exported-', PDB: 'C:\Windows\WinSxS\x86_microsoft.windows.common-controls_6595b64144ccf1df_6.0.14393.447_none_89c64d28dafea4b9\comctl32.dll', fileVersion: 6.10.14393.447
+C:\Windows\SYSTEM32\xinput1_3.dll:xinput1_3.dll (0FFA0000), size: 90112 (result: 0), SymType: '-exported-', PDB: 'C:\Windows\SYSTEM32\xinput1_3.dll', fileVersion: 9.18.944.0
+C:\Windows\System32\SETUPAPI.dll:SETUPAPI.dll (76D20000), size: 4239360 (result: 0), SymType: '-exported-', PDB: 'C:\Windows\System32\SETUPAPI.dll', fileVersion: 10.0.14393.0
+C:\Windows\System32\rasadhlp.dll:rasadhlp.dll (6BCA0000), size: 32768 (result: 0), SymType: '-exported-', PDB: 'C:\Windows\System32\rasadhlp.dll', fileVersion: 10.0.14393.0
+C:\Windows\System32\fwpuclnt.dll:fwpuclnt.dll (6B880000), size: 299008 (result: 0), SymType: '-exported-', PDB: 'C:\Windows\System32\fwpuclnt.dll', fileVersion: 10.0.14393.0
+C:\Windows\SYSTEM32\dbghelp.dll:dbghelp.dll (61B90000), size: 1331200 (result: 0), SymType: '-exported-', PDB: 'C:\Windows\SYSTEM32\dbghelp.dll', fileVersion: 10.0.14321.1024
+
+========== OUTPUTING STACK TRACE ==================
+
+0x001CBA39 (C&M) AnimationCurveTpl<Quaternionf>::ResizeUninitialized
+0x001CBAE2 (C&M) AnimationCurveTpl<Quaternionf>::ResizeUninitialized
+0x001CBBBF (C&M) AnimationCurveTpl<Quaternionf>::ResizeUninitialized
+0x0022FC39 (C&M) CallbackArrayBase<void (__cdecl*)(void),void (__cdecl*)(void const *)>::MoveFoward
+0x0071BDCC (C&M) RemapPPtrTransfer::TransferTypeless
+0x0071F38E (C&M) RemapPPtrTransfer::TransferTypeless
+0x00313E7F (C&M) Thread::RunThreadWrapper
+0x771462C4 (KERNEL32) BaseThreadInitThunk
+0x77360719 (ntdll) RtlSubscribeWnfStateChangeNotification
+
+========== END OF STACKTRACE ===========
+
+**** Crash! ****

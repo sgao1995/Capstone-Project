@@ -241,7 +241,12 @@ public class MouseMovement : MonoBehaviour {
     // take a certain amount of damage
     public void TakeDamage(float amt)
     {
-        currentHealth -= amt;
+        transform.GetComponent<PhotonView>().RPC("changeHealth", PhotonTargets.AllBuffered, amt);
+    }
+    [PunRPC]
+    void changeHealth(float dmg)
+    {
+        currentHealth -= dmg;
         if (currentHealth <= 0)
         {
             currentHealth = 0;
@@ -361,8 +366,14 @@ public class MouseMovement : MonoBehaviour {
         {
             Mine mine = collisionInfo.gameObject.GetComponent<Mine>();
             TakeDamage(mine.mineSize * 50);
-            PhotonNetwork.Destroy(collisionInfo.gameObject);
+            transform.GetComponent<PhotonView>().RPC("destroyMine", PhotonTargets.MasterClient, collisionInfo);
         }
+    }
+    [PunRPC]
+    void destroyMine(Collision collisionInfo)
+    {
+
+        PhotonNetwork.Destroy(collisionInfo.gameObject);
     }
 
     // when player leaves the spikes
@@ -388,7 +399,12 @@ public class MouseMovement : MonoBehaviour {
 			canTakePuzzlePiece = false;
 		}
     }
+    [PunRPC]
+    void destroyPU(Collider obj)
+    {
 
+        PhotonNetwork.Destroy(obj.gameObject);
+    }
     // when player collides with powerup
     void OnTriggerEnter(Collider obj)
     {
@@ -417,8 +433,9 @@ public class MouseMovement : MonoBehaviour {
 
             }
             //Debug.Log("destroy " + obj);
-            PhotonNetwork.Destroy(obj.gameObject);
+            transform.GetComponent<PhotonView>().RPC("destroyPU", PhotonTargets.MasterClient, obj);
         }
+
         // put spikes here because we dont want spikes displacing the player
         if (obj.tag == "Spike")
         {
