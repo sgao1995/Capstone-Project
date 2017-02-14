@@ -41,7 +41,7 @@ public class GameManager : Photon.PunBehaviour {
 
         SpawnMonsters();
 
-        SpawnCat();
+        //SpawnCat();
      //   SpawnMonsters();
 
 		SpawnKeysAndChests();
