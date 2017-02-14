@@ -57,6 +57,7 @@ public class CatMovement : MonoBehaviour
 
         LevelUp();  // Starts at the first level
         animator = GetComponent<Animator>();
+
         /*  Finds and initialises the Vitality System component */
 		GameObject catVitalityGameObject = GameObject.Find("Vitality");
 		catVitality = catVitalityGameObject.GetComponent<Vitality>();
@@ -111,17 +112,20 @@ public class CatMovement : MonoBehaviour
         /* Updates the HUD state for the current player */
         if (GetComponent<PhotonView>().isMine)
         {
+            /* Updates the Level attributes */
+            catVitality.setCurrentLevel(this.level);
+
             /* Updates the Health Points attributes of the Cat */
-            catVitality.setMaxHealthPoints(maxHealth); // Updates the Maximum Health Points
-            catVitality.setCurrentHealthPoints(currentHealth);  // Updates the Current Health Points
+            catVitality.setMaxHealthPoints(this.maxHealth); // Updates the Maximum Health Points
+            catVitality.setCurrentHealthPoints(this.currentHealth);  // Updates the Current Health Points
 
             /* Updates the Experience Points attributes */
-            catVitality.setMaximumExperiencePoints(maxEXP);
-            catVitality.setCurrentExperiencePoints(currentEXP);
+            catVitality.setMaximumExperiencePoints(this.maxEXP);
+            catVitality.setCurrentExperiencePoints(this.currentEXP);
         }
-		
-		// status effects
-		if (onLava){
+
+        // status effects
+        if (onLava){
 			TakeDamage(0.5f);
 		}
 		if (onSpikes){

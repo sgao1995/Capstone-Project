@@ -64,6 +64,7 @@ public class MouseMovement : MonoBehaviour {
 
         LevelUp();  // Starts at the first level
         animator = GetComponent<Animator>();
+
         /*  Finds and initialises the Vitality System component */
         GameObject mouseVitalityGameObject = GameObject.Find("Vitality");
         mouseVitality = mouseVitalityGameObject.GetComponent<Vitality>();
@@ -121,13 +122,16 @@ public class MouseMovement : MonoBehaviour {
         /* Updates the HUD state for the current player */
         if (GetComponent<PhotonView>().isMine)
         {
+            /* Updates the Level attributes */
+            mouseVitality.setCurrentLevel(this.level);
+
             /* Updates the Health Points attributes of the Mouse */
-            mouseVitality.setMaxHealthPoints(maxHealth); // Updates the Maximum Health Points
-            mouseVitality.setCurrentHealthPoints(currentHealth);  // Updates the Current Health Points
+            mouseVitality.setMaxHealthPoints(this.maxHealth); // Updates the Maximum Health Points
+            mouseVitality.setCurrentHealthPoints(this.currentHealth);  // Updates the Current Health Points
 
             /* Updates the Experience Points attributes */
-            mouseVitality.setMaximumExperiencePoints(maxEXP);
-            mouseVitality.setCurrentExperiencePoints(currentEXP);
+            mouseVitality.setMaximumExperiencePoints(this.maxEXP);
+            mouseVitality.setCurrentExperiencePoints(this.currentEXP);
         }
 
         // status effects
