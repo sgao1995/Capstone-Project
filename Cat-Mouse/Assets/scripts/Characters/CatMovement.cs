@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
 
 public class CatMovement : MonoBehaviour
@@ -39,6 +40,9 @@ public class CatMovement : MonoBehaviour
 	private bool onLava = false;
 	private bool onSpikes = false;
 	private bool alive = true;
+	private bool canOpenDoor = false;
+	private bool canTakeKey = false;
+	private bool canOpenChest = false;
 	
 	// skills
 	private float[] skillCooldownTimers = new float[4]; // the cooldown timer
@@ -46,6 +50,7 @@ public class CatMovement : MonoBehaviour
 
     /* HUD state */
     public Vitality catVitality;  // Vitality System component
+	public Text interactText;
 
     void Start()
     {
@@ -55,8 +60,12 @@ public class CatMovement : MonoBehaviour
         LevelUp();  // Starts at the first level
         animator = GetComponent<Animator>();
         /*  Finds and initialises the Vitality System component */
-       GameObject catVitalityGameObject = GameObject.Find("Vitality");
-       catVitality = catVitalityGameObject.GetComponent<Vitality>();
+		GameObject catVitalityGameObject = GameObject.Find("Vitality");
+		catVitality = catVitalityGameObject.GetComponent<Vitality>();
+	        
+		GameObject interactiveText = GameObject.Find("Text");
+		interactText = interactiveText.GetComponent<Text>();
+		interactText.text = "";
     }
 
 	// level up
@@ -179,9 +188,10 @@ public class CatMovement : MonoBehaviour
 			useSkill(learnedSkills[3]);
 		}
 		
-		// interactions
-		if (Input.GetKeyDown(KeyCode.E)){
-			InteractWithObject();
+		if (canOpenDoor || canTakeKey || canOpenChest){
+			if (Input.GetKeyDown(KeyCode.E)){
+				InteractWithObject();
+			}
 		}
 		if (Input.GetKeyDown(KeyCode.K)){
 			TakeDamage(5f);
@@ -229,7 +239,7 @@ public class CatMovement : MonoBehaviour
         if (Physics.Raycast(ray, out hitInfo, 1))
         {
             Debug.Log("We hit: " + hitInfo.collider.name);
-            if (hitInfo.collider.name == "Character")
+            if (hitInfo.collider.name == "Character"||hitInfo.collider.name == "MonsterClone" ||hitInfo.collider.name =="Monster")
             {
                 Debug.Log("Trying to hurt " + hitInfo.collider.transform.parent.name + " by calling script " + hitInfo.collider.transform.parent.GetComponent<MonsterAI>().name);
                 hitInfo.collider.transform.parent.GetComponent<MonsterAI>().SendMessage("takeDamage", 50f);
@@ -239,26 +249,29 @@ public class CatMovement : MonoBehaviour
                     Debug.Log("got exp");
 
                     currentEXP += 50;
-                    catVitality.setCurrentExperiencePoints(currentEXP);
+                    //catVitality.setCurrentExperiencePoints(currentEXP);
+                    maxEXP += 50;
                     Debug.Log("current EXP is" + catVitality.getEXP());
                 }
             }
-            if (hitInfo.collider.name == "Cat_Test(Clone)")
+          /*  if (hitInfo.collider.name == "Cat(Clone)" || hitInfo.collider.name == "Cat")
             {
                 Debug.Log("Trying to hurt " + hitInfo.collider.transform.parent.name + " by calling script " + hitInfo.collider.transform.parent.GetComponent<CatMovement>().name);
                 hitInfo.collider.transform.parent.GetComponent<CatMovement>().SendMessage("TakeDamage", 50f);
                 if (hitInfo.collider.transform.parent.GetComponent<CatMovement>().getHealth() <= 0)
                 {
                     currentEXP += 100;
+                    maxEXP += 100;
                 }
-            }
-            if (hitInfo.collider.name == "Mouse_Test(Clone)")
+            }*/
+            if (hitInfo.collider.name == "Mouse(Clone)")
             {
-                Debug.Log("Trying to hurt " + hitInfo.collider.transform.parent.name + " by calling script " + hitInfo.collider.transform.parent.GetComponent<CatMovement>().name);
-                hitInfo.collider.transform.parent.GetComponent<CatMovement>().SendMessage("TakeDamage", 50f);
-                if (hitInfo.collider.transform.parent.GetComponent<CatMovement>().getHealth() <= 0)
+                Debug.Log("Trying to hurt " + hitInfo.collider.transform.parent.name + " by calling script " + hitInfo.collider.transform.parent.GetComponent<MouseMovement>().name);
+                hitInfo.collider.transform.parent.GetComponent<MouseMovement>().SendMessage("TakeDamage", 50f);
+                if (hitInfo.collider.transform.parent.GetComponent<MouseMovement>().getHealth() <= 0)
                 {
                     currentEXP += 100;
+                    maxEXP += 100;
                 }
             }
         }
@@ -272,13 +285,13 @@ public class CatMovement : MonoBehaviour
         int i = 0;
         while (i < hitColliders.Length) {
 			if (hitColliders[i].tag == "Door"){
-				hitColliders[i].transform.parent.GetComponent<MazeDoor>().Interact();
+				hitColliders[i].transform.GetComponent<MazeDoor>().Interact();
 			}
 			if (hitColliders[i].tag == "Chest"){
-				hitColliders[i].transform.parent.GetComponent<Chest>().Interact();
+				hitColliders[i].transform.GetComponent<Chest>().Interact();
 			}
 			if (hitColliders[i].tag == "Key"){
-				hitColliders[i].transform.parent.GetComponent<Key>().Interact();
+				hitColliders[i].transform.GetComponent<Key>().Interact();
 			}
             i++;
         }
@@ -307,9 +320,21 @@ public class CatMovement : MonoBehaviour
 		if (obj.tag == "Spike"){
 			onSpikes = false;
 		}
+		if (obj.tag == "Door"){
+			interactText.text = "";
+			canOpenDoor = false;
+		}
+		if (obj.tag == "Key"){
+			interactText.text = "";
+			canTakeKey = false;
+		}
+		if (obj.tag == "Chest"){
+			interactText.text = "";
+			canOpenChest = false;
+		}
 	}
 	
-	// when player collides with powerup
+	// when player enters range of something
 	void OnTriggerEnter(Collider obj){
 		if(obj.tag == "Powerup"){
 			Powerup pup = obj.GetComponent<Powerup>();
@@ -336,6 +361,28 @@ public class CatMovement : MonoBehaviour
 		// put spikes here because we dont want spikes displacing the player
 		if (obj.tag == "Spike"){
 			onSpikes = true;
+		}
+		// enters range to use an object. Certain objects take priority over others
+		if (obj.tag == "Door" && !canTakeKey && !canOpenChest){
+			MazeDoor door = obj.gameObject.GetComponent<MazeDoor>();
+			if (door.doorOpen){
+				interactText.text = "Press E to close Door";
+			}
+			else{
+				interactText.text = "Press E to open Door";
+			}
+			canOpenDoor = true;
+		}
+		if (obj.tag == "Key"){
+			interactText.text = "Press E to take Key";
+			canTakeKey = true;
+		}
+		if (obj.tag == "Chest" && !canTakeKey){
+			Chest chest = obj.gameObject.GetComponent<Chest>();
+			if (!chest.chestOpen){
+				interactText.text = "Press E to open Chest";
+				canOpenChest = true;
+			}
 		}
 	}
     public float getHealth()

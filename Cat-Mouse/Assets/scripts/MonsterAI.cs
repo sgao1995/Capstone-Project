@@ -11,8 +11,9 @@ public class MonsterAI : MonoBehaviour {
 	private float attackCooldownTimer = 3f;
 	
 	// list of the players in the game
-	private GameObject[] playersInGame; 
-	
+	private GameObject[] playersInGame;
+    private GameObject[] catsInGame;
+    private GameObject[] miInGame;
 	// patrol
 	float patrolTimer = 5f;
 	float turnTimer = 1.8f;

@@ -27,8 +27,23 @@ public class GameManager : Photon.PunBehaviour {
             Debug.Log(activePuzzleTypes);
         }
         SpawnMaze();
-        SpawnCat();
+
+        System.Random random = new System.Random();
+        if (random.Next(0, 2) == 0)
+        {
+            SpawnMouse();
+        }
+        else
+        {
+            SpawnCat();
+        }
+        
+
         SpawnMonsters();
+
+        SpawnCat();
+     //   SpawnMonsters();
+
 		SpawnKeysAndChests();
     }
     void OnGUI()
@@ -80,12 +95,18 @@ public class GameManager : Photon.PunBehaviour {
         //enables minimap:
         myCat.GetComponent<Minimap>().enabled = true;
     }
-    /*void SpawnMonsters()
+
+    void SpawnMouse()
     {
-        Spawn monsterSpawn = s[1];
-        GameObject monster = (GameObject)PhotonNetwork.Instantiate("Monster", monsterSpawn.transform.position, monsterSpawn.transform.rotation, 0);
-        monster.GetComponent<MonsterAI>().enabled = true;
-    }*/
+        Spawn mys = s[Random.Range(0, s.Length)];
+        GameObject myMouse = (GameObject)PhotonNetwork.Instantiate("Mouse", mys.transform.position, mys.transform.rotation, 0);
+        myMouse.GetComponent<MouseMovement>().enabled = true;
+        myMouse.transform.FindChild("MouseCam").gameObject.SetActive(true);
+        //myMouse.GetComponent<NetworkPlayer>().enabled = false;
+        //enables minimap:
+        myMouse.GetComponent<Minimap>().enabled = true;
+    }
+
     void SpawnMonsters()
     {
         if (PhotonNetwork.isMasterClient)
@@ -98,7 +119,6 @@ public class GameManager : Photon.PunBehaviour {
 	// spawn the keys and chests in the puzzle rooms
 	void SpawnKeysAndChests()
 	{
-		
         // spawn each key and chest
         if (PhotonNetwork.isMasterClient)
         {
@@ -114,6 +134,7 @@ public class GameManager : Photon.PunBehaviour {
                 GameObject chest = (GameObject)PhotonNetwork.Instantiate("Chest", chestPos, chestRot, 0);
             }
         }
+
 	}
 
 }
