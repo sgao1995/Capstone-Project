@@ -41,8 +41,6 @@ public class CatMovement : MonoBehaviour
 	private bool onSpikes = false;
 	private bool alive = true;
 	private bool canOpenDoor = false;
-	private bool canTakeKey = false;
-	private bool canOpenChest = false;
 	
 	// skills
 	private float[] skillCooldownTimers = new float[4]; // the cooldown timer
@@ -188,7 +186,7 @@ public class CatMovement : MonoBehaviour
 			useSkill(learnedSkills[3]);
 		}
 		
-		if (canOpenDoor || canTakeKey || canOpenChest){
+		if (canOpenDoor){
 			if (Input.GetKeyDown(KeyCode.E)){
 				InteractWithObject();
 			}
@@ -287,12 +285,6 @@ public class CatMovement : MonoBehaviour
 			if (hitColliders[i].tag == "Door"){
 				hitColliders[i].transform.GetComponent<MazeDoor>().Interact();
 			}
-			if (hitColliders[i].tag == "Chest"){
-				hitColliders[i].transform.GetComponent<Chest>().Interact();
-			}
-			if (hitColliders[i].tag == "Key"){
-				hitColliders[i].transform.GetComponent<Key>().Interact();
-			}
             i++;
         }
 	}
@@ -323,14 +315,6 @@ public class CatMovement : MonoBehaviour
 		if (obj.tag == "Door"){
 			interactText.text = "";
 			canOpenDoor = false;
-		}
-		if (obj.tag == "Key"){
-			interactText.text = "";
-			canTakeKey = false;
-		}
-		if (obj.tag == "Chest"){
-			interactText.text = "";
-			canOpenChest = false;
 		}
 	}
 	
@@ -363,7 +347,7 @@ public class CatMovement : MonoBehaviour
 			onSpikes = true;
 		}
 		// enters range to use an object. Certain objects take priority over others
-		if (obj.tag == "Door" && !canTakeKey && !canOpenChest){
+		if (obj.tag == "Door"){
 			MazeDoor door = obj.gameObject.GetComponent<MazeDoor>();
 			if (door.doorOpen){
 				interactText.text = "Press E to close Door";
@@ -372,17 +356,6 @@ public class CatMovement : MonoBehaviour
 				interactText.text = "Press E to open Door";
 			}
 			canOpenDoor = true;
-		}
-		if (obj.tag == "Key"){
-			interactText.text = "Press E to take Key";
-			canTakeKey = true;
-		}
-		if (obj.tag == "Chest" && !canTakeKey){
-			Chest chest = obj.gameObject.GetComponent<Chest>();
-			if (!chest.chestOpen){
-				interactText.text = "Press E to open Chest";
-				canOpenChest = true;
-			}
 		}
 	}
     public float getHealth()

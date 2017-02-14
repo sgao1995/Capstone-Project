@@ -8,6 +8,8 @@ public class MazeCell : MonoBehaviour {
 	private MazeCellEdge[] edges = new MazeCellEdge[MazeDirections.numDirections];
 	private int initializedEdges;
 	public MazeRoom room;
+	public Material lavaMat;
+	float offset = 0;
 	
 	// create the cell and add the materials 
 	public void Initialize (MazeRoom room) {
@@ -65,5 +67,13 @@ public class MazeCell : MonoBehaviour {
 				}
 			}
 			throw new System.InvalidOperationException("Fully initialized");	
+	}
+	
+	void Update(){
+		// if lava then move it
+		if (transform.GetChild(0).GetComponent<Renderer>().sharedMaterial == lavaMat){
+			offset += 0.005f;
+			transform.GetChild(0).GetComponent<Renderer>().sharedMaterial.SetTextureOffset("_MainTex", new Vector2(offset, 0));
+		}
 	}
 }

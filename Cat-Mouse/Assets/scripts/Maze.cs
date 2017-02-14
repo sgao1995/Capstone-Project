@@ -39,7 +39,7 @@ public class Maze : MonoBehaviour {
 	// chests and keys
 	// format: [key1x, key1z, key2x, key2z, key3x, key3z]
 	private List<float> keyLocations = new List<float>();
-	private List<int> chestLocations = new List<int>();
+	private List<float> chestLocations = new List<float>();
 		
 	// creates a new room 
 	private MazeRoom CreateRoom (int roomType) {
@@ -329,7 +329,7 @@ public class Maze : MonoBehaviour {
 	}
 	
 	// return the chest spawn locations
-	public List<int> getChestSpawns(){
+	public List<float> getChestSpawns(){
 		return chestLocations;
 	}
 	
@@ -337,9 +337,18 @@ public class Maze : MonoBehaviour {
 	public void GenerateChestLocations(){
 		// for each chest
 		for (int c = 0; c < 3; c++){
-			// set location
-			chestLocations.Add((int)(size.x - 100*Mathf.PerlinNoise(c/(float)mazeGenerationNumber, c/(float)mazeGenerationNumber)));
-			chestLocations.Add((int)(size.z - 100*Mathf.PerlinNoise(c/(float)mazeGenerationNumber, c/(float)mazeGenerationNumber)));			
+			// set a cell, 0 to size
+			int cellX = (int)(Mathf.PerlinNoise(c*7/(float)mazeGenerationNumber, c*5/(float)mazeGenerationNumber) * size.x);
+			int cellZ = (int)(Mathf.PerlinNoise(c*3/(float)mazeGenerationNumber, c*8/(float)mazeGenerationNumber) * size.z);
+			MazeCell currentCell = GetCell(new IntVector2(cellX, cellZ));
+			
+			// set a bit of offset
+			float chestX = currentCell.transform.position.x + Mathf.PerlinNoise(currentCell.coordinates.x/(float)mazeGenerationNumber, currentCell.coordinates.x/(float)mazeGenerationNumber);
+			float chestZ = currentCell.transform.position.z + Mathf.PerlinNoise(currentCell.coordinates.z/(float)mazeGenerationNumber, currentCell.coordinates.z/(float)mazeGenerationNumber);
+			
+			// add to list
+			chestLocations.Add(chestX);
+			chestLocations.Add(chestZ);
 		}
 	}
 	

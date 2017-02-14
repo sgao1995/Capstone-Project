@@ -1,5 +1,7 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
+using System.Collections.Generic;
 
 public class MouseMovement : MonoBehaviour {
     private const int expToLevel2 = 100;
@@ -38,6 +40,14 @@ public class MouseMovement : MonoBehaviour {
     private bool onLava = false;
     private bool onSpikes = false;
     private bool alive = true;
+	private bool canOpenDoor = false;
+	private bool canTakeKey = false;
+	private bool canOpenChest = false;
+	private bool canTakePuzzlePiece = false;
+	
+	// keys and puzzle pieces on hand
+	public int numKeysHeld = 0;
+	List<int> puzzlePiecesHeld = new List<int>();
 
     // skills
     private float[] skillCooldownTimers = new float[4]; // the cooldown timer
@@ -45,6 +55,7 @@ public class MouseMovement : MonoBehaviour {
 
     /* HUD state */
     public Vitality mouseVitality;  // Vitality System component
+	public Text interactText;
 
     void Start()
     {
@@ -56,6 +67,10 @@ public class MouseMovement : MonoBehaviour {
         /*  Finds and initialises the Vitality System component */
         GameObject mouseVitalityGameObject = GameObject.Find("Vitality");
         mouseVitality = mouseVitalityGameObject.GetComponent<Vitality>();
+		
+		GameObject interactiveText = GameObject.Find("Text");
+		interactText = interactiveText.GetComponent<Text>();
+		interactText.text = "";
     }
 
     // level up
@@ -195,13 +210,18 @@ public class MouseMovement : MonoBehaviour {
         }
 
         // interactions
-        if (Input.GetKeyDown(KeyCode.E))
-        {
-            InteractWithObject();
-        }
+		if (canOpenDoor || canTakeKey || canOpenChest || canTakePuzzlePiece){
+			if (Input.GetKeyDown(KeyCode.E)){
+				InteractWithObject();
+			}
+		}
         if (Input.GetKeyDown(KeyCode.K))
         {
             TakeDamage(5f);
+        }
+		if (Input.GetKeyDown(KeyCode.T))
+        {
+            transform.position = new Vector3(0, 0, 0);
         }
 
         // timer actions
@@ -293,23 +313,32 @@ public class MouseMovement : MonoBehaviour {
     void InteractWithObject()
     {
         Vector3 pushCenter = transform.position + transform.forward * 0.6f;
-        Collider[] hitColliders = Physics.OverlapSphere(pushCenter, 0.8f);
-        // check the hitbox area
+		Collider[] hitColliders = Physics.OverlapSphere(pushCenter,0.8f);
+		// check the hitbox area
         int i = 0;
-        while (i < hitColliders.Length)
-        {
-            if (hitColliders[i].tag == "Door")
-            {
-                hitColliders[i].transform.parent.GetComponent<MazeDoor>().Interact();
-            }
-            if (hitColliders[i].tag == "Chest")
-            {
-                hitColliders[i].transform.parent.GetComponent<Chest>().Interact();
-            }
-            if (hitColliders[i].tag == "Key")
-            {
-                hitColliders[i].transform.parent.GetComponent<Key>().Interact();
-            }
+        while (i < hitColliders.Length) {
+			if (hitColliders[i].tag == "Door"){
+				hitColliders[i].transform.GetComponent<MazeDoor>().Interact();
+			}
+			if (hitColliders[i].tag == "Chest"){
+				if (numKeysHeld > 0){
+					numKeysHeld -= hitColliders[i].transform.GetComponent<Chest>().Interact();
+					break;
+				}
+			}
+			if (hitColliders[i].tag == "Key"){
+				hitColliders[i].transform.GetComponent<Key>().Interact();
+				numKeysHeld++;
+				interactText.text = "";
+				canTakeKey = false;
+				break;
+			}
+			if (hitColliders[i].tag == "PuzzlePiece"){
+				puzzlePiecesHeld.Add(hitColliders[i].transform.GetComponent<PuzzlePiece>().Interact());
+				interactText.text = "";
+				canTakeKey = false;
+				break;
+			}
             i++;
         }
     }
@@ -339,10 +368,25 @@ public class MouseMovement : MonoBehaviour {
     // when player leaves the spikes
     void OnTriggerExit(Collider obj)
     {
-        if (obj.tag == "Spike")
-        {
-            onSpikes = false;
-        }
+		if (obj.tag == "Spike"){
+			onSpikes = false;
+		}
+		if (obj.tag == "Door"){
+			interactText.text = "";
+			canOpenDoor = false;
+		}
+		if (obj.tag == "Key"){
+			interactText.text = "";
+			canTakeKey = false;
+		}
+		if (obj.tag == "Chest"){
+			interactText.text = "";
+			canOpenChest = false;
+		}
+		if (obj.tag == "PuzzlePiece"){
+			interactText.text = "";
+			canTakePuzzlePiece = false;
+		}
     }
 
     // when player collides with powerup
@@ -380,6 +424,37 @@ public class MouseMovement : MonoBehaviour {
         {
             onSpikes = true;
         }
+		// enters range to use an object. Certain objects take priority over others
+		if (obj.tag == "Door" && !canTakeKey && !canOpenChest){
+			MazeDoor door = obj.gameObject.GetComponent<MazeDoor>();
+			if (door.doorOpen){
+				interactText.text = "Press E to close Door";
+			}
+			else{
+				interactText.text = "Press E to open Door";
+			}
+			canOpenDoor = true;
+		}
+		if (obj.tag == "Key"){
+			interactText.text = "Press E to take Key";
+			canTakeKey = true;
+		}
+		if (obj.tag == "Chest" && !canTakeKey){
+			Chest chest = obj.gameObject.GetComponent<Chest>();
+			if (!chest.chestOpen){
+				if (numKeysHeld > 0){
+					interactText.text = "Press E to open Chest";
+					canOpenChest = true;
+				}
+				else if (numKeysHeld == 0){
+					interactText.text = "You require a Key";
+				}
+			}
+		}
+		if (obj.tag == "PuzzlePiece"){
+			interactText.text = "Press E to take Puzzle Piece";
+			canTakePuzzlePiece = true;
+		}
     }
     public float getHealth()
     {

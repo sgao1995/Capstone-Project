@@ -2,15 +2,19 @@
 using System.Collections;
 
 public class Key : MonoBehaviour {
-
-	// Use this for initialization
-	void Start () {
-	
-	}
+	float rotation = 0f;
 	
 	public void Interact(){
 		// need to figure out which mouse took the key
 		// then destroy the key
 		Debug.Log("Picked up Key");
+		PhotonNetwork.Destroy(this.gameObject);
+	}
+	
+	// a rotating animation
+	void Update(){
+		rotation += 1.5f;
+		Quaternion newQuat = Quaternion.Euler(0f, rotation, 0f);
+		this.transform.rotation = newQuat;
 	}
 }
