@@ -211,7 +211,7 @@ public class CatMovement : MonoBehaviour
 	void Death(){
 		Debug.Log("player died");
 		alive = false;
-		animator.Play("Unarmed-Death1");
+		//animator.Play("Unarmed-Death1");
 	}
 
     // attack in front of player
