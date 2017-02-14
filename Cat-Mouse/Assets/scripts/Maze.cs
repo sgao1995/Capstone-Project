@@ -16,6 +16,7 @@ public class Maze : MonoBehaviour {
 	public MazeWall[] wallPrefabs;
 	public MazeArch archPrefab;
 	public MazeDoor doorPrefab;
+	public MazeWall exitPrefab;
 	
 	// puzzle room generation
 	public List<MazeRoom> puzzleRooms = new List<MazeRoom>();
@@ -486,8 +487,36 @@ public class Maze : MonoBehaviour {
 	// generate the exit path
 	// exit door will always be at the edge of the map
 	private void CreateExit(){
-		// look through the edge cells
-		
+		// determine which edge of the map it will be on
+		float whichSide = Mathf.PerlinNoise(mazeGenerationNumber, mazeGenerationNumber);
+		int cellCoord = (int)(Mathf.PerlinNoise(mazeGenerationNumber, mazeGenerationNumber)*49);
+		Debug.Log(cellCoord);
+		MazeCell whichCell;
+		MazeDirection direction;
+		if (whichSide < 0.25f){
+			// x, 49 side
+			whichCell = cells[cellCoord, 49];
+			direction = (MazeDirection)0;
+		}
+		else if (whichSide < 0.5f){
+			// x, 0 side
+			whichCell = cells[cellCoord, 0];
+			direction = (MazeDirection)2;
+		}
+		else if (whichSide < 0.75f){
+			// 49, x side
+			whichCell = cells[49, cellCoord];
+			direction = (MazeDirection)1;
+		}
+		else{
+			// 0, x side
+			whichCell = cells[49, cellCoord];
+			direction = (MazeDirection)3;
+		}
+		GameObject wallObject = whichCell.transform.Find("MazeWall(Clone)").gameObject;
+		Destroy(wallObject);
+		Exit currentWall = Instantiate(exitPrefab) as Exit;
+		currentWall.Initialize(whichCell, null, direction);
 	}
 	
 	void Update(){
