@@ -486,6 +486,8 @@ public class Maze : MonoBehaviour {
 	// generate the exit path
 	// exit door will always be at the edge of the map
 	private void CreateExit(){
+		// look through the edge cells
+		
 	}
 	
 	void Update(){
