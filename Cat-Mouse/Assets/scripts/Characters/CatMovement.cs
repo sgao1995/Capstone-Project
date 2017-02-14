@@ -65,6 +65,8 @@ public class CatMovement : MonoBehaviour
 		GameObject interactiveText = GameObject.Find("Text");
 		interactText = interactiveText.GetComponent<Text>();
 		interactText.text = "";
+
+       
     }
 
 	// level up
@@ -122,6 +124,8 @@ public class CatMovement : MonoBehaviour
             /* Updates the Experience Points attributes */
             catVitality.setMaximumExperiencePoints(this.maxEXP);
             catVitality.setCurrentExperiencePoints(this.currentEXP);
+            //tell that it is a cat
+            catVitality.setCharacterType("cat");
         }
 
         // status effects

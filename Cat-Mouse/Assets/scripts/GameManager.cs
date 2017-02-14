@@ -125,4 +125,9 @@ public class GameManager : Photon.PunBehaviour {
             }
         }
 	}
+    void GameOver()//function to change scene to the game over scene if a team wins
+    {
+        
+        PhotonNetwork.LoadLevel("GameOver");
+    }
 }

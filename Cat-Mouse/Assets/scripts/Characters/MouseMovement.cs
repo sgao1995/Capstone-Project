@@ -72,6 +72,7 @@ public class MouseMovement : MonoBehaviour {
 		GameObject interactiveText = GameObject.Find("Text");
 		interactText = interactiveText.GetComponent<Text>();
 		interactText.text = "";
+
     }
 
     // level up
@@ -132,6 +133,10 @@ public class MouseMovement : MonoBehaviour {
             /* Updates the Experience Points attributes */
             mouseVitality.setMaximumExperiencePoints(this.maxEXP);
             mouseVitality.setCurrentExperiencePoints(this.currentEXP);
+
+            //tell that it is a mouse
+            mouseVitality.setCharacterType("mouse");
+
         }
 
         // status effects
