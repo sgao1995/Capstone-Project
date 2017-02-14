@@ -54,13 +54,15 @@ public class GameManager : Photon.PunBehaviour {
     }
     void SpawnMaze()
     {
+        
             mazeInstance = Instantiate(mazePrefab) as Maze;
             var mazeScript = mazeInstance.GetComponent<Maze>();
             if (mazeScript != null)
             {
                 mazeScript.StartMazeCreation();
             }
-
+        if (PhotonNetwork.isMasterClient)
+        {
             List<int> tempTypes = new List<int>();
             tempTypes.Add(0);
             tempTypes.Add(1);
@@ -69,6 +71,7 @@ public class GameManager : Photon.PunBehaviour {
             Debug.Log(tempTypes[0] + " " + tempTypes[1] + " " + tempTypes[2]);
             mazeInstance.GenerateChestLocations();
             //mazeInstance.GeneratePuzzles(activePuzzleTypes);
+        }
     }
     void SpawnCat()
     {
