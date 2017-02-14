@@ -27,7 +27,7 @@ public class GameManager : Photon.PunBehaviour {
             Debug.Log(activePuzzleTypes);
         }
         SpawnMaze();
-<<<<<<< HEAD
+
         System.Random random = new System.Random();
         if (random.Next(0, 2) == 0)
         {
@@ -40,10 +40,10 @@ public class GameManager : Photon.PunBehaviour {
         
 
         SpawnMonsters();
-=======
+
         SpawnCat();
      //   SpawnMonsters();
->>>>>>> b1d99985a2addf378b154efc26d4a302c8f5f62e
+
 		SpawnKeysAndChests();
     }
     void OnGUI()
