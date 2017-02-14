@@ -40,7 +40,7 @@ public class CatMovement : MonoBehaviour
 	private bool onLava = false;
 	private bool onSpikes = false;
 	private bool alive = true;
-	private bool canOpenDoor = false;
+	private bool canToggleDoor = false;
 	
 	// skills
 	private float[] skillCooldownTimers = new float[4]; // the cooldown timer
@@ -186,7 +186,7 @@ public class CatMovement : MonoBehaviour
 			useSkill(learnedSkills[3]);
 		}
 		
-		if (canOpenDoor){
+		if (canToggleDoor){
 			if (Input.GetKeyDown(KeyCode.E)){
 				InteractWithObject();
 			}
@@ -325,14 +325,31 @@ public class CatMovement : MonoBehaviour
 
         PhotonNetwork.Destroy(obj.gameObject);
     }
-    // when player leaves the spikes
-    void OnTriggerExit(Collider obj){
+	
+	
+	void OnTriggerStay(Collider obj){
+		// enters range to use an object. Certain objects take priority over others
+		if (obj.tag == "Door"){
+			MazeDoor door = obj.gameObject.GetComponent<MazeDoor>();
+			if (door.doorOpen){
+				interactText.text = "Press E to close Door";
+			}
+			else{
+				interactText.text = "Press E to open Door";
+			}
+			canToggleDoor = true;
+		}
+	}
+	
+	// when player leaves the trigger
+	void OnTriggerExit(Collider obj){
+
 		if (obj.tag == "Spike"){
 			onSpikes = false;
 		}
 		if (obj.tag == "Door"){
 			interactText.text = "";
-			canOpenDoor = false;
+			canToggleDoor = false;
 		}
 	}
 	
@@ -363,17 +380,6 @@ public class CatMovement : MonoBehaviour
 		// put spikes here because we dont want spikes displacing the player
 		if (obj.tag == "Spike"){
 			onSpikes = true;
-		}
-		// enters range to use an object. Certain objects take priority over others
-		if (obj.tag == "Door"){
-			MazeDoor door = obj.gameObject.GetComponent<MazeDoor>();
-			if (door.doorOpen){
-				interactText.text = "Press E to close Door";
-			}
-			else{
-				interactText.text = "Press E to open Door";
-			}
-			canOpenDoor = true;
 		}
 	}
     public float getHealth()

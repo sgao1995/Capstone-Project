@@ -28,7 +28,7 @@ public class GameManager : Photon.PunBehaviour {
         }
         SpawnMaze();
         SpawnMouse();
-        SpawnMonsters();
+      //  SpawnMonsters();
 		SpawnKeysAndChests();
     }
     void OnGUI()

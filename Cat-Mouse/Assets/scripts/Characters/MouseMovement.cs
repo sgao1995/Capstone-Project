@@ -40,7 +40,7 @@ public class MouseMovement : MonoBehaviour {
     private bool onLava = false;
     private bool onSpikes = false;
     private bool alive = true;
-	private bool canOpenDoor = false;
+	private bool canToggleDoor = false;
 	private bool canTakeKey = false;
 	private bool canOpenChest = false;
 	private bool canTakePuzzlePiece = false;
@@ -210,7 +210,7 @@ public class MouseMovement : MonoBehaviour {
         }
 
         // interactions
-		if (canOpenDoor || canTakeKey || canOpenChest || canTakePuzzlePiece){
+		if (canToggleDoor || canTakeKey || canOpenChest || canTakePuzzlePiece){
 			if (Input.GetKeyDown(KeyCode.E)){
 				InteractWithObject();
 			}
@@ -347,7 +347,7 @@ public class MouseMovement : MonoBehaviour {
             i++;
         }
     }
-
+	
     // collision with objects
     void OnCollisionEnter(Collision collisionInfo)
     {
@@ -375,8 +375,21 @@ public class MouseMovement : MonoBehaviour {
 
         PhotonNetwork.Destroy(collisionInfo.gameObject);
     }
+	void OnTriggerStay(Collider obj){
+		// enters range to use an object. Certain objects take priority over others
+		if (obj.tag == "Door" && !canTakeKey && !canOpenChest){
+			MazeDoor door = obj.gameObject.GetComponent<MazeDoor>();
+			if (door.doorOpen){
+				interactText.text = "Press E to close Door";
+			}
+			else{
+				interactText.text = "Press E to open Door";
+			}
+			canToggleDoor = true;
+		}
+	}
 
-    // when player leaves the spikes
+    // when player leaves the trigger
     void OnTriggerExit(Collider obj)
     {
 		if (obj.tag == "Spike"){
@@ -384,7 +397,7 @@ public class MouseMovement : MonoBehaviour {
 		}
 		if (obj.tag == "Door"){
 			interactText.text = "";
-			canOpenDoor = false;
+			canToggleDoor = false;
 		}
 		if (obj.tag == "Key"){
 			interactText.text = "";
@@ -441,17 +454,7 @@ public class MouseMovement : MonoBehaviour {
         {
             onSpikes = true;
         }
-		// enters range to use an object. Certain objects take priority over others
-		if (obj.tag == "Door" && !canTakeKey && !canOpenChest){
-			MazeDoor door = obj.gameObject.GetComponent<MazeDoor>();
-			if (door.doorOpen){
-				interactText.text = "Press E to close Door";
-			}
-			else{
-				interactText.text = "Press E to open Door";
-			}
-			canOpenDoor = true;
-		}
+	
 		if (obj.tag == "Key"){
 			interactText.text = "Press E to take Key";
 			canTakeKey = true;
