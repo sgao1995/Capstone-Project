@@ -27,7 +27,7 @@ public class GameManager : Photon.PunBehaviour {
             Debug.Log(activePuzzleTypes);
         }
         SpawnMaze();
-        SpawnCat();
+        SpawnMouse();
         SpawnMonsters();
 		SpawnKeysAndChests();
     }
