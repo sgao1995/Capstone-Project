@@ -60,7 +60,7 @@ public class MouseMovement : MonoBehaviour {
 
     /* HUD state */
     public Vitality mouseVitality;  // Vitality System component
-   // public Skill mouseSkill;  // Skill System component
+    public Skill mouseSkill;  // Skill System component
     public Text interactText;
 
     void Start()
@@ -76,12 +76,8 @@ public class MouseMovement : MonoBehaviour {
         mouseVitality = mouseVitalityGameObject.GetComponent<Vitality>();
 
         /*  Finds and initialises the Skill System component */
-
         GameObject mouseSkillGameObject = GameObject.Find("Skill");
-        //mouseSkill = mouseSkillGameObject.GetComponent<Skill>();
-
-       // GameObject mouseSkillGameObject = GameObject.Find("Skill");
-     //   mouseSkill = mouseSkillGameObject.GetComponent<Skill>();
+        mouseSkill = mouseSkillGameObject.GetComponent<Skill>();
 
 
         GameObject interactiveText = GameObject.Find("Text");
@@ -165,7 +161,7 @@ public class MouseMovement : MonoBehaviour {
             /* Updates the number of Skill System states */
 
             /* Updates the number of Skill Slots enabled */
-            //mouseSkill.setNumSkillSlots(this.level);
+            mouseSkill.setNumSkillSlots(this.level);
         }
 
         // status effects
