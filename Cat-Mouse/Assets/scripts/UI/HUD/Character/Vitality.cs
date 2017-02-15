@@ -11,7 +11,7 @@ public class Vitality : MonoBehaviour {
     private string characterType;
     
     /* Character Leveling System data */
-    private float currentLevel;
+    private int currentLevel;
 
     /* Character Health Bar data */
     private float currentHealthPoints;
@@ -103,7 +103,7 @@ public class Vitality : MonoBehaviour {
     }
 
     /* Sets the current Level of the Character */
-    public void setCurrentLevel(float level)
+    public void setCurrentLevel(int level)
     {
         this.currentLevel = level;
     }

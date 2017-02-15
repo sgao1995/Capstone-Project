@@ -9,7 +9,7 @@ public class MouseMovement : MonoBehaviour {
     private const int expToLevel4 = 400;
 
     // stats
-    private float level = 0;
+    private int level = 0;
     private float currentEXP = 0;
     private float maxEXP;
     public float power;
@@ -54,6 +54,10 @@ public class MouseMovement : MonoBehaviour {
     private float[] skillCooldownTimers = new float[4]; // the cooldown timer
     private float[] skillCooldowns = new float[4]; // the max cooldown
 
+    /* Vitality System attribute parameters */
+    private float[] vitalLevelHP = {50, 65, 80, 110};  // Health Points of Mouse per Level
+    private float[] vitalLevelEXP = {320, 640, 1280, 2500};  // Experience Points Mouse per Level
+
     /* HUD state */
     public Vitality mouseVitality;  // Vitality System component
 	public Text interactText;
@@ -90,6 +94,14 @@ public class MouseMovement : MonoBehaviour {
         jumpForce = 250f;
         attackCooldownDelay = 1.1f - power * 0.1f;
         currentHealth = maxHealth;
+
+        /* Sets Character Maximum Health for new Level */
+        this.maxHealth = this.vitalLevelHP[this.level - 1];
+        this.currentHealth = this.maxHealth;
+
+        /* Sets Character Maximum Experience for new level */
+        this.maxEXP = this.vitalLevelEXP[this.level - 1];
+        this.currentEXP = 0;
     }
 
     // execute a skill (not jump or attack)

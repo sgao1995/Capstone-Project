@@ -4,35 +4,32 @@ using System.Collections;
 
 public class CatMovement : MonoBehaviour
 {
-	private const int expToLevel2 = 100;
-	private const int expToLevel3 = 200;
-	private const int expToLevel4 = 400;
-	
-   // stats
-	private float level = 0;
-	private float currentEXP = 0;
+    // stats
+    private int level = 0;
+    private float currentEXP = 0;
     private float maxEXP;
-	public float power;
-	private float speed = 3.0f; //speed value
-	private float jumpForce;//amount of jump force
-	public float currentHealth;
-	private float maxHealth;
-	private int skillPoints;
-	private int ultimateSkillPoints;
-	private int[] learnedSkills = {3, 4, 5, 6};
-	
-	// movement speed
-	private int movementModifier = 1;
-	private float movementModifierTimer = 10f;
+    public float power;
+    private float speed = 3.0f; //speed value
+    private float jumpForce;//amount of jump force
+    public float currentHealth;
+    private float maxHealth;
+    private int skillPoints;
+    private int ultimateSkillPoints;
+    private int[] learnedSkills = { 3, 4, 5, 6 };
+
+    // movement speed
+    private int movementModifier = 1;
+    private float movementModifierTimer = 10f;
 
     // attack
     private Animator animator;
-	private float attackPower;
-	private float attackCooldownDelay;
-	private float attackCooldownTimer = 1f;
-	
-	private Vector3 moveV; //vector to store movement
+    private float attackPower;
+    private float attackCooldownDelay;
+    private float attackCooldownTimer = 1f;
+
+    private Vector3 moveV; //vector to store movement
     public Rigidbody catrb;
+<<<<<<< HEAD
 	
 	// jump variables
 	private bool isGrounded = false;
@@ -46,6 +43,24 @@ public class CatMovement : MonoBehaviour
 	// skills
 	private float[] skillCooldownTimers = new float[4]; // the cooldown timer
 	private float[] skillCooldowns = new float[4]; // the max cooldown
+=======
+
+    // jump variables
+    private bool isGrounded = false;
+    // status effects
+    private bool onLava = false;
+    private bool onSpikes = false;
+    private bool alive = true;
+    private bool canToggleDoor = false;
+
+    // skills
+    private float[] skillCooldownTimers = new float[4]; // the cooldown timer
+    private float[] skillCooldowns = new float[4]; // the max cooldown
+
+    /* Vitality System attribute parameters */
+    private float[] vitalLevelHP = {100, 125, 160, 200};  // Health Points of Cat per Level
+    private float[] vitalLevelEXP = {200, 400, 800, 2000};  // Experience Points Cat per Level
+>>>>>>> a92353a0b5f304eb91fdc197bfa86e2a0ca773fe
 
     /* HUD state */
     public Vitality catVitality;  // Vitality System component
@@ -82,8 +97,15 @@ public class CatMovement : MonoBehaviour
 		maxHealth = 80 + level * 20;
 		jumpForce = 300f;
 		attackCooldownDelay = 1.1f - power * 0.1f;
-		currentHealth = maxHealth;
-	}
+		
+        /* Sets Character Maximum Health for new Level */
+        this.maxHealth = this.vitalLevelHP[this.level - 1];
+        this.currentHealth = this.maxHealth;
+
+        /* Sets Character Maximum Experience for new level */
+        this.maxEXP = this.vitalLevelEXP[this.level - 1];
+        this.currentEXP = 0;
+    }
 	
 	// execute a skill (not jump or attack)
 	public void useSkill(int skillCode){
