@@ -6,14 +6,17 @@ using System.Collections;
  * Description: Controls the behaviour of the Vitality System of the HUD. 
  */
 public class Vitality : MonoBehaviour {
+
+    /* Character Type data */
+    private string characterType;
     
+    /* Character Leveling System data */
+    private int currentLevel;
+
     /* Character Health Bar data */
     private float currentHealthPoints;
     private float maxHealthPoints;
     private float healthPointsRatio;
-
-    /* Character Leveling System data */
-    private float currentLevel;
 
     /* Character Experience Bar data */
     private float currentExperiencePoints;
@@ -21,9 +24,21 @@ public class Vitality : MonoBehaviour {
     private float experiencePointsRatio;
 
     /* Represents the objects within the Vitality System */
+
+    /* Character Type objects */
+    public Image imgCharacterType;  // Character Type image
+    public Sprite[] spriteCharacterTypes; // Sprites representing each Character Type
+
+    /* Character Level objects */
+    public Image imgLevelCurrent;  // current Level image
+    public Sprite[] spriteLevelIndicators;  // Sprites representing each individual Level Indicator
+   
+    /* Character Health Bar objects */
     public RectTransform rectHealthCurrent;  // current Health Bar
-    public RectTransform rectExperienceCurrent;  // current Experience Bar
     public Text textHealthMarker;  // Health Bar marker text
+
+    /* Character Experience Bar objects */
+    public RectTransform rectExperienceCurrent;  // current Experience Bar
     public Text textExperienceMarker;  // Experience Bar marker text
 
     /* Constructs a new instance of the Vitality System and sets initial character values */
@@ -36,6 +51,34 @@ public class Vitality : MonoBehaviour {
     /* Updates Vitality System UI Elements every frame */
     void Update()
     {
+        /* Updates Character Type image for the specified Character Type */
+        if (this.characterType == "cat")
+        {
+            imgCharacterType.sprite = spriteCharacterTypes[0];
+        }
+        else if (this.characterType == "mouse")
+        {
+            imgCharacterType.sprite = spriteCharacterTypes[1];
+        }
+
+        /* Updates Character Level image according to the current level */
+        if (this.currentLevel == 1)
+        {
+            imgLevelCurrent.sprite = spriteLevelIndicators[0];
+        }
+        else if (this.currentLevel == 2)
+        {
+            imgLevelCurrent.sprite = spriteLevelIndicators[1];
+        }
+        else if (this.currentLevel == 3)
+        {
+            imgLevelCurrent.sprite = spriteLevelIndicators[2];
+        }
+        else if (this.currentLevel == 4)
+        {
+            imgLevelCurrent.sprite = spriteLevelIndicators[3];
+        }
+
         /* Updates Health Bar value */
         rectHealthCurrent.sizeDelta = new Vector2((this.healthPointsRatio * 150), rectHealthCurrent.sizeDelta.y);
         textHealthMarker.text = Mathf.RoundToInt(this.currentHealthPoints) + " / " + Mathf.RoundToInt(this.maxHealthPoints);
@@ -43,6 +86,22 @@ public class Vitality : MonoBehaviour {
         /* Updates Experience Bar value */
         rectExperienceCurrent.sizeDelta = new Vector2((this.experiencePointsRatio * 150), rectExperienceCurrent.sizeDelta.y);
         textExperienceMarker.text = Mathf.RoundToInt(this.currentExperiencePoints) + " / " + Mathf.RoundToInt(this.maxExperiencePoints);
+    }
+
+    /* Sets the Character Type (Cat or Mouse) of the Character */
+    public void setCharacterType(string characterType)
+    {
+        /* Checks if specified Character Type is valid */
+        if (this.characterType == "cat" || this.characterType == "mouse")
+        {
+            this.characterType = characterType;
+        }
+    }
+
+    /* Sets the current Level of the Character */
+    public void setCurrentLevel(int level)
+    {
+        this.currentLevel = level;
     }
 
     /* Sets the current Health Points of the Character */
@@ -76,12 +135,6 @@ public class Vitality : MonoBehaviour {
             }
             this.healthPointsRatio = this.currentHealthPoints / this.maxHealthPoints;  // Calculates ratio
         }
-    }
-
-    /* Sets the current Level of the Character */
-    public void setCurrentLevel(float level)
-    {
-        this.currentLevel = level;
     }
 
     /* Sets the current Experience Points of the Character */

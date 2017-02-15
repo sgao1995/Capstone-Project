@@ -1,11 +1,11 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Ball : MonoBehaviour {
-	public float ballSize;
+public class Target : MonoBehaviour {
+	public float targetSize;
 
 	// initialize
 	public void setSize (float size) {
-		this.ballSize = size;
+		this.targetSize = size;
 	}
 }

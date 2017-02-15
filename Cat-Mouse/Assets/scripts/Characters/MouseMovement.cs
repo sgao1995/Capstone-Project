@@ -9,7 +9,7 @@ public class MouseMovement : MonoBehaviour {
     private const int expToLevel4 = 400;
 
     // stats
-    private float level = 0;
+    private int level = 0;
     private float currentEXP = 0;
     private float maxEXP;
     public float power;
@@ -38,6 +38,7 @@ public class MouseMovement : MonoBehaviour {
     private bool isGrounded = false;
     // status effects
     private bool onLava = false;
+	private bool onIce = false;
     private bool onSpikes = false;
     private bool alive = true;
 	private bool canToggleDoor = false;
@@ -53,9 +54,14 @@ public class MouseMovement : MonoBehaviour {
     private float[] skillCooldownTimers = new float[4]; // the cooldown timer
     private float[] skillCooldowns = new float[4]; // the max cooldown
 
+    /* Vitality System attribute parameters */
+    private float[] vitalLevelHP = {50, 65, 80, 110};  // Health Points of Mouse per Level
+    private float[] vitalLevelEXP = {320, 640, 1280, 2500};  // Experience Points Mouse per Level
+
     /* HUD state */
     public Vitality mouseVitality;  // Vitality System component
-	public Text interactText;
+    public Skill mouseSkill;  // Skill System component
+    public Text interactText;
 
     void Start()
     {
@@ -64,13 +70,19 @@ public class MouseMovement : MonoBehaviour {
 
         LevelUp();  // Starts at the first level
         animator = GetComponent<Animator>();
+
         /*  Finds and initialises the Vitality System component */
         GameObject mouseVitalityGameObject = GameObject.Find("Vitality");
         mouseVitality = mouseVitalityGameObject.GetComponent<Vitality>();
-		
-		GameObject interactiveText = GameObject.Find("Text");
+
+        /*  Finds and initialises the Skill System component */
+        GameObject mouseSkillGameObject = GameObject.Find("Skill");
+        mouseSkill = mouseSkillGameObject.GetComponent<Skill>();
+
+        GameObject interactiveText = GameObject.Find("Text");
 		interactText = interactiveText.GetComponent<Text>();
 		interactText.text = "";
+
     }
 
     // level up
@@ -84,9 +96,17 @@ public class MouseMovement : MonoBehaviour {
         power = 5 + level * 5;
         attackPower = power;
         maxHealth = 80 + level * 20;
-        jumpForce = 2f + power / 25f;
+        jumpForce = 250f;
         attackCooldownDelay = 1.1f - power * 0.1f;
         currentHealth = maxHealth;
+
+        /* Sets Character Maximum Health for new Level */
+        this.maxHealth = this.vitalLevelHP[this.level - 1];
+        this.currentHealth = this.maxHealth;
+
+        /* Sets Character Maximum Experience for new level */
+        this.maxEXP = this.vitalLevelEXP[this.level - 1];
+        this.currentEXP = 0;
     }
 
     // execute a skill (not jump or attack)
@@ -121,13 +141,26 @@ public class MouseMovement : MonoBehaviour {
         /* Updates the HUD state for the current player */
         if (GetComponent<PhotonView>().isMine)
         {
+            /* Updates the Vitality System states */
+
+            /* Updates the Level attributes */
+            mouseVitality.setCurrentLevel(this.level);
+
             /* Updates the Health Points attributes of the Mouse */
-            mouseVitality.setMaxHealthPoints(maxHealth); // Updates the Maximum Health Points
-            mouseVitality.setCurrentHealthPoints(currentHealth);  // Updates the Current Health Points
+            mouseVitality.setMaxHealthPoints(this.maxHealth); // Updates the Maximum Health Points
+            mouseVitality.setCurrentHealthPoints(this.currentHealth);  // Updates the Current Health Points
 
             /* Updates the Experience Points attributes */
-            mouseVitality.setMaximumExperiencePoints(maxEXP);
-            mouseVitality.setCurrentExperiencePoints(currentEXP);
+            mouseVitality.setMaximumExperiencePoints(this.maxEXP);
+            mouseVitality.setCurrentExperiencePoints(this.currentEXP);
+
+            /* Updates the Character Type attribute as a Mouse */
+            mouseVitality.setCharacterType("mouse");
+
+            /* Updates the number of Skill System states */
+
+            /* Updates the number of Skill Slots enabled */
+            mouseSkill.setNumSkillSlots(this.level);
         }
 
         // status effects
@@ -141,8 +174,14 @@ public class MouseMovement : MonoBehaviour {
         }
         // dont let player move if they are on spikes
         else
-        {
-            moveV = moveV.normalized * speed * movementModifier * Time.deltaTime;
+        {	
+			if (onIce){
+				moveV = moveV.normalized * speed * movementModifier * Time.deltaTime * 0.1f;
+			}
+			else{
+				moveV = moveV.normalized * speed * movementModifier * Time.deltaTime;
+			}
+
             transform.Translate(moveV);
         }
 
@@ -158,27 +197,46 @@ public class MouseMovement : MonoBehaviour {
             if (Input.GetKey(KeyCode.A))
             {
                 animator.Play("Unarmed-Strafe-Left");
-                moveV = new Vector3(-1, 0, moveV.z);
+
+				if (onIce)
+					mouserb.AddRelativeForce(Vector3.left*0.2f, ForceMode.Impulse);
+				else{
+					moveV = new Vector3(-1, 0, moveV.z);
+				}
             }
             if (Input.GetKey(KeyCode.D))
             {
                 animator.Play("Unarmed-Strafe-Right");
-                moveV = new Vector3(1, 0, moveV.z);
+                
+				if (onIce)
+					mouserb.AddRelativeForce(Vector3.right*0.2f, ForceMode.Impulse);
+				else{
+					moveV = new Vector3(1, 0, moveV.z);
+				}
             }
             if (Input.GetKey(KeyCode.W))
             {
                 animator.Play("Unarmed-Strafe-Forward");
-                moveV = new Vector3(moveV.x, 0, 1);
+                
+				if (onIce)
+					mouserb.AddRelativeForce(Vector3.forward*0.2f, ForceMode.Impulse);
+				else{
+					moveV = new Vector3(moveV.x, 0, 1);
+				}
             }
             if (Input.GetKey(KeyCode.S))
             {
                 animator.Play("Unarmed-Strafe-Backward");
-                moveV = new Vector3(moveV.x, 0, -1);
+                
+				if (onIce)
+					mouserb.AddRelativeForce(Vector3.back*0.2f, ForceMode.Impulse);
+				else{
+					moveV = new Vector3(moveV.x, 0, -1);
+				}
             }
             if (Input.GetKeyDown(KeyCode.Space))
             {
                 isGrounded = false;
-                Debug.Log(moveV.x + " " + moveV.y + " " + moveV.z);
                 animator.Play("Unarmed-Jump");
                 mouserb.AddForce(new Vector3(0, jumpForce, 0));
             }
@@ -221,7 +279,7 @@ public class MouseMovement : MonoBehaviour {
         }
 		if (Input.GetKeyDown(KeyCode.T))
         {
-            transform.position = new Vector3(0, 0, 0);
+            transform.position = new Vector3(22, 0, 25);
         }
 
         // timer actions
@@ -355,11 +413,16 @@ public class MouseMovement : MonoBehaviour {
         if (collisionInfo.gameObject.tag == "Ground")
         {
             onLava = false;
+			onIce = false;
         }
         // if enters lava
         if (collisionInfo.gameObject.tag == "Lava")
         {
             onLava = true;
+        }
+		if (collisionInfo.gameObject.tag == "Ice")
+        {
+            onIce = true;
         }
         // if steps on a mine
         if (collisionInfo.gameObject.tag == "Mine")

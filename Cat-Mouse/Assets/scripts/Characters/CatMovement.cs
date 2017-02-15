@@ -4,40 +4,38 @@ using System.Collections;
 
 public class CatMovement : MonoBehaviour
 {
-	private const int expToLevel2 = 100;
-	private const int expToLevel3 = 200;
-	private const int expToLevel4 = 400;
-	
-   // stats
-	private float level = 0;
-	private float currentEXP = 0;
+    // stats
+    private int level = 0;
+    private float currentEXP = 0;
     private float maxEXP;
-	public float power;
-	private float speed = 3.0f; //speed value
-	private float jumpForce;//amount of jump force
-	public float currentHealth;
-	private float maxHealth;
-	private int skillPoints;
-	private int ultimateSkillPoints;
-	private int[] learnedSkills = {3, 4, 5, 6};
-	
-	// movement speed
-	private int movementModifier = 1;
-	private float movementModifierTimer = 10f;
+    public float power;
+    private float speed = 3.0f; //speed value
+    private float jumpForce;//amount of jump force
+    public float currentHealth;
+    private float maxHealth;
+    private int skillPoints;
+    private int ultimateSkillPoints;
+    private int[] learnedSkills = { 3, 4, 5, 6 };
+
+    // movement speed
+    private int movementModifier = 1;
+    private float movementModifierTimer = 10f;
 
     // attack
     private Animator animator;
-	private float attackPower;
-	private float attackCooldownDelay;
-	private float attackCooldownTimer = 1f;
-	
-	private Vector3 moveV; //vector to store movement
+    private float attackPower;
+    private float attackCooldownDelay;
+    private float attackCooldownTimer = 1f;
+
+    private Vector3 moveV; //vector to store movement
     public Rigidbody catrb;
+
 	
 	// jump variables
 	private bool isGrounded = false;
 	// status effects
 	private bool onLava = false;
+	private bool onIce = false;
 	private bool onSpikes = false;
 	private bool alive = true;
 	private bool canToggleDoor = false;
@@ -46,8 +44,13 @@ public class CatMovement : MonoBehaviour
 	private float[] skillCooldownTimers = new float[4]; // the cooldown timer
 	private float[] skillCooldowns = new float[4]; // the max cooldown
 
+    /* Vitality System attribute parameters */
+    private float[] vitalLevelHP = {100, 125, 160, 200};  // Health Points of Cat per Level
+    private float[] vitalLevelEXP = {200, 400, 800, 2000};  // Experience Points Cat per Level
+
     /* HUD state */
     public Vitality catVitality;  // Vitality System component
+    public Skill catSkill;  // Skill System component
 	public Text interactText;
 
     void Start()
@@ -57,13 +60,20 @@ public class CatMovement : MonoBehaviour
 
         LevelUp();  // Starts at the first level
         animator = GetComponent<Animator>();
+
         /*  Finds and initialises the Vitality System component */
 		GameObject catVitalityGameObject = GameObject.Find("Vitality");
 		catVitality = catVitalityGameObject.GetComponent<Vitality>();
-	        
-		GameObject interactiveText = GameObject.Find("Text");
+
+        /*  Finds and initialises the Skill System component */
+        GameObject catSkillGameObject = GameObject.Find("Skill");
+        catSkill = catSkillGameObject.GetComponent<Skill>();
+
+        GameObject interactiveText = GameObject.Find("Text");
 		interactText = interactiveText.GetComponent<Text>();
 		interactText.text = "";
+
+       
     }
 
 	// level up
@@ -76,10 +86,17 @@ public class CatMovement : MonoBehaviour
 		power = 5 + level * 5;
 		attackPower = power;
 		maxHealth = 80 + level * 20;
-		jumpForce = 2f + power / 25f;
+		jumpForce = 300f;
 		attackCooldownDelay = 1.1f - power * 0.1f;
-		currentHealth = maxHealth;
-	}
+		
+        /* Sets Character Maximum Health for new Level */
+        this.maxHealth = this.vitalLevelHP[this.level - 1];
+        this.currentHealth = this.maxHealth;
+
+        /* Sets Character Maximum Experience for new level */
+        this.maxEXP = this.vitalLevelEXP[this.level - 1];
+        this.currentEXP = 0;
+    }
 	
 	// execute a skill (not jump or attack)
 	public void useSkill(int skillCode){
@@ -111,59 +128,104 @@ public class CatMovement : MonoBehaviour
         /* Updates the HUD state for the current player */
         if (GetComponent<PhotonView>().isMine)
         {
+            /* Updates the Vitality System states */
+
+            /* Updates the Level attributes */
+            catVitality.setCurrentLevel(this.level);
+
             /* Updates the Health Points attributes of the Cat */
-            catVitality.setMaxHealthPoints(maxHealth); // Updates the Maximum Health Points
-            catVitality.setCurrentHealthPoints(currentHealth);  // Updates the Current Health Points
+            catVitality.setMaxHealthPoints(this.maxHealth); // Updates the Maximum Health Points
+            catVitality.setCurrentHealthPoints(this.currentHealth);  // Updates the Current Health Points
 
             /* Updates the Experience Points attributes */
-            catVitality.setMaximumExperiencePoints(maxEXP);
-            catVitality.setCurrentExperiencePoints(currentEXP);
+            catVitality.setMaximumExperiencePoints(this.maxEXP);
+            catVitality.setCurrentExperiencePoints(this.currentEXP);
+
+            /* Updates the Character Type attribute as a Cat */
+            catVitality.setCharacterType("cat");
+
+            /* Updates the number of Skill System states */
+
+            /* Updates the number of Skill Slots enabled */
+            catSkill.setNumSkillSlots(this.level);
         }
-		
-		// status effects
-		if (onLava){
+
+        // status effects
+        if (onLava){
 			TakeDamage(0.5f);
 		}
 		if (onSpikes){
 			TakeDamage(0.2f);
 		}
 		// dont let player move if they are on spikes
-		else{
-			moveV = moveV.normalized * speed * movementModifier * Time.deltaTime;
-			transform.Translate(moveV);
-		}
+        else
+        {	
+			if (onIce){
+				moveV = moveV.normalized * speed * movementModifier * Time.deltaTime * 0.1f;
+			}
+			else{
+				moveV = moveV.normalized * speed * movementModifier * Time.deltaTime;
+			}
+
+            transform.Translate(moveV);
+        }
 
         // keyboard commands
         if (Input.GetKeyDown("escape"))
         {
             Cursor.lockState = CursorLockMode.None; //if we press esc, cursor appears on screen
         }
-		// movement control
-		if (isGrounded && !onSpikes){
-			moveV = new Vector3(0, 0, 0);
-			if (Input.GetKey(KeyCode.A)){
+        // movement control
+        if (isGrounded && !onSpikes)
+        {
+            moveV = new Vector3(0, 0, 0);
+            if (Input.GetKey(KeyCode.A))
+            {
                 animator.Play("Unarmed-Strafe-Left");
-                moveV = new Vector3(-1, 0, moveV.z);
-			}
-			if (Input.GetKey(KeyCode.D)){
+
+				if (onIce)
+					catrb.AddRelativeForce(Vector3.left*0.2f, ForceMode.Impulse);
+				else{
+					moveV = new Vector3(-1, 0, moveV.z);
+				}
+            }
+            if (Input.GetKey(KeyCode.D))
+            {
                 animator.Play("Unarmed-Strafe-Right");
-                moveV = new Vector3(1, 0, moveV.z);
-			}
-			if (Input.GetKey(KeyCode.W)){
+                
+				if (onIce)
+					catrb.AddRelativeForce(Vector3.right*0.2f, ForceMode.Impulse);
+				else{
+					moveV = new Vector3(1, 0, moveV.z);
+				}
+            }
+            if (Input.GetKey(KeyCode.W))
+            {
                 animator.Play("Unarmed-Strafe-Forward");
-				moveV = new Vector3(moveV.x, 0, 1);				
-			}		
-			if (Input.GetKey(KeyCode.S)){
+                
+				if (onIce)
+					catrb.AddRelativeForce(Vector3.forward*0.2f, ForceMode.Impulse);
+				else{
+					moveV = new Vector3(moveV.x, 0, 1);
+				}
+            }
+            if (Input.GetKey(KeyCode.S))
+            {
                 animator.Play("Unarmed-Strafe-Backward");
-                moveV = new Vector3(moveV.x, 0, -1);				
-			}
-			if (Input.GetKeyDown(KeyCode.Space)){
-				isGrounded = false;
-				Debug.Log(moveV.x +  " " + moveV.y + " " + moveV.z);
+                
+				if (onIce)
+					catrb.AddRelativeForce(Vector3.back*0.2f, ForceMode.Impulse);
+				else{
+					moveV = new Vector3(moveV.x, 0, -1);
+				}
+            }
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                isGrounded = false;
                 animator.Play("Unarmed-Jump");
-				catrb.AddForce(new Vector3(0, jumpForce, 0));
-			}
-		}
+                catrb.AddForce(new Vector3(0, jumpForce, 0));
+            }
+        }
 
 
 		// left click
@@ -301,11 +363,16 @@ public class CatMovement : MonoBehaviour
 		isGrounded = true;
 		if (collisionInfo.gameObject.tag == "Ground"){
 			onLava = false;
+			onIce = false;
 		}
 		// if enters lava
 		if (collisionInfo.gameObject.tag == "Lava"){
 			onLava = true;
 		}
+		if (collisionInfo.gameObject.tag == "Ice")
+        {
+            onIce = true;
+        }
 		// if steps on a mine
 		if (collisionInfo.gameObject.tag == "Mine"){
 			Mine mine = collisionInfo.gameObject.GetComponent<Mine>();
