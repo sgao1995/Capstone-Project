@@ -50,6 +50,7 @@ public class CatMovement : MonoBehaviour
 
     /* HUD state */
     public Vitality catVitality;  // Vitality System component
+    public Skill catSkill;  // Skill System component
 	public Text interactText;
 
     void Start()
@@ -63,8 +64,12 @@ public class CatMovement : MonoBehaviour
         /*  Finds and initialises the Vitality System component */
 		GameObject catVitalityGameObject = GameObject.Find("Vitality");
 		catVitality = catVitalityGameObject.GetComponent<Vitality>();
-	        
-		GameObject interactiveText = GameObject.Find("Text");
+
+        /*  Finds and initialises the Skill System component */
+        GameObject catSkillGameObject = GameObject.Find("Skill");
+        catSkill = catSkillGameObject.GetComponent<Skill>();
+
+        GameObject interactiveText = GameObject.Find("Text");
 		interactText = interactiveText.GetComponent<Text>();
 		interactText.text = "";
 
@@ -123,6 +128,8 @@ public class CatMovement : MonoBehaviour
         /* Updates the HUD state for the current player */
         if (GetComponent<PhotonView>().isMine)
         {
+            /* Updates the Vitality System states */
+
             /* Updates the Level attributes */
             catVitality.setCurrentLevel(this.level);
 
@@ -133,8 +140,14 @@ public class CatMovement : MonoBehaviour
             /* Updates the Experience Points attributes */
             catVitality.setMaximumExperiencePoints(this.maxEXP);
             catVitality.setCurrentExperiencePoints(this.currentEXP);
-            //tell that it is a cat
+
+            /* Updates the Character Type attribute as a Cat */
             catVitality.setCharacterType("cat");
+
+            /* Updates the number of Skill System states */
+
+            /* Updates the number of Skill Slots enabled */
+            catSkill.setNumSkillSlots(this.level);
         }
 
         // status effects
