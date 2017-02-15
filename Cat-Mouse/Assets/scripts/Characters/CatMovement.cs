@@ -50,7 +50,7 @@ public class CatMovement : MonoBehaviour
 
     /* HUD state */
     public Vitality catVitality;  // Vitality System component
-    public Skill catSkill;  // Skill System component
+    //public Skill catSkill;  // Skill System component
 	public Text interactText;
 
     void Start()
@@ -66,8 +66,8 @@ public class CatMovement : MonoBehaviour
 		catVitality = catVitalityGameObject.GetComponent<Vitality>();
 
         /*  Finds and initialises the Skill System component */
-        GameObject catSkillGameObject = GameObject.Find("Skill");
-        catSkill = catSkillGameObject.GetComponent<Skill>();
+        //GameObject catSkillGameObject = GameObject.Find("Skill");
+      //  catSkill = catSkillGameObject.GetComponent<Skill>();
 
         GameObject interactiveText = GameObject.Find("Text");
 		interactText = interactiveText.GetComponent<Text>();
@@ -147,7 +147,7 @@ public class CatMovement : MonoBehaviour
             /* Updates the number of Skill System states */
 
             /* Updates the number of Skill Slots enabled */
-            catSkill.setNumSkillSlots(this.level);
+            //catSkill.setNumSkillSlots(this.level);
         }
 
         // status effects
@@ -331,11 +331,11 @@ public class CatMovement : MonoBehaviour
                     maxEXP += 100;
                 }
             }*/
-            if (hitInfo.collider.name == "Mouse(Clone)")
+            if (hitInfo.collider.tag == "Mouse")
             {
-                Debug.Log("Trying to hurt " + hitInfo.collider.transform.parent.name + " by calling script " + hitInfo.collider.transform.parent.GetComponent<MouseMovement>().name);
-                hitInfo.collider.transform.parent.GetComponent<MouseMovement>().SendMessage("TakeDamage", 50f);
-                if (hitInfo.collider.transform.parent.GetComponent<MouseMovement>().getHealth() <= 0)
+                Debug.Log("Trying to hurt " + hitInfo.collider.transform.name + " by calling script " + hitInfo.collider.transform.GetComponent<MouseMovement>().name);
+                hitInfo.collider.transform.GetComponent<MouseMovement>().SendMessage("TakeDamage", 50f);
+                if (hitInfo.collider.transform.GetComponent<MouseMovement>().getHealth() <= 0)
                 {
                     currentEXP += 100;
                     maxEXP += 100;
