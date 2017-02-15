@@ -1,27 +1,27 @@
-Initialize engine version: 5.4.2f2 (b7e030c65c9b)
+Initialize engine version: 5.4.1f1 (649f48bbbf0f)
 GfxDevice: creating device client; threaded=1
 Direct3D:
     Version:  Direct3D 11.0 [level 11.0]
-    Renderer: NVIDIA GeForce GTX 770 (ID=0x1184)
-    Vendor:   NVIDIA
-    VRAM:     2017 MB
+    Renderer: Intel(R) HD Graphics 6000 (ID=0x1626)
+    Vendor:   Intel
+    VRAM:     2111 MB
 Begin MonoManager ReloadAssembly
-Platform assembly: C:\Users\SmugFug\Documents\GitHub\Cat-and-Mouse-Game\Cat-Mouse\C&M_Data\Managed\UnityEngine.dll (this message is harmless)
-Loading C:\Users\SmugFug\Documents\GitHub\Cat-and-Mouse-Game\Cat-Mouse\C&M_Data\Managed\UnityEngine.dll into Unity Child Domain
-Platform assembly: C:\Users\SmugFug\Documents\GitHub\Cat-and-Mouse-Game\Cat-Mouse\C&M_Data\Managed\Assembly-CSharp-firstpass.dll (this message is harmless)
-Loading C:\Users\SmugFug\Documents\GitHub\Cat-and-Mouse-Game\Cat-Mouse\C&M_Data\Managed\Assembly-CSharp-firstpass.dll into Unity Child Domain
-Platform assembly: C:\Users\SmugFug\Documents\GitHub\Cat-and-Mouse-Game\Cat-Mouse\C&M_Data\Managed\Assembly-CSharp.dll (this message is harmless)
-Loading C:\Users\SmugFug\Documents\GitHub\Cat-and-Mouse-Game\Cat-Mouse\C&M_Data\Managed\Assembly-CSharp.dll into Unity Child Domain
-Platform assembly: C:\Users\SmugFug\Documents\GitHub\Cat-and-Mouse-Game\Cat-Mouse\C&M_Data\Managed\UnityEngine.UI.dll (this message is harmless)
-Loading C:\Users\SmugFug\Documents\GitHub\Cat-and-Mouse-Game\Cat-Mouse\C&M_Data\Managed\UnityEngine.UI.dll into Unity Child Domain
-Platform assembly: C:\Users\SmugFug\Documents\GitHub\Cat-and-Mouse-Game\Cat-Mouse\C&M_Data\Managed\UnityEngine.Networking.dll (this message is harmless)
-Loading C:\Users\SmugFug\Documents\GitHub\Cat-and-Mouse-Game\Cat-Mouse\C&M_Data\Managed\UnityEngine.Networking.dll into Unity Child Domain
-Platform assembly: C:\Users\SmugFug\Documents\GitHub\Cat-and-Mouse-Game\Cat-Mouse\C&M_Data\Managed\Photon3Unity3D.dll (this message is harmless)
-Loading C:\Users\SmugFug\Documents\GitHub\Cat-and-Mouse-Game\Cat-Mouse\C&M_Data\Managed\Photon3Unity3D.dll into Unity Child Domain
-- Completed reload, in  0.244 seconds
-Platform assembly: C:\Users\SmugFug\Documents\GitHub\Cat-and-Mouse-Game\Cat-Mouse\C&M_Data\Managed\System.Core.dll (this message is harmless)
-Platform assembly: C:\Users\SmugFug\Documents\GitHub\Cat-and-Mouse-Game\Cat-Mouse\C&M_Data\Managed\System.dll (this message is harmless)
-desktop: 1920x1080 60Hz; virtual: 1920x1080 at 0,0
+Platform assembly: C:\Users\sugao\Documents\CatMouseCapstone\Cat-Mouse\C&M_Data\Managed\UnityEngine.dll (this message is harmless)
+Loading C:\Users\sugao\Documents\CatMouseCapstone\Cat-Mouse\C&M_Data\Managed\UnityEngine.dll into Unity Child Domain
+Platform assembly: C:\Users\sugao\Documents\CatMouseCapstone\Cat-Mouse\C&M_Data\Managed\Assembly-CSharp-firstpass.dll (this message is harmless)
+Loading C:\Users\sugao\Documents\CatMouseCapstone\Cat-Mouse\C&M_Data\Managed\Assembly-CSharp-firstpass.dll into Unity Child Domain
+Platform assembly: C:\Users\sugao\Documents\CatMouseCapstone\Cat-Mouse\C&M_Data\Managed\Assembly-CSharp.dll (this message is harmless)
+Loading C:\Users\sugao\Documents\CatMouseCapstone\Cat-Mouse\C&M_Data\Managed\Assembly-CSharp.dll into Unity Child Domain
+Platform assembly: C:\Users\sugao\Documents\CatMouseCapstone\Cat-Mouse\C&M_Data\Managed\UnityEngine.UI.dll (this message is harmless)
+Loading C:\Users\sugao\Documents\CatMouseCapstone\Cat-Mouse\C&M_Data\Managed\UnityEngine.UI.dll into Unity Child Domain
+Platform assembly: C:\Users\sugao\Documents\CatMouseCapstone\Cat-Mouse\C&M_Data\Managed\UnityEngine.Networking.dll (this message is harmless)
+Loading C:\Users\sugao\Documents\CatMouseCapstone\Cat-Mouse\C&M_Data\Managed\UnityEngine.Networking.dll into Unity Child Domain
+Platform assembly: C:\Users\sugao\Documents\CatMouseCapstone\Cat-Mouse\C&M_Data\Managed\Photon3Unity3D.dll (this message is harmless)
+Loading C:\Users\sugao\Documents\CatMouseCapstone\Cat-Mouse\C&M_Data\Managed\Photon3Unity3D.dll into Unity Child Domain
+- Completed reload, in  0.402 seconds
+Platform assembly: C:\Users\sugao\Documents\CatMouseCapstone\Cat-Mouse\C&M_Data\Managed\System.Core.dll (this message is harmless)
+Platform assembly: C:\Users\sugao\Documents\CatMouseCapstone\Cat-Mouse\C&M_Data\Managed\System.dll (this message is harmless)
+desktop: 1366x768 60Hz; virtual: 1366x768 at 0,0
 <RI> Initializing input.
 <RI> Input initialized.
 <RI> Initialized touch support.
@@ -29,15 +29,14 @@ The referenced script on this Behaviour (Game Object 'Main Camera') is missing!
  
 (Filename:  Line: 1656)
 
-UnloadTime: 9.207051 ms
-Setting up 2 worker threads for Enlighten.
-  Thread -> id: 4bd4 -> priority: 1 
-  Thread -> id: 1770 -> priority: 1 
+UnloadTime: 1.262436 ms
+Setting up 1 worker threads for Enlighten.
+  Thread -> id: 4648 -> priority: 1 
 Unloading 7 Unused Serialized files (Serialized files now loaded: 0)
-UnloadTime: 6.751449 ms
+UnloadTime: 8.910186 ms
 
-Unloading 6 unused Assets to reduce memory usage. Loaded Objects now: 504.
-Total: 5.573448 ms (FindLiveObjects: 0.039606 ms CreateObjectMapping: 0.029122 ms MarkObjects: 0.599630 ms  DeleteObjects: 4.900720 ms)
+Unloading 6 unused Assets to reduce memory usage. Loaded Objects now: 533.
+Total: 4.190802 ms (FindLiveObjects: 0.064789 ms CreateObjectMapping: 0.067997 ms MarkObjects: 0.412472 ms  DeleteObjects: 3.644901 ms)
 
 SwitchToProtocol: Udp PhotonNetwork.connected: False
  
@@ -60,158 +59,46 @@ playerWhoIsIt: 1
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
 
 Unloading 5 Unused Serialized files (Serialized files now loaded: 0)
-UnloadTime: 1.722008 ms
+UnloadTime: 1.472842 ms
 
-Unloading 121 unused Assets to reduce memory usage. Loaded Objects now: 463.
-Total: 0.943566 ms (FindLiveObjects: 0.070767 ms CreateObjectMapping: 0.066981 ms MarkObjects: 0.594970 ms  DeleteObjects: 0.207642 ms)
-
-Initialize engine version: 5.4.2f2 (b7e030c65c9b)
-GfxDevice: creating device client; threaded=1
-Direct3D:
-    Version:  Direct3D 11.0 [level 11.0]
-    Renderer: NVIDIA GeForce GTX 770 (ID=0x1184)
-    Vendor:   NVIDIA
-    VRAM:     2017 MB
-Begin MonoManager ReloadAssembly
-Platform assembly: C:\Users\SmugFug\Documents\GitHub\Cat-and-Mouse-Game\Cat-Mouse\C&M_Data\Managed\UnityEngine.dll (this message is harmless)
-Loading C:\Users\SmugFug\Documents\GitHub\Cat-and-Mouse-Game\Cat-Mouse\C&M_Data\Managed\UnityEngine.dll into Unity Child Domain
-Platform assembly: C:\Users\SmugFug\Documents\GitHub\Cat-and-Mouse-Game\Cat-Mouse\C&M_Data\Managed\Assembly-CSharp-firstpass.dll (this message is harmless)
-Loading C:\Users\SmugFug\Documents\GitHub\Cat-and-Mouse-Game\Cat-Mouse\C&M_Data\Managed\Assembly-CSharp-firstpass.dll into Unity Child Domain
-Platform assembly: C:\Users\SmugFug\Documents\GitHub\Cat-and-Mouse-Game\Cat-Mouse\C&M_Data\Managed\Assembly-CSharp.dll (this message is harmless)
-Loading C:\Users\SmugFug\Documents\GitHub\Cat-and-Mouse-Game\Cat-Mouse\C&M_Data\Managed\Assembly-CSharp.dll into Unity Child Domain
-Platform assembly: C:\Users\SmugFug\Documents\GitHub\Cat-and-Mouse-Game\Cat-Mouse\C&M_Data\Managed\UnityEngine.UI.dll (this message is harmless)
-Loading C:\Users\SmugFug\Documents\GitHub\Cat-and-Mouse-Game\Cat-Mouse\C&M_Data\Managed\UnityEngine.UI.dll into Unity Child Domain
-Platform assembly: C:\Users\SmugFug\Documents\GitHub\Cat-and-Mouse-Game\Cat-Mouse\C&M_Data\Managed\UnityEngine.Networking.dll (this message is harmless)
-Loading C:\Users\SmugFug\Documents\GitHub\Cat-and-Mouse-Game\Cat-Mouse\C&M_Data\Managed\UnityEngine.Networking.dll into Unity Child Domain
-Platform assembly: C:\Users\SmugFug\Documents\GitHub\Cat-and-Mouse-Game\Cat-Mouse\C&M_Data\Managed\Photon3Unity3D.dll (this message is harmless)
-Loading C:\Users\SmugFug\Documents\GitHub\Cat-and-Mouse-Game\Cat-Mouse\C&M_Data\Managed\Photon3Unity3D.dll into Unity Child Domain
-- Completed reload, in  0.070 seconds
-Platform assembly: C:\Users\SmugFug\Documents\GitHub\Cat-and-Mouse-Game\Cat-Mouse\C&M_Data\Managed\System.Core.dll (this message is harmless)
-Platform assembly: C:\Users\SmugFug\Documents\GitHub\Cat-and-Mouse-Game\Cat-Mouse\C&M_Data\Managed\System.dll (this message is harmless)
-desktop: 1920x1080 60Hz; virtual: 1920x1080 at 0,0
-<RI> Initializing input.
-<RI> Input initialized.
-<RI> Initialized touch support.
-The referenced script on this Behaviour (Game Object 'Main Camera') is missing!
- 
-(Filename:  Line: 1656)
-
-UnloadTime: 0.982299 ms
-Setting up 2 worker threads for Enlighten.
-  Thread -> id: 2278 -> priority: 1 
-  Thread -> id: 2844 -> priority: 1 
-Unloading 7 Unused Serialized files (Serialized files now loaded: 0)
-UnloadTime: 6.107844 ms
-
-Unloading 6 unused Assets to reduce memory usage. Loaded Objects now: 504.
-Total: 4.931298 ms (FindLiveObjects: 0.022715 ms CreateObjectMapping: 0.028248 ms MarkObjects: 0.263849 ms  DeleteObjects: 4.613864 ms)
-
-SwitchToProtocol: Udp PhotonNetwork.connected: False
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
-
-OnJoinedLobby
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
-
-OnJoinedRoom
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
-
-playerWhoIsIt: 0
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
-
-Unloading 5 Unused Serialized files (Serialized files now loaded: 0)
-UnloadTime: 1.016954 ms
-
-Unloading 121 unused Assets to reduce memory usage. Loaded Objects now: 463.
-Total: 0.712625 ms (FindLiveObjects: 0.057079 ms CreateObjectMapping: 0.056497 ms MarkObjects: 0.454309 ms  DeleteObjects: 0.143573 ms)
-
-you are not Master
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
-
-Choose a Team
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+Unloading 145 unused Assets to reduce memory usage. Loaded Objects now: 468.
+Total: 0.987240 ms (FindLiveObjects: 0.048752 ms CreateObjectMapping: 0.044903 ms MarkObjects: 0.565145 ms  DeleteObjects: 0.327797 ms)
 
 Player 1Joined as CatTrueFalse
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
 
-Player 2Joined as MouseFalseTrue
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
-
-Unloading 4 Unused Serialized files (Serialized files now loaded: 0)
 Unloading 4 Unused Serialized files (Serialized files now loaded: 0)
 TerrainData is missing splat texture 1.
  
 (Filename:  Line: 206)
 
-TerrainData is missing splat texture 1.
- 
-(Filename:  Line: 206)
+UnloadTime: 1.365715 ms
 
-UnloadTime: 0.809020 ms
-UnloadTime: 0.818339 ms
-
-Unloading 13 unused Assets to reduce memory usage. Loaded Objects now: 583.
-Total: 0.857363 ms (FindLiveObjects: 0.06057
-msUCnloadinje c3 Manpsed gAs0.ts 3782reduce memory ts: 0. Loade8 ms  ects now: 583.
-To0.2530.88ms942
- 
-ms (FindLiveObjects: 0.069311 ms CreateObjectMapping: 0.032908 ms MarkObjects: 0.531775 ms  DeleteObjects: 0.251617 ms)
+Unloading 13 unused Assets to reduce memory usage. Loaded Objects now: 641.
+Total: 1.307981 ms (FindLiveObjects: 0.055808 ms CreateObjectMapping: 0.048752 ms MarkObjects: 0.606200 ms  DeleteObjects: 0.595936 ms)
 
 System.Collections.Generic.List`1[System.Int32]
  
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/SnityEngineeDtibugB.Geniric.Lgs.gen.cpp LinInt32]
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
 
-
-(Systemme: C:/builns.Geve/unity/build/artmiInt32]
+System.Collections.Generic.List`1[System.Int32]
  
-(Filename: C:/runtimslave/unity/buiebd/artifings.gen.cpp Ld/common/r
-u
-ntimS/ystem.Collections.Generic.List`1[Lystem.Int3
-2
-]S
-y
-sFilm.CollecC:/buildslave/unst`1[Sysld/artifacts
-/g
-eneratede:common/ildslime/Unitty/buineD/artifacts/generated/Line: 42)
-t
-ime/UnemtCyEnections.uegBindings.gen.ysppemine: 42]
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
 
-
+System.Collections.Generic.List`1[System.Int32]
  
-(Filmname: C:.bullldslans.Genery/built/a1[System.Ige32]
- te
-d/common/runtime/UnityEn/unneDe/ugBindings.gen.c/genere: 42)
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
 
-mon/runtime/UnityEngineneric.Lising[Sygen.cpp Line
-: 
-42)
-
-name: C:/buildslave/uneny/bic.ld/artifacttem.Int32]
+System.Collections.Generic.List`1[System.Int32]
  
-(Fioennm/r ntime/inityEavie/DebutBinbunil.g/artifacts/: 42)r
-a
-ted/common/renctions.ityEngineDebugBindtings.gen.c
-p
-p Lineame: C
-:
-/System.Cvelleity/build/artif.List`1[System.Int32]
- 
-(Fimeename: C:/buildslave/unity/build/artifac42)
-e
-nSyrtated/common/rs.Genme/UnityEngineDebugBinding
-s.
-gen.cpp Line: build
-s
-lave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
 
-donemaze, 148
+System.Collections.Generic.List`1[System.Int32]
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+System.Collections.Generic.List`1[System.Int32]
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
 
@@ -219,59 +106,179 @@ donemaze, 148
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
 
-0 1 2
+22
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
 
-hitting
+25
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
 
-We hit: Mouse(Clone)
+23
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
 
-NullReferenceException: Object reference not set to an instance of an object
-  at CatMovement.DealDamage () [0x00000] in <filename unknown>:0 
- 
-(Filename:  Line: -1)
-
-hitting
+1
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
 
-We hit: Mouse(Clone)
+30
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
 
-NullReferenceException: Object reference not set to an instance of an object
-  at CatMovement.DealDamage () [0x00000] in <filename unknown>:0 
- 
-(Filename:  Line: -1)
-
-hitting
+9
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
 
-We hit: Mouse(Clone)
+35
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
 
-NullReferenceException: Object reference not set to an instance of an object
-  at CatMovement.DealDamage () [0x00000] in <filename unknown>:0 
- 
-(Filename:  Line: -1)
-
-hitting
+16
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
 
-We hit: Mouse(Clone)
+4 3 2
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
 
-NullReferenceException: Object reference not set to an instance of an object
-  at CatMovement.DealDamage () [0x00000] in <filename unknown>:0 
+player died
  
-(Filename:  Line: -1)
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+Animator.GotoState: State could not be found
+ 
+(Filename:  Line: 1094)
+
+Invalid Layer Index '-1'
+ 
+(Filename:  Line: 690)
+
+Animator.GotoState: State could not be found
+ 
+(Filename:  Line: 1094)
+
+Invalid Layer Index '-1'
+ 
+(Filename:  Line: 690)
+
+Animator.GotoState: State could not be found
+ 
+(Filename:  Line: 1094)
+
+Invalid Layer Index '-1'
+ 
+(Filename:  Line: 690)
+
+Animator.GotoState: State could not be found
+ 
+(Filename:  Line: 1094)
+
+Invalid Layer Index '-1'
+ 
+(Filename:  Line: 690)
+
+Animator.GotoState: State could not be found
+ 
+(Filename:  Line: 1094)
+
+Invalid Layer Index '-1'
+ 
+(Filename:  Line: 690)
+
+Animator.GotoState: State could not be found
+ 
+(Filename:  Line: 1094)
+
+Invalid Layer Index '-1'
+ 
+(Filename:  Line: 690)
+
+Animator.GotoState: State could not be found
+ 
+(Filename:  Line: 1094)
+
+Invalid Layer Index '-1'
+ 
+(Filename:  Line: 690)
+
+Animator.GotoState: State could not be found
+ 
+(Filename:  Line: 1094)
+
+Invalid Layer Index '-1'
+ 
+(Filename:  Line: 690)
+
+Animator.GotoState: State could not be found
+ 
+(Filename:  Line: 1094)
+
+Invalid Layer Index '-1'
+ 
+(Filename:  Line: 690)
+
+Animator.GotoState: State could not be found
+ 
+(Filename:  Line: 1094)
+
+Invalid Layer Index '-1'
+ 
+(Filename:  Line: 690)
+
+Animator.GotoState: State could not be found
+ 
+(Filename:  Line: 1094)
+
+Invalid Layer Index '-1'
+ 
+(Filename:  Line: 690)
+
+Animator.GotoState: State could not be found
+ 
+(Filename:  Line: 1094)
+
+Invalid Layer Index '-1'
+ 
+(Filename:  Line: 690)
+
+Animator.GotoState: State could not be found
+ 
+(Filename:  Line: 1094)
+
+Invalid Layer Index '-1'
+ 
+(Filename:  Line: 690)
+
+Animator.GotoState: State could not be found
+ 
+(Filename:  Line: 1094)
+
+Invalid Layer Index '-1'
+ 
+(Filename:  Line: 690)
+
+Animator.GotoState: State could not be found
+ 
+(Filename:  Line: 1094)
+
+Invalid Layer Index '-1'
+ 
+(Filename:  Line: 690)
+
+Animator.GotoState: State could not be found
+ 
+(Filename:  Line: 1094)
+
+Invalid Layer Index '-1'
+ 
+(Filename:  Line: 690)
+
+Animator.GotoState: State could not be found
+ 
+(Filename:  Line: 1094)
+
+Invalid Layer Index '-1'
+ 
+(Filename:  Line: 690)
 

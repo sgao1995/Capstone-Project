@@ -11,12 +11,12 @@ public class CatMovement : MonoBehaviour
     public float power;
     private float speed = 3.0f; //speed value
     private float jumpForce;//amount of jump force
-    public float currentHealth;
+    public float currentHealth = 100;
     private float maxHealth;
     private int skillPoints;
     private int ultimateSkillPoints;
     private int[] learnedSkills = { 3, 4, 5, 6 };
-
+    private float damage = 50f;
     // movement speed
     private int movementModifier = 1;
     private float movementModifierTimer = 10f;
@@ -277,10 +277,10 @@ public class CatMovement : MonoBehaviour
     [PunRPC]
     void changeHealth(float dmg)
     {
-        currentHealth -= dmg;
-        if (currentHealth <= 0)
+        this.currentHealth -= dmg;
+        if (this.currentHealth <= 0)
         {
-            currentHealth = 0;
+           this.currentHealth = 0;
             Death();
         }
     }
@@ -309,7 +309,7 @@ public class CatMovement : MonoBehaviour
             if (hitInfo.collider.name == "Character"||hitInfo.collider.name == "MonsterClone" ||hitInfo.collider.name =="Monster")
             {
                 Debug.Log("Trying to hurt " + hitInfo.collider.transform.parent.name + " by calling script " + hitInfo.collider.transform.parent.GetComponent<MonsterAI>().name);
-                hitInfo.collider.transform.parent.GetComponent<MonsterAI>().SendMessage("takeDamage", 50f);
+                hitInfo.collider.transform.parent.GetComponent<MonsterAI>().SendMessage("takeDamage", damage);
 
                 if (hitInfo.collider.transform.parent.GetComponent<MonsterAI>().getHealth() <= 0)
                 {
@@ -334,9 +334,12 @@ public class CatMovement : MonoBehaviour
             if (hitInfo.collider.tag == "Mouse")
             {
                 Debug.Log("Trying to hurt " + hitInfo.collider.transform.name + " by calling script " + hitInfo.collider.transform.GetComponent<MouseMovement>().name);
-                hitInfo.collider.transform.GetComponent<MouseMovement>().SendMessage("TakeDamage", 50f);
+                hitInfo.collider.transform.GetComponent<MouseMovement>().SendMessage("TakeDamage", damage);
+                Debug.Log("they have " + hitInfo.collider.transform.GetComponent<MouseMovement>().getHealth() + " hp left");
+
                 if (hitInfo.collider.transform.GetComponent<MouseMovement>().getHealth() <= 0)
                 {
+                    GameObject.Find("WinObj").GetComponent<WinScript>().setMouseDeaths();
                     currentEXP += 100;
                     maxEXP += 100;
                 }
@@ -451,6 +454,6 @@ public class CatMovement : MonoBehaviour
 	}
     public float getHealth()
     {
-        return currentHealth;
+        return this.currentHealth;
     }
 }

@@ -15,12 +15,12 @@ public class MouseMovement : MonoBehaviour {
     public float power;
     private float speed = 3.0f; //speed value
     private float jumpForce;//amount of jump force
-    public float currentHealth;
+    public float currentHealth=100;
     private float maxHealth;
     private int skillPoints;
     private int ultimateSkillPoints;
     private int[] learnedSkills = { 3, 4, 5, 6 };
-
+    private float damage = 10f;
     // movement speed
     private int movementModifier = 1;
     private float movementModifierTimer = 10f;
@@ -337,7 +337,7 @@ public class MouseMovement : MonoBehaviour {
             if (hitInfo.collider.name == "Character" || hitInfo.collider.name == "MonsterClone" || hitInfo.collider.name == "Monster")
             {
                 Debug.Log("Trying to hurt " + hitInfo.collider.transform.parent.name + " by calling script " + hitInfo.collider.transform.parent.GetComponent<MonsterAI>().name);
-                hitInfo.collider.transform.parent.GetComponent<MonsterAI>().SendMessage("takeDamage", 25f);
+                hitInfo.collider.transform.parent.GetComponent<MonsterAI>().SendMessage("takeDamage", damage);
 
                 if (hitInfo.collider.transform.parent.GetComponent<MonsterAI>().getHealth() <= 0)
                 {
@@ -349,12 +349,14 @@ public class MouseMovement : MonoBehaviour {
                     Debug.Log("current EXP is" + mouseVitality.getEXP());
                 }
             }
-            if (hitInfo.collider.tag == "Cat")
+            if (hitInfo.collider.name == "Cat(Clone)")
             {
                 Debug.Log("Trying to hurt " + hitInfo.collider.transform.name + " by calling script " + hitInfo.collider.transform.GetComponent<CatMovement>().name);
-                hitInfo.collider.transform.GetComponent<CatMovement>().SendMessage("TakeDamage", 10f);
+                hitInfo.collider.transform.GetComponent<CatMovement>().SendMessage("TakeDamage", damage);
+                Debug.Log("they have " + hitInfo.collider.transform.GetComponent<CatMovement>().getHealth() + " hp left");
                 if (hitInfo.collider.transform.GetComponent<CatMovement>().getHealth() <= 0)
                 {
+                    GameObject.Find("WinObj").GetComponent<WinScript>().setCatDeaths();
                     currentEXP += 100;
                     maxEXP += 100;
                 }
