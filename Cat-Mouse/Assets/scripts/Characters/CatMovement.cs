@@ -67,7 +67,11 @@ public class CatMovement : MonoBehaviour
 
         /*  Finds and initialises the Skill System component */
         //GameObject catSkillGameObject = GameObject.Find("Skill");
+
+        //catSkill = catSkillGameObject.GetComponent<Skill>();
+
       //  catSkill = catSkillGameObject.GetComponent<Skill>();
+
 
         GameObject interactiveText = GameObject.Find("Text");
 		interactText = interactiveText.GetComponent<Text>();

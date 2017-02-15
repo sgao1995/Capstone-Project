@@ -76,8 +76,13 @@ public class MouseMovement : MonoBehaviour {
         mouseVitality = mouseVitalityGameObject.GetComponent<Vitality>();
 
         /*  Finds and initialises the Skill System component */
+
+        GameObject mouseSkillGameObject = GameObject.Find("Skill");
+        //mouseSkill = mouseSkillGameObject.GetComponent<Skill>();
+
        // GameObject mouseSkillGameObject = GameObject.Find("Skill");
      //   mouseSkill = mouseSkillGameObject.GetComponent<Skill>();
+
 
         GameObject interactiveText = GameObject.Find("Text");
 		interactText = interactiveText.GetComponent<Text>();

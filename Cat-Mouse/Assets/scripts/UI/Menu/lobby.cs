@@ -5,6 +5,7 @@ using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using System;
 
+
 public class lobby : Photon.MonoBehaviour
 {
     const string VER = "0.0.1";
