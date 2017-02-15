@@ -27,16 +27,12 @@ public class Vitality : MonoBehaviour {
 
     /* Character Type objects */
     public Image imgCharacterType;  // Character Type image
-    public Sprite spriteTypeCat; // Sprite of the Cat Character Type
-    public Sprite spriteTypeMouse;  // Sprite of the Mouse Character Type;
+    public Sprite[] spriteCharacterTypes; // Sprites representing each Character Type
 
     /* Character Level objects */
     public Image imgLevelCurrent;  // current Level image
-    public Sprite spriteLevelOne;  // Sprite indicating Level One
-    public Sprite spriteLevelTwo;
-    public Sprite spriteLevelThree;
-    public Sprite spriteLevelFour;
-
+    public Sprite[] spriteLevelIndicators;  // Sprites representing each individual Level Indicator
+   
     /* Character Health Bar objects */
     public RectTransform rectHealthCurrent;  // current Health Bar
     public Text textHealthMarker;  // Health Bar marker text
@@ -58,29 +54,29 @@ public class Vitality : MonoBehaviour {
         /* Updates Character Type image for the specified Character Type */
         if (this.characterType == "cat")
         {
-            imgCharacterType.sprite = spriteTypeCat;
+            imgCharacterType.sprite = spriteCharacterTypes[0];
         }
         else if (this.characterType == "mouse")
         {
-            imgCharacterType.sprite = spriteTypeMouse;
+            imgCharacterType.sprite = spriteCharacterTypes[1];
         }
 
         /* Updates Character Level image according to the current level */
         if (this.currentLevel == 1)
         {
-            imgLevelCurrent.sprite = spriteLevelOne;
+            imgLevelCurrent.sprite = spriteLevelIndicators[0];
         }
         else if (this.currentLevel == 2)
         {
-            imgLevelCurrent.sprite = spriteLevelTwo;
+            imgLevelCurrent.sprite = spriteLevelIndicators[1];
         }
         else if (this.currentLevel == 3)
         {
-            imgLevelCurrent.sprite = spriteLevelThree;
+            imgLevelCurrent.sprite = spriteLevelIndicators[2];
         }
         else if (this.currentLevel == 4)
         {
-            imgLevelCurrent.sprite = spriteLevelFour;
+            imgLevelCurrent.sprite = spriteLevelIndicators[3];
         }
 
         /* Updates Health Bar value */
