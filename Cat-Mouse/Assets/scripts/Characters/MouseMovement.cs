@@ -60,7 +60,8 @@ public class MouseMovement : MonoBehaviour {
 
     /* HUD state */
     public Vitality mouseVitality;  // Vitality System component
-	public Text interactText;
+    public Skill mouseSkill;  // Skill System component
+    public Text interactText;
 
     void Start()
     {
@@ -73,8 +74,12 @@ public class MouseMovement : MonoBehaviour {
         /*  Finds and initialises the Vitality System component */
         GameObject mouseVitalityGameObject = GameObject.Find("Vitality");
         mouseVitality = mouseVitalityGameObject.GetComponent<Vitality>();
-		
-		GameObject interactiveText = GameObject.Find("Text");
+
+        /*  Finds and initialises the Skill System component */
+        GameObject mouseSkillGameObject = GameObject.Find("Skill");
+        mouseSkill = mouseSkillGameObject.GetComponent<Skill>();
+
+        GameObject interactiveText = GameObject.Find("Text");
 		interactText = interactiveText.GetComponent<Text>();
 		interactText.text = "";
 
@@ -136,6 +141,8 @@ public class MouseMovement : MonoBehaviour {
         /* Updates the HUD state for the current player */
         if (GetComponent<PhotonView>().isMine)
         {
+            /* Updates the Vitality System states */
+
             /* Updates the Level attributes */
             mouseVitality.setCurrentLevel(this.level);
 
@@ -147,9 +154,13 @@ public class MouseMovement : MonoBehaviour {
             mouseVitality.setMaximumExperiencePoints(this.maxEXP);
             mouseVitality.setCurrentExperiencePoints(this.currentEXP);
 
-            //tell that it is a mouse
+            /* Updates the Character Type attribute as a Mouse */
             mouseVitality.setCharacterType("mouse");
 
+            /* Updates the number of Skill System states */
+
+            /* Updates the number of Skill Slots enabled */
+            mouseSkill.setNumSkillSlots(this.level);
         }
 
         // status effects
