@@ -77,7 +77,7 @@ public class MouseMovement : MonoBehaviour {
 
         /*  Finds and initialises the Skill System component */
         GameObject mouseSkillGameObject = GameObject.Find("Skill");
-        mouseSkill = mouseSkillGameObject.GetComponent<Skill>();
+        //mouseSkill = mouseSkillGameObject.GetComponent<Skill>();
 
         GameObject interactiveText = GameObject.Find("Text");
 		interactText = interactiveText.GetComponent<Text>();
@@ -160,7 +160,7 @@ public class MouseMovement : MonoBehaviour {
             /* Updates the number of Skill System states */
 
             /* Updates the number of Skill Slots enabled */
-            mouseSkill.setNumSkillSlots(this.level);
+            //mouseSkill.setNumSkillSlots(this.level);
         }
 
         // status effects

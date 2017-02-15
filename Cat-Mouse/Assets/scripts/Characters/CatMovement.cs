@@ -66,8 +66,8 @@ public class CatMovement : MonoBehaviour
 		catVitality = catVitalityGameObject.GetComponent<Vitality>();
 
         /*  Finds and initialises the Skill System component */
-        GameObject catSkillGameObject = GameObject.Find("Skill");
-        catSkill = catSkillGameObject.GetComponent<Skill>();
+        //GameObject catSkillGameObject = GameObject.Find("Skill");
+        //catSkill = catSkillGameObject.GetComponent<Skill>();
 
         GameObject interactiveText = GameObject.Find("Text");
 		interactText = interactiveText.GetComponent<Text>();
@@ -147,7 +147,7 @@ public class CatMovement : MonoBehaviour
             /* Updates the number of Skill System states */
 
             /* Updates the number of Skill Slots enabled */
-            catSkill.setNumSkillSlots(this.level);
+            //catSkill.setNumSkillSlots(this.level);
         }
 
         // status effects
