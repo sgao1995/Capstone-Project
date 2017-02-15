@@ -102,7 +102,7 @@ public class MouseMovement : MonoBehaviour {
         attackPower = power;
         maxHealth = 80 + level * 20;
         jumpForce = 250f;
-        attackCooldownDelay = 1.1f - power * 0.1f;
+        attackCooldownDelay = 1.1f;
         currentHealth = maxHealth;
 
         /* Sets Character Maximum Health for new Level */
@@ -186,7 +186,6 @@ public class MouseMovement : MonoBehaviour {
 			else{
 				moveV = moveV.normalized * speed * movementModifier * Time.deltaTime;
 			}
-
             transform.Translate(moveV);
         }
 
@@ -199,9 +198,10 @@ public class MouseMovement : MonoBehaviour {
         if (isGrounded && !onSpikes)
         {
             moveV = new Vector3(0, 0, 0);
+
             if (Input.GetKey(KeyCode.A))
             {
-                animator.Play("Unarmed-Strafe-Left");
+               animator.Play("MoveLeft");
 
 				if (onIce)
 					mouserb.AddRelativeForce(Vector3.left*0.2f, ForceMode.Impulse);
@@ -211,7 +211,7 @@ public class MouseMovement : MonoBehaviour {
             }
             if (Input.GetKey(KeyCode.D))
             {
-                animator.Play("Unarmed-Strafe-Right");
+                animator.Play("MoveRight");
                 
 				if (onIce)
 					mouserb.AddRelativeForce(Vector3.right*0.2f, ForceMode.Impulse);
@@ -221,7 +221,8 @@ public class MouseMovement : MonoBehaviour {
             }
             if (Input.GetKey(KeyCode.W))
             {
-                animator.Play("Unarmed-Strafe-Forward");
+				if (!Input.GetKey(KeyCode.A) && !Input.GetKey(KeyCode.D))
+					animator.Play("MoveForward");
                 
 				if (onIce)
 					mouserb.AddRelativeForce(Vector3.forward*0.2f, ForceMode.Impulse);
@@ -231,7 +232,8 @@ public class MouseMovement : MonoBehaviour {
             }
             if (Input.GetKey(KeyCode.S))
             {
-                animator.Play("Unarmed-Strafe-Backward");
+				if (!Input.GetKey(KeyCode.A) && !Input.GetKey(KeyCode.D))
+					animator.Play("MoveBackward");
                 
 				if (onIce)
 					mouserb.AddRelativeForce(Vector3.back*0.2f, ForceMode.Impulse);
@@ -242,11 +244,12 @@ public class MouseMovement : MonoBehaviour {
             if (Input.GetKeyDown(KeyCode.Space))
             {
                 isGrounded = false;
-                animator.Play("Unarmed-Jump");
+               // animator.Play("Unarmed-Jump");
+				animator.SetTrigger("JumpTrigger");
+				animator.SetInteger("Jumping", 1);
                 mouserb.AddForce(new Vector3(0, jumpForce, 0));
             }
         }
-
 
         // left click
         if (Input.GetMouseButtonDown(0) && attackCooldownTimer <= 0 && !Input.GetKey(KeyCode.Escape))
@@ -309,25 +312,33 @@ public class MouseMovement : MonoBehaviour {
     [PunRPC]
     void changeHealth(float dmg)
     {
-        currentHealth -= dmg;
-        if (currentHealth <= 0)
-        {
-            currentHealth = 0;
-            Death();
-        }
+		if (alive){
+			currentHealth -= dmg;
+			if (currentHealth <= 0)
+			{
+				currentHealth = 0;
+				Death();
+			}
+		}
     }
 
     void Death()
     {
         Debug.Log("player died");
         alive = false;
+		animator.SetTrigger("Death1Trigger");
         //animator.Play("Unarmed-Death1");
     }
 
     // attack in front of player
     void Attack()
     {
-        animator.Play("Unarmed-Attack-L3");
+		float attackType = Random.Range(0f, 1f);
+		if (attackType <= 0.5f)
+			animator.SetTrigger("Attack3Trigger");
+		else if (attackType > 0.5f)
+			animator.SetTrigger("Attack6Trigger");
+		//  animator.Play("Unarmed-Attack-L3");
 
     }
     void DealDamage()
@@ -417,6 +428,7 @@ public class MouseMovement : MonoBehaviour {
     void OnCollisionEnter(Collision collisionInfo)
     {
         isGrounded = true;
+		animator.SetInteger("Jumping", 0);
         if (collisionInfo.gameObject.tag == "Ground")
         {
             onLava = false;

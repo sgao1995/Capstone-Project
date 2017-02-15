@@ -91,7 +91,7 @@ public class CatMovement : MonoBehaviour
 		attackPower = power;
 		maxHealth = 80 + level * 20;
 		jumpForce = 300f;
-		attackCooldownDelay = 1.1f - power * 0.1f;
+		attackCooldownDelay = 1.1f;
 		
         /* Sets Character Maximum Health for new Level */
         this.maxHealth = this.vitalLevelHP[this.level - 1];
@@ -185,7 +185,7 @@ public class CatMovement : MonoBehaviour
             moveV = new Vector3(0, 0, 0);
             if (Input.GetKey(KeyCode.A))
             {
-                animator.Play("Unarmed-Strafe-Left");
+               animator.Play("MoveLeft");
 
 				if (onIce)
 					catrb.AddRelativeForce(Vector3.left*0.2f, ForceMode.Impulse);
@@ -195,7 +195,7 @@ public class CatMovement : MonoBehaviour
             }
             if (Input.GetKey(KeyCode.D))
             {
-                animator.Play("Unarmed-Strafe-Right");
+                animator.Play("MoveRight");
                 
 				if (onIce)
 					catrb.AddRelativeForce(Vector3.right*0.2f, ForceMode.Impulse);
@@ -205,7 +205,8 @@ public class CatMovement : MonoBehaviour
             }
             if (Input.GetKey(KeyCode.W))
             {
-                animator.Play("Unarmed-Strafe-Forward");
+				if (!Input.GetKey(KeyCode.A) && !Input.GetKey(KeyCode.D))
+					animator.Play("MoveForward");
                 
 				if (onIce)
 					catrb.AddRelativeForce(Vector3.forward*0.2f, ForceMode.Impulse);
@@ -215,7 +216,8 @@ public class CatMovement : MonoBehaviour
             }
             if (Input.GetKey(KeyCode.S))
             {
-                animator.Play("Unarmed-Strafe-Backward");
+				if (!Input.GetKey(KeyCode.A) && !Input.GetKey(KeyCode.D))
+					animator.Play("MoveBackward");
                 
 				if (onIce)
 					catrb.AddRelativeForce(Vector3.back*0.2f, ForceMode.Impulse);
@@ -226,7 +228,9 @@ public class CatMovement : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.Space))
             {
                 isGrounded = false;
-                animator.Play("Unarmed-Jump");
+               // animator.Play("Unarmed-Jump");
+				animator.SetTrigger("JumpTrigger");
+				animator.SetInteger("Jumping", 1);
                 catrb.AddForce(new Vector3(0, jumpForce, 0));
             }
         }
@@ -281,25 +285,31 @@ public class CatMovement : MonoBehaviour
     [PunRPC]
     void changeHealth(float dmg)
     {
-        this.currentHealth -= dmg;
-        if (this.currentHealth <= 0)
-        {
-           this.currentHealth = 0;
-            Death();
-        }
+		if (alive){
+			currentHealth -= dmg;
+			if (currentHealth <= 0)
+			{
+				currentHealth = 0;
+				Death();
+			}
+		}
     }
 
     void Death(){
 		Debug.Log("player died");
 		alive = false;
+		animator.SetTrigger("Death1Trigger");
 		//animator.Play("Unarmed-Death1");
 	}
 
     // attack in front of player
     void Attack()
     {
-        animator.Play("Unarmed-Attack-L3");
-  
+		float attackType = Random.Range(0f, 1f);
+		if (attackType <= 0.5f)
+			animator.SetTrigger("Attack3Trigger");
+		else if (attackType > 0.5f)
+			animator.SetTrigger("Attack6Trigger");
     }
     void DealDamage()
     {
@@ -368,6 +378,7 @@ public class CatMovement : MonoBehaviour
 	// collision with objects
 	void OnCollisionEnter(Collision collisionInfo){
 		isGrounded = true;
+		animator.SetInteger("Jumping", 0);
 		if (collisionInfo.gameObject.tag == "Ground"){
 			onLava = false;
 			onIce = false;
