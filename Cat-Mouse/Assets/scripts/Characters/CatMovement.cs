@@ -29,7 +29,7 @@ public class CatMovement : MonoBehaviour
 
     private Vector3 moveV; //vector to store movement
     public Rigidbody catrb;
-<<<<<<< HEAD
+
 	
 	// jump variables
 	private bool isGrounded = false;
@@ -43,24 +43,10 @@ public class CatMovement : MonoBehaviour
 	// skills
 	private float[] skillCooldownTimers = new float[4]; // the cooldown timer
 	private float[] skillCooldowns = new float[4]; // the max cooldown
-=======
-
-    // jump variables
-    private bool isGrounded = false;
-    // status effects
-    private bool onLava = false;
-    private bool onSpikes = false;
-    private bool alive = true;
-    private bool canToggleDoor = false;
-
-    // skills
-    private float[] skillCooldownTimers = new float[4]; // the cooldown timer
-    private float[] skillCooldowns = new float[4]; // the max cooldown
 
     /* Vitality System attribute parameters */
     private float[] vitalLevelHP = {100, 125, 160, 200};  // Health Points of Cat per Level
     private float[] vitalLevelEXP = {200, 400, 800, 2000};  // Experience Points Cat per Level
->>>>>>> a92353a0b5f304eb91fdc197bfa86e2a0ca773fe
 
     /* HUD state */
     public Vitality catVitality;  // Vitality System component
