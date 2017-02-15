@@ -9,6 +9,7 @@ public class GameManager : Photon.PunBehaviour {
     Spawn[] s;
     List<int> allPuzzleTypes = new List<int>();
     List<int> activePuzzleTypes = new List<int>();
+    
 
     private	void Start () {
         s = GameObject.FindObjectsOfType<Spawn>();
@@ -27,7 +28,14 @@ public class GameManager : Photon.PunBehaviour {
             Debug.Log(activePuzzleTypes);
         }
         SpawnMaze();
-        SpawnMouse();
+        if(GameObject.Find("TeamSelectionOBJ").GetComponent<teamselectiondata>().playertype == 0)
+        {
+            SpawnCat();
+        }else
+        {
+            SpawnMouse();
+        }
+        
       //  SpawnMonsters();
 		SpawnKeysAndChests();
     }
