@@ -60,7 +60,7 @@ public class MouseMovement : MonoBehaviour {
 
     /* HUD state */
     public Vitality mouseVitality;  // Vitality System component
-    public Skill mouseSkill;  // Skill System component
+   // public Skill mouseSkill;  // Skill System component
     public Text interactText;
 
     void Start()
@@ -76,8 +76,13 @@ public class MouseMovement : MonoBehaviour {
         mouseVitality = mouseVitalityGameObject.GetComponent<Vitality>();
 
         /*  Finds and initialises the Skill System component */
+
         GameObject mouseSkillGameObject = GameObject.Find("Skill");
         //mouseSkill = mouseSkillGameObject.GetComponent<Skill>();
+
+       // GameObject mouseSkillGameObject = GameObject.Find("Skill");
+     //   mouseSkill = mouseSkillGameObject.GetComponent<Skill>();
+
 
         GameObject interactiveText = GameObject.Find("Text");
 		interactText = interactiveText.GetComponent<Text>();
@@ -349,11 +354,11 @@ public class MouseMovement : MonoBehaviour {
                     Debug.Log("current EXP is" + mouseVitality.getEXP());
                 }
             }
-            if (hitInfo.collider.name == "Cat(Clone)" || hitInfo.collider.name == "Cat")
+            if (hitInfo.collider.tag == "Cat")
             {
-                Debug.Log("Trying to hurt " + hitInfo.collider.transform.parent.name + " by calling script " + hitInfo.collider.transform.parent.GetComponent<CatMovement>().name);
-                hitInfo.collider.transform.parent.GetComponent<CatMovement>().SendMessage("TakeDamage", 10f);
-                if (hitInfo.collider.transform.parent.GetComponent<CatMovement>().getHealth() <= 0)
+                Debug.Log("Trying to hurt " + hitInfo.collider.transform.name + " by calling script " + hitInfo.collider.transform.GetComponent<CatMovement>().name);
+                hitInfo.collider.transform.GetComponent<CatMovement>().SendMessage("TakeDamage", 10f);
+                if (hitInfo.collider.transform.GetComponent<CatMovement>().getHealth() <= 0)
                 {
                     currentEXP += 100;
                     maxEXP += 100;
