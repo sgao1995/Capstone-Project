@@ -64,8 +64,8 @@ public class GameManager : Photon.PunBehaviour {
         if (PhotonNetwork.isMasterClient)
         {
             List<int> tempTypes = new List<int>();
-            tempTypes.Add(0);
-            tempTypes.Add(1);
+            tempTypes.Add(4);
+            tempTypes.Add(3);
             tempTypes.Add(2);
             mazeInstance.GeneratePuzzles(tempTypes);
             Debug.Log(tempTypes[0] + " " + tempTypes[1] + " " + tempTypes[2]);

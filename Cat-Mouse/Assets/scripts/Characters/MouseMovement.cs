@@ -38,6 +38,7 @@ public class MouseMovement : MonoBehaviour {
     private bool isGrounded = false;
     // status effects
     private bool onLava = false;
+	private bool onIce = false;
     private bool onSpikes = false;
     private bool alive = true;
 	private bool canToggleDoor = false;
@@ -86,7 +87,7 @@ public class MouseMovement : MonoBehaviour {
         power = 5 + level * 5;
         attackPower = power;
         maxHealth = 80 + level * 20;
-        jumpForce = 2f + power / 25f;
+        jumpForce = 250f;
         attackCooldownDelay = 1.1f - power * 0.1f;
         currentHealth = maxHealth;
     }
@@ -150,8 +151,14 @@ public class MouseMovement : MonoBehaviour {
         }
         // dont let player move if they are on spikes
         else
-        {
-            moveV = moveV.normalized * speed * movementModifier * Time.deltaTime;
+        {	
+			if (onIce){
+				moveV = moveV.normalized * speed * movementModifier * Time.deltaTime * 0.1f;
+			}
+			else{
+				moveV = moveV.normalized * speed * movementModifier * Time.deltaTime;
+			}
+
             transform.Translate(moveV);
         }
 
@@ -167,27 +174,46 @@ public class MouseMovement : MonoBehaviour {
             if (Input.GetKey(KeyCode.A))
             {
                 animator.Play("Unarmed-Strafe-Left");
-                moveV = new Vector3(-1, 0, moveV.z);
+
+				if (onIce)
+					mouserb.AddRelativeForce(Vector3.left*0.2f, ForceMode.Impulse);
+				else{
+					moveV = new Vector3(-1, 0, moveV.z);
+				}
             }
             if (Input.GetKey(KeyCode.D))
             {
                 animator.Play("Unarmed-Strafe-Right");
-                moveV = new Vector3(1, 0, moveV.z);
+                
+				if (onIce)
+					mouserb.AddRelativeForce(Vector3.right*0.2f, ForceMode.Impulse);
+				else{
+					moveV = new Vector3(1, 0, moveV.z);
+				}
             }
             if (Input.GetKey(KeyCode.W))
             {
                 animator.Play("Unarmed-Strafe-Forward");
-                moveV = new Vector3(moveV.x, 0, 1);
+                
+				if (onIce)
+					mouserb.AddRelativeForce(Vector3.forward*0.2f, ForceMode.Impulse);
+				else{
+					moveV = new Vector3(moveV.x, 0, 1);
+				}
             }
             if (Input.GetKey(KeyCode.S))
             {
                 animator.Play("Unarmed-Strafe-Backward");
-                moveV = new Vector3(moveV.x, 0, -1);
+                
+				if (onIce)
+					mouserb.AddRelativeForce(Vector3.back*0.2f, ForceMode.Impulse);
+				else{
+					moveV = new Vector3(moveV.x, 0, -1);
+				}
             }
             if (Input.GetKeyDown(KeyCode.Space))
             {
                 isGrounded = false;
-                Debug.Log(moveV.x + " " + moveV.y + " " + moveV.z);
                 animator.Play("Unarmed-Jump");
                 mouserb.AddForce(new Vector3(0, jumpForce, 0));
             }
@@ -230,7 +256,7 @@ public class MouseMovement : MonoBehaviour {
         }
 		if (Input.GetKeyDown(KeyCode.T))
         {
-            transform.position = new Vector3(0, 0, 0);
+            transform.position = new Vector3(22, 0, 25);
         }
 
         // timer actions
@@ -364,11 +390,16 @@ public class MouseMovement : MonoBehaviour {
         if (collisionInfo.gameObject.tag == "Ground")
         {
             onLava = false;
+			onIce = false;
         }
         // if enters lava
         if (collisionInfo.gameObject.tag == "Lava")
         {
             onLava = true;
+        }
+		if (collisionInfo.gameObject.tag == "Ice")
+        {
+            onIce = true;
         }
         // if steps on a mine
         if (collisionInfo.gameObject.tag == "Mine")

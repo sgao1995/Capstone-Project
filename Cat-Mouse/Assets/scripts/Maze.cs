@@ -21,8 +21,9 @@ public class Maze : MonoBehaviour {
 	// puzzle room generation
 	public List<MazeRoom> puzzleRooms = new List<MazeRoom>();
 	public Material lavaMat;
+	public Material iceMat;
 	public List<Mine> mineList = new List<Mine>();
-	public List<Hole> holeList = new List<Hole>();
+	public List<Target> targetList = new List<Target>();
 	public List<Ball> ballList = new List<Ball>();
 	public List<Spike> spikeList = new List<Spike>();
 	
@@ -362,7 +363,7 @@ public class Maze : MonoBehaviour {
 			// floor is lava, jump from safe point to safe point
 			if (puzzleType == 0){
 				for (int c = 0; c < puzzleRooms[r].getCells().Count; c++){
-					// use Perlin noise to generate rocky areas
+					// use Perlin noise to generate lava areas
 					float generatedNoise;
 					MazeCell currentCell = puzzleRooms[r].getCells()[c];
 					generatedNoise = Mathf.PerlinNoise((currentCell.coordinates.x * currentCell.coordinates.x)/(float)mazeGenerationNumber, (currentCell.coordinates.z * currentCell.coordinates.z)/(float)mazeGenerationNumber);
@@ -438,43 +439,59 @@ public class Maze : MonoBehaviour {
 					}
 				}
 			}
-			// ball room, roll different color balls into different holes
+			// ball room, roll balls onto targets
 			else if (puzzleType == 3){
 				// pick 6 areas
-				int[] itemCells = new int[6];
+				List<int> itemCells = new List<int>();
 				int counter = 0;
 				int index = 0;
-				while(index < 6){
+				while(index < 7){
+					int cell = 0;
 					counter++;
-					int cellWithHole = (int)(puzzleRooms[r].getCells().Count * Mathf.PerlinNoise(counter/(float)mazeGenerationNumber, counter/(float)mazeGenerationNumber));
-					if (itemCells.Contains(cellWithHole))
-						break;
-					itemCells[index] = cellWithHole;
+					// keep giving cell new values until its a new value not already in the list
+					do {
+						cell = (int)Random.Range(0f, puzzleRooms[r].getCells().Count -1);
+					}while(itemCells.Contains(cell));
+					itemCells.Add(cell);
 					index++;
 				}
+				for(int i = 0; i < 7; i++){
+					Debug.Log(itemCells[i]);}
 				// first 3 cells contain balls
 				for (int b = 0; b < 3; b++){
-					Vector3 spawnPos = new Vector3(puzzleRooms[r].getCells()[itemCells[b]].transform.position.x, 0f, puzzleRooms[r].getCells()[itemCells[b]].transform.position.z);
+					Vector3 spawnPos = new Vector3(puzzleRooms[r].getCells()[itemCells[b]].transform.position.x, 0.5f, puzzleRooms[r].getCells()[itemCells[b]].transform.position.z);
 					Quaternion spawnRot = new Quaternion(0f, 0f, 0f, 0f);
 					GameObject newGO = (GameObject)PhotonNetwork.Instantiate("Ball", spawnPos, spawnRot, 0);
 					Ball newBall = newGO.GetComponent<Ball>();
-					Debug.Log("madeball");
-					newBall.setBall(b+1, 1f/(b+1));
+					newBall.setSize(0.5f);
 					ballList.Add(newBall);
 				}
 				// last 3 cells contain holes
 				for (int h = 3; h < 6; h++){
 					Vector3 spawnPos = new Vector3(puzzleRooms[r].getCells()[itemCells[h]].transform.position.x, 0f, puzzleRooms[r].getCells()[itemCells[h]].transform.position.z);
 					Quaternion spawnRot = new Quaternion(0f, 0f, 0f, 0f);
-					GameObject newGO = (GameObject)PhotonNetwork.Instantiate("Hole", spawnPos, spawnRot, 0);
-					Hole newHole = newGO.GetComponent<Hole>();
-					newHole.setSize(1f/(h-2));
-					holeList.Add(newHole);
+					GameObject newGO = (GameObject)PhotonNetwork.Instantiate("Target", spawnPos, spawnRot, 0);
+					Target newTarget = newGO.GetComponent<Target>();
+					newTarget.setSize(0.5f);
+					targetList.Add(newTarget);
 				}
+				MazeCell currentCell = puzzleRooms[r].getCells()[itemCells[6]];
+				keyLocations.Add(currentCell.transform.position.x + Mathf.PerlinNoise(currentCell.coordinates.x/(float)mazeGenerationNumber, currentCell.coordinates.x/(float)mazeGenerationNumber));
+				keyLocations.Add(currentCell.transform.position.z + Mathf.PerlinNoise(currentCell.coordinates.z/(float)mazeGenerationNumber, currentCell.coordinates.z/(float)mazeGenerationNumber));
 			}
-			// order room, arrange different cubes into the right order
+			// ice room, low control over movement
 			else if (puzzleType == 4){
-				
+				for (int c = 0; c < puzzleRooms[r].getCells().Count; c++){
+					// change all floor cells to ice
+					MazeCell changeThis = puzzleRooms[r].getCells()[c];
+					changeThis.transform.GetChild(0).gameObject.tag = "Ice";
+					changeThis.changeMaterial(iceMat);
+				}
+				float generatedNoise = Mathf.PerlinNoise(r*mazeGenerationNumber, r*mazeGenerationNumber);
+				int keyCell = (int)(generatedNoise*puzzleRooms[r].getCells().Count);
+				MazeCell currentCell = puzzleRooms[r].getCells()[keyCell];
+				keyLocations.Add(currentCell.transform.position.x + Mathf.PerlinNoise(currentCell.coordinates.x/(float)mazeGenerationNumber, currentCell.coordinates.x/(float)mazeGenerationNumber));
+				keyLocations.Add(currentCell.transform.position.z + Mathf.PerlinNoise(currentCell.coordinates.z/(float)mazeGenerationNumber, currentCell.coordinates.z/(float)mazeGenerationNumber));
 			}
 			// boss room, fight a strong monster
 			else if (puzzleType == 5){
