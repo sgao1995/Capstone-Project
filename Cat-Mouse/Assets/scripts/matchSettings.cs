@@ -24,6 +24,8 @@ public class matchSettings : Photon.PunBehaviour
             StartBtn.SetActive(false);
             Debug.Log("you are not Master");
         }
+        Debug.Log(PhotonNetwork.playerList.Length);
+
     }
     void JoinCat()
     {
@@ -60,7 +62,7 @@ public class matchSettings : Photon.PunBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        //GameObject.Find("scriptLobby").GetComponent<lobby>().playerCount= PhotonNetwork.playerList.Length;
         if(teamChosen)
         {
             GameObject.Find("StartButton").GetComponent<Image>().color = Color.red;
@@ -142,7 +144,7 @@ public class matchSettings : Photon.PunBehaviour
             case "StartBtn":
                 //if (PhotonNetwork.JoinLobby())
                 // {
-                if(teamChosen == true)
+                if(teamChosen == true/*&&PhotonNetwork.playerList.Length == 2*/)
                 {
                     
                     PhotonNetwork.LoadLevel("catmousegame3");

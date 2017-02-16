@@ -18,7 +18,7 @@ Platform assembly: C:\Users\SmugFug\Documents\GitHub\Cat-and-Mouse-Game\Cat-Mous
 Loading C:\Users\SmugFug\Documents\GitHub\Cat-and-Mouse-Game\Cat-Mouse\C&M_Data\Managed\UnityEngine.Networking.dll into Unity Child Domain
 Platform assembly: C:\Users\SmugFug\Documents\GitHub\Cat-and-Mouse-Game\Cat-Mouse\C&M_Data\Managed\Photon3Unity3D.dll (this message is harmless)
 Loading C:\Users\SmugFug\Documents\GitHub\Cat-and-Mouse-Game\Cat-Mouse\C&M_Data\Managed\Photon3Unity3D.dll into Unity Child Domain
-- Completed reload, in  0.271 seconds
+- Completed reload, in  2.288 seconds
 Platform assembly: C:\Users\SmugFug\Documents\GitHub\Cat-and-Mouse-Game\Cat-Mouse\C&M_Data\Managed\System.Core.dll (this message is harmless)
 Platform assembly: C:\Users\SmugFug\Documents\GitHub\Cat-and-Mouse-Game\Cat-Mouse\C&M_Data\Managed\System.dll (this message is harmless)
 desktop: 1920x1080 60Hz; virtual: 1920x1080 at 0,0
@@ -29,64 +29,15 @@ The referenced script on this Behaviour (Game Object 'Main Camera') is missing!
  
 (Filename:  Line: 1656)
 
-UnloadTime: 1.042291 ms
+UnloadTime: 8.425988 ms
 Setting up 2 worker threads for Enlighten.
-  Thread -> id: 2008 -> priority: 1 
-  Thread -> id: 1e50 -> priority: 1 
-Initialize engine version: 5.4.2f2 (b7e030c65c9b)
-GfxDevice: creating device client; threaded=1
-Direct3D:
-    Version:  Direct3D 11.0 [level 11.0]
-    Renderer: NVIDIA GeForce GTX 770 (ID=0x1184)
-    Vendor:   NVIDIA
-    VRAM:     2017 MB
-Begin MonoManager ReloadAssembly
-Platform assembly: C:\Users\SmugFug\Documents\GitHub\Cat-and-Mouse-Game\Cat-Mouse\C&M_Data\Managed\UnityEngine.dll (this message is harmless)
-Loading C:\Users\SmugFug\Documents\GitHub\Cat-and-Mouse-Game\Cat-Mouse\C&M_Data\Managed\UnityEngine.dll into Unity Child Domain
-Platform assembly: C:\Users\SmugFug\Documents\GitHub\Cat-and-Mouse-Game\Cat-Mouse\C&M_Data\Managed\Assembly-CSharp-firstpass.dll (this message is harmless)
-Loading C:\Users\SmugFug\Documents\GitHub\Cat-and-Mouse-Game\Cat-Mouse\C&M_Data\Managed\Assembly-CSharp-firstpass.dll into Unity Child Domain
-Platform assembly: C:\Users\SmugFug\Documents\GitHub\Cat-and-Mouse-Game\Cat-Mouse\C&M_Data\Managed\Assembly-CSharp.dll (this message is harmless)
-Loading C:\Users\SmugFug\Documents\GitHub\Cat-and-Mouse-Game\Cat-Mouse\C&M_Data\Managed\Assembly-CSharp.dll into Unity Child Domain
-Platform assembly: C:\Users\SmugFug\Documents\GitHub\Cat-and-Mouse-Game\Cat-Mouse\C&M_Data\Managed\UnityEngine.UI.dll (this message is harmless)
-Loading C:\Users\SmugFug\Documents\GitHub\Cat-and-Mouse-Game\Cat-Mouse\C&M_Data\Managed\UnityEngine.UI.dll into Unity Child Domain
-Platform assembly: C:\Users\SmugFug\Documents\GitHub\Cat-and-Mouse-Game\Cat-Mouse\C&M_Data\Managed\UnityEngine.Networking.dll (this message is harmless)
-Loading C:\Users\SmugFug\Documents\GitHub\Cat-and-Mouse-Game\Cat-Mouse\C&M_Data\Managed\UnityEngine.Networking.dll into Unity Child Domain
-Platform assembly: C:\Users\SmugFug\Documents\GitHub\Cat-and-Mouse-Game\Cat-Mouse\C&M_Data\Managed\Photon3Unity3D.dll (this message is harmless)
-Loading C:\Users\SmugFug\Documents\GitHub\Cat-and-Mouse-Game\Cat-Mouse\C&M_Data\Managed\Photon3Unity3D.dll into Unity Child Domain
-- Completed reload, in  0.066 seconds
-Platform assembly: C:\Users\SmugFug\Documents\GitHub\Cat-and-Mouse-Game\Cat-Mouse\C&M_Data\Managed\System.Core.dll (this message is harmless)
-Platform assembly: C:\Users\SmugFug\Documents\GitHub\Cat-and-Mouse-Game\Cat-Mouse\C&M_Data\Managed\System.dll (this message is harmless)
-desktop: 1920x1080 60Hz; virtual: 1920x1080 at 0,0
-<RI> Initializing input.
-<RI> Input initialized.
-<RI> Initialized touch support.
+  Thread -> id: 934 -> priority: 1 
+  Thread -> id: 8f8 -> priority: 1 
 Unloading 7 Unused Serialized files (Serialized files now loaded: 0)
-UnloadTime: 6.067073 ms
+UnloadTime: 6.748828 ms
 
-Unloading 6 unused Assets to reduce memory usage. Loaded Objects now: 543.
-Total: 5.138650 ms (FindLiveObjects: 0.037859 ms CreateObjectMapping: 0.041062 ms MarkObjects: 0.314522 ms  DeleteObjects: 4.735304 ms)
-
-SwitchToProtocol: Udp PhotonNetwork.connected: False
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
-
-OnJoinedLobby
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
-
-The referenced script on this Behaviour (Game Object 'Main Camera') is missing!
- 
-(Filename:  Line: 1656)
-
-UnloadTime: 0.888524 ms
-Setting up 2 worker threads for Enlighten.
-  Thread -> id: ac4 -> priority: 1 
-  Thread -> id: 20ac -> priority: 1 
-Unloading 7 Unused Serialized files (Serialized files now loaded: 0)
-UnloadTime: 6.828624 ms
-
-Unloading 6 unused Assets to reduce memory usage. Loaded Objects now: 543.
-Total: 5.002357 ms (FindLiveObjects: 0.024462 ms CreateObjectMapping: 0.042809 ms MarkObjects: 0.267343 ms  DeleteObjects: 4.664537 ms)
+Unloading 6 unused Assets to reduce memory usage. Loaded Objects now: 542.
+Total: 5.438028 ms (FindLiveObjects: 0.025627 ms CreateObjectMapping: 0.041062 ms MarkObjects: 0.759803 ms  DeleteObjects: 4.608331 ms)
 
 SwitchToProtocol: Udp PhotonNetwork.connected: False
  
@@ -109,34 +60,294 @@ playerWhoIsIt: 1
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
 
 Unloading 5 Unused Serialized files (Serialized files now loaded: 0)
-UnloadTime: 1.412437 ms
+UnloadTime: 1.088304 ms
 
-Unloading 145 unused Assets to reduce memory usage. Loaded Objects now: 472.
-Total: 0.745825 ms (FindLiveObjects: 0.037567 ms CreateObjectMapping: 0.030287 ms MarkObjects: 0.463046 ms  DeleteObjects: 0.213758 ms)
+Unloading 145 unused Assets to reduce memory usage. Loaded Objects now: 475.
+Total: 0.636907 ms (FindLiveObjects: 0.026792 ms CreateObjectMapping: 0.030287 ms MarkObjects: 0.393735 ms  DeleteObjects: 0.185509 ms)
 
-OnJoinedLobby
+1
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
 
-OnJoinedRoom
+FOUND
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
 
-playerWhoIsIt: 0
+FOUND
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
 
-Unloading 5 Unused Serialized files (Serialized files now loaded: 0)
-UnloadTime: 1.088013 ms
-
-Unloading 145 unused Assets to reduce memory usage. Loaded Objects now: 472.
-Total: 0.750193 ms (FindLiveObjects: 0.038441 ms CreateObjectMapping: 0.029996 ms MarkObjects: 0.463046 ms  DeleteObjects: 0.217835 ms)
-
-you are not Master
+FOUND
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
 
-Adjusting owner to sender of updates. From: 0 to: 1
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+Unloading 4 Unused Serialized files (Serialized files now loaded: 0)
+TerrainData is missing splat texture 1.
+ 
+(Filename:  Line: 206)
+
+UnloadTime: 1.250516 ms
+
+Unloading 13 unused Assets to reduce memory usage. Loaded Objects now: 740.
+Total: 0.714664 ms (FindLiveObjects: 0.038732 ms CreateObjectMapping: 0.032325 ms MarkObjects: 0.410334 ms  DeleteObjects: 0.232105 ms)
+
+System.Collections.Generic.List`1[System.Int32]
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+System.Collections.Generic.List`1[System.Int32]
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+System.Collections.Generic.List`1[System.Int32]
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+System.Collections.Generic.List`1[System.Int32]
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+System.Collections.Generic.List`1[System.Int32]
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+System.Collections.Generic.List`1[System.Int32]
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+donemaze, 148
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+22
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+26
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+5
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+1
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+3
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+36
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+7
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+0
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+4 3 2
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+We hit: Monster(Clone)
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+Trying to hurt Monster(Clone) by calling script Monster(Clone)
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+take 50 damage
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+We hit: Monster(Clone)
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+Trying to hurt Monster(Clone) by calling script Monster(Clone)
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+take 50 damage
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+We hit: Monster(Clone)
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+Trying to hurt Monster(Clone) by calling script Monster(Clone)
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+take 50 damage
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+We hit: Monster(Clone)
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+Trying to hurt Monster(Clone) by calling script Monster(Clone)
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+take 50 damage
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
 
