@@ -2,8 +2,6 @@
 using System.Collections;
 
 public class Minimap : MonoBehaviour {
-	GameObject cat;
-
 	// Use this for initialization
 	void Start () {
 		Camera.main.rect = new Rect (0f, 0f, 1f, 1f);
