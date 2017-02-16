@@ -111,6 +111,16 @@ public class MouseMovement : MonoBehaviour {
         this.currentEXP = 0;
     }
 
+	// wait function
+	public void WaitForAnimation(float seconds){
+		StartCoroutine(_wait(seconds));
+	}
+	IEnumerator _wait(float time){
+		canMove = false;
+		yield return new WaitForSeconds(time);
+		canMove = true;
+	}
+	
     // execute a skill (not jump or attack)
     public void useSkill(int skillCode)
     {
@@ -119,6 +129,9 @@ public class MouseMovement : MonoBehaviour {
             // skills 1 and 2 are passive
             case 3:
                 Debug.Log("use 3");
+				// placeholder skill for a smoke screen
+				animator.Play("Throw");
+				WaitForAnimation(0.7f);
                 break;
             case 4:
                 Debug.Log("use 4");
@@ -250,12 +263,12 @@ public class MouseMovement : MonoBehaviour {
         if (Input.GetMouseButtonDown(0) && attackCooldownTimer <= 0 && !Input.GetKey(KeyCode.Escape))
         {
             attackCooldownTimer = attackCooldownDelay;
-            StartCoroutine(Attack());
+            Attack();
         }
         // skills
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
-            mouseSkill.useSkillSlot(1);
+            useSkill(3);
         }
         if (Input.GetKeyDown(KeyCode.Alpha2))
         {
@@ -330,17 +343,15 @@ public class MouseMovement : MonoBehaviour {
     }
 
     // attack in front of player
-    IEnumerator Attack()
+    void Attack()
     {
-		canMove = false;
 		float attackType = Random.Range(0f, 1f);
 		if (attackType <= 0.5f)
 			animator.SetTrigger("Attack3Trigger");
 		else if (attackType > 0.5f)
 			animator.SetTrigger("Attack6Trigger");
 		DealDamage();
-		yield return new WaitForSeconds(0.7f);
-		canMove = true;
+		WaitForAnimation(0.7f);
     }
 	
     void DealDamage()
