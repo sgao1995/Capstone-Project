@@ -147,10 +147,18 @@ public class MonsterAI : MonoBehaviour {
         {
             if (hitInfo.collider.name == "Cat(Clone)")
             {
+                if (hitInfo.collider.transform.GetComponent<CatMovement>().getHealth() > 0 && hitInfo.collider.transform.GetComponent<CatMovement>().getHealth() - attackPower <= 0)
+                {
+                    GameObject.Find("WinObj").GetComponent<WinScript>().setCatDeaths();
+                }
                 hitInfo.collider.transform.GetComponent<CatMovement>().SendMessage("TakeDamage", attackPower);
             }
             if (hitInfo.collider.name == "Mouse(Clone)")
             {
+                if (hitInfo.collider.transform.GetComponent<MouseMovement>().getHealth() > 0 && hitInfo.collider.transform.GetComponent<MouseMovement>().getHealth() - attackPower <= 0)
+                {
+                    GameObject.Find("WinObj").GetComponent<WinScript>().setMouseDeaths();
+                }
                 hitInfo.collider.transform.GetComponent<MouseMovement>().SendMessage("TakeDamage", attackPower);
             }
         }
