@@ -99,12 +99,27 @@ public class CatMovement : MonoBehaviour
         this.currentEXP = 0;
     }
 	
+	// wait function
+	public void WaitForAnimation(float seconds){
+		StartCoroutine(_wait(seconds));
+	}
+	IEnumerator _wait(float time){
+		canMove = false;
+		yield return new WaitForSeconds(time);
+		canMove = true;
+	}
+	
 	// execute a skill (not jump or attack)
 	public void useSkill(int skillCode){
 		switch (skillCode){
 			// skills 1 and 2 are passive
 			case 3: 
 				Debug.Log("use 3");
+				// a placeholder skill for a leap
+				isGrounded = false;
+				animator.SetTrigger("JumpTrigger");
+				animator.SetInteger("Jumping", 1);
+				catrb.AddForce(new Vector3(0, 350f, 0) + (transform.forward*150f));
 				break;
 			case 4:
 				Debug.Log("use 4");
@@ -234,11 +249,11 @@ public class CatMovement : MonoBehaviour
 		if (Input.GetMouseButtonDown(0) && attackCooldownTimer <= 0 && !Input.GetKey(KeyCode.Escape))
         {
 			attackCooldownTimer = attackCooldownDelay;
-			StartCoroutine(Attack());
+			Attack();
 		}
 		// skills
 		if (Input.GetKeyDown(KeyCode.Alpha1)){
-            catSkill.useSkillSlot(1);
+            useSkill(3);
 		}
 		if (Input.GetKeyDown(KeyCode.Alpha2)){
             catSkill.useSkillSlot(2);
@@ -306,17 +321,15 @@ public class CatMovement : MonoBehaviour
 	}
 
     // attack in front of player
-    IEnumerator Attack()
+    void Attack()
     {
-		canMove = false;
 		float attackType = Random.Range(0f, 1f);
 		if (attackType <= 0.5f)
 			animator.SetTrigger("Attack3Trigger");
 		else if (attackType > 0.5f)
 			animator.SetTrigger("Attack6Trigger");
 		DealDamage();
-		yield return new WaitForSeconds(0.7f);
-		canMove = true;
+		WaitForAnimation(0.7f);
     }
 	
     void DealDamage()

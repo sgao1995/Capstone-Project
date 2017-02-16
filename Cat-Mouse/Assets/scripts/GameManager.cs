@@ -44,6 +44,7 @@ public class GameManager : Photon.PunBehaviour {
             SpawnMonsters(i);
         }
 		SpawnKeysAndChests();
+        GameObject.Find("Timer").GetComponent<Timer>().enabled = true;
     }
     void OnGUI()
     {
