@@ -83,7 +83,7 @@ public class GameManager : Photon.PunBehaviour {
     }
     void SpawnCat()
     {
-        Spawn mys = s[Random.Range(0, s.Length)];
+        Spawn mys = s[0];
         GameObject myCat = (GameObject)PhotonNetwork.Instantiate("Cat", mys.transform.position, mys.transform.rotation, 0);
         myCat.GetComponent<CatMovement>().enabled = true;
         myCat.transform.FindChild("CatCam").gameObject.SetActive(true);
@@ -94,7 +94,7 @@ public class GameManager : Photon.PunBehaviour {
 
     void SpawnMouse()
     {
-        Spawn mys = s[Random.Range(0, s.Length)];
+        Spawn mys = s[Random.Range(1, s.Length)];
         GameObject myMouse = (GameObject)PhotonNetwork.Instantiate("Mouse", mys.transform.position, mys.transform.rotation, 0);
         myMouse.GetComponent<MouseMovement>().enabled = true;
         myMouse.transform.FindChild("MouseCam").gameObject.SetActive(true);
