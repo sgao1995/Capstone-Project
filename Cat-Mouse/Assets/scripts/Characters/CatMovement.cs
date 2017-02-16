@@ -147,6 +147,9 @@ public class CatMovement : MonoBehaviour
 
             /* Updates the number of Skill System states */
 
+            /* Updates the total number of Skill Slots */
+            catSkill.setMaxSkillSlots(4);  // Set to 4
+
             /* Updates the number of Skill Slots enabled */
             catSkill.setNumSkillSlots(this.level);
         }
@@ -234,17 +237,17 @@ public class CatMovement : MonoBehaviour
 		}
 		// skills
 		if (Input.GetKeyDown(KeyCode.Alpha1)){
-			useSkill(learnedSkills[0]);
+            catSkill.useSkillSlot(1);
 		}
 		if (Input.GetKeyDown(KeyCode.Alpha2)){
-			useSkill(learnedSkills[1]);
-		}
+            catSkill.useSkillSlot(2);
+        }
 		if (Input.GetKeyDown(KeyCode.Alpha3)){
-			useSkill(learnedSkills[2]);
-		}
+            catSkill.useSkillSlot(3);
+        }
 		if (Input.GetKeyDown(KeyCode.Alpha4)){
-			useSkill(learnedSkills[3]);
-		}
+            catSkill.useSkillSlot(4);
+        }
 		
 		if (canToggleDoor){
 			if (Input.GetKeyDown(KeyCode.E)){

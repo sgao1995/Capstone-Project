@@ -161,6 +161,9 @@ public class MouseMovement : MonoBehaviour {
 
             /* Updates the number of Skill System states */
 
+            /* Updates the total number of Skill Slots */
+            mouseSkill.setMaxSkillSlots(4);  // Set to 4
+
             /* Updates the number of Skill Slots enabled */
             mouseSkill.setNumSkillSlots(this.level);
         }
@@ -252,19 +255,19 @@ public class MouseMovement : MonoBehaviour {
         // skills
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
-            useSkill(learnedSkills[0]);
+            mouseSkill.useSkillSlot(1);
         }
         if (Input.GetKeyDown(KeyCode.Alpha2))
         {
-            useSkill(learnedSkills[1]);
+            mouseSkill.useSkillSlot(2);
         }
         if (Input.GetKeyDown(KeyCode.Alpha3))
         {
-            useSkill(learnedSkills[2]);
+            mouseSkill.useSkillSlot(3);
         }
         if (Input.GetKeyDown(KeyCode.Alpha4))
         {
-            useSkill(learnedSkills[3]);
+            mouseSkill.useSkillSlot(4);
         }
 
         // interactions
