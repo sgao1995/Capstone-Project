@@ -39,6 +39,7 @@ public class CatMovement : MonoBehaviour
 	private bool onSpikes = false;
 	private bool alive = true;
 	private bool canToggleDoor = false;
+	private bool canMove = true;
 	
 	// skills
 	private float[] skillCooldownTimers = new float[4]; // the cooldown timer
@@ -157,8 +158,7 @@ public class CatMovement : MonoBehaviour
 		if (onSpikes){
 			TakeDamage(0.2f);
 		}
-		// dont let player move if they are on spikes
-        else
+		if (canMove)
         {	
 			if (onIce){
 				moveV = moveV.normalized * speed * movementModifier * Time.deltaTime * 0.1f;
@@ -166,77 +166,71 @@ public class CatMovement : MonoBehaviour
 			else{
 				moveV = moveV.normalized * speed * movementModifier * Time.deltaTime;
 			}
-
             transform.Translate(moveV);
-        }
 
-        // keyboard commands
-        if (Input.GetKeyDown("escape"))
-        {
-            Cursor.lockState = CursorLockMode.None; //if we press esc, cursor appears on screen
-        }
-        // movement control
-        if (isGrounded && !onSpikes)
-        {
-            moveV = new Vector3(0, 0, 0);
-            if (Input.GetKey(KeyCode.A))
-            {
-               animator.Play("MoveLeft");
+			// movement control
+			if (isGrounded && !onSpikes)
+			{
+				moveV = new Vector3(0, 0, 0);
 
-				if (onIce)
-					catrb.AddRelativeForce(Vector3.left*0.2f, ForceMode.Impulse);
-				else{
-					moveV = new Vector3(-1, 0, moveV.z);
-				}
-            }
-            if (Input.GetKey(KeyCode.D))
-            {
-                animator.Play("MoveRight");
-                
-				if (onIce)
-					catrb.AddRelativeForce(Vector3.right*0.2f, ForceMode.Impulse);
-				else{
-					moveV = new Vector3(1, 0, moveV.z);
-				}
-            }
-            if (Input.GetKey(KeyCode.W))
-            {
-				if (!Input.GetKey(KeyCode.A) && !Input.GetKey(KeyCode.D))
-					animator.Play("MoveForward");
-                
-				if (onIce)
-					catrb.AddRelativeForce(Vector3.forward*0.2f, ForceMode.Impulse);
-				else{
-					moveV = new Vector3(moveV.x, 0, 1);
-				}
-            }
-            if (Input.GetKey(KeyCode.S))
-            {
-				if (!Input.GetKey(KeyCode.A) && !Input.GetKey(KeyCode.D))
-					animator.Play("MoveBackward");
-                
-				if (onIce)
-					catrb.AddRelativeForce(Vector3.back*0.2f, ForceMode.Impulse);
-				else{
-					moveV = new Vector3(moveV.x, 0, -1);
-				}
-            }
-            if (Input.GetKeyDown(KeyCode.Space))
-            {
-                isGrounded = false;
-               // animator.Play("Unarmed-Jump");
-				animator.SetTrigger("JumpTrigger");
-				animator.SetInteger("Jumping", 1);
-                catrb.AddForce(new Vector3(0, jumpForce, 0));
-            }
-        }
+				if (Input.GetKey(KeyCode.A))
+				{
+				   animator.Play("MoveLeft");
 
-
+					if (onIce)
+						catrb.AddRelativeForce(Vector3.left*0.2f, ForceMode.Impulse);
+					else{
+						moveV = new Vector3(-1, 0, moveV.z);
+					}
+				}
+				if (Input.GetKey(KeyCode.D))
+				{
+					animator.Play("MoveRight");
+					
+					if (onIce)
+						catrb.AddRelativeForce(Vector3.right*0.2f, ForceMode.Impulse);
+					else{
+						moveV = new Vector3(1, 0, moveV.z);
+					}
+				}
+				if (Input.GetKey(KeyCode.W))
+				{
+					if (!Input.GetKey(KeyCode.A) && !Input.GetKey(KeyCode.D))
+						animator.Play("MoveForward");
+					
+					if (onIce)
+						catrb.AddRelativeForce(Vector3.forward*0.2f, ForceMode.Impulse);
+					else{
+						moveV = new Vector3(moveV.x, 0, 1);
+					}
+				}
+				if (Input.GetKey(KeyCode.S))
+				{
+					if (!Input.GetKey(KeyCode.A) && !Input.GetKey(KeyCode.D))
+						animator.Play("MoveBackward");
+					
+					if (onIce)
+						catrb.AddRelativeForce(Vector3.back*0.2f, ForceMode.Impulse);
+					else{
+						moveV = new Vector3(moveV.x, 0, -1);
+					}
+				}
+				if (Input.GetKeyDown(KeyCode.Space))
+				{
+					isGrounded = false;
+				   // animator.Play("Unarmed-Jump");
+					animator.SetTrigger("JumpTrigger");
+					animator.SetInteger("Jumping", 1);
+					catrb.AddForce(new Vector3(0, jumpForce, 0));
+				}
+			}
+		}
+		
 		// left click
 		if (Input.GetMouseButtonDown(0) && attackCooldownTimer <= 0 && !Input.GetKey(KeyCode.Escape))
         {
 			attackCooldownTimer = attackCooldownDelay;
-			Attack();
+			StartCoroutine(Attack());
 		}
 		// skills
 		if (Input.GetKeyDown(KeyCode.Alpha1)){
@@ -260,6 +254,10 @@ public class CatMovement : MonoBehaviour
 		if (Input.GetKeyDown(KeyCode.K)){
 			TakeDamage(5f);
 		}
+		if (Input.GetKeyDown("escape"))
+        {
+            Cursor.lockState = CursorLockMode.None; //if we press esc, cursor appears on screen
+        }
 		
 		// timer actions
 		if (movementModifierTimer > 0f)
@@ -299,14 +297,19 @@ public class CatMovement : MonoBehaviour
 	}
 
     // attack in front of player
-    void Attack()
+    IEnumerator Attack()
     {
+		canMove = false;
 		float attackType = Random.Range(0f, 1f);
 		if (attackType <= 0.5f)
 			animator.SetTrigger("Attack3Trigger");
 		else if (attackType > 0.5f)
 			animator.SetTrigger("Attack6Trigger");
+		DealDamage();
+		yield return new WaitForSeconds(0.7f);
+		canMove = true;
     }
+	
     void DealDamage()
     {
         Ray ray = new Ray(transform.position, transform.forward);
@@ -316,43 +319,29 @@ public class CatMovement : MonoBehaviour
         if (Physics.Raycast(ray, out hitInfo, 1))
         {
             Debug.Log("We hit: " + hitInfo.collider.name);
-            if (hitInfo.collider.name == "Character"||hitInfo.collider.name == "MonsterClone" ||hitInfo.collider.name =="Monster")
+            if (hitInfo.collider.name == "Character" || hitInfo.collider.name == "Monster(Clone)" || hitInfo.collider.name == "Monster" || hitInfo.collider.tag == "Monster")
             {
-                Debug.Log("Trying to hurt " + hitInfo.collider.transform.parent.name + " by calling script " + hitInfo.collider.transform.parent.GetComponent<MonsterAI>().name);
-                hitInfo.collider.transform.parent.GetComponent<MonsterAI>().SendMessage("takeDamage", damage);
+                Debug.Log("Trying to hurt " + hitInfo.collider.transform.name + " by calling script " + hitInfo.collider.transform.GetComponent<MonsterAI>().name);
+				
+				if (hitInfo.collider.transform.GetComponent<MonsterAI>().getHealth() > 0 && hitInfo.collider.transform.GetComponent<MonsterAI>().getHealth() - damage <= 0){
+					currentEXP += 50;
+					//mouseVitality.setCurrentExperiencePoints(currentEXP);
+				}
 
-                if (hitInfo.collider.transform.parent.GetComponent<MonsterAI>().getHealth() <= 0)
-                {
-                    Debug.Log("got exp");
+				hitInfo.collider.transform.GetComponent<MonsterAI>().SendMessage("takeDamage", damage);
 
-                    currentEXP += 50;
-                    //catVitality.setCurrentExperiencePoints(currentEXP);
-                    maxEXP += 50;
-                    Debug.Log("current EXP is" + catVitality.getEXP());
-                }
             }
-          /*  if (hitInfo.collider.name == "Cat(Clone)" || hitInfo.collider.name == "Cat")
-            {
-                Debug.Log("Trying to hurt " + hitInfo.collider.transform.parent.name + " by calling script " + hitInfo.collider.transform.parent.GetComponent<CatMovement>().name);
-                hitInfo.collider.transform.parent.GetComponent<CatMovement>().SendMessage("TakeDamage", 50f);
-                if (hitInfo.collider.transform.parent.GetComponent<CatMovement>().getHealth() <= 0)
-                {
-                    currentEXP += 100;
-                    maxEXP += 100;
-                }
-            }*/
             if (hitInfo.collider.tag == "Mouse")
             {
                 Debug.Log("Trying to hurt " + hitInfo.collider.transform.name + " by calling script " + hitInfo.collider.transform.GetComponent<MouseMovement>().name);
-                hitInfo.collider.transform.GetComponent<MouseMovement>().SendMessage("TakeDamage", damage);
-                Debug.Log("they have " + hitInfo.collider.transform.GetComponent<MouseMovement>().getHealth() + " hp left");
 
-                if (hitInfo.collider.transform.GetComponent<MouseMovement>().getHealth() <= 0)
+                if (hitInfo.collider.transform.GetComponent<MouseMovement>().getHealth() > 0 && hitInfo.collider.transform.GetComponent<MouseMovement>().getHealth() - damage <= 0)
                 {
                     GameObject.Find("WinObj").GetComponent<WinScript>().setMouseDeaths();
                     currentEXP += 100;
-                    maxEXP += 100;
                 }
+				
+				hitInfo.collider.transform.GetComponent<MouseMovement>().SendMessage("TakeDamage", damage);
             }
         }
     }
@@ -427,6 +416,7 @@ public class CatMovement : MonoBehaviour
 
 		if (obj.tag == "Spike"){
 			onSpikes = false;
+			canMove = true;
 		}
 		if (obj.tag == "Door"){
 			interactText.text = "";
@@ -461,6 +451,7 @@ public class CatMovement : MonoBehaviour
 		// put spikes here because we dont want spikes displacing the player
 		if (obj.tag == "Spike"){
 			onSpikes = true;
+			canMove = false;
 		}
 	}
     public float getHealth()
