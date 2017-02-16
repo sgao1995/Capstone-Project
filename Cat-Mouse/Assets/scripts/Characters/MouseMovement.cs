@@ -345,11 +345,9 @@ public class MouseMovement : MonoBehaviour {
 	
     void DealDamage()
     {
-        Ray ray = new Ray(transform.position, transform.forward);
-        RaycastHit hitInfo;
-        Debug.Log("hitting");
-
-        if (Physics.Raycast(ray, out hitInfo, 1))
+		RaycastHit hitInfo;
+		
+        if (Physics.SphereCast(transform.position, 0.2f, transform.forward, out hitInfo, 1))
         {
             Debug.Log("We hit: " + hitInfo.collider.name);
             if (hitInfo.collider.name == "Character" || hitInfo.collider.name == "Monster(Clone)" || hitInfo.collider.name == "Monster" || hitInfo.collider.tag == "Monster")
@@ -357,7 +355,7 @@ public class MouseMovement : MonoBehaviour {
                 Debug.Log("Trying to hurt " + hitInfo.collider.transform.name + " by calling script " + hitInfo.collider.transform.GetComponent<MonsterAI>().name);
 				
 				if (hitInfo.collider.transform.GetComponent<MonsterAI>().getHealth() > 0 && hitInfo.collider.transform.GetComponent<MonsterAI>().getHealth() - damage <= 0){
-					currentEXP += 50;
+					currentEXP += hitInfo.collider.transform.GetComponent<MonsterAI>().getExpDrop();
 					//mouseVitality.setCurrentExperiencePoints(currentEXP);
 				}
 

@@ -5,10 +5,11 @@ using System.Collections.Generic;
 public class MonsterAI : MonoBehaviour {
 	// monster stats
 	private float speed = 2.0f; //speed value
-	public float HP = 100f;
-	public float attackPower = 2f;
-	private float attackCooldownDelay = 3f;
-	private float attackCooldownTimer = 3f;
+	public float HP;
+	public float attackPower;
+	private float attackCooldownDelay;
+	private float attackCooldownTimer;
+	private float expDrop;
 	
 	// list of the players in the game
 	private GameObject[] playersInGame;
@@ -46,10 +47,45 @@ public class MonsterAI : MonoBehaviour {
 		animator = GetComponent<Animator>();
 		currentMode = "Attack";
 	}
+	public void setMonsterType(string type){
+		this.monsterType = type;
+		if (type == "Monster"){
+			HP = 40f;
+			attackPower = 3f;
+			attackCooldownDelay = 3f;
+			attackCooldownTimer = 3f;
+			expDrop = 50f;
+		}
+		else if (type == "MonsterElite"){
+			HP = 80f;
+			attackPower = 7f;
+			attackCooldownDelay = 2f;
+			attackCooldownTimer = 2f;
+			expDrop = 100f;
+		}
+		else if (type == "Boss"){
+			HP = 300f;
+			attackPower = 20f;
+			attackCooldownDelay = 4f;
+			attackCooldownTimer = 4f;
+			expDrop = 500f;
+		}
+		else if (type == "PuzzleRoomBoss"){
+			HP = 200f;
+			attackPower = 25f;
+			attackCooldownDelay = 5f;
+			attackCooldownTimer = 5f;
+			expDrop = 250f;
+		}
+	}
+	
     public float getHealth()
     {
         return HP;
     }
+	public float getExpDrop(){
+		return expDrop;
+	}
 
     void takeDamage(float dmg)
     {
@@ -60,7 +96,7 @@ public class MonsterAI : MonoBehaviour {
 		if (currentMode != "Attack"){
 			currentMode = "Attack";
 			delayTimer = delayBetweenMovements;
-			sprintTimer = 10f;
+			sprintTimer = 7f;
 		}
     }
     // take damage
@@ -100,16 +136,14 @@ public class MonsterAI : MonoBehaviour {
 	// attack in front of monster
     void Attack()
     {
-		Debug.Log("Monster Attack");
-		animator.Play("Punch");
+		animator.Play("Attack");
 		DealDamage();
     }
 	
 	void DealDamage(){
-		Ray ray = new Ray(transform.position, transform.forward);
-        RaycastHit hitInfo;
-
-        if (Physics.Raycast(ray, out hitInfo, 1))
+		RaycastHit hitInfo;
+		
+        if (Physics.SphereCast(transform.position, 0.2f, transform.forward, out hitInfo, 1))
         {
             if (hitInfo.collider.name == "Cat(Clone)")
             {
@@ -124,7 +158,7 @@ public class MonsterAI : MonoBehaviour {
 	
     void FixedUpdate()
     {
-		if(!animator.GetCurrentAnimatorStateInfo(0).IsName("Punch")){
+		if(!animator.GetCurrentAnimatorStateInfo(0).IsName("Attack")){
 			if (currentMode == "Sleeping"){
 				animator.Play("Idle");
 			}

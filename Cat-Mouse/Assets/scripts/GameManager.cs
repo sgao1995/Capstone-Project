@@ -108,8 +108,10 @@ public class GameManager : Photon.PunBehaviour {
         if (PhotonNetwork.isMasterClient)
         {
             Spawn monsterSpawn = s[1];
-            GameObject monster = (GameObject)PhotonNetwork.Instantiate("Monster", monsterSpawn.transform.position, monsterSpawn.transform.rotation, 0);
-            monster.GetComponent<MonsterAI>().enabled = true;
+            GameObject monsterGO = (GameObject)PhotonNetwork.Instantiate("Monster", monsterSpawn.transform.position, monsterSpawn.transform.rotation, 0);
+            monsterGO.GetComponent<MonsterAI>().enabled = true;
+			MonsterAI monster = monsterGO.GetComponent<MonsterAI>();
+			monster.setMonsterType("Monster");
         }
     }
 	// spawn the keys and chests in the puzzle rooms
