@@ -7,12 +7,16 @@ public class GameManager : Photon.PunBehaviour {
     public Maze mazePrefab;
     private Maze mazeInstance;
     Spawn[] s;
+    SpawnC[] sc;
+    SpawnM[] sm;
     List<int> allPuzzleTypes = new List<int>();
     List<int> activePuzzleTypes = new List<int>();
     
 
     private	void Start () {
         s = GameObject.FindObjectsOfType<Spawn>();
+        sc = GameObject.FindObjectsOfType<SpawnC>();
+        sm = GameObject.FindObjectsOfType<SpawnM>();
         PhotonNetwork.isMessageQueueRunning = true;
         PhotonNetwork.automaticallySyncScene = true;
         for (int p = 0; p < 6; p++)
@@ -35,8 +39,10 @@ public class GameManager : Photon.PunBehaviour {
         {
             SpawnMouse();
         }
-        
-        SpawnMonsters();
+        for (int i = 0; i<9; i++)
+        {
+            SpawnMonsters(i);
+        }
 		SpawnKeysAndChests();
     }
     void OnGUI()
@@ -83,7 +89,7 @@ public class GameManager : Photon.PunBehaviour {
     }
     void SpawnCat()
     {
-        Spawn mys = s[0];
+        SpawnC mys = sc[0];
         GameObject myCat = (GameObject)PhotonNetwork.Instantiate("Cat", mys.transform.position, mys.transform.rotation, 0);
         myCat.GetComponent<CatMovement>().enabled = true;
         myCat.transform.FindChild("CatCam").gameObject.SetActive(true);
@@ -94,7 +100,7 @@ public class GameManager : Photon.PunBehaviour {
 
     void SpawnMouse()
     {
-        Spawn mys = s[Random.Range(1, s.Length)];
+        SpawnM mys = sm[Random.Range(0, s.Length)];
         GameObject myMouse = (GameObject)PhotonNetwork.Instantiate("Mouse", mys.transform.position, mys.transform.rotation, 0);
         myMouse.GetComponent<MouseMovement>().enabled = true;
         myMouse.transform.FindChild("MouseCam").gameObject.SetActive(true);
@@ -103,11 +109,11 @@ public class GameManager : Photon.PunBehaviour {
         myMouse.GetComponent<Minimap>().enabled = true;
     }
 
-    void SpawnMonsters()
+    void SpawnMonsters(int i)
     {
         if (PhotonNetwork.isMasterClient)
         {
-            Spawn monsterSpawn = s[1];
+            Spawn monsterSpawn = s[i];
             GameObject monsterGO = (GameObject)PhotonNetwork.Instantiate("Monster", monsterSpawn.transform.position, monsterSpawn.transform.rotation, 0);
             monsterGO.GetComponent<MonsterAI>().enabled = true;
 			MonsterAI monster = monsterGO.GetComponent<MonsterAI>();

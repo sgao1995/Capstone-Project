@@ -228,6 +228,7 @@ public class CatMovement : MonoBehaviour
 				}
 			}
 		}
+       
 		
 		// left click
 		if (Input.GetMouseButtonDown(0) && attackCooldownTimer <= 0 && !Input.GetKey(KeyCode.Escape))
@@ -271,6 +272,11 @@ public class CatMovement : MonoBehaviour
 		if (attackCooldownTimer > 0){
 			attackCooldownTimer -= Time.deltaTime;
 		}
+
+    }
+    [PunRPC]
+    void moveAnimations()
+    {
 
     }
 
