@@ -101,7 +101,7 @@ public class GameManager : Photon.PunBehaviour {
 
     void SpawnMouse()
     {
-        SpawnM mys = sm[Random.Range(0, s.Length)];
+        SpawnM mys = sm[Random.Range(0, 2)];
         GameObject myMouse = (GameObject)PhotonNetwork.Instantiate("Mouse", mys.transform.position, mys.transform.rotation, 0);
         myMouse.GetComponent<MouseMovement>().enabled = true;
         myMouse.transform.FindChild("MouseCam").gameObject.SetActive(true);
