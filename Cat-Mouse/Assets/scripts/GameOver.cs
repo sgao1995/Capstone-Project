@@ -9,7 +9,10 @@ public class GameOver : MonoBehaviour {
     public Text text;
 	// Use this for initialization
 	void Start () {
+        //PhotonNetwork.isMessageQueueRunning = true;
+        PhotonNetwork.automaticallySyncScene = true;
         transform.GetComponent<PhotonView>().RPC("updateWinText", PhotonTargets.AllBuffered);
+        //updateWinText();
     }
 
     // Update is called once per frame
@@ -35,8 +38,7 @@ public class GameOver : MonoBehaviour {
            {
                Debug.LogError("PhotonNetwork : only master client can load level");
            }*/
-        PhotonNetwork.isMessageQueueRunning = true;
-        PhotonNetwork.automaticallySyncScene = true;
+     
         Debug.Log("PhotonNetwork : Loading Level : ");
         SceneManager.LoadScene("lobby", LoadSceneMode.Single);
     }

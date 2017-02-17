@@ -39,10 +39,10 @@ public class GameManager : Photon.PunBehaviour {
         {
             SpawnMouse();
         }
-        for (int i = 0; i<9; i++)
-        {
-            SpawnMonsters(i);
-        }
+     //   for (int i = 0; i<9; i++)
+        //{
+            SpawnMonsters();
+       // }
 		SpawnKeysAndChests();
         GameObject.Find("Timer").GetComponent<Timer>().enabled = true;
     }
@@ -110,11 +110,11 @@ public class GameManager : Photon.PunBehaviour {
         myMouse.GetComponent<Minimap>().enabled = true;
     }
 
-    void SpawnMonsters(int i)
+    void SpawnMonsters()
     {
         if (PhotonNetwork.isMasterClient)
         {
-            Spawn monsterSpawn = s[i];
+            Spawn monsterSpawn = s[0];
             GameObject monsterGO = (GameObject)PhotonNetwork.Instantiate("Monster", monsterSpawn.transform.position, monsterSpawn.transform.rotation, 0);
             monsterGO.GetComponent<MonsterAI>().enabled = true;
 			MonsterAI monster = monsterGO.GetComponent<MonsterAI>();

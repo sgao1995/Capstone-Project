@@ -222,7 +222,7 @@ public class MonsterAI : MonoBehaviour {
 				}
 
 				// always look at player
-				transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(playersInGame[targettedPlayer].transform.position - transform.position), 3f*Time.deltaTime);
+			//	transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(playersInGame[targettedPlayer].transform.position - transform.position), 3f*Time.deltaTime);
 				
 				//Debug.Log("chasing player " + targettedPlayer);
 				
