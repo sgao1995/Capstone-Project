@@ -9,7 +9,6 @@ public class GameOver : MonoBehaviour {
     public Text text;
 	// Use this for initialization
 	void Start () {
-        text= GameObject.Find("Text").GetComponent<Text>();
         transform.GetComponent<PhotonView>().RPC("updateWinText", PhotonTargets.AllBuffered);
     }
 
@@ -25,6 +24,7 @@ public class GameOver : MonoBehaviour {
     [PunRPC]
     void updateWinText()
     {
+        text = GameObject.Find("Text").GetComponent<Text>();
         string winner = GameObject.Find("WinObj").GetComponent<WinScript>().getWinner();
         text.text = winner + " wins!";
     }

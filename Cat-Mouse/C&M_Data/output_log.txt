@@ -18,21 +18,13 @@ Platform assembly: C:\Users\SmugFug\Documents\GitHub\Cat-and-Mouse-Game\Cat-Mous
 Loading C:\Users\SmugFug\Documents\GitHub\Cat-and-Mouse-Game\Cat-Mouse\C&M_Data\Managed\UnityEngine.Networking.dll into Unity Child Domain
 Platform assembly: C:\Users\SmugFug\Documents\GitHub\Cat-and-Mouse-Game\Cat-Mouse\C&M_Data\Managed\Photon3Unity3D.dll (this message is harmless)
 Loading C:\Users\SmugFug\Documents\GitHub\Cat-and-Mouse-Game\Cat-Mouse\C&M_Data\Managed\Photon3Unity3D.dll into Unity Child Domain
-- Completed reload, in  0.271 seconds
+- Completed reload, in  0.479 seconds
 Platform assembly: C:\Users\SmugFug\Documents\GitHub\Cat-and-Mouse-Game\Cat-Mouse\C&M_Data\Managed\System.Core.dll (this message is harmless)
 Platform assembly: C:\Users\SmugFug\Documents\GitHub\Cat-and-Mouse-Game\Cat-Mouse\C&M_Data\Managed\System.dll (this message is harmless)
 desktop: 1920x1080 60Hz; virtual: 1920x1080 at 0,0
 <RI> Initializing input.
 <RI> Input initialized.
 <RI> Initialized touch support.
-The referenced script on this Behaviour (Game Object 'Main Camera') is missing!
- 
-(Filename:  Line: 1656)
-
-UnloadTime: 1.042291 ms
-Setting up 2 worker threads for Enlighten.
-  Thread -> id: 2008 -> priority: 1 
-  Thread -> id: 1e50 -> priority: 1 
 Initialize engine version: 5.4.2f2 (b7e030c65c9b)
 GfxDevice: creating device client; threaded=1
 Direct3D:
@@ -53,24 +45,28 @@ Platform assembly: C:\Users\SmugFug\Documents\GitHub\Cat-and-Mouse-Game\Cat-Mous
 Loading C:\Users\SmugFug\Documents\GitHub\Cat-and-Mouse-Game\Cat-Mouse\C&M_Data\Managed\UnityEngine.Networking.dll into Unity Child Domain
 Platform assembly: C:\Users\SmugFug\Documents\GitHub\Cat-and-Mouse-Game\Cat-Mouse\C&M_Data\Managed\Photon3Unity3D.dll (this message is harmless)
 Loading C:\Users\SmugFug\Documents\GitHub\Cat-and-Mouse-Game\Cat-Mouse\C&M_Data\Managed\Photon3Unity3D.dll into Unity Child Domain
-- Completed reload, in  0.066 seconds
+- Completed reload, in  0.079 seconds
 Platform assembly: C:\Users\SmugFug\Documents\GitHub\Cat-and-Mouse-Game\Cat-Mouse\C&M_Data\Managed\System.Core.dll (this message is harmless)
 Platform assembly: C:\Users\SmugFug\Documents\GitHub\Cat-and-Mouse-Game\Cat-Mouse\C&M_Data\Managed\System.dll (this message is harmless)
 desktop: 1920x1080 60Hz; virtual: 1920x1080 at 0,0
 <RI> Initializing input.
 <RI> Input initialized.
 <RI> Initialized touch support.
-Unloading 7 Unused Serialized files (Serialized files now loaded: 0)
-UnloadTime: 6.067073 ms
+The referenced script on this Behaviour (Game Object 'Main Camera') is missing!
+ 
+(Filename:  Line: 1656)
 
-Unloading 6 unused Assets to reduce memory usage. Loaded Objects now: 543.
-Total: 5.138650 ms (FindLiveObjects: 0.037859 ms CreateObjectMapping: 0.041062 ms MarkObjects: 0.314522 ms  DeleteObjects: 4.735304 ms)
+UnloadTime: 4.979933 ms
+Setting up 2 worker threads for Enlighten.
+  Thread -> id: 3054 -> priority: 1 
+  Thread -> id: 1d34 -> priority: 1 
+Unloading 7 Unused Serialized files (Serialized files now loaded: 0)
+UnloadTime: 6.196085 ms
+
+Unloading 6 unused Assets to reduce memory usage. Loaded Objects now: 542.
+Total: 5.079823 ms (FindLiveObjects: 0.032617 ms CreateObjectMapping: 0.041353 ms MarkObjects: 0.663117 ms  DeleteObjects: 4.338075 ms)
 
 SwitchToProtocol: Udp PhotonNetwork.connected: False
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
-
-OnJoinedLobby
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
 
@@ -78,24 +74,14 @@ The referenced script on this Behaviour (Game Object 'Main Camera') is missing!
  
 (Filename:  Line: 1656)
 
-UnloadTime: 0.888524 ms
-Setting up 2 worker threads for Enlighten.
-  Thread -> id: ac4 -> priority: 1 
-  Thread -> id: 20ac -> priority: 1 
-Unloading 7 Unused Serialized files (Serialized files now loaded: 0)
-UnloadTime: 6.828624 ms
-
-Unloading 6 unused Assets to reduce memory usage. Loaded Objects now: 543.
-Total: 5.002357 ms (FindLiveObjects: 0.024462 ms CreateObjectMapping: 0.042809 ms MarkObjects: 0.267343 ms  DeleteObjects: 4.664537 ms)
-
-SwitchToProtocol: Udp PhotonNetwork.connected: False
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
-
+UnloadTime: 1.145384 ms
 OnJoinedLobby
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
 
+Setting up 2 worker threads for Enlighten.
+  Thread -> id: 1dc8 -> priority: 1 
+  Thread -> id: 19e0 -> priority: 1 
 OnJoinedLobby
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
@@ -109,10 +95,24 @@ playerWhoIsIt: 1
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
 
 Unloading 5 Unused Serialized files (Serialized files now loaded: 0)
-UnloadTime: 1.412437 ms
+UnloadTime: 1.214113 ms
 
-Unloading 145 unused Assets to reduce memory usage. Loaded Objects now: 472.
-Total: 0.745825 ms (FindLiveObjects: 0.037567 ms CreateObjectMapping: 0.030287 ms MarkObjects: 0.463046 ms  DeleteObjects: 0.213758 ms)
+Unloading 145 unused Assets to reduce memory usage. Loaded Objects now: 475.
+Total: 0.824746 ms (FindLiveObjects: 0.053876 ms CreateObjectMapping: 0.036985 ms MarkObjects: 0.506438 ms  DeleteObjects: 0.226863 ms)
+
+1
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+Unloading 7 Unused Serialized files (Serialized files now loaded: 0)
+UnloadTime: 6.630300 ms
+
+Unloading 6 unused Assets to reduce memory usage. Loaded Objects now: 542.
+Total: 5.435407 ms (FindLiveObjects: 0.038732 ms CreateObjectMapping: 0.055623 ms MarkObjects: 0.323841 ms  DeleteObjects: 5.014297 ms)
+
+SwitchToProtocol: Udp PhotonNetwork.connected: False
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
 
 OnJoinedLobby
  
@@ -127,16 +127,5810 @@ playerWhoIsIt: 0
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
 
 Unloading 5 Unused Serialized files (Serialized files now loaded: 0)
-UnloadTime: 1.088013 ms
+UnloadTime: 1.071704 ms
 
-Unloading 145 unused Assets to reduce memory usage. Loaded Objects now: 472.
-Total: 0.750193 ms (FindLiveObjects: 0.038441 ms CreateObjectMapping: 0.029996 ms MarkObjects: 0.463046 ms  DeleteObjects: 0.217835 ms)
+Unloading 145 unused Assets to reduce memory usage. Loaded Objects now: 475.
+Total: 0.775529 ms (FindLiveObjects: 0.046595 ms CreateObjectMapping: 0.030287 ms MarkObjects: 0.474112 ms  DeleteObjects: 0.223951 ms)
 
 you are not Master
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+2
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
 
 Adjusting owner to sender of updates. From: 0 to: 1
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+NullReferenceException: ObjecF rOUNfD
+ 
+(Finlt seteto an/instance of an oity/bui
+ld/artifcaSettiggs.Urated/ () [0n/r0000] in <filename unknown>:0 
+ 
+(FilenaLine: 42)
+
+ -1)
+
+FOUND
+ 
+(Filename: C:/buildslave/NuilReferenceException: Onbject reference notme/Unito an instance of ian object
+  aine: tchSe
+t
+tings.Update () [0x00000] in <filenameFOUND
+ 
+(File
+na
+me: Cname:  Linave/unit
+y
+/build/artifacts/generated/common/runtime/UnityEngineDebugllReferenceExcepp Line: 42ct 
+r
+eference not set to an instance of aOUND
+ 
+(Fi
+l anamet:hSe C:n/buildslave/ [0x00000] in <filenartifnknownenera
+te
+d/common/r  Line: -1)
+
+EngineDebugBindings.gen.cpp Line: 42)
+
+NullReferenceExceptioFOUNDj
+ec
+(t referee:e C:/ set to an instance of an tifect
+  geat matchSettings.Update () [0x00000] inBindingns.gen.cpp Line: 
+4
+(Fi
+l
+ename:  Line: -1)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generaReed/comenceExcepntime/UnityEngefernnce not set to an inn.cpp L of an o)
+
+ect
+  at matchSettings.Update () [0x00000] i
+n 
+<filename uC:/nown>:0 
+ve/
+unity/buil  Line: -1)
+
+generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: ullR
+e
+ferenceException: Object reference 
+no
+t ilenamo an instance of annity object
+  at matchSettings.Updmon/runtime/UnityEngineDebugBinunknown>:0 
+ 
+(Filename:
+ 
+ Line: -1)
+
+FOUND
+ 
+(Filename: C:/bNullRefereave/nnity/build/a: Object rgenerencde not set toime/anityEngineDebugBindings.gen
+.cpp Line: 42)
+
+gs.Update () [0x00000] in <filename unFOUND
+ 
+(F
+il
+ename: C:/buildslave/uni
+t
+y/build/artifacts/generated/common/runtime/UnityENullRefbugBindException: Object refere
+n
+ce not set to an instance of an objeFt
+U at 
+ma
+(Filentme: C:/bdate () [0x00ity/build/artifacts/generated/c
+om
+mon/runtime/UnityEngin
+e
+DebugBindings.gen.cpp Line: 42)
+
+NullReferenceExceptioF:OUND
+ 
+(Feference: Cot set to av e/stuncniof /an object
+  at matchSated/common/runtime/Uni0000] in <filename unknown>:0 
+ 
+(Filena
+m
+e:  Line: -1)
+
+FOUND
+ 
+(Filename: C:/buildslave/unitN/bllRef/artifactceptiogenerated/ reference ntot eet to an instance of an object
+  at matchSettings
+.
+Update () [0x00000] in <filename unknown>:0 
+ D
+(F
+ilename:  Line: i-1)
+s
+lave/unity/build/artifacts/generated/common/runtiullReferenceExceptugBindinjs.gen.cpp Line: n42)
+
+t to an instance of an object
+  at matFOUND
+ 
+(Filpdname () [/0uxldslave/unity/build/arnknown>:0ge
+ n
+erated/common/runtime
+U
+nityEngineDebugBindings.gen.cpp Line: 42)
+
+NullReferenceEFOUND
+ n
+(Filename:ference not set unity/build/artifactn object
+  a/tommon/runtime/UnityEngineDebugBindings.gen.cpp Liunknown>:
+0
+ 
+ 
+(Filename:  Line: -1)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generaNullReferenceExcep/UnityEng: Obeect reference ngen.cpp Line: 42st
+a
+nce of an object
+  at matchSettings.UpdFte ()
+ [
+0Filename: C:</ilename unkno/n>:0n
+ t
+(Fuild/artifactse:genera
+t
+ed/common/runtime/UnityEngineDebugBindings.gen.cpp Niue: 4ef)e
+
+renceException: Object reference not set to an
+ i
+nstance of an object
+  at matchSettings.Update (enerated/common/ruilename ityEnown>:0 
+ 
+(Filename:  Lin Line: 4
+2
+)
+
+FOUND
+ 
+(Filename: C:/buildslave/unNty/bRuild/aceExcaption:enerect reforence not set to an instaebug of an object
+  at matchS2)
+
+ings.Update () [0x00000] in <filename uFknown>
+:0
+ 
+il
+enilee: Cnamuildsla:  /uiity/build/a
+r
+tifacts/generated/common/runtime/UnityEngineDebugBindingN.gen.cpp encne:c 42ion: 
+O
+bject reference not set to an instance of Fn obje
+ct
+
+ ialename: C:/bugs.Uplave/uni[0x0000ld/artifacts/ame unknown>:0 
+ 
+(Filename:ityEngineD1)
+
+gBindings.gen.cpp Line: 42)
+
+NullReferenceException: ObjFcO UND
+ 
+nce noam : Cset to an instnita/build/aof an objectne
+raat matchSettinnti.Update () [0xeDebugBindings.gen.cpp Line: 42)
+
+
+(Filename:  Line: -1)
+
+FOUND
+ 
+(Filename: C:/buildslave/unitNullRed/artifacts/generated/common/runtence notyEngineoDebugBindnce of an obp Lct
+  at ma
+t
+chSettings.Update () [0x00000] in <filename unk
+no
+wn>:0 
+ 
+(Fil/buildsl Liave/unit
+y
+/build/artifacts/generated/common/runtime/UnityEngineDebulgBindinceExen.cpp Line:ject r
+e
+ference not set to an instance of an object
+  at
+ m
+atchSettings.Ubuildsl(v) [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: i-1)
+
+ugBindings.gen.cpp Line: 42)
+
+NullReferenceExceptionFOUbNeD  
+(Filenamnet s: C:o/builnstaace of an object
+  at matctsettings.Update () [0x0mon/runinimfe/ename unknown>:0gBi
+n
+diilename:  Li nine:-1)
+
+
+FOUND
+ 
+(Filename: C:/buildslave/unitN/ullReferenceExsceptioated/comct reference not set to an instancndings.gen.ject
+  at matc
+h
+Settings.Update () [0x00000] in <filename unkn
+o
+(Filena
+me
+: ilename:  Line: -1)
+
+build/artifacts/generated/common/runtime/UnityEngineDebugBindingNullReferenceExc42)
+
+n: Object reference not set to an instancF oUf a
+n 
+object
+  : t:/buildslhSettingty.Update (rtifacts/ge]nin <filename unknown>e/Uni
+ty
+Engineaeme:  ndings.gen.
+c
+pp Line: 42)
+
+NFllRefe
+r
+eFiceException: Obljslctve/unirence not sett tifacts/generatefdan /coect
+  at matchSettings.Update () [0x00.gen.cpp Line: 42)
+
+nknown>:0 
+ 
+(Filename:  Line: -1)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtiefeme/Unixcepnion: Object Bindings.e not set to an ins
+t
+ance of an object
+  at matchSettings.Update ()D 
+ 0x
+00000] mn < C:/name unknoe/u>:0 
+ 
+(Filename:  Line: -1)
+
+d/common/runtime/UnityEngineDebugBindings.gen.cpp LineNullRe
+f
+erenceException: Object reference not set FOUND i
+ns
+tance of an object
+  at matchSetutld/artifacts/generated0/common/runtime/UnintwyEngin
+eD
+ebugBnindings.gen.cpp 
+L
+ine: 42)
+
+FOUND
+ 
+(FilenamelRef/euildselxcepte/un: Object refrrencetifacset teneana id/common/runtime/Unit
+yEngimatchSettings.Update () [0x00000] i
+n
+ <filename unknown>:0 
+ 
+(Filename:  Line: -FOU
+N
+D
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnNullRefneDnbugcindiception: Object re 42)
+
+ce not set to an instance of an objectF
+ OaU ma
+ 
+(ettings.U: C:tb () [0x00000] in <filename unctnown>:0 
+ 
+(Fiommon/runtime/Un-1)
+
+gineDebugBindings.gen.cpp Line: 42)
+
+NullReferenceException: Object rFfOUNnceD
+ t 
+set enameo an instancedof an object
+ /builmatchSefacts/generated/common/runtime/UnityEngineDebugBindi
+ng
+s.gen.cpp Line: 42)
+
+
+
+FOUND
+ 
+(FilenamNu C:efuierencvExceptiy/b: ild/artifeaference not set mmon/ruo an instancngineDebugBindin
+gs.gen.cpp Linengs.U)
+
+ate () [0x00000] in <filename unknown>:0 
+ F
+OUile
+na
+me: e Line: -1)ui
+l
+dslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebuNullRBindennceExceetion: Object refe)en
+c
+e not set to an instance of an object
+  at FOUND
+ 
+(ingls.Upd: C () [l0xl0v000e/in <filename unknowns/gen
+er
+ated/common/runtime/Un
+i
+tyEngineDebugBindings.gen.cpp Line: 42)
+
+NullReferenceException: Object referenc
+e 
+noiteset ame: C:/nstanslave/unity/bect
+  at matchSettings.Up/comm () [0time/00nityEngineDebugBindingn>:0 
+ 
+(Filenam e:  
+L
+ine: -1)
+
+FOUND
+ 
+(Filename: C:/buildslave/uniNullReferartifecns/egxception/ Object reference Uotniet tyEan instance inding object
+  at matchSet
+
+tings.Update () [0x00000] in <filenamFOUND
+ 
+nFilena
+m
+(Filename:  Live/unity/bui
+l
+d/artifacts/generated/common/runtime/UnityEngineDebugBiNullRefeenn.eException: 2bjct
+ reference not set to an instance of an object
+  aF maND
+ 
+(Filngs.mU:pdatbuie () [0x00000] inld/artifacets/generate 
+ 
+(Filenuntime/UnityEngin
+e
+DebugBindings.gen.cpp Line: 42)
+
+NullReferenceExcOUpD
+ io
+n: Obname: C:/buildslave set to an insta/art of ats/generat
+ed/common/runtimes.Update () [0x00000] in <feilename nunknown
+>
+:0 
+ 
+(Filename:  Line: -1)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/geNeullReferenceExceptme/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+f an object
+  at matchSettings.Update () [0x00000] i
+n 
+<filename :nkn C:/:bui
+ld
+sFillave/unity/build/a
+r
+tifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+NullReferenceException: Object referFOUN n
+ 
+(Fit toaan in: C:/cuildslavea/uobtect
+  at matchScettings.Updatcommon/runtime/UnitfilenameD unknowdings.
+ge
+nFilename:: 42)
+
+: -1)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/genNraltReferenceExcemmon/rpttime/Unitybject rebugBindings.not. pset to an )
+
+stance of an object
+  at matchSettings.Update () [0x00O000]
+ i
+n <filename unknown>:0 
+ 
+(Filenaile:  Line: -1)
+
+nerated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)N
+
+ullReferenceException: Object reference not set tF an in
+st
+ance of an ob/build
+  at matchSettings.Updifacts/generated] in <filename unknown>:0 
+ 
+(Filenadings.gen.: p-1)
+
+e: 42)
+
+FOUND
+ 
+(Filename: lRefbuildseEaception: Objeuil d/artifactce not seted/common/runtiemof an object
+  at matchSnes.gen.cpp Late () [0x
+0
+0000] in <filename unknown>:0 
+ 
+(Filename:  UND
+ 
+(File
+
+name: C:/buildslave/unity/build/artifacts/generated/common/runtiNulURnfetenEceException: Obngs.gen.cpp Lce not set
+ 
+to an instance of an object
+  at matchSettings.UpdFOUND)
+ 
+(Fil00] in <f: le:am/ unbuildslave
+/u
+nity/build/artifacts/g
+e
+nerated/common/runtime/UnityEngineDebugBindings.gen.cpp LNnellRefer
+e
+nceException: Object reference not set to an inFtOUND
+ 
+(Filobject:
+  at buitchslave/unity/build/art0x00000] in <file/common/runtim:0 
+ 
+(FileineDe:bugBine: g-1)
+
+.cpp Line: 42)
+
+FOUNul
+lR
+eferenameExceptbuild Object reference /artifat to an instad/common/robject
+  at matcineDebugBsndUnpsdate (pp [0x00000])
+
+ <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/gNuerlReferenceException: Object reference gBindings.gen.cpp tance of an
+ 
+object
+  at matchSettings.Update () [0x00000] in Ffilena
+me
+ unknown>:0 
+ 
+(iildenale:  Linenity/bu
+i
+ld/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp LineN 42)
+
+ferenceException: Object reference not set to an
+ i
+nstannameof an ouildsla
+  at matchSettings.Uacts/generated0000] in <filename unknown>:0 
+ g
+(Filngsameen. Line: -1)
+
+2)
+
+FNUuDl
+lR
+efelenceEe: C:/buildslave/unity/build nrtifot s/generaan instance of an object
+  at maeDebugBindings.gene () [0x00000] i
+n
+ <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/lnRtyEngfneDeerenceException: Ob Lect refere
+n
+ce not set to an instance of an object
+  at matUcD
+Set
+tings.Update () [0x00000] in <filename uifknown>:ener
+at
+(Fdilenmome:  Line: -1)
+
+EngineDebugBindings.gen.cpp Line: 42)
+
+NullReferenceExceFtOiND
+on
+: Objeame:eCferencdslevnot set to an inrtiface of an object
+  at matchSme/Unngs.Update ()gBindings.gen.cpp Line: unkno
+w
+n>:0 
+ 
+(Filename:  Line: -1)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generatednceExceptionn: Object reference not set to an. instanee of an
+ 
+object
+  at matchSettings.Update () [0x00000] inF<filen
+am
+e unkname: C0 
+ u
+ildslave/uniLine: -1)
+
+rtifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp LiNullRe)
+e
+renceException: Object reference not set to aFOUND
+ 
+(Fiof an objC:/b
+  at maave/unitinbus.lUpdatif () [0x0nerated/common/rame unknown>:0 
+ 
+(DFbugBindings.gen.cpp 
+L
+ine: 42)
+
+NuOUND
+f
+(Filenaxe: Cc/buiption: O/unity /build/crte not set to an instannce of an object
+  at mbugBindingsgs.Update () e: 42)
+
+0] in <filename unknown>:0 
+ 
+(Filename:  Line:FOUND
+
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UNiuyEngineDenceException: Object reference no
+t
+ set to an instance of an object
+  at matchSettings.UpdatFOUND
+ 
+(0000] in : filename unknown>ity/b
+ui
+ld/artifacts/generated
+/
+common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+NullReferenceException: Object reference not set to an instance of an objecF
+  at ma
+chS
+ettings.Update () dslave/unity/build/artifacts/generat
+ed
+/comenan/runtiine: -1)
+
+ngineDebugBindings.gen.cpp Line: 42)
+
+NullReferenceException: ObjecF Oefere
+nc
+e noenamt : C:tbuildslavt/uaity/bunce/artifacts/get
+  ated/common/runts.mepUnite Engin0xebu000] dings.gen.cpp Liknown>:0 
+
+ 
+(Filename:  Line: -1)
+
+FOUND
+ 
+(Filename: C:/buildslave/unitNullRefeartirectc/generateod/commoct referen/UnctyEe noeDebugBindio gan in.spp Line: 42)
+
+bject
+  at matchSettings.Update () [0x00000] in <fil
+en
+ame unknown>:0 
+ 
+(Filen/ame:  Line:/ rt1if
+a
+cts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Linul:Refere
+
+ceException: Object reference not set to an instanFOUND
+ 
+(Filenam
+e at mabuildslave/uUpdty/build/artifactsin <filetndame unknown>:0 
+ 
+(FilenaneDebugBinding)
+
+gen.cpp Line: 42)
+
+NullReferenceException
+: 
+OFilename: Cre/ce buildslavo an/unity/nce of an object
+  at ated/cettings.Update () [y0x0000DebugBindings.ge n.cnown>:0 
+ 
+(Fi
+l
+ename:  Line: -1)
+
+FOUND
+ 
+(Filename: C:/buildslave/Nnutl/buefer/artiEactspgtion: Orbject refer/ence not set to an instance of s.gen.cpp L
+inet match
+S
+ettings.Update () [0x00000] in <filename unknowFO:0 
+ 
+
+(
+Filename:  L:ne: buil
+s
+lave/unity/build/artifacts/generated/common/runtime/UnityEngineDNbuglRiedinren.eExcepti.cppO Line:refe)
+
+nce not set to an instance of an object
+  at matchSettinNDs.
+ U
+(Fditlen) me: C:/b0ild000] in i<filenld/e unknown>:0 
+ 
+(Filename:  Lintime1)
+
+ityEngineDebugBindings.gen.cpp Line: 42)
+
+NullReferenceException: Object refeFence n
+ot
+ setename: C:/buildslave/unitnstance of an object
+  aat ma/comment/rngs.ime/Update ()neD[0x00000] in <filename unknown)
+
+ 
+ 
+(Filename:  Line: -1)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/lbRuferenceException: Object referencentiot set to an instaunce of an objeccp L
+ine: m42chS
+e
+ttings.Update () [0x00000] in <filename unknownF:0 
+ 
+(
+FFilename: C:/buildsla
+e/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBNullRefegen.cpp Lineio4n) O
+b
+ject reference not set to an instance of aF objD
+ 
+(
+Fialename: C:/buil.slaUpdate () [0x00000] in s/generatedunknown>:0 
+ 
+(Filename:  Line: -1)nd
+i
+ngs.gen.cpp Line: 42)
+
+NullReferenceExceptFOUN D
+ject
+eferenenamet: Ct t:/buildslave/ of unity/buil
+d/at tifacts/generated/common/runtime/UnityEngineDebuugknown>n:s.ge
+n.
+cpp Line::  2)
+
+e: -1)
+
+FOUND
+ 
+(Filename: C:/buildslave/lRefe/renceException: Object referemoce not set to an instancbugof an ogs.gcn.c
+pp Line: 4S2)
+
+ngs.Update () [0x00000] in <filename unknown>:0 
+ 
+(F
+i
+(Filmeame:   Line: -1)
+
+e/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBuildingerencn.cpeELxce:ptio
+
+: Object reference not set to an instance of anFobjec
+t
+(F atematme:e ti:/bnildsl.Uadate () [0x00000rtifacts/generated/commo>/runt
+im
+eFUilename:  LinegBind)
+gs.gen.cpp Line: 42)
+
+NullRFOUNen
+ce
+Exclename:  C:/buildslerencue not set to an factsance of an object
+  at matchSettingsneDebate () [0x00000] inL <filenam
+e
+ unknown>:0 
+ 
+(Filename:  Line: -1)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/genNrated/common/ruception: Object reference not set to an insta 42)
+
+f an object
+  at matchSettings.Update () [0x00FOUNDi
+ 
+fiilename un:/bwn>:0 
+ 
+(Filename:  Line: -acts
+/
+generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line:NullR
+e
+ferenceException: Object reference not set to an instance of an 
+ob
+(File
+  at matchSuettings.Update b() [0x00000] s/generated/common/runtime
+/U
+nityEngineDebugBinding
+s
+.gen.cpp Line: 42)
+
+NullReferenceExc
+ep
+tFiol: nOme: ct:/buildslavenot set to an instance of an object
+  at matchSettintgs.UpndDebugBindings.gen.cpp Linena 42)
+
+known>:0 
+ 
+(Filename:  Line: -1)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifactNullReferen/ceExceptunt: Object yEngineDebugBi setgs.gen.cpp Lince o42)
+
+object
+  at matchSettings.Update () [FOU000
+0]
+(Fin <filename unkndswavn/un>:0 
+ 
+(Filename:  Line: -1)
+
+common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at maFcOUNDh
+S
+(tings.Update () [0xslave/unity/build/artifacts/>e0n
+er
+atildename:  Lintime/)
+
+tyEngineDebugBindings.gen.cpp Line: 42)
+
+NullReferenceException: Object reference FOUNDe
+ t
+ to an instance if an object
+  at ild/artettings.Updatee () [0x000untimin UnfityEngineDebugBinding
+s.
+gen.ename:  e: 42) 
+
+-1)
+
+NullReferFOUND
+ e
+ptilenaieon:: Object refernity/buold/at set ts/generased/toance of anme/UjeityE
+ngineDetchSettinngs.gen.cpp L [0e: 42)
+
+ in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+OUND
+ 
+(Filename: C:/buildslave/unity/build/artifNullRgenerated/eremmon/runtime/: ObjeEngineDrence not set to .cppi sLine: 42)
+
+ object
+  at matchSettings.Update () [0x00000] in <fFOUND
+ 
+(nFilen>a0m
+e:
+ Filename:  Line: -1)
+
+y/build/artifacts/generated/common/runtime/UnityEngineDebuNullRedings.gen.cpp ioi: Onject r42)
+
+nce not set to an instance of an object
+  at matchSettings
+.U
+(dFte () [ena00000] in <filename unknown>:0/ 
+ 
+(Fcts/generated/com-on/r
+u
+ntime/UnityEngineDebugBindings.gen.cpp LinNul42)
+
+erenceException: Object reference not set to an instanceFof an
+ o
+bject
+  at matcuildslave/unity/build/artifactin e<eralename unknown>:0 
+ ni
+tyEnename:  Line:ings.g
+e
+n.cpp Line: 42)
+
+NullReferenceException: ObD
+ 
+(Filenrence not set to an instanbuild/artiofacts/
+  at mated/commngs.Uunttme () [0yEngin]eiDe<filendine unknown>:0 
+ 
+(File
+n
+ame:  Line: -1)
+
+FOUND
+ 
+(Filename: Cul/buelerenvceException:d Obtifat rs/fgenerated/commont/ an instance of an objectB
+  at matcn.cppt nLs.Update (
+)
+ [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line:FOUND
+
+ 
+(Filename: C:/buildslave/unity/build/artifacts/geneReftrenedE/commoon: Object reference not set to an instance of an obje
+c
+t
+  at matchSettings.Update () [0x00000] in <filenaFOUND
+ 
+(n>:0 
+ e(Filenamedslave/unity/b
+u
+ild/artifacts/generated/common/runtime/UnityEngineDebugBindNuls.generenceExp Line: 42)
+j
+ect reference not set to an instance of an objectF
+  at m
+at
+chSetname: C:/abu ()i[0xlds00] in <fil/build/artiown>:0 
+ 
+(Filename:  Liuntime/Un
+i
+tyEngineDebugBindings.gen.cpp Line: 42)
+
+NullReferenceException: Object reFerenc
+  n
+ot set to  an instance of an object
+  at match/Settinted.Upodmate () [0x000ityEngineDebugBindings.gen.cpp
+ L
+inilename:
+ 
+ Line: -1)
+
+NullRe
+fe
+renleException: Obldslave/fnerence not set to angenertance of ann objecte/
+U at matchSettings.Udiate () [.x00000] in <fil
+e
+name unknown>:0 
+ 
+(Filename:  Line: -1)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifllReferenceException: Objntime/Unityence not Engintoebuginstance of an p Line: 
+  at 
+
+matchSettings.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  LinFO -1)
+ 
+(
+Filename: C:/buildslave/unity/buildllRrferfactsExceptioned Objcct ommorence noteset to an instance ofDebugBject
+  a.gen.cpp Lttings.Up
+d
+ate () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: F1)
+
+D
+ 
+(Filename: C:/buildslave/unity/build/artiNullReferenceException: Objece/Uneference not ugBindingn instanpce of an obj
+e
+ct
+  at matchSettings.Update () [0x00000] in <filename unknown>:0 
+
+ 
+
+(Filename C:/bue:l-1)
+
+lave/unity/build/artifacts/generated/common/runtime/UnityEnginNulbugeBeienceException: Object refe
+r
+ence not set to an instance of an object
+  at matchSettinFs.Upda
+te
+ () [0x00000] in <filename unknown>:0 
+ 
+fFilename:  Lted/: ommon
+/
+runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+NullReferenceException: Object reference Dn
+ot
+ set to an instance oafe/unity/buil
+  at mafacts/generatUpdate () [0x00000] in <EngineDebugBiown>:0 
+gen
+.cpp Line:  Line
+:
+ -1)
+
+NullReferenceException: ObjeFt reDf
+er
+eFilnna no: set to an insta/ce noty/build/artefacct
+  at matchSettoings.UpdatenityEngineDebugBindinlen.ame unknown>:0 
+ 
+(
+Filename:  Line: -1)
+
+FOUND
+ 
+(Filename: C:/buildsNaveluRityerbnceExceptiuild/artif ctr/genefeted/ce not/run to an instance oDf an ondict
+  ag satgechSettiins.Update
+ 
+() [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/ReuftimenceException: Objectndingsenec.cpp tLset to a)
+
+instance of an object
+  at matchSettings.Update () [0xF0000] 
+in
+ <filenlme unknow:/>:0b
+ 
+uillenlave/unity/build/
+a
+rtifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cplRefp Line: 42)
+
+on: Object reference not set to an instance of an objecF
+  at 
+ma
+tchSettings.Updati (ldslave00unity/build/artifacts/gene0 
+ 
+(Filenanmruntime/UnityEn
+g
+ineDebugBindings.gen.cpp Line: 42)
+
+NullReferenceException: Object reference not seFOUND
+ 
+(Filence of an/buiject
+ e/unity/chSettings.Updas/g () [0x00000] in <filenamUnitkyown>:0 
+ 
+(Filename:  s.gen. -1)
+L
+ine: 42)
+
+NullReferenceException: Object referenceFOot sUt to an
+ 
+(Filance of an object
+  e/unityhSettid/artifacte (enerx00000] in <filename unityown>:0 
+ 
+(Filenings.gen.cpp Lin
+
+: 42)
+
+NullReFerenc
+Ex
+ceptioan: Objebct rdference not tset tod/artifstance of an object
+  at mtime/UnityEgsi.eDebugB () [0x00000] in <filename
+ 
+unknown>:0 
+ 
+(Filename:  Line: -1)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generNteullReferenceExceptiotn: gibjDebct reference not set to an in
+s
+tance of an object
+  at matchSettings.Update () [0x00000] in <filename unkFoOn>ND
+ 
+
+(
+Fileename:  Line: -1)
+
+ave/unity/build/artifacts/generated/common/runtNullReftyEngeExceptionindings Objecpp Line: nce) 
+n
+ot set to an instance of an object
+  at matchSettings.UpdaFOUND
+ 
+(0Filename: C:len/be unuildsl:0 
+ 
+(ity/build/artifacts/)
+
+erated/common/runtime/UnityEngineDebugBindings.gen.cppe Line: Excep
+
+tion: Object reference not set to an instance ofFOU Do
+bj
+eFct
+  at matchSildsings.Update (i) [0x00000] igenerated/common/runtime/
+Un
+itiyename:  Line: -1)
+s
+.gen.cpp Line: 42)
+
+NullReferenceException: Object reference nOUN s
+et
+ to ean i: Cnstanldslaf a/ obuecit
+  at matchSettings.Updated/c) [0x00runtime/UnityEngineDebugBindin
+gs
+(Filencpp LinLe: 42)
+
+
+
+FOUND
+ 
+ferenneExceptionuilObslave/unity/build/artifacts/genstance of aon/runtime
+/Uni mEngcheDebtigBindingst.gen.cpp Line: 42 <f
+i
+lename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+FOUND
+ 
+(Filename: C:/bulldRleve/rencey/buixception: Obs/gjeeract reommoence not sUnt to an instancBindings.gen.cpp
+ Line: 42)
+e
+ttings.Update () [0x00000] in <filename unknown>:0 
+ 
+(FilOname:
+ 
+ Line: -1)
+
+:/buildslave/unity/build/artifacts/generated/coNmun/lRueferencnityEngineDebugBindingserence not set to )
+
+ instance of an object
+  at matchSettings.Update () [0x0000F]OUND
+ 
+(Filen unknown>:0 
+ 
+(Filenamty/buiidne: -1)
+
+s/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+FOUND
+ 
+(FilenaNe: C:/buienceExceptioit Objectd/rartifacts/generated/common/runtime/Unitbject
+  at matchSettings.Update () [42)00
+0
+00] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runrenceExcetyEngineDejeugBindings.gen.cpp Line: 42) i
+n
+stance of an object
+  at matchSettings.Update () [0x00000F in <f
+il
+ename unknown>:0 
+ 
+(Fve/unity/buildne: tifac
+t
+s/generated/common/runtime/UnityEngineDebugBindingN.gen.cpp LineExcep
+
+ion: Object reference not set to an instance of an obOUND
+ 
+
+(FileatchSeC:/buildslave/unity/build/artifacts/generatknown>mmon/
+ru
+(Ftilename:  Line: -1)
+
+indings.gen.cpp Line: 42)
+
+NullReferenceException: Object reference not 
+se
+t to an instance odslave/unity/bt
+  d/artifacts/generated/e ()m [0xu00i0e/UnityEngineDnamug indknown>:0 
+ 
+(Filename:  
+L
+ine: -1)
+
+NullReferenceException: Object reference noFOUND
+ 
+(Filienamnce of uildslave/unct
+  uild/arthSfactts/gen.eratee /common/runtime/UnitlEngineDebugBind:0 
+ .g
+en.cpp Line: i42)
+
+-1)
+
+NullRefeFeOUND
+ 
+(FilenaOe: C:/builedenlavc/une not set to an instance of a/common/ru
+ntat matcihyEnginnesDebugBindings.gen.cp p Line: n42)
+u
+nknown>:0 
+ 
+(Filename:  Line: -1)
+
+FOUND
+ 
+(Filename: C:/buildsullRefereniteExceild/ortifacjs/gect refd/common/runtime/Unit iEngineDebugBindobject
+e a.cpp tchSettings
+.
+Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+
+(Filename: C:/buildslave/unity/build/artifactN/genereferecceException: e/Unct refeineDe notBindings.gen.cpp Line: an o
+b
+ject
+  at matchSettings.Update () [0x00000] in <filename unFOown>
+:0
+ F
+ i
+(Finame: C:/bLine: -1)
+
+unity/build/artifacts/generated/common/runtimN/UnieferencneDxcugBtidinos.: Object reference 
+n
+ot set to an instance of an object
+  at matchSettings.Update (F [0xD0
+0
+00(Filn <filenC:/euildslave>/0 
+ 
+(Filiename:  Line: -1)
+ted/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42u)lR
+e
+ferenceException: Object reference not set to an instance of an obFect
+ 
+ a
+(FilatchSe: ings:Up/buildslave/un00] in <filename unknownerated
+/c
+ommon/runtimeine: -1)
+
+ineDebugBindings.gen.cpp Line: 42)
+
+NullReferenceException: Ob
+je
+ctileename: C:/builet to an inty/ance of an object
+  ert matchSeton/ngs.UpdaUtie () [0xDebugBindings.gen.cpp Line: 420 
+ 
+
+(Filename:  Line: -1)
+
+FullRef
+ re
+nceExcaption: C:/buildslavereunce not sdt/ta an factance of an objecto
+mmon/mruntiettinnit.UpdateDebugBind[ings.gen.inpp <file 42)
+
+unknown>:0 
+ 
+(Filename:  Line: -1)
+
+FOUND
+ 
+(Filename: C:/builNslave/unity/buxception:factect referenccommotn/runtime/UnityEngineDebugBinding
+s.gt matcphSettings.U
+p
+date () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Lin
+e
+(Filen
+a
+me: C:/buildslave/unity/build/artifacts/generated/coNullReferenc/Exception: Objece reberencne not set to anine: 42)
+
+ of an object
+  at matchSettings.Update () [0x00000] in <fileUND
+ un
+(known>me: C
+:/
+buildslave/uninyeb: -1)
+
+tifacts/generated/common/runtime/UnityEngineDebugBNndinRefern.cpp Line: n: )
+b
+ject reference not set to an instance of an object
+  at maD
+ 
+ttingsenameate () [0x00000] in <filename unknowts/:gen
+er
+aFied/nommone:  Line: -nit
+y
+EngineDebugBindings.gen.cpp Line: 42)
+
+NullReferenceException: Object reference Fot Ds
+ 
+t to aan instance of an objity/
+build/artifactings.Update () [0n/runtime/UnifilengineDunknown>:0 
+ 
+(Filen Line: 42)
+
+ame:  Line: -1)
+
+FOUND
+ 
+(Filename: C:/buildsualve/ureinyceException: Object reference not set to ann instance of aBindingst
+  at matchSetting
+s
+.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename: FLine: 
+-1
+)Fi
+l
+ename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngin:eDebugBtireference not set to an in
+s
+tance of an object
+  at matchSettings.Update () [0x0000FOUND
+ 
+(Felename:name unknown>:0 
+ 
+(Filenamartifacts/gener
+a
+ted/common/runtime/UnityEngineDebugBindings.gen.cpp Line: N2)
+
+ReferenceException: Object reference not set to FOUiDsta
+nce of an  C:/ect
+  at matchStttings.d/artifacts/gene0ated in mmfilename unknowtyEng 
+ 
+(FileBnamen:  Line: -1)
+
+ne: 42)
+
+NullReferenceExceptFon: Ob
+je
+ct lename: C no:/buildslave/unity/build/n object
+  at erated/common/runtime/UnityEngineDebn <filename unknown>:0 
+ 
+(Fil
+e
+name:  Line: -1)
+
+FOUND
+N
+uFilename: CeE/buildslav Object build/artifactsset nerated/ instance of an onityEng
+ineDebugBinditings.Update () [0x0)
+
+00] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+FOUND
+ 
+(Filename: C:/buildslave/unNty/bReflde/ceExceptiact:sObj/gt reference not set to anUninstEngineDebun indings.
+g ant matchSettings
+.
+Update () [0x00000] in <filename unknown>:0 
+ 
+(FilenamF: ULND
+ 
+(Fil
+
+name: C:/buildslave/unity/build/artifacts/Nenllrated/cnceExceptionme/UbnityEngference not sengs.gen.cpp ance of an 
+o
+bject
+  at matchSettings.Update () [0x00000] in <filenamF unkno
+wn
+>:0 
+n
+(Filename:  Line: -1l
+
+ave/unity/build/artifacts/generated/common/runtime/UnityEngineDeNullgBferenceEgxcection: Object ref
+
+erence not set to an instance of an object
+  at matchSetFOUND
+ 
+ate () [0x000:/0ui] slain <filename unknown>:0 
+ 
+(Filename:  Line:ntime/
+U
+nityEngineDebugBindings.gen.cpp Line: 42)
+
+NullReferenceException: Object reference not
+ s
+et to ame: Ctance odf an object
+ uild/artifacts/generated/common/runtime/UnifilenamneDebugBin>:0 
+ 
+(Fn.cpp Line: 42e: 
+-
+1)
+
+NulOlND
+e
+(eineceExceptioni: Object refy/build/artifactse not sateetcomm n/r an instancityEngineDebugBi
+ndat matchSettings.Update)
+
+) [0x00000] in <filename unknown>:0 
+ 
+(Filename:FOUNDe:
+ -
+1)
+
+ename: C:/buildslave/unity/build/artifacts/generated/commll/ruftimeerenceExcinption: Object regference not set t
+o
+ an instance of an object
+  at matchSettings.UpdFOUND
+ 0(0F000] in : C:fibuildslane/uknown>:0 
+ 
+(Filents/generate: /comm
+o
+n/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+renceException: Object reference not set to anFinsta
+ 
+(Fi an mobject
+  at matchSettings.Updattifacts0x00000] in <filenarme unk/own>:0 
+ 
+(FilenaBei  Lings -1)
+
+cpp Line: 42)
+
+NullReferenceException: ObjectFrUND
+ f
+(Fnce nat set to an indtance of an object
+  ar tifacts/gengsratedate () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line
+:
+ -1)
+
+NullRUND
+ 
+ceException: Objecd slave/unice not seartif ants/generated of an objectim
+e/UnityEngiettings.Update () n.0x00000] in <fi
+l
+ename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+FOUND
+ 
+(Filename: C:/buildslavN/unityfeurencerException: Objtect refern/ence me/tUnityEngineDebugBindings.gen.cpp 
+Lint matchS
+e
+ttings.Update () [0x00000] in <filename unknown>:0F
+ 
+(Fi
+le
+nFilenamine:e: C:
+/
+buildslave/unity/build/artifacts/generated/common/rnceExce/UtnityEngineDebuference not set to an instanc
+
+e of an object
+  at matchSettings.Update () [0x00000FOUn <f
+il
+ename aunknownbuildslav
+e/
+unity/buil  Line: -1)
+
+generated/common/runtime/UnityEngineDebugBindings.gen.cNullRefer4nceExc
+
+eption: Object reference not set to an instance of an object
+  atUND
+ 
+(Fittings.UpdCa/beildsl() [/unity00] in <filename unknown>:0/c mm
+on
+/runtimee:nityEngineD)bu
+g
+Bindings.gen.cpp Line: 42)
+
+NullReferenceException: Object referencF not se
+ 
+(Fiaenamest:nce of an object
+  atity/build/artifacts/genera[ted/comm in <filename unknown>:0 
+ 
+(Fdilenagme.cpp Le: -1)
+
+)
+
+FOUNlR
+ef
+erenceExcepCi:n: Object reference not set to ancts/generate anc omon/run
+time/UnityEngineDebugBindings.0x00000] ine: 42)
+
+ame unknown>:0 
+ 
+(Filename:  Line: -1)
+
+FOUND
+ 
+(Filename: C:/buildslave/unitN/bulRd/artifacts/geneon: Ob/comt reference not set to anebunstance of an object
+  at ma
+t
+chSettings.Update () [0x00000] in <filename unknown>:0 
+ 
+
+
+(Filenme:  Line: ildsl
+a
+ve/unity/build/artifacts/generated/common/runtimeu/lRniteyencEngceptineDebuject reference not set to an 
+i
+nstance of an object
+  at matchSettings.Update () [0x000ND
+ 
+(Filename: C:/buildslave/
+un
+ity/bname:  Line: -1)
+n
+erated/common/runtime/UnityEngineDebugBindings.gen.cpp LNull 4efer
+e
+nceException: Object reference not set to an insDt
+a
+(File an object
+ ildslavecunitttbuigs.Update () [0ex00000] in <filename unknotyEngine
+De
+bugBinndings.gen.cpp L
+i
+ne: 42)
+
+NullReferenceException: Object Fefere
+ 
+(Folena set to an insstancen of an object
+  ats/genchSettings.Update () [0x00000] in <filename unknown>:0  
+ 
+(File)
+
+e:  Line: -1)
+
+FullNeDer
+en
+ceExceptionC: Obujlect refunien/be nut setldtartifacns/generatedstance of an object
+y angimaDtchSeindings.Update (Line: 42)00
+
+] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/arNullRts/genceExceptcon: Objmmo reference not set to Dan instance of an object
+  42)
+
+atchSettings.Update () [0x00000] in <filename unknown>:0 
+ 
+(F
+ilename:  Line: -1)
+
+ave/unity/build/artifacts/generated/common/runtime/UniNulnlRefereugBinceptiong Oben.cpp Line: 4 not
+ 
+set to an instance of an object
+  at matchSetti
+ 
+(.Update ()  [0x000dsl00e/u] in <filename unknown>:erat
+ed
+/common/runtime/UnityE
+n
+gineDebugBindings.gen.cpp Line: 42)
+
+NullReferenceException: FbjUND
+ r
+eFileence :not suil to an instance olf an objctcs
+  ateraatchSettings.Updime/Unit0x00000] in <filename unknown>:0 
+ 
+(Fi
+l
+ename:  Line: -1)
+
+FOUND
+ N
+(llRefeare: C:/buExldslave/unityn: Object refere/generated/common/runtime/Ue of an object
+  antings.gen.cpp Linepdate (
+)
+ [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+ND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/commonceEuntition: ObjtyEngineDeence ndingset to an instan42)
+
+ an object
+  at matchSettings.Update () [0xFOUND
+ i
+n <lenaenam C:/nknown>:0 
+ l
+(Filename: u Line: -1)
+
+s/generated/common/runtime/UnityEngineDebugBindingRefer.cpp Licnep 4ion):
+
+ Object reference not set to an instance of an objFOUN
+D
+ 
+(Filename: C:/builaslav() nitx00000]d/artifacts/g unknown>:0 
+ on
+/runenae/U:  Line: -1)
+
+ugBindings.gen.cpp Line: 42)
+
+NullReferenceException: Object refFrence 
+no
+t iset to an inuilaslave/un an /bujild/
+artifactcs/genergs.Updatmmon/runt0ime/UnityEngieneDebugBnown>:0 gen
+.cpp Line: 42)
+
+: -1)
+
+NullRe
+fe
+renceExcep C:/: Object refereny/beuild/art to ans/gen insed/nce on/rfntime/UnityEng
+ineDebugBindings.gen.cate () [0x0000
+0
+] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/ruNullRefereyEngnneeEebugBinon: Objeen.cpp Lrence not 
+s
+et to an instance of an object
+  at matchSettings.Update () [0x00000] in <filename unknoFOUND
+ 
+
+(
+(Fileenae: C:L/builds)
+
+ve/unity/build/artifacts/generated/common/runtime/UnitNEngineferencBinxcepgs.gen.cbp Line: 42)
+
+ence not set to an instance of an object
+  at matchSeFOUND
+ 
+(dateile) [0:00 C000] in <fil/unity/build/artifa
+ct
+s/generated/common/run
+t
+ime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+NullReferenceException: Object rFOUNDe
+ ce ilename: C:/ an instaae/unce of an object
+  at matchSettings.Update () [0x0000gineDebugBindings.gen.cpp0 
+ 
+(Filenam
+e
+:  Line: -1)
+
+FOUND
+ 
+(Filename: Nulluildslave/uxcityi/buiOd/arct rcfts/geenerateet to aon/instamec/UnityEnginect
+  at matchSetetings.Update () 
+[
+0x00000] in <filename unknown>:0 
+ 
+(Filename:  LineFOUND
+ 
+
+(Filename: C:/buildslave/unity/build/artifullRs/genercted/eExcep/tion: ObjeityEngineDece not set tgen.cpinstance of 
+a
+n object
+  at matchSettings.Update () [0x00000] in <
+fi
+(Filename: C:/builds
+la
+ve/unity/buiLine: ti1a)
+
+/generated/common/runtime/UnityEngineDebugBindiunllReferenpeException)
+
+: Object reference not set to an instance of an object
+  at
+ m
+atclenahSetti/buildslape/udate () [0x0000f0cts/generated/common/runtime
+/ 
+(FilegineDe  Line: -1)
+
+en.cpp Line: 42)
+
+NullReferenceException: Object FOUND
+ c
+(Fotleset to an/bu insstance ofy/b ild/an object
+  at mted/cSottings.Update () [0x0gi000] in <filename unknown>:0 
+ 
+(Fi
+l
+ename:  Line: -1)
+
+FOUND
+Nu
+(lReFelrenceExC:/buildson: Object ruild/artifaence neot set to an instance oUnitn objnceD
+ebug matchngs.gen.cpp Line: 42)
+
+00000] in <filename unknown>:0 
+ 
+(FilenFOe:  L
+in
+eFilena
+m
+e: C:/buildslave/unity/build/artifacNu/lReneratceE/coepmonon: Objme/cnttyEnginenDebnot setings.gen.cpp Line:  42)
+
+ject
+  at matchSettings.Update () [0x00000] in <filOUND
+ 
+(nkFiln>:ena
+ e( Cilen/me:b Line: -1)
+
+nity/build/artifacts/generated/common/runtime/UNullEeneginceEexcgBindin: sOgeect referen: 42not
+ 
+set to an instance of an object
+  at matchSettingsFUpdate
+ 
+(Filen0me: C: inu<fiienaldslave/unity/
+ il
+d/artifacts/Linerated/c
+o
+mmon/runtime/UnityEngineDebugBindings.gen.cpp Line: 42Nu
+l
+lReferenceException: Object reference not set to FOUND
+ 
+(Filef an ombject
+  atd slave/utichSettlngs.Update () [0x00ated/common/runame unUnityEn:0 
+ D
+(Filindings.gen.cpp 1)
+
+e: 42)
+
+NullReferenceExcFptUNoD:
+ 
+(Fit reference not setato an ins/ancb ofuild/artifa
+cts/generated/common/date () [0it00000] in <filename unknown>:0 
+ 
+(Filen
+a
+me:  Line: -1)
+
+FOUND
+ 
+(FilenameN uC:/buildslavxception: Objectrtif cre/egenerated/common/runtimea/UnityEngineDebug
+Bindings.genttings.Upda te (
+)
+ [0x00000] in <filename unknown>:0 
+ 
+(FilenamFOU Lin
+e:
+ Filen
+a
+me: C:/buildslave/unity/build/artifacts/generated/Nommoneferenimee/UnitiyEngiOneDebugBindings.gen.cpp Linto an in
+s
+tance of an object
+  at matchSettings.Update () [0x0FOUN] i
+n
+(Filename: Cnknown>:0 
+ 
+(Filename:  Line: acts/
+g
+enerated/common/runtime/UnityEngineDebugBindiNgs.gen.cppnLine:ceptio
+n
+: Object reference not set to an instance of an OoND
+ c
+
+  at amatchSettingslaUpdaunity/build/arti factsilename unknown>:0 
+ 
+(iFilename:  Lineebug1)
+
+ings.gen.cpp Line: 42)
+
+NullReferenceExcepFOoUN 
+O
+bjecename: C:/buildslat to nn iny/build/ar ifacts/an object
+  at on/runtime/UnityEngineDebugBindings.ge<ficle aine: nknow
+n
+>:0 
+ 
+(Filename:  Line: -1)
+
+FOUND
+ 
+(Filename: C:/buildslave/Nnity/bfuiend/artifacton/: Objetedccommon/rretimference not set to an instagen.cpp Line: 42)
+
+ at matchSettings.Update () [0x00000] in <filenameFOUNDow
+n>
+:F 
+ 
+(Filename:  Line: -1)
+
+unity/build/artifacts/generated/common/runtime/UnityNngineeferenceExines.gen.cn: Li Obj42)
+
+reference not set to an instance of an object
+  OUNDma
+t
+chSettime:.CUpdate slave/unity/b0] in <filectme unknown>:0 
+ 
+(Filuntime/UnityE -1)
+
+DebugBindings.gen.cpp Line: 42)
+
+NullReferenceException: Object refereFOUNn
+ 
+ set tao an i/butance of an object
+ d/artifacts/generated/com m) [0x00000e/UnityEngineDebugkBindings.
+ge
+n.cpename:  Line
+:
+ -1)
+
+NullRefeFenceEx
+ce
+ptiiename: C:/tbreference notity/b to an instance of an object
+ on/runtimSettings.Update () [0x000gs.gen.cpp Line: 42)kn
+o
+wn>:0 
+ 
+(Filename:  Line: -1)
+
+FOUND
+ 
+(Filename: C:/buildslave/unityNbulldReferenceException: Object refereme/UnityEnt ine an inBindings.gen.cobjecne
+: at ma
+t
+chSettings.Update () [0x00000] in <filename unknown>:0 
+F
+(File
+na
+me:  Line: -1)
+
+ildslave/unity/build/artifacts/generated/common/Nunlime/UerenceExceDebugB: Odings.gen.cpp Line:  set 
+t
+o an instance of an object
+  at matchSettings.UpdatFOU)D 
+[
+(Fi0le]nin <filename unknown>:0 
+ 
+(Filename:  L/ine: -1)d/
+c
+ommon/runtime/UnityEngineDebugBindings.gen.cpp LiNullRefe
+r
+enceException: Object reference not set to an instance of aFOUNj
+ec
+(F
+  at me: Ch/buttingsave/unity/build/artifacts/genereated/common/runti
+me
+/UnityEngineDebugBindi
+n
+gs.gen.cpp Line: 42)
+
+NullReferenceException: ObjFct ref
+er
+encle not set to ui instanceunity/buildect
+  at tmatenerated/commonatunti)e/Uni00y000] in <fgBindings.gen.cn>:0 ne
+:
+(File
+n
+ame:  Line: -1)
+
+FOullR
+e
+(FileneException: Object reference ld/nrot sets/generated/common/run obeject
+  at matchSettings.s.gdate () [0x00 000]
+ 
+in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artiNauts/geferencedExceptionuntimec/Uniference eDebugBindings.instance of e: 42)je
+c
+t
+  at matchSettings.Update () [0x00000] in <filenaFeOUND
+ 
+(F:0 
+ me
+: C:/builds ave/unity/b
+u
+ild/artifacts/generated/common/runtime/UnityEngineNeulgBindings.gexception: Object 
+r
+eference not set to an instance of an object
+  aFOUND
+ 
+(Filename: ate buildslave/0] in build/anaifa cts/generate
+d
+(Filename:  Line: -1)E
+
+ineDebugBindings.gen.cpp Line: 42)
+
+NullReferenceException: Object refereFce not seOUtoD
+ 
+(Fileanae of an obiect
+  at matchSettings.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  en.cpp Line
+:
+ 42)
+
+NullReferenUNeDx
+ 
+(Finl enamet reference laot set to/bu ad/artifactas/generatedbjectmo
+n/rt match/SettinngineDebugBindin00s.gen in <filne: 42)
+
+nown>:0 
+ 
+(Filename:  Line: -1)
+
+FOUND
+ 
+(Filename: C:NbuildslaReferenceExildp/artion: O/benerated/common/runtime/UnityEngineDebugf an objegen.
+cpp Line:hSetti
+n
+gs.Update () [0x00000] in <filename unknown>:0 
+ 
+(FileFOUN:  
+Li
+ne: -1)
+
+: C:/buildslave/unity/build/artifacts/generated/coNullReferenceException:eDebuect reference not Liset 42)
+a
+n instance of an object
+  at matchSettings.
+ 
+(Filename0x00000] in <filenime unknown>:0 
+ 
+(s/generated/common/run
+t
+ime/UnityEngineDebugBindings.gen.cpp Line: 42)
+N
+ullReferenceException: Object reference notFOUt to
+ a
+(Fnilencame: an object
+  e/unity/builingartifacts/generated/common/rlename unknown>:0 
+ 
+(Filename:  en.cpp Line
+
+: 42)
+
+NullReferenceException: ObjeFtOrefer
+en
+ce not set to bain instance of an objartiect
+s/at matted/common/runtime/UnityEngineDebugBindings.gen.cown Li0 
+ 
+(Fil
+e
+name:  Line: -1)
+
+FOUND
+ 
+(Filename: C:NulildslerenceExceptioln: Object r/generencd/commoneruntime/UnityEngineDebugBindings.
+  at matchSettings.
+U
+pdate () [0x00000] in <filename unknown
+>:
+0 
+ 
+(aFilename:  dslav: -1)
+
+y/build/artifacts/generated/common/runtimeNUuillReferenceugBEndings.gen Objpect referen
+c
+e not set to an instance of an object
+  at matchSettiFOUNDp
+ 
+(Filenam00000] buil<filelave/unity/build/a
+rt
+ifactsame:  Line: -1)
+
+n/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+NullReferenceException: Object reference not Fet NDt
+ 
+(Filenname: C:/buildslave
+  at matchSettingfacts/gener [0x00000]on/n <filenamnityEngineDe0 
+ 
+(Filename:  Line: -1)
+
+2)
+
+FNUuD
+ 
+eFilferme: Cx/buceptlion:uni Objeild/artirence not set edo/common/runtime/UnityEnct
+  at ugBindiettings.Uppdate () [0)
+
+0000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+
+(Filename: C:/buildslave/unity/build/artifacts/generated/commoul/lReferenceException: ebjeDebugBirence not set to an instan
+c
+e of an object
+  at matchSettings.Update () [0x00000] inF<filDe
+na
+me lnnanown>::/ b
+ui
+ldslename:  Line: -1)
+
+tifacts/generated/common/runtime/UnityEngineDebuguBineferenceEx.eption: O:ject reference n
+o
+t set to an instance of an object
+  at matchSOetD
+ ng
+s.Updatme:  [0x0ui0d00] in <ftlename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+e/UnityEngineDebugBindings.gen.cpp Line: 42N
+
+llReferenceException: Object reference not set to an inFtance 
+of
+ an onbme: C:
+/buildslchSetave/unity/te () [0x00000] in <filename unknown>:0 
+ 
+(Fiyename:  Line: -1)
+
+gs.gen.cpp Line: 42)
+
+NullReferenceException: Object referNnce n
+ot
+ set tome:  i:/buildslav of an object
+  at matchSettings./Update () [0x00000t] in <filename unknsowen.cp 
+ 
+(File42am)
+
+ Line: -1)
+
+FOUND
+ 
+(Fielerame: C:/eption: Ovebject reuierence notctset to an instance of runtime/Un
+  at gineDSettings.Update () [0x00000] in 
+<
+filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artiNauts/generatedE/ception: ubject reference not segt to an instance of an obje
+c
+t
+  at matchSettings.Update () [0x00000] in <filenamFOUND
+ 
+(Fil e
+na
+me: C:/beildslave:  Line: -1)
+
+rtifacts/generated/common/runtime/UnityEngineDebugBindings.ceE.cppptiin: Object
+ 
+reference not set to an instance of an object
+  atFmatNDSe
+ 
+(Fils.Update (/b [0x00000] in <filename utknown>:0 
+ er
+ated/commo  /runtime/Un
+i
+tyEngineDebugBindings.gen.cpp Line: 42)
+
+NullReferenceException: Object reference not set to aOUND
+ 
+(Fileoame:  objbuil
+dsla matchSettiuild/artif ct s/gene0raten /commoname tume/UnityEn 
+ 
+(Filename:  Line:n.c)
+
+ Line: 42)
+
+NullRefFOUnc
+ 
+xcileion: Objecuildslave/unity/bset to at instacte of an ted/ct
+ mon/runtcime/Unngs.Update () [0x00000] in <filenamee 42)
+
+own>:0 
+ 
+(Filename:  Line: -1)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/buildNarllReferengeneratedionommon/runtime/Unireynce notebsugBindings.gen.cpp Line: bj2ec
+t
+
+  at matchSettings.Update () [0x00000] in <filenaD
+ 
+(Fknlen>:0 
+ 
+(Fiuillslaename:  Liune: -1)
+
+acts/generated/common/runtime/UnityEngineDebugBindings.Nen.lRefeLrenceE: 42)
+
+n: Object reference not set to an instance of an object
+F at ma
+tc
+hSetetings.e:d C:/builds0ave/0nity/build/artifename unknown>:0 
+ 
+(Filetime/U Line: -1)
+
+bugBindings.gen.cpp Line: 42)
+
+NullReferenceException: ObjectFO rD
+ 
+ence note: tC:/buildnlave/unit of an object
+  at matchSettingsmon/runtime/UnityE00]ineDebugBiname unknown>:0 
+ 
+(File)
+
+me:  Line: -1)
+
+FOUND
+ 
+(FilenNullRCfe:encueExceptionn: Object referencts/generated/ anmm i/runstance of an object
+  at matchSettings.ine: 42)
+
+ [0x00000] in <filename unknown>:0 
+ 
+(Filename:  LFOU: -1
+)
+
+Filename: C:/buildslave/unity/build/artifacts/generated/cNumllRrunrence/Unittion: Object rugBindings.gen.cpp Line: 42)
+
+e of an object
+  at matchSettings.Update () [0x000OUND 
+i <filename uCn/build>lave/un
+it
+y/blename:t f Line: -1)
+
+ed/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)Re
+f
+erenceException: Object reference not set to an instancF of a
+n
+ objecte   at matchSeve/ungs.Updatldearti [0cx00000] ited/filename unknown>:0 
+ 
+(FilenagBe:n Line:ing)
+
+gen.cpp Line: 42)
+
+NullReferenceExceptOUn:DOb
+je
+(Filrname: C:/ce notslavt to an instld/ar of an objener
+ated matchSettings.Update Engin0e00000]Bindi<filename unknown>:0 
+ 
+
+(Filename:  Line: -1)
+
+FOUND
+ 
+(Filename:NC:/bReferenceEunity/build/artifacts/generated/common/runtime/Uni ofEngineDebugB
+indings.genettingLine: 42) (
+
+) [0x00000] in <filename unknown>:0 
+ 
+(FilenamFOUNLin
+e:
+ -1)
+
+ame: C:/buildslave/unity/build/artifacts/generatuldlRefere/rentxceptinityEnbjeceDebugBindings.gen.cpp Line: 42a)
+
+ of an object
+  at matchSettings.Update () [0x000
+00
+] iin a<ef i:/bnamdslave/unity/bui 
+ 
+(Filename:  Line: -1)
+
+mon/runtime/UnityEngineDebugBindings.gen.cpp LinNu lR42)
+
+nceException: Object reference not set to an UND
+ 
+(ce ofn an object
+  at matchSettings.Updaifacts/gen0000ted/com0on in <filename yEngineDeb0u
+ Bi
+ndilgs.gen.cpp ne: -14)
+
+
+FOUND
+ 
+(Filename: C:/nbuildect reference not settto in instance of an object
+  atntime/UnityEnginepdate indings.g000.cpp Line: a42)
+
+known>:0 
+ 
+(Filename:  Line: -1)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/buildulartilacts/generated/ciommoOb/runtire/UnityEngineDset to an ins.tance of an : 4j2)
+
+  at matchSettings.Update () [0x00000] in <filename unk
+no
+wn>:0 
+ 
+(Fi:lename:  Line:ity/bu
+i
+ld/artifacts/generated/common/runtime/UnityEnginNullReferenceExcen.cppn: Object re
+f
+erence not set to an instance of an object
+FOUtD
+ 
+(Fiettings.Update (uil) [0x0/uni] /iunld/artinaactsu/generate 
+ 
+(Filename:  Line: -Engi
+n
+eDebugBindings.gen.cpp Line: 42)
+
+NullReferenceException: Object reference not sFt to a
+  i
+nstance of an ouilect
+  at matchSettings.Update () [0x00000] in <filename uityEnn>:0 
+ 
+(gBilednags.gen.cpp Line:
+ 
+42)
+
+NullReFOUeD
+ 
+(Filencaption: builect referency/ not set to ats/igenence of an oobject
+  at matchSettings.Update () [0x000p Line: 42)
+
+name unknown>:0 
+ 
+(Filename:  Line: -1)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+NullReferenceException: ObjeOUND
+efe
+(Filename: C:/builanslave/unit of an objrtifa
+  at/ matcateettcomm.Update () [0x00000] in <filenaings.gen.cpp0 L
+in
+(e: 42)
+
+:  Line: -1)
+
+FOUND
+ 
+(Filenameu:lCRefuilnceException: Objec/arteference not stt d/coan in/rnstimtance oEf an objugBin
+dings.gen.cpp Line:Updat
+
+ () [0x00000] in <filename unknown>:0 
+ 
+(Filename:F LinD
+ 
+(Fil
+e
+name: C:/buildslave/unity/build/artifacts/generated/cNmmon/rfuntime/UnityEngineDebect reference not s L to an ins
+t
+ance of an object
+  at matchSettings.Update ()
+ [
+0x00000] in <filenamlave/unity/buil
+ /a
+rtilename:generated/co
+m
+on/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+N
+ullReferenceException: Object reference not FOt ND
+ 
+(Filenance of/bnuildslav
+e/unity/buield/artifpdate () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+42)
+
+NullReferenceExFeption
+:
+ Object e: re/buildslce notnity/bto an instaacns/gcnerated/commct
+  at matchSettings.Update () [0x00000] in <fil: 42)
+ 
+unknown>:0 
+ 
+(Filename:  Line: -1)
+
+FOUND
+ 
+(Filename: C:/buildslave/uniNyllRefer/bceild/ertifacts/generated/common/runtime/UnityEngiance of an object
+  at matchSetting
+
+s.Update () [0x00000] in <filename unknown>:0FO
+ 
+(F
+ 
+(File:  LineC -1)
+
+ldslave/unity/build/artifacts/generated/common/runtrime/UnitytEongineDebt reference not set to an42)n
+
+ance of an object
+  at matchSettings.Update () [0x00000] in <
+ 
+(Fnlemeame: own>:0il
+ds
+lave/unity/build: -1)
+
+acts/generated/common/runtime/UnityEngineDebugBindinNullRe.cpp Linxceptio
+
+: Object reference not set to an instance of an obOUect
+  
+at matchSett:/bus.Updatel() [0x0000ty/build/artifme unknown>:0 
+ 
+(Filename:  Line: -1)
+
+neDebugBindings.gen.cpp Line: 42)
+
+NullReferenceException: Object referOUNDe 
+no
+(Filename:n in/tance sof an object
+  at rtifacts/generatedate () [0x00time/UnityEngineDebugBindn>:g0 
+ n
+(Fi liename:  
+L
+ine: -1)
+
+FOUND
+ 
+(FilNname: erenceExceptionu Obtect referencetifacts/gene to an instance of an object
+  at matchSetting.gepdate () [0x00000
+]
+ in <filename unknown>:0 
+ 
+(Filename:  Line:FOUN
+
+
+ 
+(Filename: C:/buildslave/unity/build/artNfactsferenceExceptommon/runct reference not setugBi an instancecpp Line: 4ect
+ 
+ at matchSettings.Update () [0x00000] in <fileFOUe un
+kn
+owilename
+: 
+C:/leuildslave/unity/b
+
+ld/artifacts/generated/common/runtime/UnityNulinReferegBiedinException: Objeit referen
+c
+e not set to an instance of an object
+  at matchSettings.Update (
+ [0
+x0000namein <:/buildme unk/uninty/bu
+il
+d/artifacts/gene: -1)
+
+common/runtime/UnityEngineDebugBindings.gen.cpp Line: Null
+R
+eferenceException: Object reference not set to an insFOUND 
+of
+ an object
+  abt matlhSave/unity/build/ar[0x00cts/genn eralename umon/runt:ime
+/U
+nityEngineDebugBinding
+s
+.gen.cpp Line: 42)
+
+NullReferenceExceptioUND
+ 
+(Filena reference not set unity/build/artiofacts/gbjecated
+/common/runtime/Un.UpdanteneDebug00000] in <filename unknown>
+:
+0 
+ 
+(Filename:  Line: -1)
+
+FOUND
+ 
+(Filename: C:/buildNluvelRe/erenceException/artbfacts/generated/common/runtime/UnityEngin an object
+  at matchSettings.Up
+
+ate () [0x00000] in <filename unknown>:0 
+ 
+(FFOUND
+e:
+  Line: -: C:/1)
+
+dslave/unity/build/artifacts/generated/common/runtime/UnityEngineDncbegBEndings.gn: en.cpp Line: nce 
+
+ot set to an instance of an object
+  at matchSeFOings.Up
+da
+(Fe () [0x: 0000] in <lavf/uniilenuild/artifan>:0/ge
+n
+(ated/common/runtime/Un
+i
+tyEngineDebugBindings.gen.cpp Line: 42)
+
+NullReferenceException: ObjFOUNrD
+ 
+ference not set to alave/unity/build/artjfacts
+/generated/commngs.UntdamteUnityEngin0x00bugBindingsilename unLnown>:0 )
+ 
+
+(Filename:  Line: -1)
+
+FOUND
+ 
+(Filename: C:/NullRefere/unixception: Object refernence not set truntime/Unince of an ebugBin
+dings.gen.cpp Line: 42)te
+ 
+() [0x00000] in <filename unknown>:0 
+ 
+(Filename: F LNDn
+e:
+ -1)
+
+ame: C:/buildslave/unity/build/artifacts/geneullReferenceException: Object referencendings.gen.cpp Line: nce o
+f
+ an object
+  at matchSettings.Update () [0x0000OUND
+ 
+(Filenamee: C:/buildsla
+ve
+/unity/be:  Line: -a1)sg
+nerated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+NullReferenceException: Object refereFOUND
+ 
+(Filename:instancildslave/unity/b
+uild mattifacts/generatee () [0x00untime/UnityEngineDebugBindings
+ .
+gen.cpp LineLin42)
+
+)
+
+NuFlReND
+ 
+(Fileception: Object lefer/unity/build/artifa cts/generated/common/ject
+  at matchSettings.UBindings.gen.cpp Linin <file
+n
+ame unknown>:0 
+ 
+(Filename:  Line: -1)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifacts/gNnerlRefercommonxception: mbject reference not set to an instcpp Linf an obj
+e
+ct
+  at matchSettings.Update () [0x00000] in <fi
+le
+name unknown>/bui
+ld
+slave/unity/build/a1)
+
+facts/generated/common/runtime/UnityEngineDebugBllReferengen.cppption:: 4bject 
+r
+eference not set to an instance of an objectF
+OUND
+m 
+(Fiettinme: C:/buildslave/u0ity/build/artifacts/knower:0ted
+/co
+mmonename:  Line: -1)
+
+neDebugBindings.gen.cpp Line: 42)
+
+NullReferenceException: Object refereFcO UND
+ 
+(Filena ine: ance of dslave/unit
+y/bu matcartttings.Update () [0x00000] in <filename unknoeb>:Bind
+in
+gsilename:  Lne: 42)1)
+
+
+NullRFOUNe
+ c
+(Filename: C:/bujldect r/unitence not set to an instanced of an object
+  at matchSettings.Update () en.cpp Linei: 42i)
+
+ame unknown>:0 
+ 
+(Filename:  Line: -1)
+
+FOUND
+ 
+(Filename: C:/buildslave/unNty/buileferrtifacts/generatedject rommon/runtime/Un to an innDebugBindings.gen.cpp
+ Line: tchSe
+t
+tings.Update () [0x00000] in <filename unknown>:0 
+ 
+(FiND
+ 
+eFileLine: -1:/b
+u
+ildslave/unity/build/artifacts/generated/commoNullReferennceExngineDebugBindingseference nLit set to 
+a
+n instance of an object
+  at matchSettings.Update () [
+0x
+00ile0ame: C:/buildme slknoave/uni
+ty
+/build/artifacts/gener
+a
+ted/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 4ull
+R
+eferenceException: Object reference not set to an instanFe ofD
+ 
+(Filet
+ name:atchSettinildslave/unity/build/artifacts/geme unknown>:0 
+ 
+(Filename:tyEngin:D -1)
+
+ndings.gen.cpp Line: 42)
+
+NullReferenceException: Object reference not seFOUND
+ 
+(Fitanceme: C:n/buiedct
+  /anity/build/arngs.acts/generated/0common/runtime/UnityEngineDeb
+ug
+(Filenam.gen.cpp Line:
+ 
+42)
+
+NullReferFOUND
+ 
+(Fion: Oe: C:/buildslave/un set uild/artifacts/ganerated/common/run
+time/UnityEngineDebugBindings.gen.cpp Linne: 42)
+
+me unknown>:0 
+ 
+(Filename:  Line: -1)
+
+FOUND
+ 
+(Filename: C:/buildslave/uniullReflrd/artifapctsn:generate r/coerenc/runtime/UnityEn gineDebugBindings.ect
+  at ine: 42)
+
+ings.Update () [0x00000] in <filename unknown>:0 
+ F
+OFUND
+ 
+(Filenam:  Line: -l)
+
+lave/unity/build/artifacts/generated/common/runtime/NnityEngirenceException:.Objecn.cpp Line: 4not
+ 
+set to an instance of an object
+  at matFOUND
+in
+(Filpdate () [0ux0d0lave/uinty/build/artifacts/gener
+at
+(Filename:  Line: -1)
+
+yEngineDebugBindings.gen.cpp Line: 42)
+
+NullReferenceException: Object reference not set to an instan
+ce
+ of en onamc:t
+ / at matchSettings.uildaartifacts/generatn <filename unknown>:0 
+ ng
+ineDebume:  Line: -1.cp
+p
+ Line: 42)
+
+NullReferenceException: Object re
+f
+(Filename: C:tbuildslave/unity/build/artifact
+ /generachSettommo.Update ()/Unix00000] in <filename unknown>:0 
+ 
+(Filen
+a
+me:  Line: -1)
+
+FOUND
+ 
+(Filename: NullRilerence/uxnittion: Object refercnce not set to an cnstanceon/r antime/Unit
+yEngineDebugttings.Update () [0x00000] i
+n
+ <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+FOUND
+ 
+(Filename: C:/builNulaleRefetenceExcep/arti: Objecenerated/erencon/runtset to tyEngineDebugBindn ngs.gen.
+c at matchSet)
+
+ngs.Update () [0x00000] in <filename unknown>:FOU
+ND
+(
+ 
+(FilenFme:eC:/bunldslave/uni: /bui
+
+ld/artifacts/generated/common/runtime/UnityEngNnellRefeBindings.epti.cpp Line:  refe
+r
+ence not set to an instance of an object
+  atO mat
+c
+(Filenags.Update () [sx00000] in <fily/build/artifn>:0 
+ 
+(eFilename:  Line:time/U
+n
+ityEngineDebugBindings.gen.cpp Line: 42)
+
+NullReferenceException: Object referenceFnotND
+ 
+(o an instance of an lbject
+  at mabtchSettings.Updaenerated/common] inn <filename unknown>:0 
+nd
+ings.gen.cpp Line: 42)
+
+
+FOUND
+ 
+(FirenclException: Object ref/erence not set tfa ancts/gance ated/common/runti
+me/UnityEngettings.Update () [0x00pp Li ie :filena
+m
+e unknown>:0 
+ 
+(Filename:  Line: -1)
+
+FOUND
+ 
+(Filename: C:/buildslave/unitN/ulildeaferenceE/gception: /cbject reference n/tUset to gan instance of an object
+  at match
+S
+ettings.Update () [0x00000] in <filename unkFowUn>:
+0 
+
+ 
+(Filen: C:/bame:  Line: -ty/1uil)
+
+rtifacts/generated/common/runtime/UnityEngineDebugBindNnullReferepceExcepne: 42)
+
+ject reference not set to an instance of an objeFOU
+ND
+ 
+(FichSettings.Updald ()slav0000nit in <fidlaename unknown>:0 
+ 
+(mmon/runt:  Line: -1)
+
+neDebugBindings.gen.cpp Line: 42)
+
+NullReferenceException: OFjOct re
+fe
+rFilename: C:/bouildsnstance of /n objecui
+ld/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen>:0 
+ 
+(Filenam
+
+e:  Line: -1)
+
+FOUND
+ 
+(Filename: C:/buildslave/Nnity/euild/erencactxces/generateect rmmon/runtime/UnityEngineDebugBindings.ce of an object
+  a
+
+t matchSettings.Update () [0x00000] in <filename FOUND
+ 
+(Fil
+en
+amilenamebuildslave/unity/bu
+i
+ld/artifacts/generated/common/runtime/UnityEngineDebugBiNullReferenceException: O
+b
+ject reference not set to an instance of an objeFtUN
+  a
+t 
+matchSetetings.uilUplavdaute () [0x00000] icts<filename unknowon>:0 
+ 
+(Filename:  Line: -1)
+
+ngs.gen.cpp Line: 42)
+
+NullReferenceEFceUND
+ n
+(FiObject rCference not set to an instance of an oberated
+/common/runttime/UnityEngin)D bugBindings.gen.cpp Lin un n42)
+
+0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at matchSettiFOUND
+ 
+(Filename0 0000]ildsl<fve/unitename unknown>:0ts/
+ 
+(Filantmd/common/runtim
+e
+/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+NullReferenceException: ObjecF refDr
+ 
+(Filename: o an i:/btaincelof anvob/unity/
+build/artifacts/generated/common/runtime/Uniilename unkbugBinding
+s.
+(Filename:  Li 42)
+
+1)
+
+FOUND
+ 
+(Filename: C:/buildslavN/ullReferienceEtcefacto/nen Oajeed refmmence nnot set to an ineDebugBindings.gen.cp
+p Li mea 42)
+
+ttings.Update () [0x00000] in <filename unknownOUND
+ 
+
+(
+Filenname:C: Line: -lav1/unity
+/
+build/artifacts/generated/common/runtime/UnityEngineDebugBNullReferen.cep Line: 42)o
+
+n: Object reference not set to anFOUND
+ 
+(Filena object
+  alt mdslave/unity/Updat/artifacts/generated/common/runtime/Unity
+En
+gineDebugBindings.g1)
+
+cpp Line: 42)
+
+FOUND
+llR
+efilename: C:tbuildslave/unrty/erence notifacts/gene rated/ce of an object/U
+nityEngineDebuings.Update () pp Line: 42)
+
+<filename unknown>:0 
+ 
+(FilenameFOUND
+ 
+(Fi)
+
+name: C:/buildslave/unity/build/artifacts/generatedNcollReferuenceExce/Ution: ngineDeOugBeindings.gen.cpp Line: 42)
+
+instance of an object
+  at matchSettings.UpND
+ 
+(() [0x0000 0] in <fslaie/unity/builnknown>acts/
+ge
+nerleteam/commoinruntime/
+U
+nityEngineDebugBindings.gen.cpp Line: 42)
+
+NullReferenceException: Objec
+t
+(Feflerene:  not set lto aunity/build/artifacts/gen
+  at matchSettings.UpdaUnityEngix00000]Bindings.gen.cpp Line: 42)
+
+
+(Filename:  Line: -1)
+
+FOUND
+ 
+(Filename: C:/buNldslavee/enceExcbuild/arOtifacts/generated/commet runtamn instancgineDenbugBindi
+n sat matchSettings2)
+
+date () [0x00000] in <filename unknown>:0 
+ 
+(DF
+ 
+(Filename:ine:/build
+s
+lave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBincdings.gen.cpp Line: 42)
+
+nce not set to an instance of an object
+  at matFhSett
+in
+gsFilename: C:/bu0ldsl0ve/unin <filename unknown>:0 
+ 
+(Filcommon/runtime/Uni
+t
+yEngineDebugBindings.gen.cpp Line: 42)
+
+NullReferenceException: ObFOUt 
+ 
+(Filename: C:/buildslavestance of an object
+  at matcgenerated/common/runtime/0UnityEngineDebugBindinown>:0 
+ 
+(Filename: 
+ 
+Line: -1)
+
+FOUND
+ 
+(Filename: C:/buildslaNeuunity/build/artiftacts/Objgenerated/cce not set to an instance of an gobject
+s.ge matchSettingse: 42)
+
+ () [0x00000] in <filename unknown>:0 
+ F
+(OilNen
+am
+e:ilename: C:/eu:ldslav
+e
+/unity/build/artifacts/generated/common/runtime/UnityNngineDeeregBindcings.gen.cpp Line: 42)
+
+ not set to an instance of an object
+  at matchS
+ 
+(Fgs.enama: C:/buildslave/unity/build/artiknown>gener
+at
+ed/common/runtie: -1)
+
+yEngineDebugBindings.gen.cpp Line: 42)
+
+NullReferenceExceptiFO:NDb
+je
+(ctlenameenc:e not ssaee/unity/ uildaartifacts/generan object
+ n/runtime/UnityEngineDebugBindings.gen.ipp Linle: 42)
+
+known>:0 
+ 
+(Filename:  Line: -1)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifulclReferenceExceotion: Objenti remeren/UnityEngineD an insndings.gen.cpp Line:
+ 42)
+
+atchSettings.Update () [0x00000] in <filenaFOUNDkn
+ow
+n>ilena
+me
+: C:/buildslave/u -1t)
+
+uild/artifacts/generated/common/runtime/UnityEngineDebugBinRefere.gcen.cpp Line: Objec
+t
+ reference not set to an instance of anFOUND
+t
+  alenamtchSC:/buildslave/unity/bui0000] in <fil/gener unknown>:0n/r
+un
+time/UnityEngineDebugB
+i
+ndings.gen.cpp Line: 42)
+
+FOUND
+ 
+(Filrence: C:epbuilds ave/unity/build/artifacts/generated/common/runtime/Uni
+tyEngineDebugBindings.gen.cpp Line: 42)
+
+ <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artNullRe/generatex/ceptio/nunt:me/ Object referenceindings.gen.cpp Line: 4e of
+ 
+an object
+  at matchSettings.Update () [0x0UND
+ 
+(Filename: me unknldslave 
+ /
+unity/bmu:ild/ae: -1)
+
+s/generated/common/runtime/UnityEngineDebugBindingN.gel.Rep Linec: xcep
+
+on: Object reference not set to an inst
+a
+(ce of ame: bject
+  aslave/unity/build/prtifacts/generated/common/runtime/UnityEngin
+eD
+ebugBindings.gen.cpp L
+i
+ne: 42)
+
+NuUllR
+ 
+(eFileeame: C:/oui: Oslavet/unity/bcuilot det /artifacts/gen oe anrated/co
+mmat matthSettUnigs.UngineDebu [0x00000s.gen.cpp eLamee: 42)
+w
+n>:0 
+ 
+(Filename:  Line: -1)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/aNtllieferenceEs/geenerated/cOmbon/runtime/Unit nEngineDebugBindings.gen.cpp Line: 42
+)
+
+t matchSettings.Update () [0x00000] in <filename unknFOUND
+ 
+(F
+ilename: C:/builds-av1/un)
+
+/build/artifacts/generated/common/runtime/UnityEngineNullRBifnrences.xceptio Line: 42)
+
+t reference not set to an instance of aF obND
+ 
+(
+Filenaae: C:/btilinlavgs.Updy/build/artifacts/generated/common/runtime/
+Un
+ityEngineDebugBindings
+.
+gen.cpp Line: 42)
+
+NullRefFOence
+ 
+ceilename:Object refelrencunity/busetito an instance of agenerecte
+d/common/runtime/Unipdate () [0x00000] in <fil.cpp Line: 42)
+
+0 
+ 
+(Filename:  Line: -1)
+
+FOUND
+ 
+(Filename: C:/buildslave/unity/build/artifNullReenerenceE/ception: Objec/Unt rEngineDebugBindings.gen.cpp Line: 42)
+
+object
+  at matchSettings.UpFOUe ()
+ 
+(Fx00e00] in <fi C:/aumle luve/unity/bui
+ld
+/artifacts/generated/c
+o
+mmon/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+N
+ullReferenceException: Object rFfeUNDn
+ce
+ not set t o an instaace of an ity/bui
+ld/artifacts/generated/common/runtime/UnityEngineDebunBindings.noen.cpp L
+in
+e: 42)
+
+e:  Line: -1)
+
+FOUND
+ 
+(Filename: C:/buildslave/Nnity/buied/arenceEcxceptiorn: Objecmon/runtime/Unit Engi toDebuginstance of an object
+  at)
+
+atchSettings.Update () [0x00000] in <filenamUND
+ 
+(Filename
+: 
+C:/buildslave/unity/bu
+i
+ld/artifacts/generated/common/runtime/UnityEngineDebugBindiNullRen.cencLine: ption
+:
+ Object reference not set to an instance of an oFOeUND
+
+ 
+(FiltchSeeting:/buildsla() [0xi0000] in /artifacts/generated/co
+mm
+on/runtime/Unine: -1)
+e
+DebugBindings.gen.cpp Line: 42)
+
+NullReferenceExceptiFO:ND
+ 
+eFil reme: C:/built lave/unity/build/artifacn objencrat
+ed/common/runtings.Update () [0bxgBindings.gen.cpp Linenknown>
+:
+0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at matchSettings.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceExceptiFn:OOUjND
+ 
+(Filename: C:/euildslave/unity/ce od/ an object
+  at matchSettings.Update () [EngineDebugBindings.gen.cpp Li>:e: 4
+2)
+
+
+ilename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at matchSettings.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at matchSettings.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at matchSettings.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at matchSettings.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at matchSettings.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at matchSettings.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at matchSettings.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at matchSettings.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at matchSettings.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at matchSettings.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at matchSettings.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at matchSettings.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at matchSettings.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at matchSettings.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at matchSettings.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at matchSettings.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at matchSettings.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at matchSettings.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at matchSettings.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at matchSettings.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at matchSettings.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at matchSettings.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at matchSettings.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at matchSettings.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at matchSettings.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at matchSettings.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+Unloading 4 Unused Serialized files (Serialized files now loaded: 0)
+Unloading 4 Unused Serialized files (Serialized files now loaded: 0)
+TerrainData is missing splat texture 1.
+ 
+(Filename:  Line: 206)
+
+TerrainData is missing splat texture 1.
+ 
+(Filename:  Line: 206)
+
+UnloadTime: 1.500678 ms
+
+Unloading 13 unused Assets to reduce memory usage. Loaded Objects now: 740.
+Total: 0.918229 ms (FindLiveObjects: 0.139787 ms CreateObjectMapping: 0.041062 ms MarkObjects: 0.505273 ms  DeleteObjects: 0.228610 ms)
+
+System.Collections.Generic.List`1[System.Int32]
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+System.Collections.Generic.List`1[System.Int32]
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+System.Collections.Generic.List`1[System.Int32]
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+System.Collections.Generic.List`1[System.Int32]
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+System.Collections.Generic.List`1[System.Int32]
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+System.Collections.Generic.List`1[System.Int32]
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+UnloadTime: 1.216734 ms
+
+Unloading 13 unused Assets to reduce memory usage. Loaded Objects now: 740.
+Total: 0.843967 ms (FindLiveObjects: 0.055915 ms CreateObjectMapping: 0.047178 ms MarkObjects: 0.503526 ms  DeleteObjects: 0.236182 ms)
+
+System.Collections.Generic.List`1[System.Int32]
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+System.Collections.Generic.List`1[System.Int32]
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+System.Collections.Generic.List`1[System.Int32]
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+System.Collections.Generic.List`1[System.Int32]
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+System.Collections.Generic.List`1[System.Int32]
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+System.Collections.Generic.List`1[System.Int32]
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+donemaze, 148
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+22
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+6
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+12
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+4
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+27
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+0
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+9
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+21
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+4 3 2
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+donemaze, 148
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+22
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at MouseMovement.OnCollisionEnter (UnityEngine.Collision collisionInfo) [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at MouseMovement.OnCollisionEnter (UnityEngine.Collision collisionInfo) [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at MouseMovement.OnCollisionEnter (UnityEngine.Collision collisionInfo) [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at MouseMovement.OnCollisionEnter (UnityEngine.Collision collisionInfo) [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at MouseMovement.OnCollisionEnter (UnityEngine.Collision collisionInfo) [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at MouseMovement.OnCollisionEnter (UnityEngine.Collision collisionInfo) [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at MouseMovement.OnCollisionEnter (UnityEngine.Collision collisionInfo) [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at MouseMovement.OnCollisionEnter (UnityEngine.Collision collisionInfo) [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at MouseMovement.OnCollisionEnter (UnityEngine.Collision collisionInfo) [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at MouseMovement.OnCollisionEnter (UnityEngine.Collision collisionInfo) [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at MouseMovement.OnCollisionEnter (UnityEngine.Collision collisionInfo) [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at MouseMovement.OnCollisionEnter (UnityEngine.Collision collisionInfo) [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at MouseMovement.OnCollisionEnter (UnityEngine.Collision collisionInfo) [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at MouseMovement.OnCollisionEnter (UnityEngine.Collision collisionInfo) [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at MouseMovement.OnCollisionEnter (UnityEngine.Collision collisionInfo) [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at MouseMovement.OnCollisionEnter (UnityEngine.Collision collisionInfo) [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at MouseMovement.OnCollisionEnter (UnityEngine.Collision collisionInfo) [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at MouseMovement.OnCollisionEnter (UnityEngine.Collision collisionInfo) [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at MouseMovement.OnCollisionEnter (UnityEngine.Collision collisionInfo) [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at MouseMovement.OnCollisionEnter (UnityEngine.Collision collisionInfo) [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at MouseMovement.OnCollisionEnter (UnityEngine.Collision collisionInfo) [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at MouseMovement.OnCollisionEnter (UnityEngine.Collision collisionInfo) [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at MouseMovement.OnCollisionEnter (UnityEngine.Collision collisionInfo) [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at MouseMovement.OnCollisionEnter (UnityEngine.Collision collisionInfo) [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at MouseMovement.OnCollisionEnter (UnityEngine.Collision collisionInfo) [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at MouseMovement.OnCollisionEnter (UnityEngine.Collision collisionInfo) [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at MouseMovement.OnCollisionEnter (UnityEngine.Collision collisionInfo) [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at MouseMovement.OnCollisionEnter (UnityEngine.Collision collisionInfo) [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at MouseMovement.OnCollisionEnter (UnityEngine.Collision collisionInfo) [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at MouseMovement.OnCollisionEnter (UnityEngine.Collision collisionInfo) [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at MouseMovement.OnCollisionEnter (UnityEngine.Collision collisionInfo) [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at MouseMovement.OnCollisionEnter (UnityEngine.Collision collisionInfo) [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at MouseMovement.OnCollisionEnter (UnityEngine.Collision collisionInfo) [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at MouseMovement.OnCollisionEnter (UnityEngine.Collision collisionInfo) [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at MouseMovement.OnCollisionEnter (UnityEngine.Collision collisionInfo) [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at MouseMovement.OnCollisionEnter (UnityEngine.Collision collisionInfo) [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at MouseMovement.OnCollisionEnter (UnityEngine.Collision collisionInfo) [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at MouseMovement.OnCollisionEnter (UnityEngine.Collision collisionInfo) [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at MouseMovement.OnCollisionEnter (UnityEngine.Collision collisionInfo) [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at MouseMovement.OnCollisionEnter (UnityEngine.Collision collisionInfo) [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at MouseMovement.OnCollisionEnter (UnityEngine.Collision collisionInfo) [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at MouseMovement.OnCollisionEnter (UnityEngine.Collision collisionInfo) [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at MouseMovement.OnCollisionEnter (UnityEngine.Collision collisionInfo) [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at MouseMovement.OnCollisionEnter (UnityEngine.Collision collisionInfo) [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at MouseMovement.OnCollisionEnter (UnityEngine.Collision collisionInfo) [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at MouseMovement.OnCollisionEnter (UnityEngine.Collision collisionInfo) [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at MouseMovement.OnCollisionEnter (UnityEngine.Collision collisionInfo) [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at MouseMovement.OnCollisionEnter (UnityEngine.Collision collisionInfo) [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at MouseMovement.OnCollisionEnter (UnityEngine.Collision collisionInfo) [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at MouseMovement.OnCollisionEnter (UnityEngine.Collision collisionInfo) [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at MouseMovement.OnCollisionEnter (UnityEngine.Collision collisionInfo) [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at MouseMovement.OnCollisionEnter (UnityEngine.Collision collisionInfo) [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at MouseMovement.OnCollisionEnter (UnityEngine.Collision collisionInfo) [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at MouseMovement.OnCollisionEnter (UnityEngine.Collision collisionInfo) [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at MouseMovement.OnCollisionEnter (UnityEngine.Collision collisionInfo) [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at MouseMovement.OnCollisionEnter (UnityEngine.Collision collisionInfo) [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at MouseMovement.OnCollisionEnter (UnityEngine.Collision collisionInfo) [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at MouseMovement.OnCollisionEnter (UnityEngine.Collision collisionInfo) [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at MouseMovement.OnCollisionEnter (UnityEngine.Collision collisionInfo) [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at MouseMovement.OnCollisionEnter (UnityEngine.Collision collisionInfo) [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at MouseMovement.OnCollisionEnter (UnityEngine.Collision collisionInfo) [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at MouseMovement.OnCollisionEnter (UnityEngine.Collision collisionInfo) [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at MouseMovement.OnCollisionEnter (UnityEngine.Collision collisionInfo) [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at MouseMovement.OnCollisionEnter (UnityEngine.Collision collisionInfo) [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at MouseMovement.OnCollisionEnter (UnityEngine.Collision collisionInfo) [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at MouseMovement.OnCollisionEnter (UnityEngine.Collision collisionInfo) [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at MouseMovement.OnCollisionEnter (UnityEngine.Collision collisionInfo) [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at MouseMovement.OnCollisionEnter (UnityEngine.Collision collisionInfo) [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at MouseMovement.OnCollisionEnter (UnityEngine.Collision collisionInfo) [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at MouseMovement.OnCollisionEnter (UnityEngine.Collision collisionInfo) [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at MouseMovement.OnCollisionEnter (UnityEngine.Collision collisionInfo) [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at MouseMovement.OnCollisionEnter (UnityEngine.Collision collisionInfo) [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at MouseMovement.OnCollisionEnter (UnityEngine.Collision collisionInfo) [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at MouseMovement.OnCollisionEnter (UnityEngine.Collision collisionInfo) [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at MouseMovement.OnCollisionEnter (UnityEngine.Collision collisionInfo) [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at MouseMovement.OnCollisionEnter (UnityEngine.Collision collisionInfo) [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at MouseMovement.OnCollisionEnter (UnityEngine.Collision collisionInfo) [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at MouseMovement.OnCollisionEnter (UnityEngine.Collision collisionInfo) [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at MouseMovement.OnCollisionEnter (UnityEngine.Collision collisionInfo) [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at MouseMovement.OnCollisionEnter (UnityEngine.Collision collisionInfo) [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at MouseMovement.OnCollisionEnter (UnityEngine.Collision collisionInfo) [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at MouseMovement.OnCollisionEnter (UnityEngine.Collision collisionInfo) [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at MouseMovement.OnCollisionEnter (UnityEngine.Collision collisionInfo) [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at MouseMovement.OnCollisionEnter (UnityEngine.Collision collisionInfo) [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at MouseMovement.OnCollisionEnter (UnityEngine.Collision collisionInfo) [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at MouseMovement.OnCollisionEnter (UnityEngine.Collision collisionInfo) [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at MouseMovement.OnCollisionEnter (UnityEngine.Collision collisionInfo) [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at MouseMovement.OnCollisionEnter (UnityEngine.Collision collisionInfo) [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at MouseMovement.OnCollisionEnter (UnityEngine.Collision collisionInfo) [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at MouseMovement.OnCollisionEnter (UnityEngine.Collision collisionInfo) [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at MouseMovement.OnCollisionEnter (UnityEngine.Collision collisionInfo) [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at MouseMovement.OnCollisionEnter (UnityEngine.Collision collisionInfo) [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at MouseMovement.OnCollisionEnter (UnityEngine.Collision collisionInfo) [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at MouseMovement.OnCollisionEnter (UnityEngine.Collision collisionInfo) [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at MouseMovement.OnCollisionEnter (UnityEngine.Collision collisionInfo) [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at MouseMovement.OnCollisionEnter (UnityEngine.Collision collisionInfo) [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at MouseMovement.OnCollisionEnter (UnityEngine.Collision collisionInfo) [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at MouseMovement.OnCollisionEnter (UnityEngine.Collision collisionInfo) [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at MouseMovement.OnCollisionEnter (UnityEngine.Collision collisionInfo) [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at MouseMovement.OnCollisionEnter (UnityEngine.Collision collisionInfo) [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at MouseMovement.OnCollisionEnter (UnityEngine.Collision collisionInfo) [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at MouseMovement.OnCollisionEnter (UnityEngine.Collision collisionInfo) [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at MouseMovement.OnCollisionEnter (UnityEngine.Collision collisionInfo) [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at MouseMovement.OnCollisionEnter (UnityEngine.Collision collisionInfo) [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at MouseMovement.OnCollisionEnter (UnityEngine.Collision collisionInfo) [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at MouseMovement.OnCollisionEnter (UnityEngine.Collision collisionInfo) [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at MouseMovement.OnCollisionEnter (UnityEngine.Collision collisionInfo) [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at MouseMovement.OnCollisionEnter (UnityEngine.Collision collisionInfo) [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at MouseMovement.OnCollisionEnter (UnityEngine.Collision collisionInfo) [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at MouseMovement.OnCollisionEnter (UnityEngine.Collision collisionInfo) [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at MouseMovement.OnCollisionEnter (UnityEngine.Collision collisionInfo) [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at MouseMovement.OnCollisionEnter (UnityEngine.Collision collisionInfo) [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at MouseMovement.OnCollisionEnter (UnityEngine.Collision collisionInfo) [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at MouseMovement.OnCollisionEnter (UnityEngine.Collision collisionInfo) [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at MouseMovement.OnCollisionEnter (UnityEngine.Collision collisionInfo) [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at MouseMovement.OnCollisionEnter (UnityEngine.Collision collisionInfo) [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at MouseMovement.OnCollisionEnter (UnityEngine.Collision collisionInfo) [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at MouseMovement.OnCollisionEnter (UnityEngine.Collision collisionInfo) [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at MouseMovement.OnCollisionEnter (UnityEngine.Collision collisionInfo) [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at MouseMovement.OnCollisionEnter (UnityEngine.Collision collisionInfo) [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at MouseMovement.OnCollisionEnter (UnityEngine.Collision collisionInfo) [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at MouseMovement.OnCollisionEnter (UnityEngine.Collision collisionInfo) [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at MouseMovement.OnCollisionEnter (UnityEngine.Collision collisionInfo) [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+We hit: Monster(Clone)
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+Trying to hurt Monster(Clone) by calling script Monster(Clone)
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+take 10 damage
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at MouseMovement.OnCollisionEnter (UnityEngine.Collision collisionInfo) [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at MouseMovement.OnCollisionEnter (UnityEngine.Collision collisionInfo) [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at MouseMovement.OnCollisionEnter (UnityEngine.Collision collisionInfo) [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+We hit: Monster(Clone)
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+Trying to hurt Monster(Clone) by calling script Monster(Clone)
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+take 10 damage
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at MouseMovement.OnCollisionEnter (UnityEngine.Collision collisionInfo) [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at MouseMovement.OnCollisionEnter (UnityEngine.Collision collisionInfo) [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at MouseMovement.OnCollisionEnter (UnityEngine.Collision collisionInfo) [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at MouseMovement.OnCollisionEnter (UnityEngine.Collision collisionInfo) [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at MouseMovement.OnCollisionEnter (UnityEngine.Collision collisionInfo) [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+We hit: Monster(Clone)
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+Trying to hurt Monster(Clone) by calling script Monster(Clone)
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+take 10 damage
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at MouseMovement.OnCollisionEnter (UnityEngine.Collision collisionInfo) [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at MouseMovement.OnCollisionEnter (UnityEngine.Collision collisionInfo) [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at MouseMovement.OnCollisionEnter (UnityEngine.Collision collisionInfo) [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at MouseMovement.OnCollisionEnter (UnityEngine.Collision collisionInfo) [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at MouseMovement.OnCollisionEnter (UnityEngine.Collision collisionInfo) [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at MouseMovement.OnCollisionEnter (UnityEngine.Collision collisionInfo) [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+We hit: Monster(Clone)
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+Trying to hurt Monster(Clone) by calling script Monster(Clone)
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+take 10 damage
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at MouseMovement.OnCollisionEnter (UnityEngine.Collision collisionInfo) [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+We hit: Monster(Clone)
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+Trying to hurt Monster(Clone) by calling script Monster(Clone)
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+take 10 damage
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+We hit: Monster(Clone)
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+Trying to hurt Monster(Clone) by calling script Monster(Clone)
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+take 10 damage
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+We hit: Monster(Clone)
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+Trying to hurt Monster(Clone) by calling script Monster(Clone)
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+take 10 damage
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at MouseMovement.OnCollisionEnter (UnityEngine.Collision collisionInfo) [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+We hit: Monster(Clone)
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+Trying to hurt Monster(Clone) by calling script Monster(Clone)
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+take 10 damage
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at MouseMovement.OnCollisionEnter (UnityEngine.Collision collisionInfo) [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at MouseMovement.OnCollisionEnter (UnityEngine.Collision collisionInfo) [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at MouseMovement.OnCollisionEnter (UnityEngine.Collision collisionInfo) [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at MouseMovement.OnCollisionEnter (UnityEngine.Collision collisionInfo) [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at MouseMovement.OnCollisionEnter (UnityEngine.Collision collisionInfo) [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at MouseMovement.OnCollisionEnter (UnityEngine.Collision collisionInfo) [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at MouseMovement.OnCollisionEnter (UnityEngine.Collision collisionInfo) [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at MouseMovement.OnCollisionEnter (UnityEngine.Collision collisionInfo) [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at MouseMovement.OnCollisionEnter (UnityEngine.Collision collisionInfo) [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at MouseMovement.OnCollisionEnter (UnityEngine.Collision collisionInfo) [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at MouseMovement.OnCollisionEnter (UnityEngine.Collision collisionInfo) [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at MouseMovement.OnCollisionEnter (UnityEngine.Collision collisionInfo) [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at MouseMovement.OnCollisionEnter (UnityEngine.Collision collisionInfo) [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at MouseMovement.OnCollisionEnter (UnityEngine.Collision collisionInfo) [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at MouseMovement.OnCollisionEnter (UnityEngine.Collision collisionInfo) [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at MouseMovement.OnCollisionEnter (UnityEngine.Collision collisionInfo) [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at MouseMovement.OnCollisionEnter (UnityEngine.Collision collisionInfo) [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at MouseMovement.OnCollisionEnter (UnityEngine.Collision collisionInfo) [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at MouseMovement.OnCollisionEnter (UnityEngine.Collision collisionInfo) [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at MouseMovement.OnCollisionEnter (UnityEngine.Collision collisionInfo) [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at MouseMovement.OnCollisionEnter (UnityEngine.Collision collisionInfo) [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at MouseMovement.OnCollisionEnter (UnityEngine.Collision collisionInfo) [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at MouseMovement.OnCollisionEnter (UnityEngine.Collision collisionInfo) [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at MouseMovement.OnCollisionEnter (UnityEngine.Collision collisionInfo) [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at MouseMovement.OnCollisionEnter (UnityEngine.Collision collisionInfo) [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at MouseMovement.OnCollisionEnter (UnityEngine.Collision collisionInfo) [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at MouseMovement.OnCollisionEnter (UnityEngine.Collision collisionInfo) [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at MouseMovement.OnCollisionEnter (UnityEngine.Collision collisionInfo) [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at MouseMovement.OnCollisionEnter (UnityEngine.Collision collisionInfo) [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at MouseMovement.OnCollisionEnter (UnityEngine.Collision collisionInfo) [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
 
