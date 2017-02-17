@@ -5,6 +5,8 @@ public class WinScript : MonoBehaviour {
     string winner;
     int catDeaths;
     int mouseDeaths;
+	bool exitOpen = false;
+	int numPuzzlePieces = 0;
     // Use this for initialization
     void Start () {
         catDeaths = 0;
@@ -13,13 +15,13 @@ public class WinScript : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        if (catDeaths >= 1)
+        if (catDeaths >= 1 || exitOpen)
         {
-            GameOver("The Mice");
+            GameOver("The Mice Win!");
         }
         if (mouseDeaths >= 3)
         {
-            GameOver("The Cat");
+            GameOver("The Cat Wins!");
         }
 	}
 
@@ -31,6 +33,17 @@ public class WinScript : MonoBehaviour {
     {
         return winner;
     }
+	// increase number of puzzle pieces
+	public void pickedUpPuzzlePiece(){
+		numPuzzlePieces++;
+	}
+	// return number of puzzle pieces (for exit to check)
+	public int numPuzzlePiecesHeld(){
+		return numPuzzlePieces;
+	}
+	public void openExit(){
+		exitOpen = true;
+	}
     public void setCatDeaths()
     {
         catDeaths++;

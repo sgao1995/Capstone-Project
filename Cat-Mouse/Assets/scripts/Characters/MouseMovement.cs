@@ -45,11 +45,11 @@ public class MouseMovement : MonoBehaviour {
 	private bool canTakeKey = false;
 	private bool canOpenChest = false;
 	private bool canTakePuzzlePiece = false;
+	private bool canOpenExit = false;
 	private bool canMove = true;
 	
 	// keys and puzzle pieces on hand
 	public int numKeysHeld = 0;
-	List<int> puzzlePiecesHeld = new List<int>();
 
     // skills
     private float[] skillCooldownTimers = new float[4]; // the cooldown timer
@@ -284,7 +284,7 @@ public class MouseMovement : MonoBehaviour {
         }
 
         // interactions
-		if (canToggleDoor || canTakeKey || canOpenChest || canTakePuzzlePiece){
+		if (canToggleDoor || canTakeKey || canOpenChest || canTakePuzzlePiece || canOpenChest){
 			if (Input.GetKeyDown(KeyCode.E)){
 				InteractWithObject();
 			}
@@ -399,24 +399,26 @@ public class MouseMovement : MonoBehaviour {
 			if (hitColliders[i].tag == "Door"){
 				hitColliders[i].transform.GetComponent<MazeDoor>().Interact();
 			}
-			if (hitColliders[i].tag == "Chest"){
-				if (numKeysHeld > 0){
-					numKeysHeld -= hitColliders[i].transform.GetComponent<Chest>().Interact();
-					break;
-				}
-			}
 			if (hitColliders[i].tag == "Key"){
 				hitColliders[i].transform.GetComponent<Key>().Interact();
 				numKeysHeld++;
 				interactText.text = "";
 				canTakeKey = false;
-				break;
 			}
 			if (hitColliders[i].tag == "PuzzlePiece"){
-				puzzlePiecesHeld.Add(hitColliders[i].transform.GetComponent<PuzzlePiece>().Interact());
+				hitColliders[i].transform.GetComponent<PuzzlePiece>().Interact();
+				Debug.Log("take puzzle piece");
 				interactText.text = "";
 				canTakeKey = false;
-				break;
+			}
+			if (hitColliders[i].tag == "Exit"){
+				hitColliders[i].transform.GetComponent<Exit>().Interact();
+				interactText.text = "You can't seem to activate it";
+			}
+			if (hitColliders[i].tag == "Chest"){
+				if (numKeysHeld > 0){
+					numKeysHeld -= hitColliders[i].transform.GetComponent<Chest>().Interact();
+				}
 			}
             i++;
         }
@@ -467,6 +469,11 @@ public class MouseMovement : MonoBehaviour {
 			}
 			canToggleDoor = true;
 		}
+		if (obj.tag == "Chest"){
+			Chest chest = obj.gameObject.GetComponent<Chest>();
+			if (chest.chestOpen || chest.chestOpening)
+				canOpenChest = false;
+		}
 	}
 
     // when player leaves the trigger
@@ -491,6 +498,10 @@ public class MouseMovement : MonoBehaviour {
 		if (obj.tag == "PuzzlePiece"){
 			interactText.text = "";
 			canTakePuzzlePiece = false;
+		}
+		if (obj.tag == "Exit"){
+			interactText.text = "";
+			canOpenExit = false;
 		}
     }
     [PunRPC]
@@ -556,6 +567,10 @@ public class MouseMovement : MonoBehaviour {
 		if (obj.tag == "PuzzlePiece"){
 			interactText.text = "Press E to take Puzzle Piece";
 			canTakePuzzlePiece = true;
+		}
+		if (obj.tag == "Exit"){
+			interactText.text = "Press E to insert Puzzle Pieces";
+			canOpenExit = true;
 		}
     }
     public float getHealth()

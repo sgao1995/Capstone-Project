@@ -4,7 +4,7 @@ using System.Collections;
 public class Chest : MonoBehaviour {
 	public Transform hinge;
 	public bool chestOpen = false;
-	bool chestOpening = false;
+	public bool chestOpening = false;
 	public float duration = 30f;
 	float newRot = 0;
 	public int whichPieceInside;
@@ -13,8 +13,9 @@ public class Chest : MonoBehaviour {
 	
 	// open the chest
 	public int Interact(){
-		if (chestOpen == false){
+		if (chestOpen == false && chestOpening == false){
 			chestOpening = true;
+			Debug.Log("open chest");
 			return 1;
 		}
 		return 0;

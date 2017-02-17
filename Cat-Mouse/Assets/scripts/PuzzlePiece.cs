@@ -22,8 +22,8 @@ public class PuzzlePiece : MonoBehaviour {
 		this.transform.rotation = newQuat;
 	}
 	
-	public int Interact(){
+	public void Interact(){
+		GameObject.Find("WinObj").GetComponent<WinScript>().pickedUpPuzzlePiece();
 		PhotonNetwork.Destroy(this.gameObject);
-		return pieceID;
 	}
 }
