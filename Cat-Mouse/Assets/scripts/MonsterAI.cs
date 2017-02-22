@@ -26,7 +26,7 @@ public class MonsterAI : MonoBehaviour {
 	NavMeshAgent agent;
     public Rigidbody monsterrb;
 	private float delayTimer = 0f;
-	private float delayBetweenMovements = 200f;
+	private float delayBetweenMovements = 20f;
 	private List<string> modes = new List<string>();
 	private string currentMode;
 	private Animator animator;
@@ -58,7 +58,7 @@ public class MonsterAI : MonoBehaviour {
 		
 		agent = GetComponent<NavMeshAgent>();
 		animator = GetComponent<Animator>();
-		currentMode = "Attack";
+		currentMode = "Patrol";
 	}
 	public void setMonsterType(string type){
 		this.monsterType = type;
@@ -166,24 +166,29 @@ public class MonsterAI : MonoBehaviour {
     {
 		attackCooldownTimer = attackCooldownDelay;
 		animator.Play("Attack");
+		WaitForAnimation(1f);
 		DealDamage();
     }
 	// cast a bash skill in front of monster
     void Bash()
     {
-		bashCooldownTimer = 30f;
+		bashCooldownTimer = 5f;
 		animator.Play("Bash");
+		WaitForAnimation(1f);
 		DealDamage();
+		Debug.Log("Bash");
     }
 	// cast stomp in aoe around monster
 	void Stomp(){
 		stompCooldownTimer = 20f;
-		//animator.Play("");
+		animator.Play("Stomp");
+		WaitForAnimation(1.5f);
 	}
 	// cast heal on self
 	void Heal(){
 		healCooldownTimer = 30f;
-		//animator.Play();
+		animator.Play("Heal");
+		WaitForAnimation(3f);
 	}
 	
 	void DealDamage(){
@@ -212,13 +217,33 @@ public class MonsterAI : MonoBehaviour {
 	
     void FixedUpdate()
     {
-		if(!animator.GetCurrentAnimatorStateInfo(0).IsName("Attack") && canMove){
+		if(canMove){
 			if (currentMode == "Sleeping"){
 				animator.Play("Idle");
 			}
 			else if (currentMode == "Patrol"){
 				animator.Play("WalkForward");
 				transform.Translate(transform.forward * speed * Time.deltaTime, Space.World);
+			}
+			else if (currentMode == "Attack"){
+				animator.Play("WalkForward");
+
+				// face forward unless distance is short, then look at player
+				if (dist < 3f){
+					transform.LookAt(playersInGame[targettedPlayer].transform);	
+				}
+				else{
+					transform.rotation = Quaternion.LookRotation(transform.forward);
+				}
+			}
+		}
+    }
+	
+	// non motion based 
+    void Update()
+    {	
+		if (canMove){
+			if (currentMode == "Patrol"){
 				// move back and forth
 				patrolTimer -= Time.deltaTime;
 				if (patrolTimer < 0){
@@ -233,7 +258,6 @@ public class MonsterAI : MonoBehaviour {
 			}
 			else if (currentMode == "Attack"){
 				dist = Vector3.Distance(this.transform.position, playersInGame[targettedPlayer].transform.position);
-				animator.Play("WalkForward");
 				// target a player upon mode attack
 				if (retargetTimer < 0){
 					retargetTimer = timeUntilRetarget;
@@ -255,44 +279,44 @@ public class MonsterAI : MonoBehaviour {
 				
 				// type check
 				if (monsterType == "Monster"){
-					// chance to attack, 7%
+					// chance to attack, 20%
 					if (attackCooldownTimer < 0){
 						// if close enough then attack
 						if (dist < 2f){
 							attackChance = Random.Range(0, 1f);
-							if (attackChance < 0.07f){
+							if (attackChance < 0.2f){
 								Attack();
 							}
 						}
 					}
 				}
 				else if (monsterType == "MonsterElite"){
-					// chance to attack, 10%
+					// chance to attack, 15%
 					if (attackCooldownTimer < 0){
 						// if close enough then attack
 						if (dist < 2f){
 							attackChance = Random.Range(0, 1f);
-							if (attackChance < 0.1f){
+							if (attackChance < 0.15f){
 								Attack();
 							}
 							// 5% chance to bash
-							else if (bashCooldownTimer < 0 && attackChance < 0.15f){
+							else if (bashCooldownTimer < 0 && attackChance < 0.2f){
 								Bash();
 							}
 						}
 					}
 				}
 				else if (monsterType == "Boss"){
-					// chance to attack, 10%
+					// chance to attack, 15%
 					if (attackCooldownTimer < 0){
 						// if close enough then attack
 						if (dist < 4f){
 							attackChance = Random.Range(0, 1f);
-							if (attackChance < 0.1f){
+							if (attackChance < 0.15f){
 								Attack();
 							}
 							// 10% chance to heal 
-							else if (healCooldownTimer < 0 && attackChance < 0.2f){
+							else if (healCooldownTimer < 0 && attackChance < 0.25f){
 								Heal();
 							}
 						}
@@ -307,36 +331,29 @@ public class MonsterAI : MonoBehaviour {
 							if (attackChance < 0.1f){
 								Attack();
 							}
-							// 5% chance to stomp
-							else if (stompCooldownTimer < 0 && attackChance < 0.15f){
+							// 10% chance to stomp
+							else if (stompCooldownTimer < 0 && attackChance < 0.2f){
 								Stomp();
 							}
 						}
 					}
 				}
-				
-
-				// face forward unless distance is short, then look at player
-				if (dist < 3f){
-					transform.LookAt(playersInGame[targettedPlayer].transform);	
-				}
-				else{
-					transform.rotation = Quaternion.LookRotation(transform.forward);
-				}
 			}
 		}
-				
 		// switch modes if delay is up
 		delayTimer -= Time.deltaTime;
 		if (delayTimer < 0){
 			currentMode = modes[(int)Random.Range(0, modes.Count - 0.01f)];
-			if (currentMode == "Sleeping")
+			if (currentMode == "Sleeping"){
 				delayTimer = delayBetweenMovements;
-			else if (currentMode == "Patrol")
+			}
+			else if (currentMode == "Patrol"){
 				// patrol takes twice as long
 				delayTimer = delayBetweenMovements*2;
-			else if (currentMode == "Attack")
+			}
+			else if (currentMode == "Attack"){
 				delayTimer = delayBetweenMovements;
+			}
 			Debug.Log(currentMode);
 		}
 		
@@ -357,9 +374,5 @@ public class MonsterAI : MonoBehaviour {
         {
             healCooldownTimer -= Time.deltaTime;
         }
-    }
-    void OnCollisionStay()
-    {			
-		
     }
 }

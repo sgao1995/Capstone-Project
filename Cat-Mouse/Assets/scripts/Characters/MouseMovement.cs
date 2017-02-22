@@ -151,9 +151,8 @@ public class MouseMovement : MonoBehaviour {
         }
     }
 
-    void FixedUpdate()
-    {
-        /* Updates the HUD state for the current player */
+	void Update(){
+		/* Updates the HUD state for the current player */
         if (GetComponent<PhotonView>().isMine)
         {
             /* Updates the Vitality System states */
@@ -191,6 +190,64 @@ public class MouseMovement : MonoBehaviour {
             TakeDamage(0.2f);
         }
 		
+		// left click
+        if (Input.GetMouseButtonDown(0) && attackCooldownTimer <= 0 && !Input.GetKey(KeyCode.Escape))
+        {
+            attackCooldownTimer = attackCooldownDelay;
+            Attack();
+        }
+        // skills
+        if (Input.GetKeyDown(KeyCode.Alpha1))
+        {
+            useSkill(3);
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha2))
+        {
+            mouseSkill.useSkillSlot(2);
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha3))
+        {
+            mouseSkill.useSkillSlot(3);
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha4))
+        {
+            mouseSkill.useSkillSlot(4);
+        }
+
+        // interactions
+		if (canToggleDoor || canTakeKey || canOpenChest || canTakePuzzlePiece || canOpenChest){
+			if (Input.GetKeyDown(KeyCode.E)){
+				InteractWithObject();
+			}
+		}
+        if (Input.GetKeyDown(KeyCode.K))
+        {
+            TakeDamage(5f);
+        }
+		if (Input.GetKeyDown(KeyCode.T))
+        {
+            transform.position = new Vector3(22, 0, 25);
+        }
+        if (Input.GetKeyDown("escape"))
+        {
+            Cursor.lockState = CursorLockMode.None; //if we press esc, cursor appears on screen
+        }
+
+        // timer actions
+        if (movementModifierTimer > 0f)
+            movementModifierTimer -= Time.deltaTime;
+        else
+        {
+            movementModifier = 1;
+        }
+        if (attackCooldownTimer > 0)
+        {
+            attackCooldownTimer -= Time.deltaTime;
+        }
+	}
+	
+    void FixedUpdate()
+    {
 		if (canMove)
         {	
 			if (onIce){
@@ -258,62 +315,6 @@ public class MouseMovement : MonoBehaviour {
 				}
 			}
 		}
-		
-        // left click
-        if (Input.GetMouseButtonDown(0) && attackCooldownTimer <= 0 && !Input.GetKey(KeyCode.Escape))
-        {
-            attackCooldownTimer = attackCooldownDelay;
-            Attack();
-        }
-        // skills
-        if (Input.GetKeyDown(KeyCode.Alpha1))
-        {
-            useSkill(3);
-        }
-        if (Input.GetKeyDown(KeyCode.Alpha2))
-        {
-            mouseSkill.useSkillSlot(2);
-        }
-        if (Input.GetKeyDown(KeyCode.Alpha3))
-        {
-            mouseSkill.useSkillSlot(3);
-        }
-        if (Input.GetKeyDown(KeyCode.Alpha4))
-        {
-            mouseSkill.useSkillSlot(4);
-        }
-
-        // interactions
-		if (canToggleDoor || canTakeKey || canOpenChest || canTakePuzzlePiece || canOpenChest){
-			if (Input.GetKeyDown(KeyCode.E)){
-				InteractWithObject();
-			}
-		}
-        if (Input.GetKeyDown(KeyCode.K))
-        {
-            TakeDamage(5f);
-        }
-		if (Input.GetKeyDown(KeyCode.T))
-        {
-            transform.position = new Vector3(22, 0, 25);
-        }
-        if (Input.GetKeyDown("escape"))
-        {
-            Cursor.lockState = CursorLockMode.None; //if we press esc, cursor appears on screen
-        }
-
-        // timer actions
-        if (movementModifierTimer > 0f)
-            movementModifierTimer -= Time.deltaTime;
-        else
-        {
-            movementModifier = 1;
-        }
-        if (attackCooldownTimer > 0)
-        {
-            attackCooldownTimer -= Time.deltaTime;
-        }
-
     }
 
     // take a certain amount of damage
@@ -338,8 +339,8 @@ public class MouseMovement : MonoBehaviour {
     {
         Debug.Log("player died");
         alive = false;
-		animator.SetTrigger("Death1Trigger");
-        //animator.Play("Unarmed-Death1");
+        animator.Play("Unarmed-Death1");
+		WaitForAnimation(5f);
     }
 
     // attack in front of player

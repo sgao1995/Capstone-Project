@@ -39,7 +39,7 @@ public class GameManager : Photon.PunBehaviour {
         {
             SpawnMouse();
         }
-        for (int i = 0; i<3; i++)
+        for (int i = 0; i<20; i++)
         {
             SpawnMonsters();
         }
@@ -115,10 +115,10 @@ public class GameManager : Photon.PunBehaviour {
         if (PhotonNetwork.isMasterClient)
         {
             Spawn monsterSpawn = s[0];
-            GameObject monsterGO = (GameObject)PhotonNetwork.Instantiate("Monster", monsterSpawn.transform.position, monsterSpawn.transform.rotation, 0);
+            GameObject monsterGO = (GameObject)PhotonNetwork.Instantiate("MonsterElite", monsterSpawn.transform.position, monsterSpawn.transform.rotation, 0);
             monsterGO.GetComponent<MonsterAI>().enabled = true;
 			MonsterAI monster = monsterGO.GetComponent<MonsterAI>();
-			monster.setMonsterType("Monster");
+			monster.setMonsterType("MonsterElite");
         }
     }
 	// spawn the keys and chests in the puzzle rooms
