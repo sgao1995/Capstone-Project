@@ -180,7 +180,7 @@ public class CatMovement : MonoBehaviour
 		if (Input.GetMouseButtonDown(0) && attackCooldownTimer <= 0 && !Input.GetKey(KeyCode.Escape))
         {
 			attackCooldownTimer = attackCooldownDelay;
-			Attack();
+			StartCoroutine(Attack());
 		}
 		// skills
 		if (Input.GetKeyDown(KeyCode.Alpha1)){
@@ -323,15 +323,15 @@ public class CatMovement : MonoBehaviour
 	}
 
     // attack in front of player
-    void Attack()
+    IEnumerator Attack()
     {
 		float attackType = Random.Range(0f, 1f);
 		if (attackType <= 0.5f)
 			animator.SetTrigger("Attack3Trigger");
 		else if (attackType > 0.5f)
 			animator.SetTrigger("Attack6Trigger");
+		yield return new WaitForSeconds(0.3f);
 		DealDamage();
-		WaitForAnimation(0.7f);
     }
 	
     void DealDamage()
