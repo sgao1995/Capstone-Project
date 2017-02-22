@@ -39,10 +39,10 @@ public class GameManager : Photon.PunBehaviour {
         {
             SpawnMouse();
         }
-     //   for (int i = 0; i<9; i++)
-        //{
+        for (int i = 0; i<3; i++)
+        {
             SpawnMonsters();
-       // }
+        }
 		SpawnKeysAndChests();
         GameObject.Find("Timer").GetComponent<Timer>().enabled = true;
     }

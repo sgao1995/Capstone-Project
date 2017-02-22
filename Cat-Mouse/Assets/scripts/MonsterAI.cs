@@ -10,16 +10,15 @@ public class MonsterAI : MonoBehaviour {
 	private float attackCooldownDelay;
 	private float attackCooldownTimer;
 	private float expDrop;
+	private float attackChance;
 	
 	// list of the players in the game
-	private GameObject[] playersInGame;
-    private GameObject[] catsInGame;
-    private GameObject[] miceInGame;
+	private List<GameObject> playersInGame = new List<GameObject>();
+	public int targettedPlayer;
 	// patrol
 	float patrolTimer = 5f;
 	float turnTimer = 1.8f;
 	// attack
-	float sprintTimer = 10f;
 	float retargetTimer = 5f;
 	private float timeUntilRetarget = 5f;
 	
@@ -29,11 +28,16 @@ public class MonsterAI : MonoBehaviour {
 	private float delayTimer = 0f;
 	private float delayBetweenMovements = 200f;
 	private List<string> modes = new List<string>();
-	private string currentMode = "Sleeping";
+	private string currentMode;
 	private Animator animator;
+	private bool canMove = true;
 	
-	// monster type
+	// monster type and skills
 	public string monsterType;
+	private float bashCooldownTimer = 30f;
+	private float stompCooldownTimer = 20f;
+	private float healCooldownTimer = 30f;
+	private float dist;
 	
 	// Use this for initialization
 	void Start () {
@@ -42,7 +46,16 @@ public class MonsterAI : MonoBehaviour {
 		modes.Add("Patrol");
 		modes.Add("Attack");
 		modes.Add("Sleeping");
-		playersInGame= GameObject.FindGameObjectsWithTag("Player");
+		
+		GameObject[] catArray = GameObject.FindGameObjectsWithTag("Cat");
+		for (int i = 0; i < catArray.Length; i++){
+			playersInGame.Add(catArray[i]);
+		}
+		GameObject[] mouseArray = GameObject.FindGameObjectsWithTag("Mouse");
+		for (int i = 0; i < mouseArray.Length; i++){
+			playersInGame.Add(mouseArray[i]);
+		}
+		
 		agent = GetComponent<NavMeshAgent>();
 		animator = GetComponent<Animator>();
 		currentMode = "Attack";
@@ -87,16 +100,31 @@ public class MonsterAI : MonoBehaviour {
 		return expDrop;
 	}
 
+		// wait function
+	public void WaitForAnimation(float seconds){
+		StartCoroutine(_wait(seconds));
+	}
+	IEnumerator _wait(float time){
+		canMove = false;
+		yield return new WaitForSeconds(time);
+		canMove = true;
+	}
+	
     void takeDamage(float dmg)
     {
+		if (HP - dmg > 0){
+			animator.Play("GetHit");
+			WaitForAnimation(1f);
+		}
         transform.GetComponent<PhotonView>().RPC("changeHealth", PhotonTargets.AllBuffered, dmg);
 		Debug.Log("take " + dmg + " damage");
+		retargetTimer = timeUntilRetarget;
+
 		
 		// change modes to attack
 		if (currentMode != "Attack"){
 			currentMode = "Attack";
 			delayTimer = delayBetweenMovements;
-			sprintTimer = 7f;
 		}
     }
     // take damage
@@ -109,8 +137,8 @@ public class MonsterAI : MonoBehaviour {
         {
             if (this.gameObject != null)
             {
-               transform.GetComponent<MonsterAI>().enabled = false;
-               StartCoroutine(Death());
+				StartCoroutine(Death());
+				transform.GetComponent<MonsterAI>().enabled = false;
             }
         }
     }
@@ -136,9 +164,27 @@ public class MonsterAI : MonoBehaviour {
 	// attack in front of monster
     void Attack()
     {
+		attackCooldownTimer = attackCooldownDelay;
 		animator.Play("Attack");
 		DealDamage();
     }
+	// cast a bash skill in front of monster
+    void Bash()
+    {
+		bashCooldownTimer = 30f;
+		animator.Play("Bash");
+		DealDamage();
+    }
+	// cast stomp in aoe around monster
+	void Stomp(){
+		stompCooldownTimer = 20f;
+		//animator.Play("");
+	}
+	// cast heal on self
+	void Heal(){
+		healCooldownTimer = 30f;
+		//animator.Play();
+	}
 	
 	void DealDamage(){
 		RaycastHit hitInfo;
@@ -166,7 +212,7 @@ public class MonsterAI : MonoBehaviour {
 	
     void FixedUpdate()
     {
-		if(!animator.GetCurrentAnimatorStateInfo(0).IsName("Attack")){
+		if(!animator.GetCurrentAnimatorStateInfo(0).IsName("Attack") && canMove){
 			if (currentMode == "Sleeping"){
 				animator.Play("Idle");
 			}
@@ -186,51 +232,97 @@ public class MonsterAI : MonoBehaviour {
 				}
 			}
 			else if (currentMode == "Attack"){
-				if (sprintTimer > 2f){
-					sprintTimer -= Time.deltaTime;
-					animator.Play("Run");
-				}
-				else{
-					animator.Play("WalkForward");
-				}
+				dist = Vector3.Distance(this.transform.position, playersInGame[targettedPlayer].transform.position);
+				animator.Play("WalkForward");
 				// target a player upon mode attack
 				if (retargetTimer < 0){
 					retargetTimer = timeUntilRetarget;
 				}
-				int targettedPlayer = 0;
 				// then retarget every 5 seconds
 				if (retargetTimer == timeUntilRetarget)
 				{
 					// find closest player
 					float closestDist = float.MaxValue;
-					for (int p = 0; p < playersInGame.Length; p++){
-						float dist = Vector3.Distance(this.transform.position, playersInGame[p].transform.position);
+					for (int p = 0; p < playersInGame.Count; p++){
+						dist = Vector3.Distance(this.transform.position, playersInGame[p].transform.position);
 						if (dist < closestDist){
 							targettedPlayer = p;
+							agent.SetDestination(playersInGame[targettedPlayer].transform.position);
 						}
 					}
 				}		
 				retargetTimer -= Time.deltaTime;
 				
-				// chance to attack, 10%
-				if (attackCooldownTimer < 0){
-					float attack = Random.Range(0, 1f);
-					if (attack < 0.1f){
-						attackCooldownTimer = attackCooldownDelay;
-						Attack();
+				// type check
+				if (monsterType == "Monster"){
+					// chance to attack, 7%
+					if (attackCooldownTimer < 0){
+						// if close enough then attack
+						if (dist < 2f){
+							attackChance = Random.Range(0, 1f);
+							if (attackChance < 0.07f){
+								Attack();
+							}
+						}
 					}
 				}
+				else if (monsterType == "MonsterElite"){
+					// chance to attack, 10%
+					if (attackCooldownTimer < 0){
+						// if close enough then attack
+						if (dist < 2f){
+							attackChance = Random.Range(0, 1f);
+							if (attackChance < 0.1f){
+								Attack();
+							}
+							// 5% chance to bash
+							else if (bashCooldownTimer < 0 && attackChance < 0.15f){
+								Bash();
+							}
+						}
+					}
+				}
+				else if (monsterType == "Boss"){
+					// chance to attack, 10%
+					if (attackCooldownTimer < 0){
+						// if close enough then attack
+						if (dist < 4f){
+							attackChance = Random.Range(0, 1f);
+							if (attackChance < 0.1f){
+								Attack();
+							}
+							// 10% chance to heal 
+							else if (healCooldownTimer < 0 && attackChance < 0.2f){
+								Heal();
+							}
+						}
+					}
+				}
+				else if (monsterType == "PuzzleRoomBoss"){
+					// chance to attack, 10%
+					if (attackCooldownTimer < 0){
+						// if close enough then attack
+						if (dist < 2f){
+							attackChance = Random.Range(0, 1f);
+							if (attackChance < 0.1f){
+								Attack();
+							}
+							// 5% chance to stomp
+							else if (stompCooldownTimer < 0 && attackChance < 0.15f){
+								Stomp();
+							}
+						}
+					}
+				}
+				
 
-				// always look at player
-			//	transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(playersInGame[targettedPlayer].transform.position - transform.position), 3f*Time.deltaTime);
-				
-				//Debug.Log("chasing player " + targettedPlayer);
-				
-				// follow the player, turn to face direction of movement
-				transform.rotation = Quaternion.LookRotation(transform.forward);
-				// moves faster for first couple seconds
-				transform.Translate(transform.forward * speed * (1f + sprintTimer/8f) * Time.deltaTime, Space.World);
-				agent.SetDestination(playersInGame[targettedPlayer].transform.position);
+				// face forward unless distance is short, then look at player
+				if (dist < 3f){
+					transform.LookAt(playersInGame[targettedPlayer].transform);	
+				}
+				else{
+					transform.rotation = Quaternion.LookRotation(transform.forward);
+				}
 			}
 		}
 				
@@ -248,10 +340,22 @@ public class MonsterAI : MonoBehaviour {
 			Debug.Log(currentMode);
 		}
 		
-		// attack cooldown
+		// cooldowns
 		if (attackCooldownTimer > 0)
         {
             attackCooldownTimer -= Time.deltaTime;
+        }
+		if (bashCooldownTimer > 0)
+        {
+            bashCooldownTimer -= Time.deltaTime;
+        }
+		if (stompCooldownTimer > 0)
+        {
+            stompCooldownTimer -= Time.deltaTime;
+        }
+		if (healCooldownTimer > 0)
+        {
+            healCooldownTimer -= Time.deltaTime;
         }
     }
     void OnCollisionStay()
