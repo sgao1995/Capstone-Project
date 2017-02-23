@@ -132,9 +132,13 @@ public class MouseMovement : MonoBehaviour {
 				// placeholder skill for a smoke screen
 				animator.Play("Throw");
 				WaitForAnimation(0.7f);
+                transform.GetComponent<PhotonView>().RPC("cloak", PhotonTargets.AllBuffered);
+
                 break;
             case 4:
                 Debug.Log("use 4");
+                transform.GetComponent<PhotonView>().RPC("uncloak", PhotonTargets.AllBuffered);
+
                 break;
             case 5:
                 Debug.Log("use 5");
@@ -150,7 +154,27 @@ public class MouseMovement : MonoBehaviour {
                 break;
         }
     }
-
+    //used https://docs.unity3d.com/Manual/Coroutines.html as resource for coroutines and invisiblity
+    [PunRPC]
+    void cloak()
+    {
+        StartCoroutine(Invis(0.2f, 3f));
+    }
+    [PunRPC]
+    void uncloak()
+    {
+        StartCoroutine(Invis(1.0f, 3f));
+    }
+    IEnumerator Invis(float val, float time)
+    {
+        for (float f = 1f; f >= 0; f -= Time.deltaTime/time)
+        {
+            Color mouseColor = transform.Find("Mesh").GetComponent<SkinnedMeshRenderer>().material.color;
+            mouseColor.a = Mathf.Lerp(transform.Find("Mesh").GetComponent<SkinnedMeshRenderer>().material.color.a, val, f); //lerp to make it look smoother
+            transform.Find("Mesh").GetComponent<SkinnedMeshRenderer>().material.color = mouseColor;
+            yield return null;
+        }
+    }
 	void Update(){
 		/* Updates the HUD state for the current player */
         if (GetComponent<PhotonView>().isMine)
@@ -207,7 +231,8 @@ public class MouseMovement : MonoBehaviour {
         }
         if (Input.GetKeyDown(KeyCode.Alpha2))
         {
-            mouseSkill.useSkillSlot(2);
+            useSkill(4);
+            //mouseSkill.useSkillSlot(2);
         }
         if (Input.GetKeyDown(KeyCode.Alpha3))
         {
