@@ -15,7 +15,7 @@ public class CatMovement : MonoBehaviour
     private float maxHealth;
     private int skillPoints;
     private int ultimateSkillPoints;
-    private int[] learnedSkills = { 3, 4, 5, 6 };
+    private int[] learnedSkills = { 0, 1, 2, 3 };
     private float damage = 50f;
     // movement speed
     private int movementModifier = 1;
@@ -164,6 +164,9 @@ public class CatMovement : MonoBehaviour
             /* Updates the total number of Skill Slots */
             catSkill.setMaxSkillSlots(4);  // Set to 4
 
+            /* Updates the Skill assigned to each Skill Slot */
+            catSkill.setSlotAssign(learnedSkills);
+
             /* Updates the number of Skill Slots enabled */
             catSkill.setNumSkillSlots(this.level);
         }
@@ -185,6 +188,7 @@ public class CatMovement : MonoBehaviour
 		// skills
 		if (Input.GetKeyDown(KeyCode.Alpha1)){
             useSkill(3);
+            catSkill.useSkillSlot(1);
 		}
 		if (Input.GetKeyDown(KeyCode.Alpha2)){
             catSkill.useSkillSlot(2);

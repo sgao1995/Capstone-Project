@@ -19,7 +19,7 @@ public class MouseMovement : MonoBehaviour {
     private float maxHealth;
     private int skillPoints;
     private int ultimateSkillPoints;
-    private int[] learnedSkills = { 3, 4, 5, 6 };
+    private int[] learnedSkills = { 0, 1, 2, 3 };
     private float damage = 10f;
     // movement speed
     private int movementModifier = 1;
@@ -176,6 +176,9 @@ public class MouseMovement : MonoBehaviour {
             /* Updates the total number of Skill Slots */
             mouseSkill.setMaxSkillSlots(4);  // Set to 4
 
+            /* Updates the Skill assigned to each Skill Slot */
+            mouseSkill.setSlotAssign(learnedSkills);
+
             /* Updates the number of Skill Slots enabled */
             mouseSkill.setNumSkillSlots(this.level);
         }
@@ -200,6 +203,7 @@ public class MouseMovement : MonoBehaviour {
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
             useSkill(3);
+            mouseSkill.useSkillSlot(1);  // Updates the Skill System of the HUD
         }
         if (Input.GetKeyDown(KeyCode.Alpha2))
         {
