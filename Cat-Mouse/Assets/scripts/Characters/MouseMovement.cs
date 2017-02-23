@@ -158,6 +158,8 @@ public class MouseMovement : MonoBehaviour {
     [PunRPC]
     void cloak()
     {
+        transform.Find("Smoke").GetComponent<ParticleSystem>().Play();
+      //  Destroy(gameObject, transform.Find("Smoke").GetComponent<ParticleSystem>().duration);
         StartCoroutine(Invis(0.2f, 3f));
     }
     [PunRPC]
