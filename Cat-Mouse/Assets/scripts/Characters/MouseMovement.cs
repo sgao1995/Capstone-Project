@@ -156,9 +156,13 @@ public class MouseMovement : MonoBehaviour {
     }
     //used https://docs.unity3d.com/Manual/Coroutines.html as resource for coroutines and invisiblity
     [PunRPC]
-    void cloak()
-    {
-        transform.Find("Smoke").GetComponent<ParticleSystem>().Play();
+    IEnumerator cloak()
+    {	                
+		yield return new WaitForSeconds(0.3f);
+		Quaternion smokeRot = Quaternion.Euler(-90, 0, 0);
+		Vector3 smokePos = new Vector3(transform.position.x, 0.5f, transform.position.z) + transform.forward;
+		GameObject smokeScreen = (GameObject)PhotonNetwork.Instantiate("Smoke", smokePos, smokeRot, 0);
+     //   transform.Find("Smoke").GetComponent<ParticleSystem>().Play();
       //  Destroy(gameObject, transform.Find("Smoke").GetComponent<ParticleSystem>().duration);
         StartCoroutine(Invis(0.2f, 3f));
     }
