@@ -8,13 +8,22 @@ public class BGM : MonoBehaviour {
 	public bool fadeOut = false;
 	public float fadeOutDuration = 0.5f;
 	
+	// makes sure only 1 audio player is playing at once
 	void Awake(){
-		musicObject = GameObject.Find("audBGM");
-		musicObject = this.gameObject;
-		musicPlayer = GetComponent<AudioSource>(); 
-		musicPlayer.clip = music;
-		musicPlayer.Play();
 		DontDestroyOnLoad(musicObject);
+		// if there is already an audio player then destroy it
+		if (FindObjectsOfType(GetType()).Length > 1)
+		{
+			Destroy(gameObject);
+		}
+		// otherwise initiate it
+		else{
+			musicObject = GameObject.Find("audBGM");
+			musicObject = this.gameObject;
+			musicPlayer = GetComponent<AudioSource>(); 
+			musicPlayer.clip = music;
+			musicPlayer.Play();
+		}
 	}
 	
 	// Update is called once per frame
