@@ -6,21 +6,34 @@ using System.Collections.Generic;
 public class GameManager : Photon.PunBehaviour {
     public Maze mazePrefab;
     private Maze mazeInstance;
-    Spawn[] s;
+    List<MonsterSpawn> monsterSpawnList = new List<MonsterSpawn>();
     SpawnC[] sc;
     SpawnM[] sm;
     List<int> allPuzzleTypes = new List<int>();
     List<int> activePuzzleTypes = new List<int>();
     public BGM music;
+	public MonsterSpawn mSpawn;
 
     private	void Start () {
 		music = GameObject.Find("audBGM").GetComponent<BGM>();
 		music.fadeOut = true;
-        s = GameObject.FindObjectsOfType<Spawn>();
+        //s = GameObject.FindObjectsOfType<Spawn>();
         sc = GameObject.FindObjectsOfType<SpawnC>();
         sm = GameObject.FindObjectsOfType<SpawnM>();
         PhotonNetwork.isMessageQueueRunning = true;
         PhotonNetwork.automaticallySyncScene = true;
+		// create the monster spawn locations
+		for (int i = 0; i < 5; i++){
+			for (int j = 0; j < 5; j++){
+				Vector3 spawnPos = new Vector3(40f - i*20f, 0, 40f - j*20f);
+				Quaternion spawnRot = new Quaternion(0f, 0f, 0f, 0f);
+				MonsterSpawn newSpawn = Instantiate(mSpawn) as MonsterSpawn;
+				mSpawn.transform.position = spawnPos;
+				mSpawn.transform.rotation = spawnRot;
+				monsterSpawnList.Add(newSpawn);
+			}
+		}
+		
         for (int p = 0; p < 6; p++)
         {
             allPuzzleTypes.Add(p);
@@ -28,7 +41,6 @@ public class GameManager : Photon.PunBehaviour {
         for (int p = 0; p < 6; p++)
         {
             int getPuzzle = Random.Range(0, allPuzzleTypes.Count);
-            //	int getPuzzle = 1;
             activePuzzleTypes.Add(allPuzzleTypes[getPuzzle]);
             allPuzzleTypes.RemoveAt(getPuzzle);
             Debug.Log(activePuzzleTypes);
@@ -41,11 +53,14 @@ public class GameManager : Photon.PunBehaviour {
         {
             SpawnMouse();
         }
-        for (int i = 0; i<10; i++)
+		// spawn basic monsters and elite monsters
+        for (int i = 0; i< monsterSpawnList.Count; i++)
         {
             SpawnMonsters(i);
-			SpawnMonsters(i);
         }
+		// spawn boss monster
+		SpawnBoss();
+		
 		SpawnKeysAndChests();
         GameObject.Find("Timer").GetComponent<Timer>().enabled = true;
     }
@@ -72,17 +87,16 @@ public class GameManager : Photon.PunBehaviour {
     }
     void SpawnMaze()
     {
-        
-            mazeInstance = Instantiate(mazePrefab) as Maze;
-            var mazeScript = mazeInstance.GetComponent<Maze>();
-            if (mazeScript != null)
-            {
-                mazeScript.StartMazeCreation();
-            }
+		mazeInstance = Instantiate(mazePrefab) as Maze;
+		var mazeScript = mazeInstance.GetComponent<Maze>();
+		if (mazeScript != null)
+		{
+			mazeScript.StartMazeCreation();
+		}
         if (PhotonNetwork.isMasterClient)
         {
             List<int> tempTypes = new List<int>();
-            tempTypes.Add(4);
+            tempTypes.Add(5);
             tempTypes.Add(3);
             tempTypes.Add(2);
             mazeInstance.GeneratePuzzles(tempTypes);
@@ -113,17 +127,53 @@ public class GameManager : Photon.PunBehaviour {
         myMouse.GetComponent<Minimap>().enabled = true;
     }
 
-    void SpawnMonsters(int formation)
+    void SpawnMonsters(int spawn)
     {
         if (PhotonNetwork.isMasterClient)
         {
-            Spawn monsterSpawn = s[Random.Range(0, 8)];
-            GameObject monsterGO = (GameObject)PhotonNetwork.Instantiate("MonsterElite", monsterSpawn.transform.position, monsterSpawn.transform.rotation, 0);
-            monsterGO.GetComponent<MonsterAI>().enabled = true;
-			MonsterAI monster = monsterGO.GetComponent<MonsterAI>();
-			monster.setMonsterType("MonsterElite");
+			MonsterSpawn monsterSpawn = monsterSpawnList[spawn];
+			int formation = Random.Range(0, 3);
+			// 1 normal monster
+			if (formation == 0){
+				GameObject monsterGO = (GameObject)PhotonNetwork.Instantiate("Monster", monsterSpawn.transform.position, monsterSpawn.transform.rotation, 0);
+				monsterGO.GetComponent<MonsterAI>().enabled = true;
+				MonsterAI monster = monsterGO.GetComponent<MonsterAI>();
+				monster.setMonsterType("Monster");
+			}
+			// 2 normal monsters
+			else if (formation == 1){
+				for (int i = 0; i < 2; i++){
+					GameObject monsterGO = (GameObject)PhotonNetwork.Instantiate("Monster", monsterSpawn.transform.position, monsterSpawn.transform.rotation, 0);
+					monsterGO.GetComponent<MonsterAI>().enabled = true;
+					MonsterAI monster = monsterGO.GetComponent<MonsterAI>();
+					monster.setMonsterType("Monster");
+				}
+			}
+			// 1 normal monster and 1 elite monster
+			else if (formation == 2){
+				GameObject monsterGO = (GameObject)PhotonNetwork.Instantiate("Monster", monsterSpawn.transform.position, monsterSpawn.transform.rotation, 0);
+				monsterGO.GetComponent<MonsterAI>().enabled = true;
+				MonsterAI monster = monsterGO.GetComponent<MonsterAI>();
+				monster.setMonsterType("Monster");
+			
+				GameObject monsterGO2 = (GameObject)PhotonNetwork.Instantiate("MonsterElite", monsterSpawn.transform.position, monsterSpawn.transform.rotation, 0);
+				monsterGO2.GetComponent<MonsterAI>().enabled = true;
+				MonsterAI monster2 = monsterGO2.GetComponent<MonsterAI>();
+				monster2.setMonsterType("MonsterElite");
+			}
         }
     }
+	
+	void SpawnBoss(){
+		// pick a random spawn to spawn at
+		int location = Random.Range(0, monsterSpawnList.Count);
+		MonsterSpawn bossSpawn = monsterSpawnList[location];
+		GameObject monsterGO = (GameObject)PhotonNetwork.Instantiate("Boss", bossSpawn.transform.position, bossSpawn.transform.rotation, 0);
+		monsterGO.GetComponent<MonsterAI>().enabled = true;
+		MonsterAI monster = monsterGO.GetComponent<MonsterAI>();
+		monster.setMonsterType("Boss");
+	}
+	
 	// spawn the keys and chests in the puzzle rooms
 	void SpawnKeysAndChests()
 	{

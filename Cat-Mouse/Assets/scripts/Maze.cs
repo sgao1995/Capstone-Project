@@ -495,7 +495,19 @@ public class Maze : MonoBehaviour {
 			}
 			// boss room, fight a strong monster
 			else if (puzzleType == 5){
+				// spawn boss
+				MazeCell bossCell = puzzleRooms[r].getCells()[Random.Range(0, puzzleRooms[r].getCells().Count)];
+				Vector3 bossPos = new Vector3(bossCell.transform.position.x, 0f, bossCell.transform.position.z);
+				Quaternion bossRot = new Quaternion(0f, 0f, 0f, 0f);
+				GameObject monsterGO = (GameObject)PhotonNetwork.Instantiate("PuzzleRoomBoss", bossPos, bossRot, 0);
+				monsterGO.GetComponent<MonsterAI>().enabled = true;
+				MonsterAI monster = monsterGO.GetComponent<MonsterAI>();
+				monster.setMonsterType("PuzzleRoomBoss");
 				
+				// key location
+				MazeCell keyCell = puzzleRooms[r].getCells()[Random.Range(0, puzzleRooms[r].getCells().Count)];
+				keyLocations.Add(keyCell.transform.position.x + Mathf.PerlinNoise(keyCell.coordinates.x/(float)mazeGenerationNumber, keyCell.coordinates.x/(float)mazeGenerationNumber));
+				keyLocations.Add(keyCell.transform.position.z + Mathf.PerlinNoise(keyCell.coordinates.z/(float)mazeGenerationNumber, keyCell.coordinates.z/(float)mazeGenerationNumber));
 			}
 		}
 		
