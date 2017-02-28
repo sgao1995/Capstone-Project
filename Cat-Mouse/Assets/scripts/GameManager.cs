@@ -11,9 +11,11 @@ public class GameManager : Photon.PunBehaviour {
     SpawnM[] sm;
     List<int> allPuzzleTypes = new List<int>();
     List<int> activePuzzleTypes = new List<int>();
-    
+    public BGM music;
 
     private	void Start () {
+		music = GameObject.Find("audBGM").GetComponent<BGM>();
+		music.fadeOut = true;
         s = GameObject.FindObjectsOfType<Spawn>();
         sc = GameObject.FindObjectsOfType<SpawnC>();
         sm = GameObject.FindObjectsOfType<SpawnM>();
