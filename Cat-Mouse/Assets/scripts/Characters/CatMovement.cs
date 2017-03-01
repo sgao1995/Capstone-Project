@@ -255,8 +255,10 @@ public class CatMovement : MonoBehaviour
 					animator.Play("MoveLeft");
 				   	// play sound effect
 					if (!soundPlayer.isPlaying){
-						soundPlayer.PlayOneShot(footstepSound, 1f);
-					}
+
+                        //soundPlayer.PlayOneShot(footstepSound, 1f);
+                        transform.GetComponent<PhotonView>().RPC("playSound", PhotonTargets.AllBuffered, 0, 1f);
+                    }
 					if (onIce)
 						catrb.AddRelativeForce(Vector3.left*0.2f, ForceMode.Impulse);
 					else{
@@ -268,8 +270,9 @@ public class CatMovement : MonoBehaviour
 					animator.Play("MoveRight");
 				   	// play sound effect
 					if (!soundPlayer.isPlaying){
-						soundPlayer.PlayOneShot(footstepSound, 1f);
-					}
+                        //soundPlayer.PlayOneShot(footstepSound, 1f);
+                        transform.GetComponent<PhotonView>().RPC("playSound", PhotonTargets.AllBuffered, 0, 1f);
+                    }
 					if (onIce)
 						catrb.AddRelativeForce(Vector3.right*0.2f, ForceMode.Impulse);
 					else{
@@ -283,8 +286,9 @@ public class CatMovement : MonoBehaviour
 					
 				   	// play sound effect
 					if (!soundPlayer.isPlaying){
-						soundPlayer.PlayOneShot(footstepSound, 1f);
-					}
+                        //soundPlayer.PlayOneShot(footstepSound, 1f);
+                        transform.GetComponent<PhotonView>().RPC("playSound", PhotonTargets.AllBuffered, 0, 1f);
+                    }
 					if (onIce)
 						catrb.AddRelativeForce(Vector3.forward*0.2f, ForceMode.Impulse);
 					else{
@@ -298,8 +302,8 @@ public class CatMovement : MonoBehaviour
 
 					// play sound effect
 					if (!soundPlayer.isPlaying){
-						soundPlayer.PlayOneShot(footstepSound, 1f);
-					}
+                        transform.GetComponent<PhotonView>().RPC("playSound", PhotonTargets.AllBuffered, 0, 1f);
+                    }
 					if (onIce)
 						catrb.AddRelativeForce(Vector3.back*0.2f, ForceMode.Impulse);
 					else{
@@ -308,8 +312,9 @@ public class CatMovement : MonoBehaviour
 				}
 				if (Input.GetKeyDown(KeyCode.Space))
 				{
-					soundPlayer.PlayOneShot(jumpSound, 1f);
-					isGrounded = false;
+                    //soundPlayer.PlayOneShot(jumpSound, 1f);
+                    transform.GetComponent<PhotonView>().RPC("playSound", PhotonTargets.AllBuffered, 1, 1f);
+                    isGrounded = false;
 					animator.SetTrigger("JumpTrigger");
 					animator.SetInteger("Jumping", 1);
 					catrb.AddForce(new Vector3(0, jumpForce, 0));
@@ -317,7 +322,24 @@ public class CatMovement : MonoBehaviour
 			}
 		}
     }
-	
+	[PunRPC]
+    void playSound(int type, float t)
+    {
+       /* if (GetComponent<PhotonView>().isMine)
+        {
+            
+        }*/
+        if(type == 0)
+        {
+            soundPlayer.PlayOneShot(footstepSound, t);
+        }
+        if(type == 1)
+        {
+            soundPlayer.PlayOneShot(jumpSound, t);
+        }
+      
+    }
+
     [PunRPC]
     void moveAnimations()
     {

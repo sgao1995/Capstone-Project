@@ -162,6 +162,20 @@ public class MouseMovement : MonoBehaviour {
                 break;
         }
     }
+    [PunRPC]
+    void playSound(int type, float t)
+    {
+       
+        if (type == 0)
+        {
+            soundPlayer.PlayOneShot(footstepSound, t);
+        }
+        if (type == 1)
+        {
+            soundPlayer.PlayOneShot(jumpSound, t);
+        }
+
+    }
     //used https://docs.unity3d.com/Manual/Coroutines.html as resource for coroutines and invisiblity
     [PunRPC]
     IEnumerator cloak()
@@ -313,8 +327,9 @@ public class MouseMovement : MonoBehaviour {
 					animator.Play("MoveLeft");
 				   	// play sound effect
 					if (!soundPlayer.isPlaying){
-						soundPlayer.PlayOneShot(footstepSound, 1f);
-					}
+                        //soundPlayer.PlayOneShot(footstepSound, 1f);
+                        transform.GetComponent<PhotonView>().RPC("playSound", PhotonTargets.AllBuffered, 0, 1f);
+                    }
 
 					if (onIce)
 						mouserb.AddRelativeForce(Vector3.left*0.2f, ForceMode.Impulse);
@@ -327,8 +342,9 @@ public class MouseMovement : MonoBehaviour {
 					animator.Play("MoveRight");
 					// play sound effect
 					if (!soundPlayer.isPlaying){
-						soundPlayer.PlayOneShot(footstepSound, 1f);
-					}
+                        //soundPlayer.PlayOneShot(footstepSound, 1f);
+                        transform.GetComponent<PhotonView>().RPC("playSound", PhotonTargets.AllBuffered, 0, 1f);
+                    }
 					
 					if (onIce)
 						mouserb.AddRelativeForce(Vector3.right*0.2f, ForceMode.Impulse);
@@ -344,8 +360,9 @@ public class MouseMovement : MonoBehaviour {
 					
 					// play sound effect
 					if (!soundPlayer.isPlaying){
-						soundPlayer.PlayOneShot(footstepSound, 1f);
-					}
+						//soundPlayer.PlayOneShot(footstepSound, 1f);
+                        transform.GetComponent<PhotonView>().RPC("playSound", PhotonTargets.AllBuffered, 0, 1f);
+                    }
 					
 					if (onIce)
 						mouserb.AddRelativeForce(Vector3.forward*0.2f, ForceMode.Impulse);
@@ -359,8 +376,9 @@ public class MouseMovement : MonoBehaviour {
 						animator.Play("MoveBackward");
 					// play sound effect
 					if (!soundPlayer.isPlaying){
-						soundPlayer.PlayOneShot(footstepSound, 1f);
-					}
+                        //soundPlayer.PlayOneShot(footstepSound, 1f);
+                        transform.GetComponent<PhotonView>().RPC("playSound", PhotonTargets.AllBuffered, 0, 1f);
+                    }
 					
 					if (onIce)
 						mouserb.AddRelativeForce(Vector3.back*0.2f, ForceMode.Impulse);
@@ -370,8 +388,9 @@ public class MouseMovement : MonoBehaviour {
 				}
 				if (Input.GetKeyDown(KeyCode.Space))
 				{
-					soundPlayer.PlayOneShot(jumpSound, 1f);
-					isGrounded = false;
+					//soundPlayer.PlayOneShot(jumpSound, 1f);
+                    transform.GetComponent<PhotonView>().RPC("playSound", PhotonTargets.AllBuffered, 1, 1f);
+                    isGrounded = false;
 					animator.SetTrigger("JumpTrigger");
 					animator.SetInteger("Jumping", 1);
 					mouserb.AddForce(new Vector3(0, jumpForce, 0));
