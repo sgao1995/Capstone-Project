@@ -259,7 +259,7 @@ public class MouseMovement : MonoBehaviour {
         }
 
         // interactions
-		if (canToggleDoor || canTakeKey || canOpenChest || canTakePuzzlePiece || canOpenChest){
+		if (canToggleDoor || canTakeKey || canOpenChest || canTakePuzzlePiece || canOpenChest || canOpenExit){
 			if (Input.GetKeyDown(KeyCode.E)){
 				InteractWithObject();
 			}
@@ -433,6 +433,7 @@ public class MouseMovement : MonoBehaviour {
                     //currentEXP += hitInfo.collider.transform.GetComponent<MonsterAI>().getExpDrop();
                     //mouseVitality.setCurrentExperiencePoints(currentEXP);
                     currentEXP += 20;
+					GameObject.Find("SCRIPTS").GetComponent<GameManager>().decreaseMonsterCount();
 				}
 
 				hitInfo.collider.transform.GetComponent<MonsterAI>().SendMessage("takeDamage", damage);
@@ -447,6 +448,7 @@ public class MouseMovement : MonoBehaviour {
                     //currentEXP += hitInfo.collider.transform.GetComponent<MonsterAI>().getExpDrop();
                     //mouseVitality.setCurrentExperiencePoints(currentEXP);
                     currentEXP += 50;
+					GameObject.Find("SCRIPTS").GetComponent<GameManager>().decreaseMonsterCount();
                 }
 
                 hitInfo.collider.transform.GetComponent<MonsterAI>().SendMessage("takeDamage", damage);
@@ -629,7 +631,7 @@ public class MouseMovement : MonoBehaviour {
                 movementModifier = 2;
                 movementModifierTimer = 10f;
             }
-            // damage boost
+            // hp restore
             else if (pup.powerupType == 1)
             {
 

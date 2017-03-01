@@ -33,11 +33,6 @@ public class Maze : MonoBehaviour {
 	public int roomTypeCount = 0;
 	public float cellSize = 1;
 	
-	// powerups
-	private List<Powerup> powerupList = new List<Powerup>();
-	private float powerupSpawnTimer = 5f;
-	public float powerupSpawnDelay = 5f;
-	
 	// chests and keys
 	// format: [key1x, key1z, key2x, key2z, key3x, key3z]
 	private List<float> keyLocations = new List<float>();
@@ -356,7 +351,6 @@ public class Maze : MonoBehaviour {
 	
 	// generate the puzzles in the puzzle rooms
 	public void GeneratePuzzles(List<int> activePuzzleTypes){
-		List<int> remainingPuzzleTypes = activePuzzleTypes;
 		for (int r = 0; r < 3; r++){
 			int puzzleType = activePuzzleTypes[r];
 			bool keyGenerated = false;
@@ -549,18 +543,6 @@ public class Maze : MonoBehaviour {
 	}
 	
 	void Update(){
-		// spawn powerups when there are less than 5 in the maze
-		powerupSpawnTimer -= Time.deltaTime;
-		if (powerupSpawnTimer < 0 && powerupList.Count < 5){
-			// spawn a powerup
-			Vector3 spawnPos = new Vector3(Random.value, 0.5f, Random.value);
-			Quaternion spawnRot = new Quaternion(0f, 0f, 0f, 0f);
-			GameObject newGO = (GameObject)PhotonNetwork.Instantiate("Powerup", spawnPos, spawnRot, 0);
-			Powerup newPowerup = newGO.GetComponent<Powerup>();
-			newPowerup.setType(0);
-			powerupList.Add(newPowerup);
-			powerupSpawnTimer = powerupSpawnDelay;
-		}
 		
 		// if puzzle room is completed then spawn a key
 		

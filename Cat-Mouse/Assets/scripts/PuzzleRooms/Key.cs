@@ -5,8 +5,6 @@ public class Key : MonoBehaviour {
 	float rotation = 0f;
 	
 	public void Interact(){
-		// need to figure out which mouse took the key
-		// then destroy the key
 		Debug.Log("Picked up Key");
         transform.GetComponent<PhotonView>().RPC("destroyKey", PhotonTargets.MasterClient);
     }
