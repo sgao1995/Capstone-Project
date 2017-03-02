@@ -30,7 +30,7 @@ public class matchSettings : Photon.PunBehaviour
     }
     void JoinCat()
     {
-        GameObject.Find("CText").GetComponent<Text>().text = "Player " + GameObject.Find("TeamSelectionOBJ").GetComponent<teamselectiondata>().playername;
+        GameObject.Find("CText").GetComponent<Text>().text = "Player " + PhotonNetwork.player.ID;
     }
     void LeaveCat()
     {
@@ -38,7 +38,7 @@ public class matchSettings : Photon.PunBehaviour
     }
     void JoinMouse1()
     {
-        GameObject.Find("M1Text").GetComponent<Text>().text = "Player " + GameObject.Find("TeamSelectionOBJ").GetComponent<teamselectiondata>().playername;
+        GameObject.Find("M1Text").GetComponent<Text>().text = "Player " + PhotonNetwork.player.ID;
     }
     void LeaveM1()
     {
@@ -46,7 +46,7 @@ public class matchSettings : Photon.PunBehaviour
     }
     void JoinMouse2()
     {
-        GameObject.Find("M2Text").GetComponent<Text>().text = "Player " + GameObject.Find("TeamSelectionOBJ").GetComponent<teamselectiondata>().playername;
+        GameObject.Find("M2Text").GetComponent<Text>().text = "Player " + PhotonNetwork.player.ID;
     }
     void LeaveM2()
     {
@@ -54,7 +54,7 @@ public class matchSettings : Photon.PunBehaviour
     }
     void JoinMouse3()
     {
-        GameObject.Find("M3Text").GetComponent<Text>().text = "Player " + GameObject.Find("TeamSelectionOBJ").GetComponent<teamselectiondata>().playername;
+        GameObject.Find("M3Text").GetComponent<Text>().text = "Player " + PhotonNetwork.player.ID;
     }
     void LeaveM3()
     {

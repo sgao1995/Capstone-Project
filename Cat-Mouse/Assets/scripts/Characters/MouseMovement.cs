@@ -47,9 +47,9 @@ public class MouseMovement : MonoBehaviour {
 	private bool canTakePuzzlePiece = false;
 	private bool canOpenExit = false;
 	private bool canMove = true;
-    private Collider[] hitCollider;
-    // keys and puzzle pieces on hand
-    public int numKeysHeld = 0;
+	
+	// keys and puzzle pieces on hand
+	public int numKeysHeld = 0;
 
     // skills
     private float[] skillCooldownTimers = new float[4]; // the cooldown timer
@@ -84,7 +84,7 @@ public class MouseMovement : MonoBehaviour {
         GameObject interactiveText = GameObject.Find("Text");
 		interactText = interactiveText.GetComponent<Text>();
 		interactText.text = "";
-        
+
     }
 
     // level up
@@ -154,24 +154,6 @@ public class MouseMovement : MonoBehaviour {
                 break;
         }
     }
-    void tagTeam()
-    {
-        hitCollider = Physics.OverlapSphere(this.transform.position, 5);
-        foreach (Collider C in hitCollider)
-        {
-            if (C.GetComponent<Collider>().transform.root != this.transform && C.GetComponent<Collider>().tag == "Mouse")
-            {
-                Debug.Log("hit");
-                movementModifier = 2;
-                
-            }
-        }
-    }
-    void LateUpdate()
-    {
-        tagTeam();
-    }
-
     //used https://docs.unity3d.com/Manual/Coroutines.html as resource for coroutines and invisiblity
     [PunRPC]
     void cloak()
@@ -196,7 +178,7 @@ public class MouseMovement : MonoBehaviour {
         }
     }
 	void Update(){
-        /* Updates the HUD state for the current player */
+		/* Updates the HUD state for the current player */
         if (GetComponent<PhotonView>().isMine)
         {
             /* Updates the Vitality System states */
@@ -226,7 +208,7 @@ public class MouseMovement : MonoBehaviour {
             /* Updates the number of Skill Slots enabled */
             mouseSkill.setNumSkillSlots(this.level);
         }
-        
+
         // status effects
         if (onLava)
         {
