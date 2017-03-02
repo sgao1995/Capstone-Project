@@ -68,7 +68,8 @@ public class MouseMovement : MonoBehaviour {
 	public AudioClip footstepSound;
 	public AudioClip jumpSound;
 	public AudioSource soundPlayer;
-	
+
+    private Collider[] hitCollider;
 
     void Start()
     {
@@ -94,7 +95,23 @@ public class MouseMovement : MonoBehaviour {
 		soundPlayer = GetComponent<AudioSource>();
 		soundPlayer.clip = footstepSound;
     }
+    void tagTeam()
+    {
+        hitCollider = Physics.OverlapSphere(this.transform.position, 5);
+        foreach (Collider C in hitCollider)
+        {
+            if (C.GetComponent<Collider>().transform.root != this.transform && C.GetComponent<Collider>().tag == "Mouse")
+            {
+                Debug.Log("hit");
+                movementModifier = 2;
 
+            }
+        }
+    }
+    void LateUpdate()
+    {
+        tagTeam();
+    }
     // level up
     public void LevelUp()
     {
