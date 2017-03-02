@@ -39,6 +39,15 @@ public class MonsterAI : MonoBehaviour {
 	private float healCooldownTimer = 30f;
 	private float dist;
 	
+	public AudioClip footstepSound;
+	public AudioClip attackMissSound;
+	public AudioClip[] dealDamageSound;
+	public AudioClip[] takeDamageSound;
+	public AudioClip bashSound;
+	public AudioClip healSound;
+	public AudioClip stompSound;
+	public AudioSource soundPlayer;
+	
 	// Use this for initialization
 	void Start () {
 		monsterrb = GetComponent<Rigidbody>();
@@ -59,6 +68,7 @@ public class MonsterAI : MonoBehaviour {
 		agent = GetComponent<NavMeshAgent>();
 		animator = GetComponent<Animator>();
 		currentMode = "Sleeping";
+		soundPlayer = GetComponent<AudioSource>();
 	}
 	public void setMonsterType(string type){
 		this.monsterType = type;
@@ -92,6 +102,42 @@ public class MonsterAI : MonoBehaviour {
 		}
 	}
 	
+	[PunRPC]
+    void playSound(int type, float t)
+    {
+		switch(type){
+			// monster footsteps
+			case 0:
+				soundPlayer.PlayOneShot(footstepSound, t);
+				break;
+			// take damage
+			case 2:
+				soundPlayer.PlayOneShot(takeDamageSound[Random.Range(0, takeDamageSound.Length)], t);
+				break;
+			// deal damage
+			case 3:
+				soundPlayer.PlayOneShot(dealDamageSound[Random.Range(0, dealDamageSound.Length)], t);
+				break;
+			// attack miss
+			case 4:
+				soundPlayer.PlayOneShot(attackMissSound, t);
+				break;
+			// bash
+			case 5:
+				soundPlayer.PlayOneShot(bashSound, t);
+				break;
+			// heal
+			case 6:
+				soundPlayer.PlayOneShot(healSound, t);
+				break;
+			// stomp
+			case 7:
+				soundPlayer.PlayOneShot(stompSound, t);
+				break;
+		}
+    }
+	
+	
     public float getHealth()
     {
         return HP;
@@ -119,7 +165,7 @@ public class MonsterAI : MonoBehaviour {
         transform.GetComponent<PhotonView>().RPC("changeHealth", PhotonTargets.AllBuffered, dmg);
 		Debug.Log("take " + dmg + " damage");
 		retargetTimer = timeUntilRetarget;
-
+		transform.GetComponent<PhotonView>().RPC("playSound", PhotonTargets.AllBuffered, 2, 1f);
 		
 		// change modes to attack
 		if (currentMode != "Attack"){
@@ -178,19 +224,22 @@ public class MonsterAI : MonoBehaviour {
 		animator.Play("Bash");
 		WaitForAnimation(1f);
 		DealDamage();
-		Debug.Log("Bash");
+		transform.GetComponent<PhotonView>().RPC("playSound", PhotonTargets.AllBuffered, 5, 1f);
+		
     }
 	// cast stomp in aoe around monster
 	void Stomp(){
 		stompCooldownTimer = 20f;
 		animator.Play("Stomp");
 		WaitForAnimation(1.5f);
+		transform.GetComponent<PhotonView>().RPC("playSound", PhotonTargets.AllBuffered, 7, 1f);
 	}
 	// cast heal on self
 	void Heal(){
 		healCooldownTimer = 30f;
 		animator.Play("Heal");
 		WaitForAnimation(3f);
+		transform.GetComponent<PhotonView>().RPC("playSound", PhotonTargets.AllBuffered, 6, 1f);
 	}
 	
 	void DealDamage(){
@@ -214,7 +263,11 @@ public class MonsterAI : MonoBehaviour {
                 }
                 hitInfo.collider.transform.GetComponent<MouseMovement>().SendMessage("TakeDamage", attackPower);
             }
+			transform.GetComponent<PhotonView>().RPC("playSound", PhotonTargets.AllBuffered, 3, 1f);
         }
+		else{
+			transform.GetComponent<PhotonView>().RPC("playSound", PhotonTargets.AllBuffered, 4, 1f);
+		}
 	}
 	
     void FixedUpdate()
@@ -225,11 +278,16 @@ public class MonsterAI : MonoBehaviour {
 			}
 			else if (currentMode == "Patrol"){
 				animator.Play("WalkForward");
+				if (!soundPlayer.isPlaying){
+					transform.GetComponent<PhotonView>().RPC("playSound", PhotonTargets.AllBuffered, 0, 1f);
+				}
 				transform.Translate(transform.forward * speed * Time.deltaTime, Space.World);
 			}
 			else if (currentMode == "Attack"){
 				animator.Play("WalkForward");
-
+				if (!soundPlayer.isPlaying){
+					transform.GetComponent<PhotonView>().RPC("playSound", PhotonTargets.AllBuffered, 0, 1f);
+				}
 				// face forward unless distance is short, then look at player
 				if (dist < 3f){
 					transform.LookAt(playersInGame[targettedPlayer].transform);	

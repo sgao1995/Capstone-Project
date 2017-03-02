@@ -57,6 +57,10 @@ public class CatMovement : MonoBehaviour
 	/* Sound effects */
 	public AudioClip footstepSound;
 	public AudioClip jumpSound;
+	public AudioClip attackMissSound;
+	public AudioClip[] dealDamageSound;
+	public AudioClip[] takeDamageSound;
+	public AudioClip signalFlareSound;
 	public AudioSource soundPlayer;
 
     void Start()
@@ -81,7 +85,6 @@ public class CatMovement : MonoBehaviour
 
        	// find and initialize sound effects
 		soundPlayer = GetComponent<AudioSource>();
-		soundPlayer.clip = footstepSound;
     }
 
 	// level up
@@ -145,6 +148,38 @@ public class CatMovement : MonoBehaviour
 				break;
 		}
 	}
+	
+	[PunRPC]
+    void playSound(int type, float t)
+    {
+		switch(type){
+			case 0:
+				soundPlayer.PlayOneShot(footstepSound, t);
+				break;
+			case 1:
+				soundPlayer.PlayOneShot(jumpSound, t);
+				break;
+			// take damage
+			case 2:
+				soundPlayer.PlayOneShot(takeDamageSound[Random.Range(0, takeDamageSound.Length)], t);
+				break;
+			// deal damage
+			case 3:
+				soundPlayer.PlayOneShot(dealDamageSound[Random.Range(0, dealDamageSound.Length)], t);
+				break;
+			case 4:
+				soundPlayer.PlayOneShot(attackMissSound, t);
+				break;
+			// smokescreen
+			case 5:
+				//soundPlayer.PlayOneShot(smokescreenSound, t);
+				break;
+			// use signal flare
+			case 6:
+				soundPlayer.PlayOneShot(signalFlareSound, t);
+				break;
+		}
+    }
 	
 	void Update(){
 		/* Updates the HUD state for the current player */
@@ -255,8 +290,6 @@ public class CatMovement : MonoBehaviour
 					animator.Play("MoveLeft");
 				   	// play sound effect
 					if (!soundPlayer.isPlaying){
-
-                        //soundPlayer.PlayOneShot(footstepSound, 1f);
                         transform.GetComponent<PhotonView>().RPC("playSound", PhotonTargets.AllBuffered, 0, 1f);
                     }
 					if (onIce)
@@ -270,7 +303,6 @@ public class CatMovement : MonoBehaviour
 					animator.Play("MoveRight");
 				   	// play sound effect
 					if (!soundPlayer.isPlaying){
-                        //soundPlayer.PlayOneShot(footstepSound, 1f);
                         transform.GetComponent<PhotonView>().RPC("playSound", PhotonTargets.AllBuffered, 0, 1f);
                     }
 					if (onIce)
@@ -286,7 +318,6 @@ public class CatMovement : MonoBehaviour
 					
 				   	// play sound effect
 					if (!soundPlayer.isPlaying){
-                        //soundPlayer.PlayOneShot(footstepSound, 1f);
                         transform.GetComponent<PhotonView>().RPC("playSound", PhotonTargets.AllBuffered, 0, 1f);
                     }
 					if (onIce)
@@ -322,23 +353,6 @@ public class CatMovement : MonoBehaviour
 			}
 		}
     }
-	[PunRPC]
-    void playSound(int type, float t)
-    {
-       /* if (GetComponent<PhotonView>().isMine)
-        {
-            
-        }*/
-        if(type == 0)
-        {
-            soundPlayer.PlayOneShot(footstepSound, t);
-        }
-        if(type == 1)
-        {
-            soundPlayer.PlayOneShot(jumpSound, t);
-        }
-      
-    }
 
     [PunRPC]
     void moveAnimations()
@@ -350,6 +364,7 @@ public class CatMovement : MonoBehaviour
     public void TakeDamage(float amt)
     {
         transform.GetComponent<PhotonView>().RPC("changeHealth", PhotonTargets.AllBuffered, amt);
+		transform.GetComponent<PhotonView>().RPC("playSound", PhotonTargets.AllBuffered, 2, 1f);
     }
     [PunRPC]
     void changeHealth(float dmg)
@@ -459,7 +474,11 @@ public class CatMovement : MonoBehaviour
 				
 				hitInfo.collider.transform.GetComponent<MouseMovement>().SendMessage("TakeDamage", damage);
             }
+			transform.GetComponent<PhotonView>().RPC("playSound", PhotonTargets.AllBuffered, 3, 1f);
         }
+		else{
+			transform.GetComponent<PhotonView>().RPC("playSound", PhotonTargets.AllBuffered, 4, 1f);
+		}
     }
     
     // allow the player to open and close doors

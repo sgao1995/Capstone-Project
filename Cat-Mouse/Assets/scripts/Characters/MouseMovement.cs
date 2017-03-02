@@ -67,6 +67,11 @@ public class MouseMovement : MonoBehaviour {
 	/* Sound effects */
 	public AudioClip footstepSound;
 	public AudioClip jumpSound;
+	public AudioClip attackMissSound;
+	public AudioClip[] dealDamageSound;
+	public AudioClip[] takeDamageSound;
+	public AudioClip smokescreenSound;
+	public AudioClip signalFlareSound;
 	public AudioSource soundPlayer;
 
     private Collider[] hitCollider;
@@ -91,9 +96,7 @@ public class MouseMovement : MonoBehaviour {
 		interactText = interactiveText.GetComponent<Text>();
 		interactText.text = "";
 		
-		// find and initialize sound effects
 		soundPlayer = GetComponent<AudioSource>();
-		soundPlayer.clip = footstepSound;
     }
     void tagTeam()
     {
@@ -158,6 +161,7 @@ public class MouseMovement : MonoBehaviour {
 				animator.Play("Throw");
 				WaitForAnimation(0.7f);
                 transform.GetComponent<PhotonView>().RPC("cloak", PhotonTargets.AllBuffered);
+				transform.GetComponent<PhotonView>().RPC("playSound", PhotonTargets.AllBuffered, 5, 1f);
 
                 break;
             case 4:
@@ -176,22 +180,40 @@ public class MouseMovement : MonoBehaviour {
             case 8:
                 break;
             case 9:
+				transform.GetComponent<PhotonView>().RPC("playSound", PhotonTargets.AllBuffered, 6, 1f);
                 break;
         }
     }
     [PunRPC]
     void playSound(int type, float t)
     {
-       
-        if (type == 0)
-        {
-            soundPlayer.PlayOneShot(footstepSound, t);
-        }
-        if (type == 1)
-        {
-            soundPlayer.PlayOneShot(jumpSound, t);
-        }
-
+		switch(type){
+			case 0:
+				soundPlayer.PlayOneShot(footstepSound, t);
+				break;
+			case 1:
+				soundPlayer.PlayOneShot(jumpSound, t);
+				break;
+			// take damage
+			case 2:
+				soundPlayer.PlayOneShot(takeDamageSound[Random.Range(0, takeDamageSound.Length)], t);
+				break;
+			// deal damage
+			case 3:
+				soundPlayer.PlayOneShot(dealDamageSound[Random.Range(0, dealDamageSound.Length)], t);
+				break;
+			case 4:
+				soundPlayer.PlayOneShot(attackMissSound, t);
+				break;
+			// smokescreen
+			case 5:
+				soundPlayer.PlayOneShot(smokescreenSound, t);
+				break;
+			// use signal flare
+			case 6:
+				soundPlayer.PlayOneShot(signalFlareSound, t);
+				break;
+		}
     }
     //used https://docs.unity3d.com/Manual/Coroutines.html as resource for coroutines and invisiblity
     [PunRPC]
@@ -295,10 +317,6 @@ public class MouseMovement : MonoBehaviour {
 				InteractWithObject();
 			}
 		}
-        if (Input.GetKeyDown(KeyCode.K))
-        {
-            TakeDamage(5f);
-        }
 		if (Input.GetKeyDown(KeyCode.T))
         {
             transform.position = new Vector3(22, 0, 25);
@@ -420,6 +438,7 @@ public class MouseMovement : MonoBehaviour {
     public void TakeDamage(float amt)
     {
         transform.GetComponent<PhotonView>().RPC("changeHealth", PhotonTargets.AllBuffered, amt);
+		transform.GetComponent<PhotonView>().RPC("playSound", PhotonTargets.AllBuffered, 2, 1f);
     }
     [PunRPC]
     void changeHealth(float dmg)
@@ -528,9 +547,13 @@ public class MouseMovement : MonoBehaviour {
                     currentEXP += 100;
                 }
 				
-				hitInfo.collider.transform.GetComponent<CatMovement>().SendMessage("TakeDamage", damage);
+				hitInfo.collider.transform.GetComponent<CatMovement>().SendMessage("takeDamage", damage);
             }
+			transform.GetComponent<PhotonView>().RPC("playSound", PhotonTargets.AllBuffered, 3, 1f);
         }
+		else{
+			transform.GetComponent<PhotonView>().RPC("playSound", PhotonTargets.AllBuffered, 4, 1f);
+		}
     }
 
     // allow the player to open and close doors
