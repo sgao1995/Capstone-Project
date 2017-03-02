@@ -6,19 +6,39 @@ using System.Collections.Generic;
 public class GameManager : Photon.PunBehaviour {
     public Maze mazePrefab;
     private Maze mazeInstance;
-    Spawn[] s;
     SpawnC[] sc;
     SpawnM[] sm;
     List<int> allPuzzleTypes = new List<int>();
     List<int> activePuzzleTypes = new List<int>();
-    
+    public BGM music;
+	// monsters
+	List<MonsterSpawn> monsterSpawnList = new List<MonsterSpawn>();public MonsterSpawn mSpawn;
+	public int numMonsters = 0;
+	public float delayUntilSpawn = 10f;
+	public bool startSpawnCountdown = false;
+	// powerups
+	private List<Powerup> powerupList = new List<Powerup>();
 
     private	void Start () {
-        s = GameObject.FindObjectsOfType<Spawn>();
+		music = GameObject.Find("audBGM").GetComponent<BGM>();
+		music.fadeOut = true;
+        //s = GameObject.FindObjectsOfType<Spawn>();
         sc = GameObject.FindObjectsOfType<SpawnC>();
         sm = GameObject.FindObjectsOfType<SpawnM>();
         PhotonNetwork.isMessageQueueRunning = true;
         PhotonNetwork.automaticallySyncScene = true;
+		// create the monster spawn locations
+		for (int i = 0; i < 5; i++){
+			for (int j = 0; j < 5; j++){
+				Vector3 spawnPos = new Vector3(40f - i*20f, 0, 40f - j*20f);
+				Quaternion spawnRot = new Quaternion(0f, 0f, 0f, 0f);
+				MonsterSpawn newSpawn = Instantiate(mSpawn) as MonsterSpawn;
+				mSpawn.transform.position = spawnPos;
+				mSpawn.transform.rotation = spawnRot;
+				monsterSpawnList.Add(newSpawn);
+			}
+		}
+		
         for (int p = 0; p < 6; p++)
         {
             allPuzzleTypes.Add(p);
@@ -26,7 +46,6 @@ public class GameManager : Photon.PunBehaviour {
         for (int p = 0; p < 6; p++)
         {
             int getPuzzle = Random.Range(0, allPuzzleTypes.Count);
-            //	int getPuzzle = 1;
             activePuzzleTypes.Add(allPuzzleTypes[getPuzzle]);
             allPuzzleTypes.RemoveAt(getPuzzle);
             Debug.Log(activePuzzleTypes);
@@ -39,12 +58,20 @@ public class GameManager : Photon.PunBehaviour {
         {
             SpawnMouse();
         }
-        for (int i = 0; i<10; i++)
+		// spawn basic monsters and elite monsters
+        for (int i = 0; i< monsterSpawnList.Count; i++)
         {
             SpawnMonsters(i);
-			SpawnMonsters(i);
         }
+		// spawn boss monster
+		SpawnBoss();
+		
 		SpawnKeysAndChests();
+		// spawn 5 powerups
+		for (int i = 0; i < 5; i++){
+			SpawnPowerup();
+		}
+
         GameObject.Find("Timer").GetComponent<Timer>().enabled = true;
     }
     void OnGUI()
@@ -70,17 +97,16 @@ public class GameManager : Photon.PunBehaviour {
     }
     void SpawnMaze()
     {
-        
-            mazeInstance = Instantiate(mazePrefab) as Maze;
-            var mazeScript = mazeInstance.GetComponent<Maze>();
-            if (mazeScript != null)
-            {
-                mazeScript.StartMazeCreation();
-            }
+		mazeInstance = Instantiate(mazePrefab) as Maze;
+		var mazeScript = mazeInstance.GetComponent<Maze>();
+		if (mazeScript != null)
+		{
+			mazeScript.StartMazeCreation();
+		}
         if (PhotonNetwork.isMasterClient)
         {
             List<int> tempTypes = new List<int>();
-            tempTypes.Add(4);
+            tempTypes.Add(5);
             tempTypes.Add(3);
             tempTypes.Add(2);
             mazeInstance.GeneratePuzzles(tempTypes);
@@ -111,17 +137,68 @@ public class GameManager : Photon.PunBehaviour {
         myMouse.GetComponent<Minimap>().enabled = true;
     }
 
-    void SpawnMonsters(int formation)
+    void SpawnMonsters(int spawn)
     {
         if (PhotonNetwork.isMasterClient)
         {
-            Spawn monsterSpawn = s[Random.Range(0, 8)];
-            GameObject monsterGO = (GameObject)PhotonNetwork.Instantiate("MonsterElite", monsterSpawn.transform.position, monsterSpawn.transform.rotation, 0);
-            monsterGO.GetComponent<MonsterAI>().enabled = true;
-			MonsterAI monster = monsterGO.GetComponent<MonsterAI>();
-			monster.setMonsterType("MonsterElite");
+			// majority will be weaker ones upon initial spawn, but 
+			// will get stronger spawns as game goes on
+			MonsterSpawn monsterSpawn = monsterSpawnList[spawn];
+			int formation = Random.Range(0, 1000) + (int)Time.time;
+			// 1 normal monster
+			if (formation < 500){
+				GameObject monsterGO = (GameObject)PhotonNetwork.Instantiate("Monster", monsterSpawn.transform.position, monsterSpawn.transform.rotation, 0);
+				monsterGO.GetComponent<MonsterAI>().enabled = true;
+				MonsterAI monster = monsterGO.GetComponent<MonsterAI>();
+				monster.setMonsterType("Monster");
+				numMonsters++;
+			}
+			// 2 normal monsters
+			else if (formation < 800){
+				for (int i = 0; i < 2; i++){
+					GameObject monsterGO = (GameObject)PhotonNetwork.Instantiate("Monster", monsterSpawn.transform.position, monsterSpawn.transform.rotation, 0);
+					monsterGO.GetComponent<MonsterAI>().enabled = true;
+					MonsterAI monster = monsterGO.GetComponent<MonsterAI>();
+					monster.setMonsterType("Monster");
+					numMonsters++;
+				}
+			}
+			// 1 normal monster and 1 elite monster
+			else if (formation <= 1000){
+				GameObject monsterGO = (GameObject)PhotonNetwork.Instantiate("Monster", monsterSpawn.transform.position, monsterSpawn.transform.rotation, 0);
+				monsterGO.GetComponent<MonsterAI>().enabled = true;
+				MonsterAI monster = monsterGO.GetComponent<MonsterAI>();
+				monster.setMonsterType("Monster");
+			
+				GameObject monsterGO2 = (GameObject)PhotonNetwork.Instantiate("MonsterElite", monsterSpawn.transform.position, monsterSpawn.transform.rotation, 0);
+				monsterGO2.GetComponent<MonsterAI>().enabled = true;
+				MonsterAI monster2 = monsterGO2.GetComponent<MonsterAI>();
+				monster2.setMonsterType("MonsterElite");
+				numMonsters+=2;
+			}
+			// 2 elite monsters
+			else if (formation > 1000){
+				for (int i = 0; i < 2; i++){
+					GameObject monsterGO = (GameObject)PhotonNetwork.Instantiate("MonsterElite", monsterSpawn.transform.position, monsterSpawn.transform.rotation, 0);
+					monsterGO.GetComponent<MonsterAI>().enabled = true;
+					MonsterAI monster = monsterGO.GetComponent<MonsterAI>();
+					monster.setMonsterType("MonsterElite");
+					numMonsters++;
+				}
+			}
         }
     }
+	
+	void SpawnBoss(){
+		// pick a random spawn to spawn at
+		int location = Random.Range(0, monsterSpawnList.Count);
+		MonsterSpawn bossSpawn = monsterSpawnList[location];
+		GameObject monsterGO = (GameObject)PhotonNetwork.Instantiate("Boss", bossSpawn.transform.position, bossSpawn.transform.rotation, 0);
+		monsterGO.GetComponent<MonsterAI>().enabled = true;
+		MonsterAI monster = monsterGO.GetComponent<MonsterAI>();
+		monster.setMonsterType("Boss");
+	}
+	
 	// spawn the keys and chests in the puzzle rooms
 	void SpawnKeysAndChests()
 	{
@@ -134,7 +211,7 @@ public class GameManager : Photon.PunBehaviour {
             {
                 Vector3 keyPos = new Vector3(keyLocations[i], 1, keyLocations[i + 1]);
                 Quaternion keyRot = new Quaternion(0f, 0f, 0f, 0f);
-                GameObject key = (GameObject)PhotonNetwork.Instantiate("Key", keyPos, keyRot, 0);
+                PhotonNetwork.Instantiate("Key", keyPos, keyRot, 0);
                 Vector3 chestPos = new Vector3(chestLocations[i], 0.35f, chestLocations[i + 1]);
                 Quaternion chestRot = new Quaternion(0f, 0f, 0f, 0f);
                 GameObject chest = (GameObject)PhotonNetwork.Instantiate("Chest", chestPos, chestRot, 0);
@@ -142,6 +219,48 @@ public class GameManager : Photon.PunBehaviour {
 				newChest.whichPieceInside = (i/2)+1;
             }
         }
+	}
+	
+	// spawn powerups
+	void SpawnPowerup(){
+		if (PhotonNetwork.isMasterClient)
+        {
+			// need to add 0.5 or else they spawn on edges
+			Vector3 spawnPos = new Vector3(0.5f+Random.Range(-45, 46), 0.5f, 0.5f+Random.Range(-45, 46));
+			Quaternion spawnRot = new Quaternion(0f, 0f, 0f, 0f);
+			GameObject newGO = (GameObject)PhotonNetwork.Instantiate("Powerup", spawnPos, spawnRot, 0);
+			Powerup newPowerup = newGO.GetComponent<Powerup>();
+			newPowerup.setType(Random.Range(0, 4));
+			powerupList.Add(newPowerup);
+        }
+	}
+	
+	public void decreaseMonsterCount(){
+		numMonsters--;
+	}
+	
+
+	void Update(){	
+		// spawn additional monsters when they die, difficulty scaling with time
+		if (numMonsters < 30 && startSpawnCountdown == false){
+			startSpawnCountdown = true;
+			delayUntilSpawn = 10f;
+		}
+		if (startSpawnCountdown){
+			delayUntilSpawn -= Time.deltaTime;
+		}
+		if (delayUntilSpawn < 0 && startSpawnCountdown){
+			startSpawnCountdown = false;
+			delayUntilSpawn = 10f;
+			for (int i = 0; i < 5; i++){
+				int randSpawn = Random.Range(0, monsterSpawnList.Count);
+				SpawnMonsters(randSpawn);
+			}
+		}
+		// spawn additional powerups
+		if (powerupList.Count < 5){
+			SpawnPowerup();
+		}
 	}
   
 }

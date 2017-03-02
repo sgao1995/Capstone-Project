@@ -58,7 +58,7 @@ public class MonsterAI : MonoBehaviour {
 		
 		agent = GetComponent<NavMeshAgent>();
 		animator = GetComponent<Animator>();
-		currentMode = "Patrol";
+		currentMode = "Sleeping";
 	}
 	public void setMonsterType(string type){
 		this.monsterType = type;
@@ -147,6 +147,8 @@ public class MonsterAI : MonoBehaviour {
     {
 		animator.Play("Death");
 		yield return new WaitForSeconds(5);
+		// notify game manager of a monster death
+		
 		// remove monster from the game
         PhotonNetwork.Destroy(this.gameObject);
         
@@ -343,7 +345,7 @@ public class MonsterAI : MonoBehaviour {
 		// switch modes if delay is up
 		delayTimer -= Time.deltaTime;
 		if (delayTimer < 0){
-			currentMode = modes[(int)Random.Range(0, modes.Count - 0.01f)];
+			currentMode = modes[Random.Range(0, modes.Count)];
 			if (currentMode == "Sleeping"){
 				delayTimer = delayBetweenMovements;
 			}
@@ -354,7 +356,6 @@ public class MonsterAI : MonoBehaviour {
 			else if (currentMode == "Attack"){
 				delayTimer = delayBetweenMovements;
 			}
-			Debug.Log(currentMode);
 		}
 		
 		// cooldowns

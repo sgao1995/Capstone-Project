@@ -63,6 +63,12 @@ public class MouseMovement : MonoBehaviour {
     public Vitality mouseVitality;  // Vitality System component
     public Skill mouseSkill;  // Skill System component
     public Text interactText;
+	
+	/* Sound effects */
+	public AudioClip footstepSound;
+	public AudioClip jumpSound;
+	public AudioSource soundPlayer;
+	
 
     void Start()
     {
@@ -80,11 +86,13 @@ public class MouseMovement : MonoBehaviour {
         GameObject mouseSkillGameObject = GameObject.Find("Skill");
         mouseSkill = mouseSkillGameObject.GetComponent<Skill>();
 
-
         GameObject interactiveText = GameObject.Find("Text");
 		interactText = interactiveText.GetComponent<Text>();
 		interactText.text = "";
-
+		
+		// find and initialize sound effects
+		soundPlayer = GetComponent<AudioSource>();
+		soundPlayer.clip = footstepSound;
     }
 
     // level up
@@ -154,11 +162,29 @@ public class MouseMovement : MonoBehaviour {
                 break;
         }
     }
+    [PunRPC]
+    void playSound(int type, float t)
+    {
+       
+        if (type == 0)
+        {
+            soundPlayer.PlayOneShot(footstepSound, t);
+        }
+        if (type == 1)
+        {
+            soundPlayer.PlayOneShot(jumpSound, t);
+        }
+
+    }
     //used https://docs.unity3d.com/Manual/Coroutines.html as resource for coroutines and invisiblity
     [PunRPC]
-    void cloak()
-    {
-        transform.Find("Smoke").GetComponent<ParticleSystem>().Play();
+    IEnumerator cloak()
+    {	                
+		yield return new WaitForSeconds(0.3f);
+		Quaternion smokeRot = Quaternion.Euler(-90, 0, 0);
+		Vector3 smokePos = new Vector3(transform.position.x, 0.5f, transform.position.z) + transform.forward;
+		GameObject smokeScreen = (GameObject)PhotonNetwork.Instantiate("Smoke", smokePos, smokeRot, 0);
+     //   transform.Find("Smoke").GetComponent<ParticleSystem>().Play();
       //  Destroy(gameObject, transform.Find("Smoke").GetComponent<ParticleSystem>().duration);
         StartCoroutine(Invis(0.2f, 3f));
     }
@@ -223,6 +249,7 @@ public class MouseMovement : MonoBehaviour {
         if (Input.GetMouseButtonDown(0) && attackCooldownTimer <= 0 && !Input.GetKey(KeyCode.Escape))
         {
             attackCooldownTimer = attackCooldownDelay;
+			WaitForAnimation(0.7f);
             StartCoroutine(Attack());
         }
         // skills
@@ -246,7 +273,7 @@ public class MouseMovement : MonoBehaviour {
         }
 
         // interactions
-		if (canToggleDoor || canTakeKey || canOpenChest || canTakePuzzlePiece || canOpenChest){
+		if (canToggleDoor || canTakeKey || canOpenChest || canTakePuzzlePiece || canOpenChest || canOpenExit){
 			if (Input.GetKeyDown(KeyCode.E)){
 				InteractWithObject();
 			}
@@ -293,10 +320,16 @@ public class MouseMovement : MonoBehaviour {
 			if (isGrounded && !onSpikes)
 			{
 				moveV = new Vector3(0, 0, 0);
-
+				soundPlayer.pitch = Random.Range(0.9f, 1.1f);
+				
 				if (Input.GetKey(KeyCode.A))
 				{
-				   animator.Play("MoveLeft");
+					animator.Play("MoveLeft");
+				   	// play sound effect
+					if (!soundPlayer.isPlaying){
+                        //soundPlayer.PlayOneShot(footstepSound, 1f);
+                        transform.GetComponent<PhotonView>().RPC("playSound", PhotonTargets.AllBuffered, 0, 1f);
+                    }
 
 					if (onIce)
 						mouserb.AddRelativeForce(Vector3.left*0.2f, ForceMode.Impulse);
@@ -307,6 +340,11 @@ public class MouseMovement : MonoBehaviour {
 				if (Input.GetKey(KeyCode.D))
 				{
 					animator.Play("MoveRight");
+					// play sound effect
+					if (!soundPlayer.isPlaying){
+                        //soundPlayer.PlayOneShot(footstepSound, 1f);
+                        transform.GetComponent<PhotonView>().RPC("playSound", PhotonTargets.AllBuffered, 0, 1f);
+                    }
 					
 					if (onIce)
 						mouserb.AddRelativeForce(Vector3.right*0.2f, ForceMode.Impulse);
@@ -316,8 +354,15 @@ public class MouseMovement : MonoBehaviour {
 				}
 				if (Input.GetKey(KeyCode.W))
 				{
+					// play animation
 					if (!Input.GetKey(KeyCode.A) && !Input.GetKey(KeyCode.D))
 						animator.Play("MoveForward");
+					
+					// play sound effect
+					if (!soundPlayer.isPlaying){
+						//soundPlayer.PlayOneShot(footstepSound, 1f);
+                        transform.GetComponent<PhotonView>().RPC("playSound", PhotonTargets.AllBuffered, 0, 1f);
+                    }
 					
 					if (onIce)
 						mouserb.AddRelativeForce(Vector3.forward*0.2f, ForceMode.Impulse);
@@ -329,6 +374,11 @@ public class MouseMovement : MonoBehaviour {
 				{
 					if (!Input.GetKey(KeyCode.A) && !Input.GetKey(KeyCode.D))
 						animator.Play("MoveBackward");
+					// play sound effect
+					if (!soundPlayer.isPlaying){
+                        //soundPlayer.PlayOneShot(footstepSound, 1f);
+                        transform.GetComponent<PhotonView>().RPC("playSound", PhotonTargets.AllBuffered, 0, 1f);
+                    }
 					
 					if (onIce)
 						mouserb.AddRelativeForce(Vector3.back*0.2f, ForceMode.Impulse);
@@ -338,8 +388,9 @@ public class MouseMovement : MonoBehaviour {
 				}
 				if (Input.GetKeyDown(KeyCode.Space))
 				{
-					isGrounded = false;
-				   // animator.Play("Unarmed-Jump");
+					//soundPlayer.PlayOneShot(jumpSound, 1f);
+                    transform.GetComponent<PhotonView>().RPC("playSound", PhotonTargets.AllBuffered, 1, 1f);
+                    isGrounded = false;
 					animator.SetTrigger("JumpTrigger");
 					animator.SetInteger("Jumping", 1);
 					mouserb.AddForce(new Vector3(0, jumpForce, 0));
@@ -401,6 +452,7 @@ public class MouseMovement : MonoBehaviour {
                     //currentEXP += hitInfo.collider.transform.GetComponent<MonsterAI>().getExpDrop();
                     //mouseVitality.setCurrentExperiencePoints(currentEXP);
                     currentEXP += 20;
+					GameObject.Find("SCRIPTS").GetComponent<GameManager>().decreaseMonsterCount();
 				}
 
 				hitInfo.collider.transform.GetComponent<MonsterAI>().SendMessage("takeDamage", damage);
@@ -415,6 +467,7 @@ public class MouseMovement : MonoBehaviour {
                     //currentEXP += hitInfo.collider.transform.GetComponent<MonsterAI>().getExpDrop();
                     //mouseVitality.setCurrentExperiencePoints(currentEXP);
                     currentEXP += 50;
+					GameObject.Find("SCRIPTS").GetComponent<GameManager>().decreaseMonsterCount();
                 }
 
                 hitInfo.collider.transform.GetComponent<MonsterAI>().SendMessage("takeDamage", damage);
@@ -597,7 +650,7 @@ public class MouseMovement : MonoBehaviour {
                 movementModifier = 2;
                 movementModifierTimer = 10f;
             }
-            // damage boost
+            // hp restore
             else if (pup.powerupType == 1)
             {
 
