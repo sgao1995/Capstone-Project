@@ -53,6 +53,7 @@ public class CatMovement : MonoBehaviour
     public Vitality catVitality;  // Vitality System component
     public Skill catSkill;  // Skill System component
 	public Text interactText;
+	public bool miniMenuShowing = false;
 	
 	/* Sound effects */
 	public AudioClip footstepSound;

@@ -63,6 +63,8 @@ public class MouseMovement : MonoBehaviour {
     public Vitality mouseVitality;  // Vitality System component
     public Skill mouseSkill;  // Skill System component
     public Text interactText;
+	public bool miniMenuShowing = false;
+	private GameObject miniMenu;
 	
 	/* Sound effects */
 	public AudioClip footstepSound;
@@ -95,6 +97,12 @@ public class MouseMovement : MonoBehaviour {
         GameObject interactiveText = GameObject.Find("Text");
 		interactText = interactiveText.GetComponent<Text>();
 		interactText.text = "";
+		
+		miniMenu = GameObject.Find("MiniMenu");
+		// need to disable the minimenu to begin with
+		miniMenu.SetActive(false);
+		// disable the skills menu as well
+
 		
 		soundPlayer = GetComponent<AudioSource>();
     }
@@ -285,12 +293,27 @@ public class MouseMovement : MonoBehaviour {
         }
 		
 		// left click
-        if (Input.GetMouseButtonDown(0) && attackCooldownTimer <= 0 && !Input.GetKey(KeyCode.Escape))
+        if (Input.GetMouseButtonDown(0) && attackCooldownTimer <= 0 && !Input.GetKey(KeyCode.Escape) && !miniMenuShowing)
         {
-            attackCooldownTimer = attackCooldownDelay;
+			attackCooldownTimer = attackCooldownDelay;
 			WaitForAnimation(0.7f);
-            StartCoroutine(Attack());
+			StartCoroutine(Attack());
         }
+		// right click brings up mini menu
+		if (Input.GetMouseButtonDown(1)){
+			if (miniMenuShowing == false){
+				// show the cursor
+				Cursor.lockState = CursorLockMode.None;
+				miniMenu.SetActive(true);
+				miniMenuShowing = true;	
+			}
+			else{
+				Cursor.lockState = CursorLockMode.Locked;
+				miniMenu.SetActive(false);
+				miniMenuShowing = false;
+			}
+		}
+
         // skills
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
