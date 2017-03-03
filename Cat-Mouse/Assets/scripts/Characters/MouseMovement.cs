@@ -101,7 +101,6 @@ public class MouseMovement : MonoBehaviour {
 		miniMenu = GameObject.Find("MiniMenu");
 		// need to disable the minimenu to begin with
 		miniMenu.SetActive(false);
-		// disable the skills menu as well
 
 		
 		soundPlayer = GetComponent<AudioSource>();

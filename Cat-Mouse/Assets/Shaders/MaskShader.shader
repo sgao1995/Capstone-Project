@@ -5,7 +5,7 @@
 	}
 	SubShader {
 		Tags { "Queue"="Transparent" }
-		Lighting On
+		Lighting Off
 		Cull Off
 		ZTest Always
 		ZWrite Off

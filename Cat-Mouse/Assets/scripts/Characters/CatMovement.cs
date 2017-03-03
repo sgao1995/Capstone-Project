@@ -54,6 +54,7 @@ public class CatMovement : MonoBehaviour
     public Skill catSkill;  // Skill System component
 	public Text interactText;
 	public bool miniMenuShowing = false;
+	private GameObject miniMenu;
 	
 	/* Sound effects */
 	public AudioClip footstepSound;
@@ -83,6 +84,10 @@ public class CatMovement : MonoBehaviour
         GameObject interactiveText = GameObject.Find("Text");
 		interactText = interactiveText.GetComponent<Text>();
 		interactText.text = "";
+
+		miniMenu = GameObject.Find("MiniMenu");
+		// need to disable the minimenu to begin with
+		miniMenu.SetActive(false);
 
        	// find and initialize sound effects
 		soundPlayer = GetComponent<AudioSource>();
@@ -223,12 +228,27 @@ public class CatMovement : MonoBehaviour
 		}
 		
 		// left click
-		if (Input.GetMouseButtonDown(0) && attackCooldownTimer <= 0 && !Input.GetKey(KeyCode.Escape))
+		if (Input.GetMouseButtonDown(0) && attackCooldownTimer <= 0 && !Input.GetKey(KeyCode.Escape) && !miniMenuShowing)
         {
 			attackCooldownTimer = attackCooldownDelay;
 			WaitForAnimation(0.7f);
 			StartCoroutine(Attack());
 		}
+		// right click brings up mini menu
+		if (Input.GetMouseButtonDown(1)){
+			if (miniMenuShowing == false){
+				// show the cursor
+				Cursor.lockState = CursorLockMode.None;
+				miniMenu.SetActive(true);
+				miniMenuShowing = true;	
+			}
+			else{
+				Cursor.lockState = CursorLockMode.Locked;
+				miniMenu.SetActive(false);
+				miniMenuShowing = false;
+			}
+		}
+		
 		// skills
 		if (Input.GetKeyDown(KeyCode.Alpha1)){
             useSkill(3);
