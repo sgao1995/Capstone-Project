@@ -2,18 +2,17 @@
 using UnityEngine.UI;
 
 public class GUIManager : MonoBehaviour {
-	private GameObject skillsMenu;
+	public GameObject skillsMenu;
 	
 	void Start(){
-		skillsMenu = GameObject.Find("SkillMenu");
 		skillsMenu.SetActive(false);
 	}
 	
 	
 	/* Mini Menu button behaviours */
-	public void SkillsMenuButtonClicked(){
+	public void SkillsMenuButtonClicked(){		Debug.Log("set active");
 		skillsMenu.SetActive(true);
-		Debug.Log("set active");
+
 	}
 	public void DangerSignalClicked(){
 		
