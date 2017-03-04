@@ -8,17 +8,9 @@ public class GUIManager : MonoBehaviour {
 		skillsMenu.SetActive(false);
 	}
 	
-	
 	/* Mini Menu button behaviours */
-	public void SkillsMenuButtonClicked(){		Debug.Log("set active");
+	public void SkillsMenuButtonClicked(){	
 		skillsMenu.SetActive(true);
-
-	}
-	public void DangerSignalClicked(){
-		
-	}
-	public void AssistSignalClicked(){
-		
 	}
 	public void CloseSkillsMenu(){
 		skillsMenu.SetActive(false);

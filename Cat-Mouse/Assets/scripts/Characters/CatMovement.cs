@@ -62,7 +62,6 @@ public class CatMovement : MonoBehaviour
 	public AudioClip attackMissSound;
 	public AudioClip[] dealDamageSound;
 	public AudioClip[] takeDamageSound;
-	public AudioClip signalFlareSound;
 	public AudioSource soundPlayer;
 
     void Start()
@@ -180,9 +179,7 @@ public class CatMovement : MonoBehaviour
 			case 5:
 				//soundPlayer.PlayOneShot(smokescreenSound, t);
 				break;
-			// use signal flare
 			case 6:
-				soundPlayer.PlayOneShot(signalFlareSound, t);
 				break;
 		}
     }

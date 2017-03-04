@@ -47,6 +47,7 @@ public class MouseMovement : MonoBehaviour {
 	private bool canTakePuzzlePiece = false;
 	private bool canOpenExit = false;
 	private bool canMove = true;
+	private float flareCooldownTimer = 0f; // cooldown of flare usage
 	
 	// keys and puzzle pieces on hand
 	public int numKeysHeld = 0;
@@ -73,9 +74,10 @@ public class MouseMovement : MonoBehaviour {
 	public AudioClip[] dealDamageSound;
 	public AudioClip[] takeDamageSound;
 	public AudioClip smokescreenSound;
-	public AudioClip signalFlareSound;
 	public AudioSource soundPlayer;
 
+
+	
     private Collider[] hitCollider;
 
     void Start()
@@ -216,9 +218,7 @@ public class MouseMovement : MonoBehaviour {
 			case 5:
 				soundPlayer.PlayOneShot(smokescreenSound, t);
 				break;
-			// use signal flare
 			case 6:
-				soundPlayer.PlayOneShot(signalFlareSound, t);
 				break;
 		}
     }
@@ -359,6 +359,9 @@ public class MouseMovement : MonoBehaviour {
         {
             attackCooldownTimer -= Time.deltaTime;
         }
+		if (flareCooldownTimer > 0f){
+			flareCooldownTimer -= Time.deltaTime;
+		}
 	}
 	
     void FixedUpdate()
@@ -459,6 +462,8 @@ public class MouseMovement : MonoBehaviour {
     // take a certain amount of damage
     public void TakeDamage(float amt)
     {
+		animator.Play("GetHit");
+		WaitForAnimation(0.5f);
         transform.GetComponent<PhotonView>().RPC("changeHealth", PhotonTargets.AllBuffered, amt);
 		transform.GetComponent<PhotonView>().RPC("playSound", PhotonTargets.AllBuffered, 2, 1f);
     }
@@ -482,6 +487,39 @@ public class MouseMovement : MonoBehaviour {
         animator.Play("Unarmed-Death1");
 		WaitForAnimation(5f);
     }
+
+	[PunRPC]
+	void HideMiniMenu(){
+		Cursor.lockState = CursorLockMode.Locked;
+		miniMenu.SetActive(false);
+		miniMenuShowing = false;
+	}
+	
+	[PunRPC]
+	void CastFlare(int color){
+		if (flareCooldownTimer <= 0){
+			WaitForAnimation(1.5f);
+			StartCoroutine(Flare(color));
+		}
+		else{
+			interactText.text = (int)flareCooldownTimer + " seconds left until recharged.";
+		}
+	}
+	
+	// cast a flare at the location of the player
+	IEnumerator Flare(int color){
+		flareCooldownTimer = 10f;
+		animator.Play("Flare");
+		yield return new WaitForSeconds(0.5f);
+		Quaternion flareRot = Quaternion.Euler(90, 0, 0);
+		Vector3 flarePos = new Vector3(transform.position.x, transform.position.y + 1f, transform.position.z) + transform.right/2f;
+		if (color == 1){
+			GameObject newGO = (GameObject)PhotonNetwork.Instantiate("SignalFlareRed", flarePos, flareRot, 0);
+		}
+		else if (color == 2){
+			GameObject newGO = (GameObject)PhotonNetwork.Instantiate("SignalFlareBlue", flarePos, flareRot, 0);	
+		}
+	}
 
     // attack in front of player
     IEnumerator Attack()
