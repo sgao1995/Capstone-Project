@@ -137,9 +137,10 @@ public class MouseMovement : MonoBehaviour {
             // skills 1 and 2 are passive
             case 3:
                 Debug.Log("use 3");
-				// placeholder skill for a smoke screen
-				animator.Play("Throw");
-				WaitForAnimation(0.7f);
+                // placeholder skill for a smoke screen
+                //	animator.Play("Throw");
+                transform.GetComponent<PhotonView>().RPC("PlayAnim", PhotonTargets.All, "Throw");
+                WaitForAnimation(0.7f);
                 transform.GetComponent<PhotonView>().RPC("cloak", PhotonTargets.AllBuffered);
 
                 break;
@@ -324,9 +325,10 @@ public class MouseMovement : MonoBehaviour {
 				
 				if (Input.GetKey(KeyCode.A))
 				{
-					animator.Play("MoveLeft");
-				   	// play sound effect
-					if (!soundPlayer.isPlaying){
+				//	animator.Play("MoveLeft");
+                    transform.GetComponent<PhotonView>().RPC("PlayAnim", PhotonTargets.All, "MoveLeft");
+                    // play sound effect
+                    if (!soundPlayer.isPlaying){
                         //soundPlayer.PlayOneShot(footstepSound, 1f);
                         transform.GetComponent<PhotonView>().RPC("playSound", PhotonTargets.AllBuffered, 0, 1f);
                     }
@@ -339,9 +341,10 @@ public class MouseMovement : MonoBehaviour {
 				}
 				if (Input.GetKey(KeyCode.D))
 				{
-					animator.Play("MoveRight");
-					// play sound effect
-					if (!soundPlayer.isPlaying){
+			//		animator.Play("MoveRight");
+                    transform.GetComponent<PhotonView>().RPC("PlayAnim", PhotonTargets.All, "MoveRight");
+                    // play sound effect
+                    if (!soundPlayer.isPlaying){
                         //soundPlayer.PlayOneShot(footstepSound, 1f);
                         transform.GetComponent<PhotonView>().RPC("playSound", PhotonTargets.AllBuffered, 0, 1f);
                     }
@@ -356,10 +359,11 @@ public class MouseMovement : MonoBehaviour {
 				{
 					// play animation
 					if (!Input.GetKey(KeyCode.A) && !Input.GetKey(KeyCode.D))
-						animator.Play("MoveForward");
-					
-					// play sound effect
-					if (!soundPlayer.isPlaying){
+					//	animator.Play("MoveForward");
+                        transform.GetComponent<PhotonView>().RPC("PlayAnim", PhotonTargets.All, "MoveForward");
+
+                    // play sound effect
+                    if (!soundPlayer.isPlaying){
 						//soundPlayer.PlayOneShot(footstepSound, 1f);
                         transform.GetComponent<PhotonView>().RPC("playSound", PhotonTargets.AllBuffered, 0, 1f);
                     }
@@ -373,9 +377,10 @@ public class MouseMovement : MonoBehaviour {
 				if (Input.GetKey(KeyCode.S))
 				{
 					if (!Input.GetKey(KeyCode.A) && !Input.GetKey(KeyCode.D))
-						animator.Play("MoveBackward");
-					// play sound effect
-					if (!soundPlayer.isPlaying){
+						//animator.Play("MoveBackward");
+                        transform.GetComponent<PhotonView>().RPC("PlayAnim", PhotonTargets.All, "MoveBackward");
+                    // play sound effect
+                    if (!soundPlayer.isPlaying){
                         //soundPlayer.PlayOneShot(footstepSound, 1f);
                         transform.GetComponent<PhotonView>().RPC("playSound", PhotonTargets.AllBuffered, 0, 1f);
                     }
@@ -391,9 +396,11 @@ public class MouseMovement : MonoBehaviour {
 					//soundPlayer.PlayOneShot(jumpSound, 1f);
                     transform.GetComponent<PhotonView>().RPC("playSound", PhotonTargets.AllBuffered, 1, 1f);
                     isGrounded = false;
-					animator.SetTrigger("JumpTrigger");
-					animator.SetInteger("Jumping", 1);
-					mouserb.AddForce(new Vector3(0, jumpForce, 0));
+                    //animator.SetTrigger("JumpTrigger");
+                    //animator.SetInteger("Jumping", 1);
+                    transform.GetComponent<PhotonView>().RPC("SetTrigger", PhotonTargets.All, "JumpTrigger");
+                    transform.GetComponent<PhotonView>().RPC("SetInteger", PhotonTargets.All, "Jumping", 1);
+                    mouserb.AddForce(new Vector3(0, jumpForce, 0));
 				}
 			}
 		}
@@ -421,8 +428,9 @@ public class MouseMovement : MonoBehaviour {
     {
         Debug.Log("player died");
         alive = false;
-        animator.Play("Unarmed-Death1");
-		WaitForAnimation(5f);
+       // animator.Play("Unarmed-Death1");
+        transform.GetComponent<PhotonView>().RPC("PlayAnim", PhotonTargets.All, "Unarmed-Death1");
+        WaitForAnimation(5f);
     }
 
     // attack in front of player
@@ -430,10 +438,12 @@ public class MouseMovement : MonoBehaviour {
     {
 		float attackType = Random.Range(0f, 1f);
 		if (attackType <= 0.5f)
-			animator.SetTrigger("Attack3Trigger");
+		//	animator.SetTrigger("Attack3Trigger");
+            transform.GetComponent<PhotonView>().RPC("SetTrigger", PhotonTargets.All, "Attack3Trigger");
 		else if (attackType > 0.5f)
-			animator.SetTrigger("Attack6Trigger");
-		yield return new WaitForSeconds(0.3f);
+            //animator.SetTrigger("Attack6Trigger");
+            transform.GetComponent<PhotonView>().RPC("SetTrigger", PhotonTargets.All, "Attack6Trigger");
+        yield return new WaitForSeconds(0.3f);
 		DealDamage();
     }
 	
@@ -551,12 +561,27 @@ public class MouseMovement : MonoBehaviour {
             i++;
         }
     }
-	
+    [PunRPC]
+    void PlayAnim(string a)
+    {
+        GetComponent<Animator>().Play(a);
+    }
+    [PunRPC]
+    void SetTrigger(string a)
+    {
+        GetComponent<Animator>().SetTrigger(a);
+    }
+    [PunRPC]
+    void SetInteger(string a, int i)
+    {
+        GetComponent<Animator>().SetInteger(a, i);
+    }
     // collision with objects
     void OnCollisionEnter(Collision collisionInfo)
     {
         isGrounded = true;
-		animator.SetInteger("Jumping", 0);
+        //animator.SetInteger("Jumping", 0);
+        transform.GetComponent<PhotonView>().RPC("SetInteger", PhotonTargets.All, "Jumping", 0);
         if (collisionInfo.gameObject.tag == "Ground")
         {
             onLava = false;
