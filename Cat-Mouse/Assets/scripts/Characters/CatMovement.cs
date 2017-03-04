@@ -44,6 +44,7 @@ public class CatMovement : MonoBehaviour
 	// skills
 	private float[] skillCooldownTimers = new float[4]; // the cooldown timer
 	private float[] skillCooldowns = new float[4]; // the max cooldown
+    private float noinputtime = 3.0f;
 
     /* Vitality System attribute parameters */
     private float[] vitalLevelHP = {100, 125, 160, 200};  // Health Points of Cat per Level
@@ -55,6 +56,7 @@ public class CatMovement : MonoBehaviour
 	public Text interactText;
 	public bool miniMenuShowing = false;
 	private GameObject miniMenu;
+    private GameObject Alert;
 	
 	/* Sound effects */
 	public AudioClip footstepSound;
@@ -63,6 +65,8 @@ public class CatMovement : MonoBehaviour
 	public AudioClip[] dealDamageSound;
 	public AudioClip[] takeDamageSound;
 	public AudioSource soundPlayer;
+
+    private Collider[] hitCollider;
 
     void Start()
     {
@@ -87,6 +91,8 @@ public class CatMovement : MonoBehaviour
 		miniMenu = GameObject.Find("MiniMenu");
 		// need to disable the minimenu to begin with
 		miniMenu.SetActive(false);
+        Alert = GameObject.Find("Alert");
+        Alert.SetActive(false);
 
        	// find and initialize sound effects
 		soundPlayer = GetComponent<AudioSource>();
@@ -185,7 +191,15 @@ public class CatMovement : MonoBehaviour
     }
 	
 	void Update(){
-		/* Updates the HUD state for the current player */
+        if(Time.time >= noinputtime)
+        {
+            Debug.Log("no input for 3 seconds");
+        }
+        if (Input.GetKeyDown(KeyCode.T))
+        {
+            transform.position = new Vector3(22, 0, 25);
+        }
+        /* Updates the HUD state for the current player */
         if (GetComponent<PhotonView>().isMine)
         {
             /* Updates the Vitality System states */
@@ -284,7 +298,26 @@ public class CatMovement : MonoBehaviour
 			attackCooldownTimer -= Time.deltaTime;
 		}
 	}
-	
+    //heightenedSenses
+    void heightenedSenses()
+    {
+        hitCollider = Physics.OverlapSphere(this.transform.position, 10);
+        foreach (Collider C in hitCollider)
+        {
+            if (C.GetComponent<Collider>().transform.root != this.transform && (C.GetComponent<Collider>().tag == "Mouse" || C.GetComponent<Collider>().tag == "Mouse(Clone)"))
+            {
+                Debug.Log("Mice Detected");
+                Alert.SetActive(true);
+            }else
+            {
+                Alert.SetActive(false);
+            }
+        }
+    }
+    void LateUpdate()
+    {
+        heightenedSenses();
+    }
     void FixedUpdate()
     {
 		if (canMove)

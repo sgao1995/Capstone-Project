@@ -66,9 +66,10 @@ public class MouseMovement : MonoBehaviour {
     public Text interactText;
 	public bool miniMenuShowing = false;
 	private GameObject miniMenu;
-	
-	/* Sound effects */
-	public AudioClip footstepSound;
+    private GameObject Alert;
+
+    /* Sound effects */
+    public AudioClip footstepSound;
 	public AudioClip jumpSound;
 	public AudioClip attackMissSound;
 	public AudioClip[] dealDamageSound;
@@ -103,9 +104,11 @@ public class MouseMovement : MonoBehaviour {
 		miniMenu = GameObject.Find("MiniMenu");
 		// need to disable the minimenu to begin with
 		miniMenu.SetActive(false);
+        Alert = GameObject.Find("Alert");
+        Alert.SetActive(false);
 
-		
-		soundPlayer = GetComponent<AudioSource>();
+
+        soundPlayer = GetComponent<AudioSource>();
     }
     void tagTeam()
     {
@@ -462,8 +465,8 @@ public class MouseMovement : MonoBehaviour {
     // take a certain amount of damage
     public void TakeDamage(float amt)
     {
-		animator.Play("GetHit");
-		WaitForAnimation(0.5f);
+		//animator.Play("GetHit");
+	//	WaitForAnimation(0.5f);
         transform.GetComponent<PhotonView>().RPC("changeHealth", PhotonTargets.AllBuffered, amt);
 		transform.GetComponent<PhotonView>().RPC("playSound", PhotonTargets.AllBuffered, 2, 1f);
     }
