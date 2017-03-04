@@ -47,6 +47,7 @@ public class MouseMovement : MonoBehaviour {
 	private bool canTakePuzzlePiece = false;
 	private bool canOpenExit = false;
 	private bool canMove = true;
+	private float flareCooldownTimer = 0f; // cooldown of flare usage
 	
 	// keys and puzzle pieces on hand
 	public int numKeysHeld = 0;
@@ -63,12 +64,22 @@ public class MouseMovement : MonoBehaviour {
     public Vitality mouseVitality;  // Vitality System component
     public Skill mouseSkill;  // Skill System component
     public Text interactText;
-	
-	/* Sound effects */
-	public AudioClip footstepSound;
+	public bool miniMenuShowing = false;
+	private GameObject miniMenu;
+    private GameObject Alert;
+
+    /* Sound effects */
+    public AudioClip footstepSound;
 	public AudioClip jumpSound;
+	public AudioClip attackMissSound;
+	public AudioClip[] dealDamageSound;
+	public AudioClip[] takeDamageSound;
+	public AudioClip smokescreenSound;
 	public AudioSource soundPlayer;
+
+
 	
+    private Collider[] hitCollider;
 
     void Start()
     {
@@ -90,11 +101,32 @@ public class MouseMovement : MonoBehaviour {
 		interactText = interactiveText.GetComponent<Text>();
 		interactText.text = "";
 		
-		// find and initialize sound effects
-		soundPlayer = GetComponent<AudioSource>();
-		soundPlayer.clip = footstepSound;
-    }
+		miniMenu = GameObject.Find("MiniMenu");
+		// need to disable the minimenu to begin with
+		miniMenu.SetActive(false);
+        Alert = GameObject.Find("Alert");
+        Alert.SetActive(false);
 
+
+        soundPlayer = GetComponent<AudioSource>();
+    }
+    void tagTeam()
+    {
+        hitCollider = Physics.OverlapSphere(this.transform.position, 5);
+        foreach (Collider C in hitCollider)
+        {
+            if (C.GetComponent<Collider>().transform.root != this.transform && C.GetComponent<Collider>().tag == "Mouse")
+            {
+                Debug.Log("hit");
+                movementModifier = 2;
+
+            }
+        }
+    }
+    void LateUpdate()
+    {
+        tagTeam();
+    }
     // level up
     public void LevelUp()
     {
@@ -142,6 +174,7 @@ public class MouseMovement : MonoBehaviour {
                 transform.GetComponent<PhotonView>().RPC("PlayAnim", PhotonTargets.All, "Throw");
                 WaitForAnimation(0.7f);
                 transform.GetComponent<PhotonView>().RPC("cloak", PhotonTargets.AllBuffered);
+				transform.GetComponent<PhotonView>().RPC("playSound", PhotonTargets.AllBuffered, 5, 1f);
 
                 break;
             case 4:
@@ -160,22 +193,38 @@ public class MouseMovement : MonoBehaviour {
             case 8:
                 break;
             case 9:
+				transform.GetComponent<PhotonView>().RPC("playSound", PhotonTargets.AllBuffered, 6, 1f);
                 break;
         }
     }
     [PunRPC]
     void playSound(int type, float t)
     {
-       
-        if (type == 0)
-        {
-            soundPlayer.PlayOneShot(footstepSound, t);
-        }
-        if (type == 1)
-        {
-            soundPlayer.PlayOneShot(jumpSound, t);
-        }
-
+		switch(type){
+			case 0:
+				soundPlayer.PlayOneShot(footstepSound, t);
+				break;
+			case 1:
+				soundPlayer.PlayOneShot(jumpSound, t);
+				break;
+			// take damage
+			case 2:
+				soundPlayer.PlayOneShot(takeDamageSound[Random.Range(0, takeDamageSound.Length)], t);
+				break;
+			// deal damage
+			case 3:
+				soundPlayer.PlayOneShot(dealDamageSound[Random.Range(0, dealDamageSound.Length)], t);
+				break;
+			case 4:
+				soundPlayer.PlayOneShot(attackMissSound, t);
+				break;
+			// smokescreen
+			case 5:
+				soundPlayer.PlayOneShot(smokescreenSound, t);
+				break;
+			case 6:
+				break;
+		}
     }
     //used https://docs.unity3d.com/Manual/Coroutines.html as resource for coroutines and invisiblity
     [PunRPC]
@@ -247,12 +296,27 @@ public class MouseMovement : MonoBehaviour {
         }
 		
 		// left click
-        if (Input.GetMouseButtonDown(0) && attackCooldownTimer <= 0 && !Input.GetKey(KeyCode.Escape))
+        if (Input.GetMouseButtonDown(0) && attackCooldownTimer <= 0 && !Input.GetKey(KeyCode.Escape) && !miniMenuShowing)
         {
-            attackCooldownTimer = attackCooldownDelay;
+			attackCooldownTimer = attackCooldownDelay;
 			WaitForAnimation(0.7f);
-            StartCoroutine(Attack());
+			StartCoroutine(Attack());
         }
+		// right click brings up mini menu
+		if (Input.GetMouseButtonDown(1)){
+			if (miniMenuShowing == false){
+				// show the cursor
+				Cursor.lockState = CursorLockMode.None;
+				miniMenu.SetActive(true);
+				miniMenuShowing = true;	
+			}
+			else{
+				Cursor.lockState = CursorLockMode.Locked;
+				miniMenu.SetActive(false);
+				miniMenuShowing = false;
+			}
+		}
+
         // skills
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
@@ -279,10 +343,6 @@ public class MouseMovement : MonoBehaviour {
 				InteractWithObject();
 			}
 		}
-        if (Input.GetKeyDown(KeyCode.K))
-        {
-            TakeDamage(5f);
-        }
 		if (Input.GetKeyDown(KeyCode.T))
         {
             transform.position = new Vector3(22, 0, 25);
@@ -303,6 +363,9 @@ public class MouseMovement : MonoBehaviour {
         {
             attackCooldownTimer -= Time.deltaTime;
         }
+		if (flareCooldownTimer > 0f){
+			flareCooldownTimer -= Time.deltaTime;
+		}
 	}
 	
     void FixedUpdate()
@@ -409,7 +472,10 @@ public class MouseMovement : MonoBehaviour {
     // take a certain amount of damage
     public void TakeDamage(float amt)
     {
+		//animator.Play("GetHit");
+	//	WaitForAnimation(0.5f);
         transform.GetComponent<PhotonView>().RPC("changeHealth", PhotonTargets.AllBuffered, amt);
+		transform.GetComponent<PhotonView>().RPC("playSound", PhotonTargets.AllBuffered, 2, 1f);
     }
     [PunRPC]
     void changeHealth(float dmg)
@@ -432,6 +498,39 @@ public class MouseMovement : MonoBehaviour {
         transform.GetComponent<PhotonView>().RPC("PlayAnim", PhotonTargets.All, "Unarmed-Death1");
         WaitForAnimation(5f);
     }
+
+	[PunRPC]
+	void HideMiniMenu(){
+		Cursor.lockState = CursorLockMode.Locked;
+		miniMenu.SetActive(false);
+		miniMenuShowing = false;
+	}
+	
+	[PunRPC]
+	void CastFlare(int color){
+		if (flareCooldownTimer <= 0){
+			WaitForAnimation(1.5f);
+			StartCoroutine(Flare(color));
+		}
+		else{
+			interactText.text = (int)flareCooldownTimer + " seconds left until recharged.";
+		}
+	}
+	
+	// cast a flare at the location of the player
+	IEnumerator Flare(int color){
+		flareCooldownTimer = 10f;
+		animator.Play("Flare");
+		yield return new WaitForSeconds(0.5f);
+		Quaternion flareRot = Quaternion.Euler(90, 0, 0);
+		Vector3 flarePos = new Vector3(transform.position.x, transform.position.y + 1f, transform.position.z) + transform.right/2f;
+		if (color == 1){
+			GameObject newGO = (GameObject)PhotonNetwork.Instantiate("SignalFlareRed", flarePos, flareRot, 0);
+		}
+		else if (color == 2){
+			GameObject newGO = (GameObject)PhotonNetwork.Instantiate("SignalFlareBlue", flarePos, flareRot, 0);	
+		}
+	}
 
     // attack in front of player
     IEnumerator Attack()
@@ -521,9 +620,13 @@ public class MouseMovement : MonoBehaviour {
                     currentEXP += 100;
                 }
 				
-				hitInfo.collider.transform.GetComponent<CatMovement>().SendMessage("TakeDamage", damage);
+				hitInfo.collider.transform.GetComponent<CatMovement>().SendMessage("takeDamage", damage);
             }
+			transform.GetComponent<PhotonView>().RPC("playSound", PhotonTargets.AllBuffered, 3, 1f);
         }
+		else{
+			transform.GetComponent<PhotonView>().RPC("playSound", PhotonTargets.AllBuffered, 4, 1f);
+		}
     }
 
     // allow the player to open and close doors

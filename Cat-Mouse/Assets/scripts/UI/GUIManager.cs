@@ -2,24 +2,17 @@
 using UnityEngine.UI;
 
 public class GUIManager : MonoBehaviour {
-	// minimap 
-	public RenderTexture MiniMapTexture;
-	public Material MiniMapMaterial;
-	private float offset;
-	private GameObject fullMap;
+	public GameObject skillsMenu;
 	
 	void Start(){
-		fullMap = GameObject.Find("FullMap");
+		skillsMenu.SetActive(false);
 	}
 	
-	void Update(){
-		if (Input.GetKeyDown(KeyCode.Tab)){
-			fullMap.transform.GetChild(0).GetComponent<Camera>().enabled = true;
-			fullMap.GetComponent<Image>().enabled = true;
-		}
-		if (Input.GetKeyUp(KeyCode.Tab)){
-			fullMap.transform.GetChild(0).GetComponent<Camera>().enabled = false;
-			fullMap.GetComponent<Image>().enabled = false;
-		}
+	/* Mini Menu button behaviours */
+	public void SkillsMenuButtonClicked(){	
+		skillsMenu.SetActive(true);
+	}
+	public void CloseSkillsMenu(){
+		skillsMenu.SetActive(false);
 	}
 }
