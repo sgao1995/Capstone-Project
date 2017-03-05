@@ -472,8 +472,9 @@ public class MouseMovement : MonoBehaviour {
     // take a certain amount of damage
     public void TakeDamage(float amt)
     {
-		//animator.Play("GetHit");
-	//	WaitForAnimation(0.5f);
+        //animator.Play("GetHit");
+       // transform.GetComponent<PhotonView>().RPC("PlayAnim", PhotonTargets.All, "GetHit");
+        //WaitForAnimation(0.5f);
         transform.GetComponent<PhotonView>().RPC("changeHealth", PhotonTargets.AllBuffered, amt);
 		transform.GetComponent<PhotonView>().RPC("playSound", PhotonTargets.AllBuffered, 2, 1f);
     }
@@ -520,8 +521,9 @@ public class MouseMovement : MonoBehaviour {
 	// cast a flare at the location of the player
 	IEnumerator Flare(int color){
 		flareCooldownTimer = 10f;
-		animator.Play("Flare");
-		yield return new WaitForSeconds(0.5f);
+		//animator.Play("Flare");
+        transform.GetComponent<PhotonView>().RPC("PlayAnim", PhotonTargets.All, "Flare");
+        yield return new WaitForSeconds(0.5f);
 		Quaternion flareRot = Quaternion.Euler(90, 0, 0);
 		Vector3 flarePos = new Vector3(transform.position.x, transform.position.y + 1f, transform.position.z) + transform.right/2f;
 		if (color == 1){
@@ -610,7 +612,7 @@ public class MouseMovement : MonoBehaviour {
                 hitInfo.collider.transform.GetComponent<MonsterAI>().SendMessage("takeDamage", damage);
 
             }
-            if (hitInfo.collider.name == "Cat(Clone)")
+            if (hitInfo.collider.tag == "Cat")
             {
                 Debug.Log("Trying to hurt " + hitInfo.collider.transform.name + " by calling script " + hitInfo.collider.transform.GetComponent<CatMovement>().name);
                 
@@ -620,7 +622,7 @@ public class MouseMovement : MonoBehaviour {
                     currentEXP += 100;
                 }
 				
-				hitInfo.collider.transform.GetComponent<CatMovement>().SendMessage("takeDamage", damage);
+				hitInfo.collider.transform.GetComponent<CatMovement>().SendMessage("TakeDamage", damage);
             }
 			transform.GetComponent<PhotonView>().RPC("playSound", PhotonTargets.AllBuffered, 3, 1f);
         }

@@ -434,6 +434,8 @@ public class CatMovement : MonoBehaviour
     // take a certain amount of damage
     public void TakeDamage(float amt)
     {
+     //   transform.GetComponent<PhotonView>().RPC("PlayAnim", PhotonTargets.All, "GetHit");
+     //   WaitForAnimation(0.5f);
         transform.GetComponent<PhotonView>().RPC("changeHealth", PhotonTargets.AllBuffered, amt);
 		transform.GetComponent<PhotonView>().RPC("playSound", PhotonTargets.AllBuffered, 2, 1f);
     }

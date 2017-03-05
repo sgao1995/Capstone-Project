@@ -6,7 +6,7 @@ public class NetworkPlayer : Photon.MonoBehaviour {
     Quaternion rRotation = Quaternion.identity;
 	// Use this for initialization
 	void Start () {
-	
+	    
 	}
 	
 	// Update is called once per frame
