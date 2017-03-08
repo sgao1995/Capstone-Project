@@ -10,12 +10,11 @@ public class SkillButton : MonoBehaviour {
  
  public void SetName(string name)
  {
-  Name = name;
-  ButtonText.text = name;
+    Name = name;
+    ButtonText.text = name;
  }
  public void Button_Click()
  {
-  ScrollView.ButtonClicked(Name);
- 
+    ScrollView.ButtonClicked(Name);
  }
 } 

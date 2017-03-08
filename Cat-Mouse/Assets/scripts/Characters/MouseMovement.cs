@@ -282,7 +282,7 @@ public class MouseMovement : MonoBehaviour {
             mouseSkill.setSlotAssign(learnedSkills);
 
             /* Updates the number of Skill Slots enabled */
-            mouseSkill.setNumSkillSlots(this.level);
+           // mouseSkill.setNumSkillSlots(this.level);
         }
 
         // status effects

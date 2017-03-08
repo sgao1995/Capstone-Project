@@ -197,7 +197,7 @@ public class CatMovement : MonoBehaviour
         /* Updates the HUD state for the current player */
         if (Time.time >= noinputtime)
         {
-            Debug.Log("no input for 3 seconds");
+           // Debug.Log("no input for 3 seconds");
         }
         if (Input.GetKeyDown(KeyCode.T))
         {
@@ -231,7 +231,7 @@ public class CatMovement : MonoBehaviour
             catSkill.setSlotAssign(learnedSkills);
 
             /* Updates the number of Skill Slots enabled */
-            catSkill.setNumSkillSlots(this.level);
+         //   catSkill.setNumSkillSlots(this.level);
         }
 
         // status effects
