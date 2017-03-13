@@ -19,7 +19,7 @@ public class MouseMovement : MonoBehaviour {
     private float maxHealth;
     private int skillPoints;
     private int ultimateSkillPoints;
-    private int[] learnedSkills = { 0, 1, 2, 3 };
+    private List<int> learnedSkills;
     private float damage = 10f;
     // movement speed
     private int movementModifier = 1;
@@ -53,6 +53,7 @@ public class MouseMovement : MonoBehaviour {
 	public int numKeysHeld = 0;
 
     // skills
+    private int numSkillSlotsMaximum = 4;  // Sets the maximum number of Skill Slots for the Mouse
     private float[] skillCooldownTimers = new float[4]; // the cooldown timer
     private float[] skillCooldowns = new float[4]; // the max cooldown
 
@@ -88,6 +89,9 @@ public class MouseMovement : MonoBehaviour {
 
         LevelUp();  // Starts at the first level
         animator = GetComponent<Animator>();
+
+        /* Initialises list of Learned Skills for the Cat */
+        learnedSkills = new List<int>();
 
         /*  Finds and initialises the Vitality System component */
         GameObject mouseVitalityGameObject = GameObject.Find("Vitality");
@@ -276,13 +280,10 @@ public class MouseMovement : MonoBehaviour {
             /* Updates the number of Skill System states */
 
             /* Updates the total number of Skill Slots */
-            mouseSkill.setMaxSkillSlots(4);  // Set to 4
+            mouseSkill.setMaxSkillSlots(numSkillSlotsMaximum);
 
             /* Updates the Skill assigned to each Skill Slot */
             mouseSkill.setSlotAssign(learnedSkills);
-
-            /* Updates the number of Skill Slots enabled */
-           // mouseSkill.setNumSkillSlots(this.level);
         }
 
         // status effects
@@ -326,7 +327,7 @@ public class MouseMovement : MonoBehaviour {
         if (Input.GetKeyDown(KeyCode.Alpha2))
         {
             useSkill(4);
-            //mouseSkill.useSkillSlot(2);
+            mouseSkill.useSkillSlot(2);
         }
         if (Input.GetKeyDown(KeyCode.Alpha3))
         {
@@ -834,5 +835,17 @@ public class MouseMovement : MonoBehaviour {
     public float getHealth()
     {
         return currentHealth;
+    }
+
+    /* Adds a new Skill to the Skills Learned by the Mouse Character */
+    public void addLearnedSkill(int skillID)
+    {
+        learnedSkills.Add(skillID);
+    }
+
+    /* Gets the Skills currently learned by the Cat */
+    public List<int> getLearnedSkills()
+    {
+        return learnedSkills;
     }
 }

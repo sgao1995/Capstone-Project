@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
+using System.Collections.Generic;
 
 public class CatMovement : MonoBehaviour
 {
@@ -15,7 +16,7 @@ public class CatMovement : MonoBehaviour
     private float maxHealth;
     private int skillPoints;
     private int ultimateSkillPoints;
-    private int[] learnedSkills = { 0, 1, 2, 3 };
+    private List<int> learnedSkills;
     private float damage = 50f;
     // movement speed
     private int movementModifier = 1;
@@ -40,8 +41,9 @@ public class CatMovement : MonoBehaviour
 	private bool alive = true;
 	private bool canToggleDoor = false;
 	private bool canMove = true;
-	
-	// skills
+
+    // skills
+    private int numSkillSlotsMaximum = 4;  // Sets the maximum number of Skill Slots for the Cat
 	private float[] skillCooldownTimers = new float[4]; // the cooldown timer
 	private float[] skillCooldowns = new float[4]; // the max cooldown
     private float noinputtime = 3.0f;
@@ -76,8 +78,11 @@ public class CatMovement : MonoBehaviour
         LevelUp();  // Starts at the first level
         animator = GetComponent<Animator>();
 
+        /* Initialises list of Learned Skills for the Cat */
+        learnedSkills = new List<int>();
+
         /*  Finds and initialises the Vitality System component */
-		GameObject catVitalityGameObject = GameObject.Find("Vitality");
+        GameObject catVitalityGameObject = GameObject.Find("Vitality");
 		catVitality = catVitalityGameObject.GetComponent<Vitality>();
 
         /*  Finds and initialises the Skill System component */
@@ -224,14 +229,11 @@ public class CatMovement : MonoBehaviour
 
             /* Updates the number of Skill System states */
 
-            /* Updates the total number of Skill Slots */
-            catSkill.setMaxSkillSlots(4);  // Set to 4
+            /* Updates the maximum number of Skill Slots */
+            catSkill.setMaxSkillSlots(numSkillSlotsMaximum);
 
-            /* Updates the Skill assigned to each Skill Slot */
-            catSkill.setSlotAssign(learnedSkills);
-
-            /* Updates the number of Skill Slots enabled */
-         //   catSkill.setNumSkillSlots(this.level);
+           /* Updates the Skill assigned to each Skill Slot */
+           catSkill.setSlotAssign(learnedSkills);
         }
 
         // status effects
@@ -670,5 +672,17 @@ public class CatMovement : MonoBehaviour
     public float getHealth()
     {
         return this.currentHealth;
+    }
+
+    /* Adds a new Skill to the Skills Learned by the Cat Character */
+    public void addLearnedSkill(int skillID)
+    {
+        learnedSkills.Add(skillID);
+    }
+
+    /* Gets the Skills currently learned by the Cat */
+    public List<int> getLearnedSkills()
+    {
+        return learnedSkills;
     }
 }

@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
+using System.Collections.Generic;
 
 /* Class: Skill.cs
  * Description: Controls the behaviour of the Skill System of the HUD.
@@ -18,19 +19,20 @@ public class Skill : MonoBehaviour {
     /* Represents all Skills available to the Character */
     public CharSkill[] charSkills;
 
-    /* Represents the Sprites of all Skills */
-    public Sprite[] skillListIcons;  /* PLACEHOLDER: Will be loaded from a seperate class */
+    /* Represents the Skill Data for all Skills */
+    public string[] skillListName;  // Represents the Skill Name of all Skills
+    public string[] skillListDescription;  // Represents the Skill Description of all Skills
+    public int[] skillListType;  // Represents the Skill Type (0: Passive, 1: Active)
+    public Sprite[] skillListIcon;  // Represents the Sprites of all Skills
     public Sprite skillLocked;  // Represents the sprite for a Locked Skill Slot
-
-    /* Represents the cooldown times of all Skills */
-    public float[] skillListCooldown;  /* PLACEHOLDER: Will be loaded from a seperate class */
+    public float[] skillListCooldown;   // Represents the cooldown times of all Skills
 
     /* Sets Character Skill Slot data */
     private int numSkillSlots;  // Represents number of Skill Slots enabled
     private int maxSkillSlots;  // Represents maximum number of Skill Slots
 
     /* Represents the assignment of Skills to Skill Slots */
-    private int[] charSlotAssign;  // Each INDEX represents a Skill Slot and the respective VALUE represents the Skill index (from the list of Skills)
+    private List<int> charSlotAssign;  // Each INDEX represents a Skill Slot and the respective VALUE represents the Skill index (from the list of Skills)
 
     /* Represents a Skill Slot of a Character */
     public class SkillSlot
@@ -113,62 +115,118 @@ public class Skill : MonoBehaviour {
     public class CharSkill
     {
         /* Attributes of a Skill */
+        private int skillID;  // Represents the Skill ID of the Skill
+        private string skillName;  // Represents the Name of the Skill
+        private string skillDescription;  // Represents the Description of the Skill
+        private int skillType;  // Represents the Type of the Skill  (0: Passive, 1: Active) 
         private Sprite skillIcon;  // Represents the sprite of the Skill
         private float skillCooldownTotal;  // Represents the total (maximum) cooldown period of the Skill (in seconds)
         private float skillCooldownElapsed;  // Represents the elapsed cooldown period of the Skill (in seconds)
 
         /* Constructs a new Skill */
-        public CharSkill(Sprite skillIcon,  float skillCooldownTotal)
+        public CharSkill(int skillID, string skillName, string skillDescription, int skillType, Sprite skillIcon, float skillCooldownTotal)
         {
+            this.skillID = skillID;
+            this.skillName = skillName;
+            this.skillDescription = skillDescription;
+            this.skillType = skillType;
             this.skillIcon = skillIcon;
             this.skillCooldownTotal = skillCooldownTotal;
             this.skillCooldownElapsed = this.skillCooldownTotal;
         }
 
+        /* Sets the Skill ID of the Skill */
+        public void setSkillID(int id)
+        {
+            skillID = id;
+        }
+
+        /* Gets the Skill ID of the Skill */
+        public int getSkillID()
+        {
+            return skillID;
+        }
+
+        /* Sets the Name of the Skill */
+        public void setSkillName(string name)
+        {
+            skillName = name;
+        }
+
+        /* Gets the Name of the Skill */
+        public string getSkillName()
+        {
+            return skillName;
+        }
+
+        /* Sets the Description of the Skill */
+        public void setSkillDescription(string description)
+        {
+            skillDescription = description;
+        }
+
+        /* Gets the Description of the Skill */
+        public string getSkillDescription()
+        {
+            return skillDescription;
+        }
+
+        /* Sets the Type of the Skill */
+        public void setSkillType(int type)
+        {
+            skillType = type;
+        }
+
+        /* Gets the Type of the Skill */
+        public int getSkillType()
+        {
+            return skillType;
+        }
+
         /* Sets the sprite representing the Skill */
         public void setSkillIcon(Sprite icon)
         {
-            this.skillIcon = icon;
-        }
-
-        /* Sets the total cooldown period of the Skill, in seconds */
-        public void setSkillCooldownTotal(float seconds)
-        {
-            this.skillCooldownTotal = seconds;
-        }
-
-        /* Sets the elapsed cooldown period of the Skill, in seconds */
-        public void setSkillCooldownElapsed(float seconds)
-        {
-            this.skillCooldownElapsed = seconds;
+            skillIcon = icon;
         }
 
         /* Gets the sprite representing the Skill */
         public Sprite getSkillIcon()
         {
-            return this.skillIcon;
+            return skillIcon;
+        }
+
+        /* Sets the total cooldown period of the Skill, in seconds */
+        public void setSkillCooldownTotal(float seconds)
+        {
+            skillCooldownTotal = seconds;
         }
 
         /* Gets the total cooldown period of the Skill, in seconds */
         public float getSkillCooldownTotal()
         {
-            return this.skillCooldownTotal;
+            return skillCooldownTotal;
+        }
+
+        /* Sets the elapsed cooldown period of the Skill, in seconds */
+        public void setSkillCooldownElapsed(float seconds)
+        {
+            skillCooldownElapsed = seconds;
         }
 
         /* Gets the elapsed cooldown period of the Skill, in seconds */
         public float getSkillCooldownElapsed()
         {
-            return this.skillCooldownElapsed;
+            return skillCooldownElapsed;
         }
 
         /* Activates the Skill */
         public void useSkill()
         {
             /* Checks if cooldown period for slot is still active */
-            if (this.getSkillCooldownElapsed() >= this.getSkillCooldownTotal())
+            if (getSkillCooldownElapsed() >= getSkillCooldownTotal())
             {
                 /* Starts cooldown timer */
-                this.setSkillCooldownElapsed(0);
+                setSkillCooldownElapsed(0);
             }  
         }
     }
@@ -185,11 +243,11 @@ public class Skill : MonoBehaviour {
         }
 
         /* Initialises all Skills available to the Character */
-        charSkills = new CharSkill[4];  // PLACEHOLDER: Set to 4 skills
+        charSkills = new CharSkill[11];  // PLACEHOLDER: Set to 11 skills
 
         for (int i = 0; i < this.charSkills.Length; i++)
         {
-            charSkills[i] = new CharSkill(this.skillListIcons[i], this.skillListCooldown[i]);  // Loads Skill data
+            charSkills[i] = new CharSkill(i, this.skillListName[i], this.skillListDescription[i], this.skillListType[i], this.skillListIcon[i], this.skillListCooldown[i]);  // Loads Skill data
         }
     }
 	
@@ -199,11 +257,15 @@ public class Skill : MonoBehaviour {
        /* Updates the cooldown status for each Skill */
        for (int i = 0; i < this.getNumSkillSlots(); i++)
         {
-            /* Check to see if cooldown period has started */
-            if (this.skillSlots[i].getSlotSkill().getSkillCooldownElapsed() < this.skillSlots[i].getSlotSkill().getSkillCooldownTotal())
-            {
-                this.skillSlots[i].getSlotSkill().setSkillCooldownElapsed(this.skillSlots[i].getSlotSkill().getSkillCooldownElapsed() + Time.deltaTime);  // Increments the elapsed cooldown period
-                this.skillSlots[i].getSlotObject().fillAmount = this.skillSlots[i].getSlotSkill().getSkillCooldownElapsed() / this.skillSlots[i].getSlotSkill().getSkillCooldownTotal();  // Sets the countdown indicator for the Skill Slot
+            /* Checks to see if Skill Slot currently has an Active skill */
+            if (this.skillSlots[i].getSlotSkill().getSkillType() == 1)
+            { 
+                /* Checks to see if cooldown period has started */
+                if (this.skillSlots[i].getSlotSkill().getSkillCooldownElapsed() < this.skillSlots[i].getSlotSkill().getSkillCooldownTotal())
+                {
+                    this.skillSlots[i].getSlotSkill().setSkillCooldownElapsed(this.skillSlots[i].getSlotSkill().getSkillCooldownElapsed() + Time.deltaTime);  // Increments the elapsed cooldown period
+                    this.skillSlots[i].getSlotObject().fillAmount = this.skillSlots[i].getSlotSkill().getSkillCooldownElapsed() / this.skillSlots[i].getSlotSkill().getSkillCooldownTotal();  // Sets the countdown indicator for the Skill Slot
+                }
             }
         }
     }
@@ -212,7 +274,7 @@ public class Skill : MonoBehaviour {
     public void setNumSkillSlots(int numberSlots)
     {
         /* Checks if the number of Skill Slots set is valid */
-        if (numberSlots > 0 || numberSlots <= this.getMaxSkillSlots())
+        if (numberSlots >= 0 || numberSlots <= this.getMaxSkillSlots())
         {
             /* Disables all Skill Slots initially */
             for (int i = 0; i < this.getMaxSkillSlots(); i++)
@@ -232,7 +294,7 @@ public class Skill : MonoBehaviour {
     /* Gets the number of Skill Slots enabled for the Character */
     public int getNumSkillSlots()
     {
-        return this.numSkillSlots;
+        return numSkillSlots;
     }
 
     /* Sets the maximum number of Skill Slots */
@@ -248,21 +310,25 @@ public class Skill : MonoBehaviour {
     }
 
     /* Sets the Skills to Skill Slot assignment */
-    public void setSlotAssign(int[] charSlotAssign)
+    public void setSlotAssign(List<int> charSlotAssign)
     {
         this.charSlotAssign = charSlotAssign;
 
-        /* Assigns the specified Skill to each Skill Slot */
-        for (int i = 0; i < this.charSlotAssign.Length; i++)
+        /* Assigns the specified Skill to each available Skill Slot */
+        for (int i = 0; i < this.getNumSkillSlots(); i++)
         {
-            skillSlots[i].setSlotSkill(charSkills[charSlotAssign[i]]);
+             /* Assigns the Skill to the Skill Slot */
+             skillSlots[i].setSlotSkill(charSkills[charSlotAssign[i]]);     
         }
+
+        /* Updates the number of Skill Slots available */
+        setNumSkillSlots(charSlotAssign.Count);
     }
 
     /* Gets the current Skills to Skill Slot assignment */
-    public int[] getSlotAssign()
+    public List<int> getSlotAssign()
     {
-        return this.charSlotAssign;
+        return charSlotAssign;
     }
 
     /* Uses the Skill in the specified Skill Slot */
