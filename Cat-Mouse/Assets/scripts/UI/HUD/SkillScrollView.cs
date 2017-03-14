@@ -11,6 +11,13 @@ public class SkillScrollView : MonoBehaviour {
     GameObject SkillSlot3;
     GameObject SkillSlot4;
     public int skillsLeveled=0;
+
+    /* Character Classes */
+    public GameObject catCharObject;  // Game Object representing the 'Hunter' Class
+    public GameObject mouseCharObject;  // Game Object representing the 'Explorer' Class
+    public CatMovement catChar;  // Represents the 'Hunter' Class behaviour
+    public MouseMovement mouseChar;  // Represents the 'Explorer' Class behaviour
+
 	// initialize the GUI skills based on the character class
 	void Start () {
         SkillSlot1 = GameObject.Find("skillSlotOne");
@@ -18,6 +25,19 @@ public class SkillScrollView : MonoBehaviour {
         SkillSlot3 = GameObject.Find("skillSlotThree");
         SkillSlot4 = GameObject.Find("skillSlotFour");
         GameObject content = transform.GetChild(0).gameObject;
+
+        /* Initialises and retrieves the Character Classes and associated behaviours */
+        if (GameObject.Find("TeamSelectionOBJ").GetComponent<teamselectiondata>().playertype == 0)
+        {
+            catCharObject = GameObject.Find("Cat(Clone)");  // Retrieves the Hunter Class Object
+            catChar = catCharObject.GetComponent<CatMovement>();  // Retrieves the Hunter Class behaviours
+        }
+        else
+        {
+            mouseCharObject = GameObject.Find("Mouse(Clone)");
+            mouseChar = mouseCharObject.GetComponent<MouseMovement>();
+        }
+
 		// if hunter
 		if (GameObject.Find("TeamSelectionOBJ").GetComponent<teamselectiondata>().playertype == 0){
             content.transform.GetChild(1).transform.GetChild(0).GetComponent<SkillButton>().SetName("Hunter/HeightenedSensesIcon");
@@ -147,5 +167,61 @@ public class SkillScrollView : MonoBehaviour {
 
         }
 
+    }
+
+    /* Adds selected Skill to the Player's list of Learned Skills */
+    public void addSkill(int skillID)
+    {
+        /* Checks the Character Class of the Player */
+
+        /* If Hunter Class */
+        if (GameObject.Find("TeamSelectionOBJ").GetComponent<teamselectiondata>().playertype == 0)
+        {
+
+        }
+
+        /* Else, Explorer Class */
+        else
+        {
+            /* Select Skill to add from Skill ID */
+            switch (skillID)
+            {
+                case 0:  // If Skill ID = 0
+                    mouseChar.addLearnedSkill(0);  // Adds Skill with ID = 0
+                    break;
+                case 1:
+                    mouseChar.addLearnedSkill(1);
+                    break;
+                case 2:
+                    mouseChar.addLearnedSkill(2);
+                    break;
+                case 3:
+                    mouseChar.addLearnedSkill(3);
+                    break;
+                case 4:
+                    mouseChar.addLearnedSkill(4);
+                    break;
+                case 5:
+                    mouseChar.addLearnedSkill(5);
+                    break;
+                case 6:
+                    mouseChar.addLearnedSkill(6);
+                    break;
+                case 7:
+                    mouseChar.addLearnedSkill(7);
+                    break;
+                case 8:
+                    mouseChar.addLearnedSkill(8);
+                    break;
+                case 9:
+                    mouseChar.addLearnedSkill(9);
+                    break;
+                case 10:
+                    mouseChar.addLearnedSkill(10);
+                    break;
+                default:  // Invalid Skill ID, do nothing
+                    break;
+            }
+        }
     }
 } 

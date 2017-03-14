@@ -314,15 +314,25 @@ public class Skill : MonoBehaviour {
     {
         this.charSlotAssign = charSlotAssign;
 
+        /* Checks if the number of Skill Slots assigned is less than or equal to the maximum number */
+        if (this.getSlotAssign().Count <= this.getMaxSkillSlots())
+        {
+            /* Updates the number of Skill Slots available */
+            setNumSkillSlots(charSlotAssign.Count);
+        }
+        
+        /* Updates the number of Skill Slots available to the maximum number */
+        else
+        {
+            setNumSkillSlots(this.getMaxSkillSlots());
+        }
+
         /* Assigns the specified Skill to each available Skill Slot */
         for (int i = 0; i < this.getNumSkillSlots(); i++)
         {
-             /* Assigns the Skill to the Skill Slot */
-             skillSlots[i].setSlotSkill(charSkills[charSlotAssign[i]]);     
+            /* Assigns the Skill to the Skill Slot */
+            skillSlots[i].setSlotSkill(charSkills[charSlotAssign[i]]);
         }
-
-        /* Updates the number of Skill Slots available */
-        setNumSkillSlots(charSlotAssign.Count);
     }
 
     /* Gets the current Skills to Skill Slot assignment */

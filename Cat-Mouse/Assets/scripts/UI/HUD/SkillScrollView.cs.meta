@@ -1,10 +1,16 @@
 fileFormatVersion: 2
 guid: 1b67bc0b736ab8c4293f4f354039e744
-timeCreated: 1488512471
+timeCreated: 1489458532
 licenseType: Free
 MonoImporter:
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - Button_Template: {instanceID: 0}
+  - catCharObject: {instanceID: 0}
+  - mouseCharObject: {instanceID: 0}
+  - catChar: {instanceID: 0}
+  - mouseChar: {instanceID: 0}
+  - skillIcon: {instanceID: 0}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 
