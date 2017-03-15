@@ -172,7 +172,7 @@ public class MouseMovement : MonoBehaviour {
         {
             // skills 1 and 2 are passive
             case 3:
-                Debug.Log("use 3");
+                Debug.Log("use smokescreen");
                 // placeholder skill for a smoke screen
                 //	animator.Play("Throw");
                 transform.GetComponent<PhotonView>().RPC("PlayAnim", PhotonTargets.All, "Throw");
@@ -321,13 +321,15 @@ public class MouseMovement : MonoBehaviour {
         // skills
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
-            useSkill(3);
-            mouseSkill.useSkillSlot(1);  // Updates the Skill System of the HUD
+			if (mouseSkill.skillSlots[0].getSlotSkill().isSkillOnCooldown() == false){
+				useSkill(mouseSkill.useSkillSlot(1)); // Updates the Skill System of the HUD
+			}
         }
         if (Input.GetKeyDown(KeyCode.Alpha2))
         {
-            useSkill(4);
-            mouseSkill.useSkillSlot(2);
+			if (mouseSkill.skillSlots[1].getSlotSkill().isSkillOnCooldown() == false){
+				useSkill(mouseSkill.useSkillSlot(2)); // Updates the Skill System of the HUD
+			}
         }
         if (Input.GetKeyDown(KeyCode.Alpha3))
         {

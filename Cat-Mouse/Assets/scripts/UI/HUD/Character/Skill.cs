@@ -228,6 +228,13 @@ public class Skill : MonoBehaviour {
                 setSkillCooldownElapsed(0);
             }  
         }
+		
+		/* Check if skill is on cooldown */
+		public bool isSkillOnCooldown(){
+			if (getSkillCooldownElapsed() >= getSkillCooldownTotal())
+				return false;
+			return true;
+		}
     }
 
     // Use this for initialization
@@ -378,13 +385,15 @@ public class Skill : MonoBehaviour {
     }
 
     /* Uses the Skill in the specified Skill Slot */
-    public void useSkillSlot(int slotNum)
+    public int useSkillSlot(int slotNum)
     {
         /* Checks if Skill Slot is currently enabled */
         if(skillSlots[slotNum - 1].getSlotEnabled() == true)
         {
             this.skillSlots[slotNum - 1].getSlotSkill().useSkill();
+			return this.skillSlots[slotNum-1].getSlotSkill().getSkillID();
         }
-       
+		return -1;
     }
+	
 }
