@@ -20,16 +20,15 @@ public class Skill : MonoBehaviour {
     public CharSkill[] charSkills;
 
     /* Represents the Skill Data for all Skills */
-    public string[] skillListName;  // Represents the Skill Name of all Skills
-    public string[] skillListDescription;  // Represents the Skill Description of all Skills
-    public int[] skillListType;  // Represents the Skill Type (0: Passive, 1: Active)
+    public SkillData skillDataSource; // Represents the Skill Data source 
     public Sprite[] skillListIcon;  // Represents the Sprites of all Skills
     public Sprite skillLocked;  // Represents the sprite for a Locked Skill Slot
-    public float[] skillListCooldown;   // Represents the cooldown times of all Skills
 
     /* Sets Character Skill Slot data */
     private int numSkillSlots;  // Represents number of Skill Slots enabled
     private int maxSkillSlots;  // Represents maximum number of Skill Slots
+
+    private bool skillDataSourceLoaded = false;  // Represents whether all Skill Data has been successfully loaded from the Data Source
 
     /* Represents the assignment of Skills to Skill Slots */
     private List<int> charSlotAssign;  // Each INDEX represents a Skill Slot and the respective VALUE represents the Skill index (from the list of Skills)
@@ -237,6 +236,9 @@ public class Skill : MonoBehaviour {
         /* Initialises all Skill Slots of Character */
         skillSlots = new SkillSlot[4];  // Set to 4 Skill Slots
 
+        /* Retrieves and initialises the Skill Data source */
+        this.skillDataSource = this.gameObject.GetComponent<SkillData>();
+
         for (int i = 0; i < this.skillSlots.Length; i++)
         {
             skillSlots[i] = new SkillSlot(this.skillSlotObjects[i], this.skillLocked, false);  // Initially, all Skill Slots are disabled
@@ -244,28 +246,50 @@ public class Skill : MonoBehaviour {
 
         /* Initialises all Skills available to the Character */
         charSkills = new CharSkill[11];  // PLACEHOLDER: Set to 11 skills
-
-        for (int i = 0; i < this.charSkills.Length; i++)
-        {
-            charSkills[i] = new CharSkill(i, this.skillListName[i], this.skillListDescription[i], this.skillListType[i], this.skillListIcon[i], this.skillListCooldown[i]);  // Loads Skill data
-        }
     }
 	
 	// Updates the Skill System UI Elements every frame */
 	void Update ()
     {
-       /* Updates the cooldown status for each Skill */
-       for (int i = 0; i < this.getNumSkillSlots(); i++)
+       /* If Skill Data has not been loaded, load data  */
+       if (this.getSkillDataSourceLoaded() == false)
         {
-            /* Checks to see if Skill Slot currently has an Active skill */
-            if (this.skillSlots[i].getSlotSkill().getSkillType() == 1)
-            { 
-                /* Checks to see if cooldown period has started */
-                if (this.skillSlots[i].getSlotSkill().getSkillCooldownElapsed() < this.skillSlots[i].getSlotSkill().getSkillCooldownTotal())
+            /* Checks to see if Skill Data is ready to be loaded */
+            if (this.skillDataSource.getSkillDataLoaded() == true)
+            {
+                Debug.Log("The Skill Name is: " + skillDataSource.getSkillListType()[charSkills.Length - 1].ToString()); 
+                /* Loads Skill data */
+                for (int i = 0; i < this.charSkills.Length; i++)
                 {
-                    this.skillSlots[i].getSlotSkill().setSkillCooldownElapsed(this.skillSlots[i].getSlotSkill().getSkillCooldownElapsed() + Time.deltaTime);  // Increments the elapsed cooldown period
-                    this.skillSlots[i].getSlotObject().fillAmount = this.skillSlots[i].getSlotSkill().getSkillCooldownElapsed() / this.skillSlots[i].getSlotSkill().getSkillCooldownTotal();  // Sets the countdown indicator for the Skill Slot
+                    charSkills[i] = new CharSkill(this.skillDataSource.getSkillListID()[i],
+                        this.skillDataSource.getSkillListName()[i],
+                        this.skillDataSource.getSkillListDescription()[i],
+                        this.skillDataSource.getSkillListType()[i],
+                        this.skillListIcon[i],
+                        this.skillDataSource.getSkillListCooldown()[i]);
                 }
+
+                /* Indicate that Skill Data has been loaded */
+                this.setSkillDataSourceLoaded(true);
+            }
+        }
+        
+       /* Otherwise, Skill System is active */
+       else
+        {
+            /* Updates the cooldown status for each Skill */
+            for (int i = 0; i < this.getNumSkillSlots(); i++)
+            {
+                /* Checks to see if Skill Slot currently has an Active skill */
+                if (this.skillSlots[i].getSlotSkill().getSkillType() == 1)
+                    { 
+                        /* Checks to see if cooldown period has started */
+                        if (this.skillSlots[i].getSlotSkill().getSkillCooldownElapsed() < this.skillSlots[i].getSlotSkill().getSkillCooldownTotal())
+                        {
+                            this.skillSlots[i].getSlotSkill().setSkillCooldownElapsed(this.skillSlots[i].getSlotSkill().getSkillCooldownElapsed() + Time.deltaTime);  // Increments the elapsed cooldown period
+                            this.skillSlots[i].getSlotObject().fillAmount = this.skillSlots[i].getSlotSkill().getSkillCooldownElapsed() / this.skillSlots[i].getSlotSkill().getSkillCooldownTotal();  // Sets the countdown indicator for the Skill Slot
+                        }
+                    }
             }
         }
     }
@@ -307,6 +331,18 @@ public class Skill : MonoBehaviour {
     public int getMaxSkillSlots()
     {
         return this.maxSkillSlots;
+    }
+
+    /* Sets whether the Skill Data has been loaded from the data source */
+    public void setSkillDataSourceLoaded(bool loaded)
+    {
+        this.skillDataSourceLoaded = loaded;
+    }
+
+    /* Gets whether the Skill Data has been loaded from the data source */
+    public bool getSkillDataSourceLoaded()
+    {
+        return this.skillDataSourceLoaded;
     }
 
     /* Sets the Skills to Skill Slot assignment */

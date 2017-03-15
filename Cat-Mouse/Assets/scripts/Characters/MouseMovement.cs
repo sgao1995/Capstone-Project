@@ -840,10 +840,20 @@ public class MouseMovement : MonoBehaviour {
     /* Adds a new Skill to the Skills Learned by the Mouse Character */
     public void addLearnedSkill(int skillID)
     {
-        learnedSkills.Add(skillID);
+        /* Checks if Skill has already been Learned */
+        if (!(this.getLearnedSkills().Contains(skillID)))
+        {
+            learnedSkills.Add(skillID);  // Adds specified skill
+        }
     }
 
-    /* Gets the Skills currently learned by the Cat */
+    /* Sets the Skills currently learned by the Mouse */
+    public void getLearnedSkills(List<int> learnedSkills)
+    {
+        this.learnedSkills = learnedSkills;
+    }
+
+    /* Gets the Skills currently learned by the Mouse */
     public List<int> getLearnedSkills()
     {
         return learnedSkills;

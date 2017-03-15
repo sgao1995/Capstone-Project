@@ -677,7 +677,17 @@ public class CatMovement : MonoBehaviour
     /* Adds a new Skill to the Skills Learned by the Cat Character */
     public void addLearnedSkill(int skillID)
     {
-        learnedSkills.Add(skillID);
+        /* Checks if Skill has already been Learned */
+        if (!(this.getLearnedSkills().Contains(skillID)))
+        {
+            learnedSkills.Add(skillID);  // Adds specified Skill
+        }
+    }
+
+    /* Sets the Skills currently learned by the Cat */
+    public void getLearnedSkills(List<int> learnedSkills)
+    {
+        this.learnedSkills = learnedSkills;
     }
 
     /* Gets the Skills currently learned by the Cat */
