@@ -69,6 +69,9 @@ public class CatMovement : MonoBehaviour
 	public AudioSource soundPlayer;
 
     private Collider[] hitCollider;
+	
+	// list of traps the player has set
+	private List<GameObject> steelTrapsList = new List<GameObject>();
 
     void Start()
     {
@@ -102,6 +105,8 @@ public class CatMovement : MonoBehaviour
        	// find and initialize sound effects
 		soundPlayer = GetComponent<AudioSource>();
         soundPlayer.clip = footstepSound;
+		
+		// steel traps
     }
 
 	// level up
@@ -162,11 +167,47 @@ public class CatMovement : MonoBehaviour
 			case 7: 
 				break;
 			case 8:
+				/* "Lasso - Throw out a rope that pulls the first enemy hit to you. 15 second cooldown." */
+				Debug.Log("Use Lasso");
+				transform.GetComponent<PhotonView>().RPC("PlayAnim", PhotonTargets.All, "Throw");
+                WaitForAnimation(0.7f);
+                transform.GetComponent<PhotonView>().RPC("Lasso", PhotonTargets.AllBuffered);
 				break;
 			case 9: 
+				Debug.Log("Place trap");
+				/* "Trap - Lay down a steel trap that lasts 300 seconds that will snare the first enemy that steps on it for 4 seconds. Maximum of 5 traps at once. 10 second cooldown. */
+				transform.GetComponent<PhotonView>().RPC("PlaceTrap", PhotonTargets.AllBuffered);
 				break;
 		}
 	}
+	
+	/* Function that placed a trap on the ground in front of the player */
+	[PunRPC]
+	IEnumerator PlaceTrap(){
+		yield return new WaitForSeconds(0.3f);
+		Quaternion trapRot = Quaternion.Euler(0, 0, 0);
+		Vector3 trapPos = new Vector3(transform.position.x, 0f, transform.position.z) + transform.forward;
+		GameObject trapGO = (GameObject)PhotonNetwork.Instantiate("SteelTrap", trapPos, trapRot, 0);
+		steelTrapsList.Add(trapGO);
+		// if there are more than 5 traps, remove the earliest placed one
+		if (steelTrapsList.Count > 5){
+			transform.GetComponent<PhotonView>().RPC("destroyObj", PhotonTargets.MasterClient, steelTrapsList[0]);
+			// and cleanse the trap list
+			steelTrapsList.RemoveAt(0);
+		}
+	}
+	
+	/* Throws a lasso in front of the player, pulling monsters and players towards the cat if connected*/
+	[PunRPC]
+    IEnumerator Lasso()
+    {	                
+		yield return new WaitForSeconds(0.3f);
+		Quaternion lassoRot = Quaternion.Euler(-90, 0, 0);
+		Vector3 lassoPos = new Vector3(transform.position.x, 0.7f, transform.position.z) + transform.forward + transform.right;
+		GameObject lassoGO = (GameObject)PhotonNetwork.Instantiate("Lasso", lassoPos, lassoRot, 0);
+		Lasso newLasso = lassoGO.GetComponent<Lasso>();
+		newLasso.originalPosition = transform.position;
+    }
 	
 	[PunRPC]
     void playSound(int type, float t)
@@ -268,17 +309,32 @@ public class CatMovement : MonoBehaviour
 		
 		// skills
 		if (Input.GetKeyDown(KeyCode.Alpha1)){
-            useSkill(3);
-            catSkill.useSkillSlot(1);
+			if (catSkill.skillSlots[0].getSlotEnabled()){
+				if (catSkill.skillSlots[0].getSlotSkill().isSkillOnCooldown() == false){
+					useSkill(catSkill.useSkillSlot(1)); // Updates the Skill System of the HUD
+				}
+			}
 		}
 		if (Input.GetKeyDown(KeyCode.Alpha2)){
-            catSkill.useSkillSlot(2);
+			if (catSkill.skillSlots[1].getSlotEnabled()){
+				if (catSkill.skillSlots[1].getSlotSkill().isSkillOnCooldown() == false){
+					useSkill(catSkill.useSkillSlot(2)); // Updates the Skill System of the HUD
+				}
+			}
         }
 		if (Input.GetKeyDown(KeyCode.Alpha3)){
-            catSkill.useSkillSlot(3);
+			if (catSkill.skillSlots[2].getSlotEnabled()){
+				if (catSkill.skillSlots[2].getSlotSkill().isSkillOnCooldown() == false){
+					useSkill(catSkill.useSkillSlot(3)); // Updates the Skill System of the HUD
+				}
+			}
         }
 		if (Input.GetKeyDown(KeyCode.Alpha4)){
-            catSkill.useSkillSlot(4);
+			if (catSkill.skillSlots[3].getSlotEnabled()){
+				if (catSkill.skillSlots[3].getSlotSkill().isSkillOnCooldown() == false){
+					useSkill(catSkill.useSkillSlot(4)); // Updates the Skill System of the HUD
+				}
+			}
         }
 		
 		if (canToggleDoor){
@@ -610,6 +666,10 @@ public class CatMovement : MonoBehaviour
 
         PhotonNetwork.Destroy(obj.gameObject);
     }
+	[PunRPC]
+	void destroyObj(GameObject go){
+		PhotonNetwork.Destroy(go);
+	}
 	
 	
 	void OnTriggerStay(Collider obj){

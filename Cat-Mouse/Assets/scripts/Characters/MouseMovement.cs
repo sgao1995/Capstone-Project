@@ -321,23 +321,35 @@ public class MouseMovement : MonoBehaviour {
         // skills
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
-			if (mouseSkill.skillSlots[0].getSlotSkill().isSkillOnCooldown() == false){
-				useSkill(mouseSkill.useSkillSlot(1)); // Updates the Skill System of the HUD
+			if (mouseSkill.skillSlots[0].getSlotEnabled()){
+				if (mouseSkill.skillSlots[0].getSlotSkill().isSkillOnCooldown() == false){
+					useSkill(mouseSkill.useSkillSlot(1)); // Updates the Skill System of the HUD
+				}
 			}
         }
         if (Input.GetKeyDown(KeyCode.Alpha2))
         {
-			if (mouseSkill.skillSlots[1].getSlotSkill().isSkillOnCooldown() == false){
-				useSkill(mouseSkill.useSkillSlot(2)); // Updates the Skill System of the HUD
+			if (mouseSkill.skillSlots[1].getSlotEnabled()){
+				if (mouseSkill.skillSlots[1].getSlotSkill().isSkillOnCooldown() == false){
+					useSkill(mouseSkill.useSkillSlot(2)); // Updates the Skill System of the HUD
+				}
 			}
         }
         if (Input.GetKeyDown(KeyCode.Alpha3))
         {
-            mouseSkill.useSkillSlot(3);
+			if (mouseSkill.skillSlots[2].getSlotEnabled()){
+				if (mouseSkill.skillSlots[2].getSlotSkill().isSkillOnCooldown() == false){
+					useSkill(mouseSkill.useSkillSlot(3)); // Updates the Skill System of the HUD
+				}
+			}
         }
         if (Input.GetKeyDown(KeyCode.Alpha4))
         {
-            mouseSkill.useSkillSlot(4);
+			if (mouseSkill.skillSlots[3].getSlotEnabled()){
+				if (mouseSkill.skillSlots[3].getSlotSkill().isSkillOnCooldown() == false){
+					useSkill(mouseSkill.useSkillSlot(4)); // Updates the Skill System of the HUD
+				}
+			}
         }
 
         // interactions
