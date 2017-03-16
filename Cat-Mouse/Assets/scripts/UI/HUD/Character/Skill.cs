@@ -121,6 +121,7 @@ public class Skill : MonoBehaviour {
         private Sprite skillIcon;  // Represents the sprite of the Skill
         private float skillCooldownTotal;  // Represents the total (maximum) cooldown period of the Skill (in seconds)
         private float skillCooldownElapsed;  // Represents the elapsed cooldown period of the Skill (in seconds)
+        private bool skillCooldownActive;  // Represents whether the cooldown period of the Skill is active
 
         /* Constructs a new Skill */
         public CharSkill(int skillID, string skillName, string skillDescription, int skillType, Sprite skillIcon, float skillCooldownTotal)
@@ -132,6 +133,7 @@ public class Skill : MonoBehaviour {
             this.skillIcon = skillIcon;
             this.skillCooldownTotal = skillCooldownTotal;
             this.skillCooldownElapsed = this.skillCooldownTotal;
+            this.skillCooldownActive = false;
         }
 
         /* Sets the Skill ID of the Skill */
@@ -218,23 +220,38 @@ public class Skill : MonoBehaviour {
             return skillCooldownElapsed;
         }
 
-        /* Activates the Skill */
-        public void useSkill()
+        /* Activates the Skill and returns the Skill ID */
+        public int useSkill()
         {
             /* Checks if cooldown period for slot is still active */
-            if (getSkillCooldownElapsed() >= getSkillCooldownTotal())
+            if (this.getCooldownPeriodActive() == false)
             {
                 /* Starts cooldown timer */
-                setSkillCooldownElapsed(0);
-            }  
+                this.setSkillCooldownElapsed(0);
+
+                /* Returns the Skill ID of this Skill */
+                return this.getSkillID();
+            }
+
+            /* Otherwise, do nothing */
+            else
+            { 
+                /* Returns flag indicating skill not used */
+                return -1;
+            }
         }
 		
-		/* Check if skill is on cooldown */
-		public bool isSkillOnCooldown(){
-			if (getSkillCooldownElapsed() >= getSkillCooldownTotal())
-				return false;
-			return true;
-		}
+		/* Sets whether the Cooldown Period of the Skill is active */
+        public void setCooldownPeriodActive(bool isActive)
+        {
+            this.skillCooldownActive = isActive;
+        }
+
+        /* Gets whether the Cooldown Period of the Skill is active */
+        public bool getCooldownPeriodActive()
+        {
+            return this.skillCooldownActive;
+        }
     }
 
     // Use this for initialization
@@ -289,14 +306,21 @@ public class Skill : MonoBehaviour {
             {
                 /* Checks to see if Skill Slot currently has an Active skill */
                 if (this.skillSlots[i].getSlotSkill().getSkillType() == 1)
-                    { 
-                        /* Checks to see if cooldown period has started */
-                        if (this.skillSlots[i].getSlotSkill().getSkillCooldownElapsed() < this.skillSlots[i].getSlotSkill().getSkillCooldownTotal())
-                        {
-                            this.skillSlots[i].getSlotSkill().setSkillCooldownElapsed(this.skillSlots[i].getSlotSkill().getSkillCooldownElapsed() + Time.deltaTime);  // Increments the elapsed cooldown period
-                            this.skillSlots[i].getSlotObject().fillAmount = this.skillSlots[i].getSlotSkill().getSkillCooldownElapsed() / this.skillSlots[i].getSlotSkill().getSkillCooldownTotal();  // Sets the countdown indicator for the Skill Slot
-                        }
+                { 
+                    /* Checks to see if cooldown period of Skill is active */
+                    if (this.skillSlots[i].getSlotSkill().getSkillCooldownElapsed() < this.skillSlots[i].getSlotSkill().getSkillCooldownTotal())
+                    {
+                        this.skillSlots[i].getSlotSkill().setCooldownPeriodActive(true);  // Sets the Cooldown Period of the Skill as active
+                        this.skillSlots[i].getSlotSkill().setSkillCooldownElapsed(this.skillSlots[i].getSlotSkill().getSkillCooldownElapsed() + Time.deltaTime);  // Increments the elapsed cooldown period
+                        this.skillSlots[i].getSlotObject().fillAmount = this.skillSlots[i].getSlotSkill().getSkillCooldownElapsed() / this.skillSlots[i].getSlotSkill().getSkillCooldownTotal();  // Sets the countdown indicator for the Skill Slot
                     }
+
+                    /* If cooldown period is not active */
+                    else
+                    {
+                        this.skillSlots[i].getSlotSkill().setCooldownPeriodActive(false);  // Sets the Cooldown Period of the Skill as inactive
+                    }
+               }
             }
         }
     }
@@ -390,10 +414,17 @@ public class Skill : MonoBehaviour {
         /* Checks if Skill Slot is currently enabled */
         if(skillSlots[slotNum - 1].getSlotEnabled() == true)
         {
-            this.skillSlots[slotNum - 1].getSlotSkill().useSkill();
-			return this.skillSlots[slotNum-1].getSlotSkill().getSkillID();
+            return this.skillSlots[slotNum - 1].getSlotSkill().useSkill();  // Activates the Skill in the Skill Slot
         }
-		return -1;
+
+        /* Otherwise, do nothing */
+        else
+        {
+            /* Returns flag indicating skill not used */
+            return -1;
+        }
+
+        
     }
 	
 }

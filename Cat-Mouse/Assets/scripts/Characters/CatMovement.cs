@@ -308,33 +308,21 @@ public class CatMovement : MonoBehaviour
 		}
 		
 		// skills
-		if (Input.GetKeyDown(KeyCode.Alpha1)){
-			if (catSkill.skillSlots[0].getSlotEnabled()){
-				if (catSkill.skillSlots[0].getSlotSkill().isSkillOnCooldown() == false){
-					useSkill(catSkill.useSkillSlot(1)); // Updates the Skill System of the HUD
-				}
-			}
+		if (Input.GetKeyDown(KeyCode.Alpha1))
+        {
+            this.useSkill(this.catSkill.useSkillSlot(1));  // Uses the 1st Skill Slot of the Hunter Character
 		}
-		if (Input.GetKeyDown(KeyCode.Alpha2)){
-			if (catSkill.skillSlots[1].getSlotEnabled()){
-				if (catSkill.skillSlots[1].getSlotSkill().isSkillOnCooldown() == false){
-					useSkill(catSkill.useSkillSlot(2)); // Updates the Skill System of the HUD
-				}
-			}
+		if (Input.GetKeyDown(KeyCode.Alpha2))
+        {
+            this.useSkill(this.catSkill.useSkillSlot(2));  // Uses the 2nd Skill Slot
         }
-		if (Input.GetKeyDown(KeyCode.Alpha3)){
-			if (catSkill.skillSlots[2].getSlotEnabled()){
-				if (catSkill.skillSlots[2].getSlotSkill().isSkillOnCooldown() == false){
-					useSkill(catSkill.useSkillSlot(3)); // Updates the Skill System of the HUD
-				}
-			}
+		if (Input.GetKeyDown(KeyCode.Alpha3))
+        {
+            this.useSkill(this.catSkill.useSkillSlot(3));  // Uses the 3rd Skill Slot
         }
-		if (Input.GetKeyDown(KeyCode.Alpha4)){
-			if (catSkill.skillSlots[3].getSlotEnabled()){
-				if (catSkill.skillSlots[3].getSlotSkill().isSkillOnCooldown() == false){
-					useSkill(catSkill.useSkillSlot(4)); // Updates the Skill System of the HUD
-				}
-			}
+		if (Input.GetKeyDown(KeyCode.Alpha4))
+        {
+            this.useSkill(this.catSkill.useSkillSlot(4));  // Uses the 4th Skill Slot
         }
 		
 		if (canToggleDoor){

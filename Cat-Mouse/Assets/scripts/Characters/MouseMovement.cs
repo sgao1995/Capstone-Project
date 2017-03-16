@@ -321,35 +321,19 @@ public class MouseMovement : MonoBehaviour {
         // skills
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
-			if (mouseSkill.skillSlots[0].getSlotEnabled()){
-				if (mouseSkill.skillSlots[0].getSlotSkill().isSkillOnCooldown() == false){
-					useSkill(mouseSkill.useSkillSlot(1)); // Updates the Skill System of the HUD
-				}
-			}
+            this.useSkill(this.mouseSkill.useSkillSlot(1));  // Uses the 1st Skill Slot of the Explorer Character
         }
         if (Input.GetKeyDown(KeyCode.Alpha2))
         {
-			if (mouseSkill.skillSlots[1].getSlotEnabled()){
-				if (mouseSkill.skillSlots[1].getSlotSkill().isSkillOnCooldown() == false){
-					useSkill(mouseSkill.useSkillSlot(2)); // Updates the Skill System of the HUD
-				}
-			}
+            this.useSkill(this.mouseSkill.useSkillSlot(2));  // Uses the 2nd Skill Slot
         }
         if (Input.GetKeyDown(KeyCode.Alpha3))
         {
-			if (mouseSkill.skillSlots[2].getSlotEnabled()){
-				if (mouseSkill.skillSlots[2].getSlotSkill().isSkillOnCooldown() == false){
-					useSkill(mouseSkill.useSkillSlot(3)); // Updates the Skill System of the HUD
-				}
-			}
+            this.useSkill(this.mouseSkill.useSkillSlot(3));  // Uses the 3rd Skill Slot
         }
         if (Input.GetKeyDown(KeyCode.Alpha4))
         {
-			if (mouseSkill.skillSlots[3].getSlotEnabled()){
-				if (mouseSkill.skillSlots[3].getSlotSkill().isSkillOnCooldown() == false){
-					useSkill(mouseSkill.useSkillSlot(4)); // Updates the Skill System of the HUD
-				}
-			}
+            this.useSkill(this.mouseSkill.useSkillSlot(4));  // Uses the 4th Skill Slot
         }
 
         // interactions
