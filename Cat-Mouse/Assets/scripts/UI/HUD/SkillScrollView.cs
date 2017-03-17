@@ -177,17 +177,54 @@ public class SkillScrollView : MonoBehaviour {
         /* If Hunter Class */
         if (GameObject.Find("TeamSelectionOBJ").GetComponent<teamselectiondata>().playertype == 0)
         {
-
+            /* Selects Skill ID of Skill to add from Inspector Skill ID */
+            switch (skillID)
+            {
+                case 0:  // If Skill ID = 11
+                    catChar.addLearnedSkill(11);  // Adds Skill with ID = 11
+                    break;
+                case 1:
+                    catChar.addLearnedSkill(12);
+                    break;
+                case 2:
+                    catChar.addLearnedSkill(13);
+                    break;
+                case 3:
+                    catChar.addLearnedSkill(14);
+                    break;
+                case 4:
+                    catChar.addLearnedSkill(15);
+                    break;
+                case 5:
+                    catChar.addLearnedSkill(16);
+                    break;
+                case 6:
+                    catChar.addLearnedSkill(17);
+                    break;
+                case 7:
+                    catChar.addLearnedSkill(18);
+                    break;
+                case 8:
+                    catChar.addLearnedSkill(19);
+                    break;
+                case 9:
+                    catChar.addLearnedSkill(20);
+                    break;
+                case 10:
+                    catChar.addLearnedSkill(21);
+                    break;
+                default:  // Invalid Skill ID, do nothing
+                    break;
+            }
         }
 
         /* Else, Explorer Class */
         else
         {
-            /* Select Skill to add from Skill ID */
             switch (skillID)
             {
-                case 0:  // If Skill ID = 0
-                    mouseChar.addLearnedSkill(0);  // Adds Skill with ID = 0
+                case 0:
+                    mouseChar.addLearnedSkill(0);
                     break;
                 case 1:
                     mouseChar.addLearnedSkill(1);
@@ -219,7 +256,7 @@ public class SkillScrollView : MonoBehaviour {
                 case 10:
                     mouseChar.addLearnedSkill(10);
                     break;
-                default:  // Invalid Skill ID, do nothing
+                default: 
                     break;
             }
         }

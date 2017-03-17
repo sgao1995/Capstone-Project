@@ -835,7 +835,7 @@ public class MouseMovement : MonoBehaviour {
         return currentHealth;
     }
 
-    /* Adds a new Skill to the Skills Learned by the Mouse Character */
+    /* Adds a new Skill to the Skills Learned by the Explorer Character */
     public void addLearnedSkill(int skillID)
     {
         /* Checks if Skill has already been Learned */
@@ -870,13 +870,13 @@ public class MouseMovement : MonoBehaviour {
         }
     }
 
-    /* Sets the Skills currently learned by the Mouse */
-    public void getLearnedSkills(List<int> learnedSkills)
+    /* Sets the Skills currently learned by the Explorer Character */
+    public void setLearnedSkills(List<int> learnedSkills)
     {
         this.learnedSkills = learnedSkills;
     }
 
-    /* Gets the Skills currently learned by the Mouse */
+    /* Gets the Skills currently learned by the Explorer Character */
     public List<int> getLearnedSkills()
     {
         return learnedSkills;

@@ -310,7 +310,7 @@ public class CatMovement : MonoBehaviour
 		// skills
 		if (Input.GetKeyDown(KeyCode.Alpha1))
         {
-            this.useSkill(this.catSkill.useSkillSlot(1));  // Uses the 1st Skill Slot of the Hunter Character
+            this.useSkill(this.catSkill.useSkillSlot(1));  // Uses the 1st Skill Slot of the Hunter Class
 		}
 		if (Input.GetKeyDown(KeyCode.Alpha2))
         {
@@ -722,23 +722,48 @@ public class CatMovement : MonoBehaviour
         return this.currentHealth;
     }
 
-    /* Adds a new Skill to the Skills Learned by the Cat Character */
+    /* Adds a new Skill to the Skills Learned by the Hunter Character */
     public void addLearnedSkill(int skillID)
     {
         /* Checks if Skill has already been Learned */
         if (!(this.getLearnedSkills().Contains(skillID)))
         {
-            learnedSkills.Add(skillID);  // Adds specified Skill
+            /* Checks if Hunter Character has enough Skill Points to add the Skill */
+
+            /* Checks Skill Tier for type of Skill Point required */
+            if (catSkill.getCharSkills()[skillID].getSkillTier() == 0)
+            {
+                /* Checks to see if character has enough Regular Skill Points */
+                if (this.skillPoints > 0)
+                {
+                    Debug.Log("The number of Skill Points is: " + this.skillPoints);
+                    learnedSkills.Add(skillID);  // Adds specified skill
+                    this.skillPoints--;  // Decrements the number of Regular Skill Points
+                    Debug.Log("The number of Skill Points is: " + this.skillPoints);
+                }
+            }
+
+            else if (catSkill.getCharSkills()[skillID].getSkillTier() == 1)
+            {
+                /* Checks to see if character has enough Ultimate Skill Points */
+                if (this.ultimateSkillPoints > 0)
+                {
+                    Debug.Log("The number of Skill Points is: " + this.skillPoints);
+                    learnedSkills.Add(skillID);
+                    this.ultimateSkillPoints--;
+                    Debug.Log("The number of Skill Points is: " + this.skillPoints);
+                }
+            }
         }
     }
 
-    /* Sets the Skills currently learned by the Cat */
-    public void getLearnedSkills(List<int> learnedSkills)
+    /* Sets the Skills currently learned by the Hunter Character */
+    public void setLearnedSkills(List<int> learnedSkills)
     {
         this.learnedSkills = learnedSkills;
     }
 
-    /* Gets the Skills currently learned by the Cat */
+    /* Gets the Skills currently learned by the Hunter Character */
     public List<int> getLearnedSkills()
     {
         return learnedSkills;

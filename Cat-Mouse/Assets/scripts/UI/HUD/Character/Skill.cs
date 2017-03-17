@@ -18,9 +18,10 @@ public class Skill : MonoBehaviour {
 
     /* Represents all Skills available to the Character */
     public CharSkill[] charSkills;
+    public int charSkillsNum;  // Represents number of Skills
 
     /* Represents the Skill Data for all Skills */
-    public SkillData skillDataSource; // Represents the Skill Data source 
+    public SkillData skillDataSource; // Represents the Skill Data source
     public Sprite[] skillListIcon;  // Represents the Sprites of all Skills
     public Sprite skillLocked;  // Represents the sprite for a Locked Skill Slot
 
@@ -282,8 +283,11 @@ public class Skill : MonoBehaviour {
             skillSlots[i] = new SkillSlot(this.skillSlotObjects[i], this.skillLocked, false);  // Initially, all Skill Slots are disabled
         }
 
+        /* Retrieves the number of Skills available */
+        this.setCharSkillsNum(this.skillDataSource.getNumStoredSkills());
+
         /* Initialises all Skills available to the Character */
-        charSkills = new CharSkill[11];  // PLACEHOLDER: Set to 11 skills
+        charSkills = new CharSkill[this.getCharSkillsNum()];
     }
 	
 	// Updates the Skill System UI Elements every frame */
@@ -295,7 +299,6 @@ public class Skill : MonoBehaviour {
             /* Checks to see if Skill Data is ready to be loaded */
             if (this.skillDataSource.getSkillDataLoaded() == true)
             {
-                Debug.Log("The Skill Name is: " + skillDataSource.getSkillListType()[charSkills.Length - 1].ToString()); 
                 /* Loads Skill data */
                 for (int i = 0; i < this.charSkills.Length; i++)
                 {
@@ -444,5 +447,17 @@ public class Skill : MonoBehaviour {
     public CharSkill[] getCharSkills()
     {
         return this.charSkills;
+    }
+
+    /* Sets the total number of Skills available */
+    public void setCharSkillsNum(int numSkills)
+    {
+        this.charSkillsNum = numSkills;
+    }
+
+    /* Gets the total number of Skills available */
+    public int getCharSkillsNum()
+    {
+        return this.charSkillsNum;
     }
 }
