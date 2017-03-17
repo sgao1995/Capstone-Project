@@ -841,7 +841,32 @@ public class MouseMovement : MonoBehaviour {
         /* Checks if Skill has already been Learned */
         if (!(this.getLearnedSkills().Contains(skillID)))
         {
-            learnedSkills.Add(skillID);  // Adds specified skill
+            /* Checks if Explorer Character has enough Skill Points to add the Skill */
+
+            /* Checks Skill Tier for type of Skill Point required */
+            if (mouseSkill.getCharSkills()[skillID].getSkillTier() == 0)
+            {
+                /* Checks to see if character has enough Regular Skill Points */
+                if (this.skillPoints > 0)
+                {
+                    Debug.Log("The number of Skill Points is: " + this.skillPoints);
+                    learnedSkills.Add(skillID);  // Adds specified skill
+                    this.skillPoints--;  // Decrements the number of Regular Skill Points
+                    Debug.Log("The number of Skill Points is: " + this.skillPoints);
+                }
+            }
+
+            else if (mouseSkill.getCharSkills()[skillID].getSkillTier() == 1)
+            {
+                /* Checks to see if character has enough Ultimate Skill Points */
+                if (this.ultimateSkillPoints > 0)
+                {
+                    Debug.Log("The number of Skill Points is: " + this.skillPoints);
+                    learnedSkills.Add(skillID);
+                    this.ultimateSkillPoints--;
+                    Debug.Log("The number of Skill Points is: " + this.skillPoints);
+                }
+            }
         }
     }
 

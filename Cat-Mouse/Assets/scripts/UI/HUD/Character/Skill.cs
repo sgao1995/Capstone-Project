@@ -117,19 +117,21 @@ public class Skill : MonoBehaviour {
         private int skillID;  // Represents the Skill ID of the Skill
         private string skillName;  // Represents the Name of the Skill
         private string skillDescription;  // Represents the Description of the Skill
-        private int skillType;  // Represents the Type of the Skill  (0: Passive, 1: Active) 
+        private int skillType;  // Represents the Type of the Skill  (0: Passive, 1: Active)
+        private int skillTier;  // Represents the Tier of the Skill  (0: Regular, 1: Ultimate) 
         private Sprite skillIcon;  // Represents the sprite of the Skill
         private float skillCooldownTotal;  // Represents the total (maximum) cooldown period of the Skill (in seconds)
         private float skillCooldownElapsed;  // Represents the elapsed cooldown period of the Skill (in seconds)
         private bool skillCooldownActive;  // Represents whether the cooldown period of the Skill is active
 
         /* Constructs a new Skill */
-        public CharSkill(int skillID, string skillName, string skillDescription, int skillType, Sprite skillIcon, float skillCooldownTotal)
+        public CharSkill(int skillID, string skillName, string skillDescription, int skillType, int skillTier, Sprite skillIcon, float skillCooldownTotal)
         {
             this.skillID = skillID;
             this.skillName = skillName;
             this.skillDescription = skillDescription;
             this.skillType = skillType;
+            this.skillTier = skillTier;
             this.skillIcon = skillIcon;
             this.skillCooldownTotal = skillCooldownTotal;
             this.skillCooldownElapsed = this.skillCooldownTotal;
@@ -182,6 +184,18 @@ public class Skill : MonoBehaviour {
         public int getSkillType()
         {
             return skillType;
+        }
+
+        /* Sets the Tier of the Skill */
+        public void setSkillTier(int tier)
+        {
+            this.skillTier = tier;
+        }
+
+        /* Gets the Tier of the Skill */
+        public int getSkillTier()
+        {
+            return this.skillTier;
         }
 
         /* Sets the sprite representing the Skill */
@@ -289,6 +303,7 @@ public class Skill : MonoBehaviour {
                         this.skillDataSource.getSkillListName()[i],
                         this.skillDataSource.getSkillListDescription()[i],
                         this.skillDataSource.getSkillListType()[i],
+                        this.skillDataSource.getSkillListTier()[i],
                         this.skillListIcon[i],
                         this.skillDataSource.getSkillListCooldown()[i]);
                 }
@@ -423,8 +438,11 @@ public class Skill : MonoBehaviour {
             /* Returns flag indicating skill not used */
             return -1;
         }
-
-        
     }
-	
+
+    /* Gets the list of all Skills */
+    public CharSkill[] getCharSkills()
+    {
+        return this.charSkills;
+    }
 }

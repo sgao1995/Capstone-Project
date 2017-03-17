@@ -8,6 +8,7 @@ public class SkillData : MonoBehaviour {
     private List<string> skillListName;  // Represents the Skill Name of all Skills
     private List<string> skillListDescription;  // Represents the Skill Description of all Skills
     private List<int> skillListType;  // Represents the Skill Type of all Skills  (0: Passive, 1: Active)
+    private List<int> skillListTier;  // Represents the Skill Tier of all Skills  (0: Regular, 1: Ultimate)
     private List<Sprite> skillListIcon;  // Represents the Sprites for the Skill Icons of all Skills
     private List<float> skillListCooldown;  // Represents the Cooldown Times of all Skills
 
@@ -65,6 +66,11 @@ public class SkillData : MonoBehaviour {
         int[] skillListTypeData = { 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1 };
         this.skillListType.AddRange(skillListTypeData);
 
+        /* Loads the Skill List Tier Data of all Skills */
+        this.skillListTier = new List<int>();
+        int[] skillListTierData = { 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1 };
+        this.skillListTier.AddRange(skillListTierData);
+
         /* Loads the Skill List Cooldown Time Data for all Skills */
         this.skillListCooldown = new List<float>();
         this.skillListCooldown.Add(0f);
@@ -112,28 +118,34 @@ public class SkillData : MonoBehaviour {
         return this.skillDataLoaded;
     }
 
-    /* Gets an array containing the Skill ID of all Skills */
+    /* Gets a list containing the Skill ID of all Skills */
     public List<int> getSkillListID()
     {
         return this.skillListID;
     }
 
-    /* Gets an array containing the Skill Name of all Skills */
+    /* Gets a list containing the Skill Name of all Skills */
     public List<string> getSkillListName()
     {
         return this.skillListName;
     }
 
-    /* Gets an array containing the Skill Description of all Skills */
+    /* Gets a list containing the Skill Description of all Skills */
     public List<string> getSkillListDescription()
     {
         return this.skillListDescription;
     }
 
-    /* Gets an array containing the Skill Type of all Skills */
+    /* Gets a list containing the Skill Type of all Skills */
     public List<int> getSkillListType()
     {
         return this.skillListType;
+    }
+
+    /* Gets a list containing the Skill Tier of all Skills */
+    public List<int> getSkillListTier()
+    {
+        return this.skillListTier;
     }
 
     /* Gets an array containing the Skill Cooldown Time of all Skills */
