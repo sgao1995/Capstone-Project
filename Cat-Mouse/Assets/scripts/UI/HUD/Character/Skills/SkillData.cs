@@ -119,8 +119,8 @@ public class SkillData : MonoBehaviour {
         this.skillListCooldown.Add(45f);
         this.skillListCooldown.Add(20f);
         this.skillListCooldown.Add(20f);
-        this.skillListCooldown.Add(15f);
-        this.skillListCooldown.Add(10f);
+        this.skillListCooldown.Add(1f);
+        this.skillListCooldown.Add(1f);
         this.skillListCooldown.Add(100f);
         this.skillListCooldown.Add(60f);
 

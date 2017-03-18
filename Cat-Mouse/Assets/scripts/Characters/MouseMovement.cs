@@ -767,7 +767,7 @@ public class MouseMovement : MonoBehaviour {
 
         PhotonNetwork.Destroy(obj.gameObject);
     }
-    // when player collides with powerup
+    // when player collides
     void OnTriggerEnter(Collider obj)
     {
         if (obj.tag == "Powerup")
@@ -829,6 +829,13 @@ public class MouseMovement : MonoBehaviour {
 			interactText.text = "Press E to insert Puzzle Pieces";
 			canOpenExit = true;
 		}
+		if (obj.tag == "SteelTrap"){
+			// trap just stops movement for 5 seconds, can use the wait for animation function for this
+			transform.position = new Vector3(obj.transform.position.x, transform.position.y, obj.transform.position.z);
+			WaitForAnimation(5f);
+			TakeDamage(5f);
+			obj.GetComponent<SteelTrap>().activate(this.gameObject);
+		}
     }
     public float getHealth()
     {
@@ -881,4 +888,14 @@ public class MouseMovement : MonoBehaviour {
     {
         return learnedSkills;
     }
+	
+	/* Stun the player */
+	public void denyPlayerMovement(){
+		canMove = false;
+	}
+	
+	public void allowPlayerMovement(){
+		canMove = true;
+	}
+
 }

@@ -48,6 +48,9 @@ public class MonsterAI : MonoBehaviour {
 	public AudioClip stompSound;
 	public AudioSource soundPlayer;
 	
+	private GameObject trappedBy;
+	private bool trapped = false;
+	
 	// Use this for initialization
 	void Start () {
 		monsterrb = GetComponent<Rigidbody>();
@@ -152,7 +155,9 @@ public class MonsterAI : MonoBehaviour {
 	}
 	IEnumerator _wait(float time){
 		canMove = false;
+		transform.GetComponent<NavMeshAgent>().enabled = false;
 		yield return new WaitForSeconds(time);
+		transform.GetComponent<NavMeshAgent>().enabled = true;
 		canMove = true;
 	}
 	
@@ -273,6 +278,10 @@ public class MonsterAI : MonoBehaviour {
     void FixedUpdate()
     {
 		if(canMove){
+			if (trapped){
+				transform.position = trappedBy.transform.position;
+			}
+			
 			if (currentMode == "Sleeping"){
 				animator.Play("Idle");
 			}
@@ -433,5 +442,31 @@ public class MonsterAI : MonoBehaviour {
         {
             healCooldownTimer -= Time.deltaTime;
         }
+    }
+	
+	/* Stun the monster */
+	public void denyMonsterMovement(){
+		canMove = false;
+	}
+	
+	public void allowMonsterMovement(){
+		canMove = true;
+	}
+    
+	public void releaseFromTrap(){
+		trapped = false;
+		trappedBy = null;
+	}
+	
+    void OnTriggerEnter(Collider obj)
+    {
+		if (obj.tag == "SteelTrap"){
+			trappedBy = obj.gameObject;
+			trapped = true;
+			// trap just stops movement for 5 seconds, can use the wait for animation function for this
+			WaitForAnimation(5f);
+			takeDamage(5f);
+			obj.GetComponent<SteelTrap>().activate(this.gameObject);
+		}
     }
 }

@@ -166,14 +166,13 @@ public class CatMovement : MonoBehaviour
 				break;
 			case 7: 
 				break;
-			case 8:
+			case 18:
 				/* "Lasso - Throw out a rope that pulls the first enemy hit to you. 15 second cooldown." */
-				Debug.Log("Use Lasso");
 				transform.GetComponent<PhotonView>().RPC("PlayAnim", PhotonTargets.All, "Throw");
                 WaitForAnimation(0.7f);
                 transform.GetComponent<PhotonView>().RPC("Lasso", PhotonTargets.AllBuffered);
 				break;
-			case 9: 
+			case 19: 
 				Debug.Log("Place trap");
 				/* "Trap - Lay down a steel trap that lasts 300 seconds that will snare the first enemy that steps on it for 4 seconds. Maximum of 5 traps at once. 10 second cooldown. */
 				transform.GetComponent<PhotonView>().RPC("PlaceTrap", PhotonTargets.AllBuffered);
@@ -186,7 +185,7 @@ public class CatMovement : MonoBehaviour
 	IEnumerator PlaceTrap(){
 		yield return new WaitForSeconds(0.3f);
 		Quaternion trapRot = Quaternion.Euler(0, 0, 0);
-		Vector3 trapPos = new Vector3(transform.position.x, 0f, transform.position.z) + transform.forward;
+		Vector3 trapPos = new Vector3(transform.position.x, -0.051f, transform.position.z) + transform.forward;
 		GameObject trapGO = (GameObject)PhotonNetwork.Instantiate("SteelTrap", trapPos, trapRot, 0);
 		steelTrapsList.Add(trapGO);
 		// if there are more than 5 traps, remove the earliest placed one
@@ -202,11 +201,14 @@ public class CatMovement : MonoBehaviour
     IEnumerator Lasso()
     {	                
 		yield return new WaitForSeconds(0.3f);
-		Quaternion lassoRot = Quaternion.Euler(-90, 0, 0);
-		Vector3 lassoPos = new Vector3(transform.position.x, 0.7f, transform.position.z) + transform.forward + transform.right;
-		GameObject lassoGO = (GameObject)PhotonNetwork.Instantiate("Lasso", lassoPos, lassoRot, 0);
-		Lasso newLasso = lassoGO.GetComponent<Lasso>();
-		newLasso.originalPosition = transform.position;
+		Quaternion lassoRot = Quaternion.Euler(0, 0, 0);
+		Vector3 lassoPos = transform.position;
+		Lasso newLasso = ((GameObject)PhotonNetwork.Instantiate("Lasso", lassoPos, lassoRot, 0)).GetComponent<Lasso>();
+		// range of 10 units
+		Camera catCam = transform.Find("CatCam").GetComponent<Camera>();
+		Ray ray = catCam.ViewportPointToRay(new Vector3(0.5F, 0.5F, 0));
+		Vector3 endPos = ray.origin + ray.direction * 10f;
+		newLasso.Initialize(transform.position + (transform.up*0.7f) + (transform.right*0.5f) + (transform.forward*0.5f), endPos, ray, transform.gameObject);
     }
 	
 	[PunRPC]
@@ -380,6 +382,10 @@ public class CatMovement : MonoBehaviour
 			}
             transform.Translate(moveV);
 
+			// skill testing
+			if (Input.GetKey(KeyCode.Q))
+				useSkill(18);
+			
 			// movement control
 			if (isGrounded && !onSpikes)
 			{
@@ -710,7 +716,7 @@ public class CatMovement : MonoBehaviour
 			}
             //Debug.Log("destroy " + obj);
             transform.GetComponent<PhotonView>().RPC("destroyPU", PhotonTargets.MasterClient, obj);
-    }
+		}
 		// put spikes here because we dont want spikes displacing the player
 		if (obj.tag == "Spike"){
 			onSpikes = true;
@@ -768,4 +774,13 @@ public class CatMovement : MonoBehaviour
     {
         return learnedSkills;
     }
+	
+	/* Stun the player */
+	public void denyPlayerMovement(){
+		canMove = false;
+	}
+	
+	public void allowPlayerMovement(){
+		canMove = true;
+	}
 }
