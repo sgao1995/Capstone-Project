@@ -49,6 +49,7 @@ public class CatMovement : MonoBehaviour
     private float noinputtime = 3.0f;
     private bool isInvisible = false;
     private float healingAmt = 7.5f;
+    private GameObject targetMouse;
 
     /* Vitality System attribute parameters */
     private float[] vitalLevelHP = {100, 125, 160, 200};  // Health Points of Cat per Level
@@ -237,6 +238,27 @@ public class CatMovement : MonoBehaviour
             }
         }
     }
+
+    void theHunter()
+    {
+        GameObject[] target;
+        target = GameObject.FindGameObjectsWithTag("Mouse");
+        float dist = Mathf.Infinity;
+        Vector3 position = transform.position;
+        for (int i = 0; i < target.Length; i++)
+        {
+            Vector3 d = target[i].transform.position - position;
+            float dt = d.sqrMagnitude;
+            if (dt < dist)
+            {
+                targetMouse = target[i];
+                dist = dt;
+            }
+        }
+        Vector3 temp = new Vector3(2f, 0, 0);
+        transform.position = targetMouse.transform.position + temp;
+    }
+
 	[PunRPC]
     void playSound(int type, float t)
     {
@@ -285,6 +307,11 @@ public class CatMovement : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.F))
         {
             StartCoroutine(recoup());
+        }
+        //temporary for TheHunter skill
+        if (Input.GetKeyDown(KeyCode.P))
+        {
+            theHunter();
         }
         /* Updates the HUD state for the current player */
         if (GetComponent<PhotonView>().isMine)
