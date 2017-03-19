@@ -47,6 +47,8 @@ public class CatMovement : MonoBehaviour
 	private float[] skillCooldownTimers = new float[4]; // the cooldown timer
 	private float[] skillCooldowns = new float[4]; // the max cooldown
     private float noinputtime = 3.0f;
+    private bool isInvisible = false;
+    private float healingAmt = 7.5f;
 
     /* Vitality System attribute parameters */
     private float[] vitalLevelHP = {100, 125, 160, 200};  // Health Points of Cat per Level
@@ -211,6 +213,30 @@ public class CatMovement : MonoBehaviour
 		newLasso.Initialize(transform.position + (transform.up*0.7f) + (transform.right*0.5f) + (transform.forward*0.5f), endPos, ray, transform.gameObject);
     }
 	
+    void lieInWait()
+    {
+        if (isInvisible)
+        {
+
+        }
+    }
+    IEnumerator recoup()
+    {
+        float time = 10;
+        if(currentHealth < maxHealth)
+        {
+            while(time > 0)
+            {
+                currentHealth += healingAmt;
+                if (currentHealth > maxHealth)
+                {
+                    currentHealth = maxHealth;
+                }
+                time = time - 1;
+                yield return new WaitForSeconds(1);
+            }
+        }
+    }
 	[PunRPC]
     void playSound(int type, float t)
     {
@@ -250,6 +276,15 @@ public class CatMovement : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.T))
         {
             transform.position = new Vector3(22, 0, 25);
+        }
+        //temporary for recoup skill
+        if (Input.GetKeyDown(KeyCode.H))
+        {
+            currentHealth = currentHealth - 80;
+        }
+        if (Input.GetKeyDown(KeyCode.F))
+        {
+            StartCoroutine(recoup());
         }
         /* Updates the HUD state for the current player */
         if (GetComponent<PhotonView>().isMine)
