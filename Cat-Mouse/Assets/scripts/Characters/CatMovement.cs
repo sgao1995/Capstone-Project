@@ -46,10 +46,13 @@ public class CatMovement : MonoBehaviour
     private int numSkillSlotsMaximum = 4;  // Sets the maximum number of Skill Slots for the Cat
 	private float[] skillCooldownTimers = new float[4]; // the cooldown timer
 	private float[] skillCooldowns = new float[4]; // the max cooldown
-    private float noinputtime = 3.0f;
-    private bool isInvisible = false;
     private float healingAmt = 7.5f;
     private GameObject targetMouse;
+    private float beginT = 0f;
+    private float beginT2 = 0f;
+    private float holdT = 2.0f;
+    private float Invis = 3.0f;
+    private bool pauseTimer = false;
 
     /* Vitality System attribute parameters */
     private float[] vitalLevelHP = {100, 125, 160, 200};  // Health Points of Cat per Level
@@ -213,12 +216,30 @@ public class CatMovement : MonoBehaviour
 		Vector3 endPos = ray.origin + ray.direction * 10f;
 		newLasso.Initialize(transform.position + (transform.up*0.7f) + (transform.right*0.5f) + (transform.forward*0.5f), endPos, ray, transform.gameObject);
     }
-	
-    void lieInWait()
-    {
-        if (isInvisible)
-        {
 
+    IEnumerator lieInWait()
+    {
+        pauseTimer = true;
+        //become invisible
+        StartCoroutine(InvisC(0.2f, 3f));
+        Debug.Log("INVIS");
+        yield return null;
+    }
+    [PunRPC]
+    void uncloak()
+    {     
+        StartCoroutine(InvisC(1.0f, 3f));
+        pauseTimer = false;
+    }
+    [PunRPC]
+    IEnumerator InvisC(float val, float time)
+    {
+        for (float f = 1f; f >= 0; f -= Time.deltaTime / time)
+        {
+            Color catColor = transform.Find("Mesh").GetComponent<SkinnedMeshRenderer>().material.color;
+            catColor.a = Mathf.Lerp(transform.Find("Mesh").GetComponent<SkinnedMeshRenderer>().material.color.a, val, f); //lerp to make it look smoother
+            transform.Find("Mesh").GetComponent<SkinnedMeshRenderer>().material.color = catColor;
+            yield return null;
         }
     }
     IEnumerator recoup()
@@ -291,10 +312,6 @@ public class CatMovement : MonoBehaviour
 	
 	void Update(){
         /* Updates the HUD state for the current player */
-        if (Time.time >= noinputtime)
-        {
-           // Debug.Log("no input for 3 seconds");
-        }
         if (Input.GetKeyDown(KeyCode.T))
         {
             transform.position = new Vector3(22, 0, 25);
@@ -308,10 +325,32 @@ public class CatMovement : MonoBehaviour
         {
             StartCoroutine(recoup());
         }
+
         //temporary for TheHunter skill
+        
         if (Input.GetKeyDown(KeyCode.P))
         {
-            theHunter();
+            beginT = Time.time;
+        }
+        if (Input.GetKey(KeyCode.P))
+        {
+            if (beginT + holdT <= Time.time)
+            {
+                theHunter();
+            }
+        }
+        //temporary for lieInWait Skill
+        if (!pauseTimer)
+        {
+            beginT2 += Time.deltaTime;
+        }
+        if (pauseTimer)
+        {
+            beginT2 = 0f;
+        }
+        if (beginT2>=3.0f)
+        {
+            StartCoroutine(lieInWait());
         }
         /* Updates the HUD state for the current player */
         if (GetComponent<PhotonView>().isMine)
@@ -352,7 +391,8 @@ public class CatMovement : MonoBehaviour
 		// left click
 		if (Input.GetMouseButtonDown(0) && attackCooldownTimer <= 0 && !Input.GetKey(KeyCode.Escape))
         {
-			attackCooldownTimer = attackCooldownDelay;
+            uncloak();
+            attackCooldownTimer = attackCooldownDelay;
 			WaitForAnimation(0.7f);
 			StartCoroutine(Attack());
 		}
@@ -453,9 +493,9 @@ public class CatMovement : MonoBehaviour
 			{
 				moveV = new Vector3(0, 0, 0);
 				soundPlayer.pitch = Random.Range(0.9f, 1.1f);
-
 				if (Input.GetKey(KeyCode.A))
 				{
+                    uncloak();
 					//animator.Play("MoveLeft");
                     transform.GetComponent<PhotonView>().RPC("PlayAnim", PhotonTargets.All, "MoveLeft");
 
@@ -471,6 +511,7 @@ public class CatMovement : MonoBehaviour
 				}
 				if (Input.GetKey(KeyCode.D))
 				{
+                    uncloak();
                     //animator.Play("MoveRight");
                     transform.GetComponent<PhotonView>().RPC("PlayAnim", PhotonTargets.All, "MoveRight");
                     // play sound effect
@@ -485,7 +526,8 @@ public class CatMovement : MonoBehaviour
 				}
 				if (Input.GetKey(KeyCode.W))
 				{
-					if (!Input.GetKey(KeyCode.A) && !Input.GetKey(KeyCode.D))
+                    uncloak();
+                    if (!Input.GetKey(KeyCode.A) && !Input.GetKey(KeyCode.D))
                         //animator.Play("MoveForward");
                         transform.GetComponent<PhotonView>().RPC("PlayAnim", PhotonTargets.All, "MoveForward");
 				   	// play sound effect
@@ -500,7 +542,8 @@ public class CatMovement : MonoBehaviour
 				}
 				if (Input.GetKey(KeyCode.S))
 				{
-					if (!Input.GetKey(KeyCode.A) && !Input.GetKey(KeyCode.D))
+                    uncloak();
+                    if (!Input.GetKey(KeyCode.A) && !Input.GetKey(KeyCode.D))
 						//animator.Play("MoveBackward");
                         transform.GetComponent<PhotonView>().RPC("PlayAnim", PhotonTargets.All, "MoveBackward");
 
@@ -517,6 +560,7 @@ public class CatMovement : MonoBehaviour
 				}
 				if (Input.GetKeyDown(KeyCode.Space))
 				{
+                    uncloak();
                     //soundPlayer.PlayOneShot(jumpSound, 1f);
                     transform.GetComponent<PhotonView>().RPC("playSound", PhotonTargets.AllBuffered, 1, 1f);
                     isGrounded = false;
@@ -548,8 +592,9 @@ public class CatMovement : MonoBehaviour
     // take a certain amount of damage
     public void TakeDamage(float amt)
     {
-     //   transform.GetComponent<PhotonView>().RPC("PlayAnim", PhotonTargets.All, "GetHit");
-     //   WaitForAnimation(0.5f);
+        uncloak();
+        //   transform.GetComponent<PhotonView>().RPC("PlayAnim", PhotonTargets.All, "GetHit");
+        //   WaitForAnimation(0.5f);
         transform.GetComponent<PhotonView>().RPC("changeHealth", PhotonTargets.AllBuffered, amt);
 		transform.GetComponent<PhotonView>().RPC("playSound", PhotonTargets.AllBuffered, 2, 1f);
     }
