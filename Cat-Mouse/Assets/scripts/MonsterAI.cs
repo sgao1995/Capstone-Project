@@ -1,8 +1,12 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
-
+using UnityEngine.Networking;
 public class MonsterAI : MonoBehaviour {
+    //flag to check if monster is moving
+    private bool notmoving = true;
+    private Vector3 currentPos;
+    private Vector3 lastPos;
 	// monster stats
 	private float speed = 2.0f; //speed value
 	public float HP;
@@ -177,13 +181,13 @@ public class MonsterAI : MonoBehaviour {
     void takeDamage(float dmg)
     {
 		if (HP - dmg > 0){
-            animator.SetBool("GetHit", true);
+            animator.SetTrigger("GetHit");
            
             WaitForAnimation(1f);
-            if (animator.GetNextAnimatorStateInfo(0).IsName("GetHit"))
-            {
-                animator.SetBool("GetHit", false);
-            }
+          //  if (animator.GetNextAnimatorStateInfo(0).IsName("GetHit"))
+          //  {
+            //    animator.SetBool("GetHit", false);
+          //  }
         }
         transform.GetComponent<PhotonView>().RPC("changeHealth", PhotonTargets.AllBuffered, dmg);
 		Debug.Log("take " + dmg + " damage");
@@ -220,7 +224,7 @@ public class MonsterAI : MonoBehaviour {
 		
 		// remove monster from the game
         PhotonNetwork.Destroy(this.gameObject);
-        
+
     }
 	// turn left 2 degrees
 	void TurnLeft(){
@@ -236,21 +240,22 @@ public class MonsterAI : MonoBehaviour {
     void Attack()
     {
 		attackCooldownTimer = attackCooldownDelay;
-        animator.SetBool("Attack", true);
+        animator.SetTrigger("Attack");
        
 
         WaitForAnimation(1f);
-        if (animator.GetNextAnimatorStateInfo(0).IsName("Attack"))
-        {
-            animator.SetBool("Attack", false);
-        }
+       // if (animator.GetNextAnimatorStateInfo(0).IsName("Attack"))
+      //  {
+     //       NetworkAnimator.SetTrigger("Attack");
+      //  }
         DealDamage();
     }
 	// cast a bash skill in front of monster
     void Bash()
     {
 		bashCooldownTimer = 5f;
-//		animator.Play("Bash");
+        //		animator.Play("Bash");
+        animator.SetTrigger("Bash");
 		WaitForAnimation(1f);
 		DealDamage();
 		transform.GetComponent<PhotonView>().RPC("playSound", PhotonTargets.AllBuffered, 5, 1f);
@@ -259,14 +264,16 @@ public class MonsterAI : MonoBehaviour {
 	// cast stomp in aoe around monster
 	void Stomp(){
 		stompCooldownTimer = 20f;
-//		animator.Play("Stomp");
+        //		animator.Play("Stomp");
+        animator.Play("Stomp");
 		WaitForAnimation(1.5f);
 		transform.GetComponent<PhotonView>().RPC("playSound", PhotonTargets.AllBuffered, 7, 1f);
 	}
 	// cast heal on self
 	void Heal(){
 		healCooldownTimer = 30f;
-//		animator.Play("Heal");
+        //		animator.Play("Heal");
+        animator.SetTrigger("Heal");
 		WaitForAnimation(3f);
 		transform.GetComponent<PhotonView>().RPC("playSound", PhotonTargets.AllBuffered, 6, 1f);
 	}
@@ -302,7 +309,17 @@ public class MonsterAI : MonoBehaviour {
     void FixedUpdate()
     {  
 		if(canMove){
-			if (trapped){
+            currentPos = transform.position;
+            if (currentPos == lastPos)
+            {
+                notmoving = true;
+            }
+            else
+            {
+                notmoving = false;
+            }
+            lastPos = currentPos;
+            if (trapped){
 				transform.position = trappedBy.transform.position;
 			}
 			
@@ -313,13 +330,20 @@ public class MonsterAI : MonoBehaviour {
             }
 			else if (currentMode == "Patrol"){
 
-               animator.SetBool("WalkForward",true);
-       
+                if (!notmoving)
+                {
+                    animator.SetBool("WalkForward", true);
+                }
+                else
+                {
+                    animator.SetBool("WalkForward", false);
+                }
 
                 if (!soundPlayer.isPlaying){
 					transform.GetComponent<PhotonView>().RPC("playSound", PhotonTargets.AllBuffered, 0, 1f);
 				}
 				transform.Translate(transform.forward * speed * Time.deltaTime, Space.World);
+                
 			}
 			else if (currentMode == "Attack"){
 
@@ -344,7 +368,7 @@ public class MonsterAI : MonoBehaviour {
     {
 
         animDirection = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical")).normalized;
-
+        
         if (canMove){
 			if (currentMode == "Patrol"){
 				// move back and forth
