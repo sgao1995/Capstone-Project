@@ -169,6 +169,7 @@ public class MonsterAI : MonoBehaviour {
 		}
         transform.GetComponent<PhotonView>().RPC("changeHealth", PhotonTargets.AllBuffered, dmg);
 		Debug.Log("take " + dmg + " damage");
+        Debug.Log("hp is:" + HP);
 		retargetTimer = timeUntilRetarget;
 		transform.GetComponent<PhotonView>().RPC("playSound", PhotonTargets.AllBuffered, 2, 1f);
 		
