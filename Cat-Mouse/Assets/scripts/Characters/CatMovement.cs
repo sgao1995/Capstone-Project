@@ -17,16 +17,20 @@ public class CatMovement : MonoBehaviour
     private int skillPoints;
     private int ultimateSkillPoints;
     private List<int> learnedSkills;
-    private float damage = 50f;
     // movement speed
-    private int movementModifier = 1;
+    private float movementModifier = 1;
     private float movementModifierTimer = 10f;
 
     // attack
     private Animator animator;
     private float attackPower;
+    private float attackPowerM; //this is the attackpower after damage modifiers are applied
     private float attackCooldownDelay;
     private float attackCooldownTimer = 1f;
+    private int damageModifier = 1;
+    private int damageModifierF = 1; //for the focus skill
+    private float damageModifierTimer = 20f;
+    private bool focusTimerPause = false;
 
     private Vector3 moveV; //vector to store movement
     public Rigidbody catrb;
@@ -50,6 +54,7 @@ public class CatMovement : MonoBehaviour
     private GameObject targetMouse;
     private float beginT = 0f;
     private float beginT2 = 0f;
+    private float beginT3 = 0f;
     private float holdT = 2.0f;
     private float Invis = 3.0f;
     private bool pauseTimer = false;
@@ -216,20 +221,20 @@ public class CatMovement : MonoBehaviour
 		Vector3 endPos = ray.origin + ray.direction * 10f;
 		newLasso.Initialize(transform.position + (transform.up*0.7f) + (transform.right*0.5f) + (transform.forward*0.5f), endPos, ray, transform.gameObject);
     }
-
     IEnumerator lieInWait()
     {
-        pauseTimer = true;
         //become invisible
         StartCoroutine(InvisC(0.2f, 3f));
         Debug.Log("INVIS");
         yield return null;
     }
+
     [PunRPC]
     void uncloak()
-    {     
-        StartCoroutine(InvisC(1.0f, 3f));
-        pauseTimer = false;
+    {
+        pauseTimer = true;
+        StartCoroutine(InvisC(1.0f, 1.0f));
+        
     }
     [PunRPC]
     IEnumerator InvisC(float val, float time)
@@ -339,6 +344,23 @@ public class CatMovement : MonoBehaviour
                 theHunter();
             }
         }
+        //temporary for focus skill
+        if (!focusTimerPause)
+        {
+            beginT3 += Time.deltaTime;
+        }
+        if (focusTimerPause)
+        {
+            beginT3 = 0f;
+        }
+        if (beginT3 >= 10.0f)
+        {
+            damageModifierF = 2;
+        }else
+        {
+            damageModifierF = 1;
+        }
+        focusTimerPause = false;
         //temporary for lieInWait Skill
         if (!pauseTimer)
         {
@@ -352,6 +374,7 @@ public class CatMovement : MonoBehaviour
         {
             StartCoroutine(lieInWait());
         }
+        pauseTimer = false;
         /* Updates the HUD state for the current player */
         if (GetComponent<PhotonView>().isMine)
         {
@@ -392,6 +415,7 @@ public class CatMovement : MonoBehaviour
 		if (Input.GetMouseButtonDown(0) && attackCooldownTimer <= 0 && !Input.GetKey(KeyCode.Escape))
         {
             uncloak();
+            focusTimerPause = true;
             attackCooldownTimer = attackCooldownDelay;
 			WaitForAnimation(0.7f);
 			StartCoroutine(Attack());
@@ -451,6 +475,14 @@ public class CatMovement : MonoBehaviour
 		if (attackCooldownTimer > 0){
 			attackCooldownTimer -= Time.deltaTime;
 		}
+        if (damageModifierTimer > 0f)
+        {
+            damageModifierTimer -= Time.deltaTime;
+        }else
+        {
+            damageModifier = 1;
+        }
+        Debug.Log("DEAL THIS MUCH DAMAGE:" + attackPowerM);
 	}
     //heightenedSenses
     void heightenedSenses()
@@ -483,11 +515,11 @@ public class CatMovement : MonoBehaviour
 				moveV = moveV.normalized * speed * movementModifier * Time.deltaTime;
 			}
             transform.Translate(moveV);
-
+            // attack power modifier
+            attackPowerM = attackPower * damageModifier * damageModifierF;
 			// skill testing
 			if (Input.GetKey(KeyCode.Q))
 				useSkill(18);
-			
 			// movement control
 			if (isGrounded && !onSpikes)
 			{
@@ -644,70 +676,70 @@ public class CatMovement : MonoBehaviour
             {
                 Debug.Log("Trying to hurt " + hitInfo.collider.transform.name + " by calling script " + hitInfo.collider.transform.GetComponent<MonsterAI>().name);
 				
-				if (hitInfo.collider.transform.GetComponent<MonsterAI>().getHealth() > 0 && hitInfo.collider.transform.GetComponent<MonsterAI>().getHealth() - damage <= 0){
+				if (hitInfo.collider.transform.GetComponent<MonsterAI>().getHealth() > 0 && hitInfo.collider.transform.GetComponent<MonsterAI>().getHealth() - attackPowerM <= 0){
                     //currentEXP += hitInfo.collider.transform.GetComponent<MonsterAI>().getExpDrop();
                     //mouseVitality.setCurrentExperiencePoints(currentEXP);
                     currentEXP += 20;
-					GameObject.Find("SCRIPTS").GetComponent<GameManager>().decreaseMonsterCount();
+					
 				}
 
-				hitInfo.collider.transform.GetComponent<MonsterAI>().SendMessage("takeDamage", damage);
+				hitInfo.collider.transform.GetComponent<MonsterAI>().SendMessage("takeDamage", attackPowerM);
 
             }
             if (hitInfo.collider.tag == "MonsterElite")
             {
                 Debug.Log("Trying to hurt " + hitInfo.collider.transform.name + " by calling script " + hitInfo.collider.transform.GetComponent<MonsterAI>().name);
 
-                if (hitInfo.collider.transform.GetComponent<MonsterAI>().getHealth() > 0 && hitInfo.collider.transform.GetComponent<MonsterAI>().getHealth() - damage <= 0)
+                if (hitInfo.collider.transform.GetComponent<MonsterAI>().getHealth() > 0 && hitInfo.collider.transform.GetComponent<MonsterAI>().getHealth() - attackPowerM <= 0)
                 {
                     //currentEXP += hitInfo.collider.transform.GetComponent<MonsterAI>().getExpDrop();
                     //mouseVitality.setCurrentExperiencePoints(currentEXP);
                     currentEXP += 50;
-					GameObject.Find("SCRIPTS").GetComponent<GameManager>().decreaseMonsterCount();
+					
                 }
 
-                hitInfo.collider.transform.GetComponent<MonsterAI>().SendMessage("takeDamage", damage);
+                hitInfo.collider.transform.GetComponent<MonsterAI>().SendMessage("takeDamage", attackPowerM);
 
             }
             if (hitInfo.collider.tag == "Boss")
             {
                 Debug.Log("Trying to hurt " + hitInfo.collider.transform.name + " by calling script " + hitInfo.collider.transform.GetComponent<MonsterAI>().name);
 
-                if (hitInfo.collider.transform.GetComponent<MonsterAI>().getHealth() > 0 && hitInfo.collider.transform.GetComponent<MonsterAI>().getHealth() - damage <= 0)
+                if (hitInfo.collider.transform.GetComponent<MonsterAI>().getHealth() > 0 && hitInfo.collider.transform.GetComponent<MonsterAI>().getHealth() - attackPowerM <= 0)
                 {
                     //currentEXP += hitInfo.collider.transform.GetComponent<MonsterAI>().getExpDrop();
                     //mouseVitality.setCurrentExperiencePoints(currentEXP);
                     currentEXP += 200;
                 }
 
-                hitInfo.collider.transform.GetComponent<MonsterAI>().SendMessage("takeDamage", damage);
+                hitInfo.collider.transform.GetComponent<MonsterAI>().SendMessage("takeDamage", attackPowerM);
 
             }
             if (hitInfo.collider.tag == "PuzzleBoss")
             {
                 Debug.Log("Trying to hurt " + hitInfo.collider.transform.name + " by calling script " + hitInfo.collider.transform.GetComponent<MonsterAI>().name);
 
-                if (hitInfo.collider.transform.GetComponent<MonsterAI>().getHealth() > 0 && hitInfo.collider.transform.GetComponent<MonsterAI>().getHealth() - damage <= 0)
+                if (hitInfo.collider.transform.GetComponent<MonsterAI>().getHealth() > 0 && hitInfo.collider.transform.GetComponent<MonsterAI>().getHealth() - attackPowerM <= 0)
                 {
                     //currentEXP += hitInfo.collider.transform.GetComponent<MonsterAI>().getExpDrop();
                     //mouseVitality.setCurrentExperiencePoints(currentEXP);
                     currentEXP += 200;
                 }
 
-                hitInfo.collider.transform.GetComponent<MonsterAI>().SendMessage("takeDamage", damage);
+                hitInfo.collider.transform.GetComponent<MonsterAI>().SendMessage("takeDamage", attackPowerM);
 
             }
             if (hitInfo.collider.tag == "Mouse")
             {
                 Debug.Log("Trying to hurt " + hitInfo.collider.transform.name + " by calling script " + hitInfo.collider.transform.GetComponent<MouseMovement>().name);
 
-                if (hitInfo.collider.transform.GetComponent<MouseMovement>().getHealth() > 0 && hitInfo.collider.transform.GetComponent<MouseMovement>().getHealth() - damage <= 0)
+                if (hitInfo.collider.transform.GetComponent<MouseMovement>().getHealth() > 0 && hitInfo.collider.transform.GetComponent<MouseMovement>().getHealth() - attackPowerM <= 0)
                 {
                     GameObject.Find("WinObj").GetComponent<WinScript>().setMouseDeaths();
                     currentEXP += 100;
                 }
 				
-				hitInfo.collider.transform.GetComponent<MouseMovement>().SendMessage("TakeDamage", damage);
+				hitInfo.collider.transform.GetComponent<MouseMovement>().SendMessage("TakeDamage", attackPowerM);
             }
 			transform.GetComponent<PhotonView>().RPC("playSound", PhotonTargets.AllBuffered, 3, 1f);
         }
@@ -806,12 +838,13 @@ public class CatMovement : MonoBehaviour
 			Powerup pup = obj.GetComponent<Powerup>();
 			// movement speed boost
 			if (pup.powerupType == 0){
-				movementModifier = 2;
+				movementModifier = 1.5f;
 				movementModifierTimer = 10f;
 			}
 			// damage boost
 			else if (pup.powerupType == 1){
-				
+                damageModifier = 2;
+                damageModifierTimer = 20f;
 			}
 			// invis
 			else if (pup.powerupType == 2){

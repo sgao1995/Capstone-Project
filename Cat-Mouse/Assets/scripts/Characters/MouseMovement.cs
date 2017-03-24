@@ -562,7 +562,7 @@ public class MouseMovement : MonoBehaviour {
                     //currentEXP += hitInfo.collider.transform.GetComponent<MonsterAI>().getExpDrop();
                     //mouseVitality.setCurrentExperiencePoints(currentEXP);
                     currentEXP += 20;
-					GameObject.Find("SCRIPTS").GetComponent<GameManager>().decreaseMonsterCount();
+					
 				}
 
 				hitInfo.collider.transform.GetComponent<MonsterAI>().SendMessage("takeDamage", damage);
@@ -577,7 +577,7 @@ public class MouseMovement : MonoBehaviour {
                     //currentEXP += hitInfo.collider.transform.GetComponent<MonsterAI>().getExpDrop();
                     //mouseVitality.setCurrentExperiencePoints(currentEXP);
                     currentEXP += 50;
-					GameObject.Find("SCRIPTS").GetComponent<GameManager>().decreaseMonsterCount();
+					
                 }
 
                 hitInfo.collider.transform.GetComponent<MonsterAI>().SendMessage("takeDamage", damage);
