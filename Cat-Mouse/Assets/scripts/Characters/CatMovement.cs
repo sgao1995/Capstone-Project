@@ -679,6 +679,7 @@ public class CatMovement : MonoBehaviour
 				if (hitInfo.collider.transform.GetComponent<MonsterAI>().getHealth() > 0 && hitInfo.collider.transform.GetComponent<MonsterAI>().getHealth() - attackPowerM <= 0){
                     //currentEXP += hitInfo.collider.transform.GetComponent<MonsterAI>().getExpDrop();
                     //mouseVitality.setCurrentExperiencePoints(currentEXP);
+                    Debug.Log("got exp Cat");
                     currentEXP += 20;
 					
 				}
