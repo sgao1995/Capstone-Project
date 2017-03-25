@@ -561,6 +561,7 @@ public class MouseMovement : MonoBehaviour {
 				if (hitInfo.collider.transform.GetComponent<MonsterAI>().getHealth() > 0 && hitInfo.collider.transform.GetComponent<MonsterAI>().getHealth() - damage <= 0){
                     //currentEXP += hitInfo.collider.transform.GetComponent<MonsterAI>().getExpDrop();
                     //mouseVitality.setCurrentExperiencePoints(currentEXP);
+                    Debug.Log("got EXP");
                     currentEXP += 20;
 					
 				}
