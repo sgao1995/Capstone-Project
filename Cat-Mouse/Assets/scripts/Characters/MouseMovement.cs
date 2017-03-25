@@ -258,9 +258,16 @@ public class MouseMovement : MonoBehaviour {
         }
     }
 	void Update(){
-		/* Updates the HUD state for the current player */
+        
+        /* Updates the Character attributes and HUD state for the current player */
         if (GetComponent<PhotonView>().isMine)
         {
+            /* If the Maximum Experience Points for the current Level is reached, Level Up the Character */
+            if (this.currentEXP >= this.maxEXP)
+            {
+                this.LevelUp();
+            }
+
             /* Updates the Vitality System states */
 
             /* Updates the Level attributes */
