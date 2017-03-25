@@ -17,9 +17,9 @@ public class MonsterAI : MonoBehaviour {
 	private float attackChance;
 
     //animations:
-    Animator animator;
+  //  Animator animator;
     Vector3 animDirection = Vector3.zero;
-    static int hitState = Animator.StringToHash("Base Layer.GetHit");
+  /*  static int hitState = Animator.StringToHash("Base Layer.GetHit");
     static int deathState = Animator.StringToHash("Base Layer.Death");
     static int attackState = Animator.StringToHash("Base Layer.Attack");
     static int bashState = Animator.StringToHash("Base Layer.Bash");
@@ -27,7 +27,7 @@ public class MonsterAI : MonoBehaviour {
     static int healState = Animator.StringToHash("Base Layer.Heal");
     static int idleState = Animator.StringToHash("Base Layer.Idle");
     static int walkState = Animator.StringToHash("Base Layer.WalkForward");
-    private AnimatorStateInfo currentState;
+    private AnimatorStateInfo currentState;*/
 
     // list of the players in the game
     private List<GameObject> playersInGame = new List<GameObject>();
@@ -69,8 +69,8 @@ public class MonsterAI : MonoBehaviour {
 	
 	// Use this for initialization
 	void Start () {
-        animator = this.transform.GetComponent<Animator>();
-        animator.enabled = true;
+//        animator = this.transform.GetComponent<Animator>();
+ //       animator.enabled = true;
         monsterrb = GetComponent<Rigidbody>();
 		delayTimer = delayBetweenMovements;
 		modes.Add("Patrol");
@@ -181,7 +181,9 @@ public class MonsterAI : MonoBehaviour {
     void takeDamage(float dmg)
     {
 		if (HP - dmg > 0){
-            animator.SetTrigger("GetHit");
+            transform.GetComponent<PhotonView>().RPC("SetTrigger", PhotonTargets.All, "GetHit");
+
+          //  GetComponent<Animator>().SetTrigger("GetHit");
            
             WaitForAnimation(1f);
           //  if (animator.GetNextAnimatorStateInfo(0).IsName("GetHit"))
@@ -219,7 +221,7 @@ public class MonsterAI : MonoBehaviour {
    
 	IEnumerator Death()
     {
-        animator.SetBool("Death", true);
+        GetComponent<Animator>().SetBool("Death", true);
         yield return new WaitForSeconds(5);
 		// notify game manager of a monster death
 		
@@ -241,7 +243,8 @@ public class MonsterAI : MonoBehaviour {
     void Attack()
     {
 		attackCooldownTimer = attackCooldownDelay;
-        animator.SetTrigger("Attack");
+        transform.GetComponent<PhotonView>().RPC("SetTrigger", PhotonTargets.All, "Attack");
+        //GetComponent<Animator>().SetTrigger("Attack");
        
 
         WaitForAnimation(1f);
@@ -256,7 +259,9 @@ public class MonsterAI : MonoBehaviour {
     {
 		bashCooldownTimer = 5f;
         //		animator.Play("Bash");
-        animator.SetTrigger("Bash");
+        transform.GetComponent<PhotonView>().RPC("SetTrigger", PhotonTargets.All, "Bash");
+
+       // GetComponent<Animator>().SetTrigger("Bash");
 		WaitForAnimation(1f);
 		DealDamage();
 		transform.GetComponent<PhotonView>().RPC("playSound", PhotonTargets.AllBuffered, 5, 1f);
@@ -266,15 +271,17 @@ public class MonsterAI : MonoBehaviour {
 	void Stomp(){
 		stompCooldownTimer = 20f;
         //		animator.Play("Stomp");
-        animator.Play("Stomp");
-		WaitForAnimation(1.5f);
+        transform.GetComponent<PhotonView>().RPC("SetTrigger", PhotonTargets.All, "Stomp");
+        WaitForAnimation(1.5f);
 		transform.GetComponent<PhotonView>().RPC("playSound", PhotonTargets.AllBuffered, 7, 1f);
 	}
 	// cast heal on self
 	void Heal(){
 		healCooldownTimer = 30f;
         //		animator.Play("Heal");
-        animator.SetTrigger("Heal");
+        transform.GetComponent<PhotonView>().RPC("SetTrigger", PhotonTargets.All, "Heal");
+
+      //  GetComponent<Animator>().SetTrigger("Heal");
 		WaitForAnimation(3f);
 		transform.GetComponent<PhotonView>().RPC("playSound", PhotonTargets.AllBuffered, 6, 1f);
 	}
@@ -325,19 +332,19 @@ public class MonsterAI : MonoBehaviour {
 			}
 			
 			if (currentMode == "Sleeping"){
-                    
-                animator.SetBool("WalkForward", false);
+
+                GetComponent<Animator>().SetBool("WalkForward", false);
       
             }
 			else if (currentMode == "Patrol"){
 
                 if (!notmoving)
                 {
-                    animator.SetBool("WalkForward", true);
+                    GetComponent<Animator>().SetBool("WalkForward", true);
                 }
                 else
                 {
-                    animator.SetBool("WalkForward", false);
+                    GetComponent<Animator>().SetBool("WalkForward", false);
                 }
 
                 if (!soundPlayer.isPlaying){
@@ -348,7 +355,7 @@ public class MonsterAI : MonoBehaviour {
 			}
 			else if (currentMode == "Attack"){
 
-                   animator.SetBool("WalkForward", true);
+                GetComponent<Animator>().SetBool("WalkForward", true);
        
                 if (!soundPlayer.isPlaying){
 					transform.GetComponent<PhotonView>().RPC("playSound", PhotonTargets.AllBuffered, 0, 1f);
@@ -528,4 +535,11 @@ public class MonsterAI : MonoBehaviour {
 			obj.GetComponent<SteelTrap>().activate(this.gameObject);
 		}
     }
+    //rpc for triggers
+    [PunRPC]
+    void SetTrigger(string a)
+    {
+        GetComponent<Animator>().SetTrigger(a);
+    }
+    
 }
