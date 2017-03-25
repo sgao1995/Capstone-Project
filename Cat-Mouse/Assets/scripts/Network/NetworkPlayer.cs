@@ -29,16 +29,16 @@ public class NetworkPlayer : Photon.MonoBehaviour {
         {
             stream.SendNext(transform.position);
             stream.SendNext(transform.rotation);
-            stream.SendNext(animator.GetBool("Death"));
-            stream.SendNext(animator.GetBool("WalkForward"));
+            //stream.SendNext(animator.GetBool("Death"));
+            //stream.SendNext(animator.GetBool("WalkForward"));
 
         }
         else
         {
             this.rPosition = (Vector3)stream.ReceiveNext();
             this.rRotation = (Quaternion)stream.ReceiveNext();
-            animator.SetBool("Death", (bool)stream.ReceiveNext());
-            animator.SetBool("WalkForward", (bool)stream.ReceiveNext());
+         //   animator.SetBool("Death", (bool)stream.ReceiveNext());
+        //    animator.SetBool("WalkForward", (bool)stream.ReceiveNext());
 
         }
     }

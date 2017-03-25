@@ -13,7 +13,6 @@ public class matchSettings : Photon.PunBehaviour
     static int catLimit = 0;
     static int miceLimit = 0;
     static bool teamChosen = false;
-    static bool choseTeam = false;
     // Use this for initialization
     void Start()
     {
@@ -28,37 +27,53 @@ public class matchSettings : Photon.PunBehaviour
         Debug.Log(PhotonNetwork.playerList.Length);*/
 
     }
+  
     void JoinCat()
     {
-        GameObject.Find("CText").GetComponent<Text>().text = "Player " + PhotonNetwork.player.ID;
+        GameObject.Find("CatBtn").GetComponent<PhotonView>().RPC("setPid", PhotonTargets.AllBuffered, "CText",PhotonNetwork.player.ID.ToString());
     }
     void LeaveCat()
     {
-        GameObject.Find("CText").GetComponent<Text>().text = "Spot Open";
+        GameObject.Find("CatBtn").GetComponent<PhotonView>().RPC("unsetPid", PhotonTargets.AllBuffered, "CText");
     }
+
     void JoinMouse1()
     {
-        GameObject.Find("M1Text").GetComponent<Text>().text = "Player " + PhotonNetwork.player.ID;
+        GameObject.Find("Mice1Btn").GetComponent<PhotonView>().RPC("setPid", PhotonTargets.AllBuffered, "M1Text", PhotonNetwork.player.ID.ToString());
     }
     void LeaveM1()
     {
-        GameObject.Find("M1Text").GetComponent<Text>().text = "Spot Open";
+        GameObject.Find("Mice1Btn").GetComponent<PhotonView>().RPC("unsetPid", PhotonTargets.AllBuffered, "M1Text");
     }
     void JoinMouse2()
     {
-        GameObject.Find("M2Text").GetComponent<Text>().text = "Player " + PhotonNetwork.player.ID;
+        GameObject.Find("Mice2Btn").GetComponent<PhotonView>().RPC("setPid", PhotonTargets.AllBuffered, "M2Text", PhotonNetwork.player.ID.ToString());
     }
     void LeaveM2()
     {
-        GameObject.Find("M2Text").GetComponent<Text>().text = "Spot Open";
+        GameObject.Find("Mice2Btn").GetComponent<PhotonView>().RPC("unsetPid", PhotonTargets.AllBuffered, "M2Text");
     }
     void JoinMouse3()
     {
-        GameObject.Find("M3Text").GetComponent<Text>().text = "Player " + PhotonNetwork.player.ID;
+        GameObject.Find("Mice3Btn").GetComponent<PhotonView>().RPC("setPid", PhotonTargets.AllBuffered, "M3Text", PhotonNetwork.player.ID.ToString());
     }
     void LeaveM3()
     {
-        GameObject.Find("M3Text").GetComponent<Text>().text = "Spot Open";
+        GameObject.Find("Mice3Btn").GetComponent<PhotonView>().RPC("unsetPid", PhotonTargets.AllBuffered, "M3Text");
+    }
+    [PunRPC]
+    void setPid(string button, string pid)
+    {
+        GameObject.Find(button).GetComponent<Text>().text = "Player " + pid;
+        Debug.Log("HEY IT WORKS" + pid);
+
+    }
+    [PunRPC]
+    void unsetPid(string button)
+    {
+        GameObject.Find(button).GetComponent<Text>().text = "Spot Open";
+        Debug.Log("HEY IT WORKS2");
+
     }
     // Update is called once per frame
     void Update()
@@ -69,74 +84,6 @@ public class matchSettings : Photon.PunBehaviour
             //GameObject.Find("StartButton").GetComponent<Image>().color = Color.red;
             //GameObject.Find("StartButton").transform.FindChild("Text").GetComponent<Text>().color = Color.white;
         }
-        /*if (isCat)
-        {
-            JoinCat();
-            if (GameObject.Find("CatBtn") == null)
-            {
-                Debug.Log("NOPE");
-            }
-            else
-            {
-                Debug.Log("FOUND");
-            }
-
-        }else
-        {
-            //LeaveCat();
-
-        }
-        if (isMice1)
-        {
-            JoinMouse1();
-            if (GameObject.Find("Mice1Btn") == null)
-            {
-                Debug.Log("NOPE");
-            }
-            else
-            {
-                Debug.Log("FOUND");
-            }
-
-        }
-        else
-        {
-            //LeaveM1();
-        }
-        if (isMice2)
-        {
-            JoinMouse2();
-            if (GameObject.Find("Mice2Btn") == null)
-            {
-                Debug.Log("NOPE");
-            }
-            else
-            {
-                Debug.Log("FOUND");
-            }
-
-        }
-        else
-        {
-            //LeaveM2();
-        }
-        if (isMice3)
-        {
-            JoinMouse3();
-            if (GameObject.Find("Mice3Btn") == null)
-            {
-                Debug.Log("NOPE");
-            }
-            else
-            {
-                Debug.Log("FOUND");
-            }
-
-        }
-        else
-        {
-            //LeaveM3();
-        }*/
     }
     public void ButtonEvents(string Event)
     {
@@ -155,7 +102,7 @@ public class matchSettings : Photon.PunBehaviour
                 break;
             case "Cat":
 
-                if (isCat == false && choseTeam == false)
+                if (isCat == false && teamChosen == false)
                 {
 
                     isCat = true;
@@ -163,9 +110,7 @@ public class matchSettings : Photon.PunBehaviour
                     isMice2 = false;
                     isMice3 = false;
                     teamChosen = true;
-                    choseTeam = true;
                     GameObject.Find("TeamSelectionOBJ").GetComponent<teamselectiondata>().playertype = 0;
-                    //GameObject.Find("Cat").GetComponent<Button>().interactable = false;
                     GameObject.Find("CatBtn").GetComponent<Image>().color = Color.blue;
                     GameObject.Find("CatBtn").transform.FindChild("CText").GetComponent<Text>().color = Color.white;
                     GameObject.Find("CatBtn").GetComponent<PhotonView>().RPC("C", PhotonTargets.OthersBuffered);
@@ -173,7 +118,7 @@ public class matchSettings : Photon.PunBehaviour
                 }
                 else
                 {
-                    if (isCat == true && choseTeam == true)
+                    if (isCat == true && teamChosen == true)
                     {
                         Debug.Log("IT WORKS");
                         isCat = false;
@@ -181,9 +126,6 @@ public class matchSettings : Photon.PunBehaviour
                         isMice2 = false;
                         isMice3 = false;
                         teamChosen = false;
-                        choseTeam = false;
-                        //GameObject.Find("StartButton").GetComponent<Image>().color = Color.white;
-                        //GameObject.Find("StartButton").transform.FindChild("Text").GetComponent<Text>().color = Color.black;
                         GameObject.Find("CatBtn").GetComponent<Image>().color = Color.white;
                         GameObject.Find("CatBtn").transform.FindChild("CText").GetComponent<Text>().color = Color.black;
                         GameObject.Find("CatBtn").GetComponent<PhotonView>().RPC("NC", PhotonTargets.OthersBuffered);
@@ -192,7 +134,7 @@ public class matchSettings : Photon.PunBehaviour
                 }
                 break;
             case "Mouse1":
-                if (isMice1 == false && choseTeam == false)
+                if (isMice1 == false && teamChosen == false)
                 {
 
                     isCat = false;
@@ -200,9 +142,7 @@ public class matchSettings : Photon.PunBehaviour
                     isMice2 = false;
                     isMice3 = false;
                     teamChosen = true;
-                    choseTeam = true;
                     GameObject.Find("TeamSelectionOBJ").GetComponent<teamselectiondata>().playertype = 1;
-                    //GameObject.Find("Mice1").GetComponent<Button>().interactable = false;
                     GameObject.Find("Mice1Btn").GetComponent<Image>().color = Color.red;
                     GameObject.Find("Mice1Btn").transform.FindChild("M1Text").GetComponent<Text>().color = Color.white;
                     GameObject.Find("Mice1Btn").GetComponent<PhotonView>().RPC("M1", PhotonTargets.OthersBuffered);
@@ -210,16 +150,13 @@ public class matchSettings : Photon.PunBehaviour
                 }
                 else
                 {
-                    if (isMice1 == true && choseTeam == true)
+                    if (isMice1 == true && teamChosen == true)
                     {
                         isCat = false;
                         isMice1 = false;
                         isMice2 = false;
                         isMice3 = false;
                         teamChosen = false;
-                        choseTeam = false;
-                        //GameObject.Find("StartButton").GetComponent<Image>().color = Color.white;
-                        //GameObject.Find("StartButton").transform.FindChild("Text").GetComponent<Text>().color = Color.black;
                         GameObject.Find("Mice1Btn").GetComponent<Image>().color = Color.white;
                         GameObject.Find("Mice1Btn").transform.FindChild("M1Text").GetComponent<Text>().color = Color.black;
                         GameObject.Find("Mice1Btn").GetComponent<PhotonView>().RPC("NM1", PhotonTargets.OthersBuffered);
@@ -228,7 +165,7 @@ public class matchSettings : Photon.PunBehaviour
                 }
                 break;
             case "Mouse2":
-                if (isMice2 == false && choseTeam == false)
+                if (isMice2 == false && teamChosen == false)
                 {
 
                     isCat = false;
@@ -236,9 +173,7 @@ public class matchSettings : Photon.PunBehaviour
                     isMice2 = true;
                     isMice3 = false;
                     teamChosen = true;
-                    choseTeam = true;
                     GameObject.Find("TeamSelectionOBJ").GetComponent<teamselectiondata>().playertype = 1;
-                    //GameObject.Find("Mice2").GetComponent<Button>().interactable = false;
                     GameObject.Find("Mice2Btn").GetComponent<Image>().color = Color.yellow;
                     GameObject.Find("Mice2Btn").transform.FindChild("M2Text").GetComponent<Text>().color = Color.white;
                     GameObject.Find("Mice2Btn").GetComponent<PhotonView>().RPC("M2", PhotonTargets.OthersBuffered);
@@ -246,16 +181,13 @@ public class matchSettings : Photon.PunBehaviour
                 }
                 else
                 {
-                    if (isMice2 == true && choseTeam == true)
+                    if (isMice2 == true && teamChosen == true)
                     {
                         isCat = false;
                         isMice1 = false;
                         isMice2 = false;
                         isMice3 = false;
                         teamChosen = false;
-                        choseTeam = false;
-                        //GameObject.Find("StartButton").GetComponent<Image>().color = Color.white;
-                        //GameObject.Find("StartButton").transform.FindChild("Text").GetComponent<Text>().color = Color.black;
                         GameObject.Find("Mice2Btn").GetComponent<Image>().color = Color.white;
                         GameObject.Find("Mice2Btn").transform.FindChild("M2Text").GetComponent<Text>().color = Color.black;
                         GameObject.Find("Mice2Btn").GetComponent<PhotonView>().RPC("NM2", PhotonTargets.OthersBuffered);
@@ -264,7 +196,7 @@ public class matchSettings : Photon.PunBehaviour
                 }
                 break;
             case "Mouse3":
-                if (isMice3 == false && choseTeam == false)
+                if (isMice3 == false && teamChosen == false)
                 {
 
                     isCat = false;
@@ -272,9 +204,7 @@ public class matchSettings : Photon.PunBehaviour
                     isMice2 = false;
                     isMice3 = true;
                     teamChosen = true;
-                    choseTeam = true;
                     GameObject.Find("TeamSelectionOBJ").GetComponent<teamselectiondata>().playertype = 1;
-                    //GameObject.Find("Mice3").GetComponent<Button>().interactable = false;
                     GameObject.Find("Mice3Btn").GetComponent<Image>().color = Color.green;
                     GameObject.Find("Mice3Btn").transform.FindChild("M3Text").GetComponent<Text>().color = Color.white;
                     GameObject.Find("Mice3Btn").GetComponent<PhotonView>().RPC("M3", PhotonTargets.OthersBuffered);
@@ -282,16 +212,13 @@ public class matchSettings : Photon.PunBehaviour
                 }
                 else
                 {
-                    if (isMice3 == true && choseTeam == true)
+                    if (isMice3 == true && teamChosen == true)
                     {
                         isCat = false;
                         isMice1 = false;
                         isMice2 = false;
                         isMice3 = false;
                         teamChosen = false;
-                        choseTeam = false;
-                        //GameObject.Find("StartButton").GetComponent<Image>().color = Color.white;
-                        //GameObject.Find("StartButton").transform.FindChild("Text").GetComponent<Text>().color = Color.black;
                         GameObject.Find("Mice3Btn").GetComponent<Image>().color = Color.white;
                         GameObject.Find("Mice3Btn").transform.FindChild("M3Text").GetComponent<Text>().color = Color.black;
                         GameObject.Find("Mice3Btn").GetComponent<PhotonView>().RPC("NM3", PhotonTargets.OthersBuffered);
@@ -307,7 +234,6 @@ public class matchSettings : Photon.PunBehaviour
         GameObject.Find("CatBtn").GetComponent<Button>().interactable = false;
         GameObject.Find("CatBtn").GetComponent<Image>().color = Color.blue;
         GameObject.Find("CatBtn").transform.FindChild("CText").GetComponent<Text>().color = Color.white;
-        JoinCat();
     }
     [PunRPC]
     void NC()
@@ -315,9 +241,6 @@ public class matchSettings : Photon.PunBehaviour
         GameObject.Find("CatBtn").GetComponent<Button>().interactable = true;
         GameObject.Find("CatBtn").GetComponent<Image>().color = Color.white;
         GameObject.Find("CatBtn").transform.FindChild("CText").GetComponent<Text>().color = Color.black;
-        LeaveCat();
-        //GameObject.Find("StartButton").GetComponent<Image>().color = Color.white;
-        //GameObject.Find("StartButton").transform.FindChild("Text").GetComponent<Text>().color = Color.black;
     }
     [PunRPC]
     void M1()
@@ -325,7 +248,6 @@ public class matchSettings : Photon.PunBehaviour
         GameObject.Find("Mice1Btn").GetComponent<Button>().interactable = false;
         GameObject.Find("Mice1Btn").GetComponent<Image>().color = Color.red;
         GameObject.Find("Mice1Btn").transform.FindChild("M1Text").GetComponent<Text>().color = Color.white;
-        JoinMouse1();
     }
     [PunRPC]
     void NM1()
@@ -333,9 +255,6 @@ public class matchSettings : Photon.PunBehaviour
         GameObject.Find("Mice1Btn").GetComponent<Button>().interactable = true;
         GameObject.Find("Mice1Btn").GetComponent<Image>().color = Color.white;
         GameObject.Find("Mice1Btn").transform.FindChild("M1Text").GetComponent<Text>().color = Color.black;
-        LeaveM1();
-        //GameObject.Find("StartButton").GetComponent<Image>().color = Color.white;
-        //GameObject.Find("StartButton").transform.FindChild("Text").GetComponent<Text>().color = Color.black;
     }
     [PunRPC]
     void M2()
@@ -343,7 +262,6 @@ public class matchSettings : Photon.PunBehaviour
         GameObject.Find("Mice2Btn").GetComponent<Button>().interactable = false;
         GameObject.Find("Mice2Btn").GetComponent<Image>().color = Color.yellow;
         GameObject.Find("Mice2Btn").transform.FindChild("M2Text").GetComponent<Text>().color = Color.white;
-        JoinMouse2();
     }
     [PunRPC]
     void NM2()
@@ -351,9 +269,6 @@ public class matchSettings : Photon.PunBehaviour
         GameObject.Find("Mice2Btn").GetComponent<Button>().interactable = true;
         GameObject.Find("Mice2Btn").GetComponent<Image>().color = Color.white;
         GameObject.Find("Mice2Btn").transform.FindChild("M2Text").GetComponent<Text>().color = Color.black;
-        LeaveM2();
-        //GameObject.Find("StartButton").GetComponent<Image>().color = Color.white;
-        //GameObject.Find("StartButton").transform.FindChild("Text").GetComponent<Text>().color = Color.black;
     }
     [PunRPC]
     void M3()
@@ -361,7 +276,6 @@ public class matchSettings : Photon.PunBehaviour
         GameObject.Find("Mice3Btn").GetComponent<Button>().interactable = false;
         GameObject.Find("Mice3Btn").GetComponent<Image>().color = Color.green;
         GameObject.Find("Mice3Btn").transform.FindChild("M3Text").GetComponent<Text>().color = Color.white;
-        JoinMouse3();
     }
     [PunRPC]
     void NM3()
@@ -369,8 +283,5 @@ public class matchSettings : Photon.PunBehaviour
         GameObject.Find("Mice3Btn").GetComponent<Button>().interactable = true;
         GameObject.Find("Mice3Btn").GetComponent<Image>().color = Color.white;
         GameObject.Find("Mice3Btn").transform.FindChild("M3Text").GetComponent<Text>().color = Color.black;
-        LeaveM3();
-        //GameObject.Find("StartButton").GetComponent<Image>().color = Color.white;
-        //GameObject.Find("StartButton").transform.FindChild("Text").GetComponent<Text>().color = Color.black;
     }
 }
