@@ -65,7 +65,6 @@ public class lobby : Photon.MonoBehaviour
 
                     PhotonNetwork.CreateRoom(roomName, roomOpt, TypedLobby.Default);
                 }
-                //PhotonNetwork.JoinRandomRoom();
                 break;
             case "RefreshBtn":
                 if (PhotonNetwork.JoinLobby())
@@ -73,15 +72,10 @@ public class lobby : Photon.MonoBehaviour
                     Refresh();
                 }
                 break;
-            //case "JoinBtn":
-                
-                //PhotonNetwork.JoinRoom();
-              //  break;
         }
     }
     void Refresh()
     {
-       // int pNum = GameObject.Find("TeamSelectionOBJ").GetComponent<teamselectiondata>().playercount;
         if (roomPF.Count > 0)
         {
             for (int i = 0; i < roomPF.Count; i++)
@@ -98,8 +92,6 @@ public class lobby : Photon.MonoBehaviour
             r.GetComponent<RectTransform>().position = new Vector3(roomPreFab.GetComponent<RectTransform>().position.x, roomPreFab.GetComponent<RectTransform>().position.y - (i * 55), roomPreFab.GetComponent<RectTransform>().position.z);
             r.transform.FindChild("RText").GetComponent<Text>().text = PhotonNetwork.GetRoomList()[i].name;
             r.transform.FindChild("RText2").GetComponent<Text>().text = "Waiting";
-            //r.transform.FindChild("RText3").GetComponent<Text>().text = RoomInfo + "/4";
-            //Debug.Log("# of players:" + GameObject.Find("TeamSelectionOBJ").GetComponent<teamselectiondata>().playercount);
             string roomName = r.transform.FindChild("RText").GetComponent<Text>().text;
             r.GetComponent<Button>().onClick.AddListener(() => { PhotonNetwork.JoinRoom(roomName); });
             r.SetActive(true);

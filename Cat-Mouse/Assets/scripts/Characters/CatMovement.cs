@@ -58,6 +58,9 @@ public class CatMovement : MonoBehaviour
     private float holdT = 2.0f;
     private float Invis = 3.0f;
     private bool pauseTimer = false;
+    private float stalkerTime = 5f;
+    private bool isStalkerActive = false;
+    private bool bashActive = false;
 
     /* Vitality System attribute parameters */
     private float[] vitalLevelHP = {100, 125, 160, 200};  // Health Points of Cat per Level
@@ -224,7 +227,7 @@ public class CatMovement : MonoBehaviour
     IEnumerator lieInWait()
     {
         //become invisible
-        StartCoroutine(InvisC(0.2f, 3f));
+        transform.GetComponent<PhotonView>().RPC("InvisC", PhotonTargets.AllBuffered, 0.2f, 3f);
         Debug.Log("INVIS");
         yield return null;
     }
@@ -232,9 +235,11 @@ public class CatMovement : MonoBehaviour
     [PunRPC]
     void uncloak()
     {
-        pauseTimer = true;
-        StartCoroutine(InvisC(1.0f, 1.0f));
-        
+        if (!isStalkerActive)
+        {
+            pauseTimer = true;
+            StartCoroutine(InvisC(1f, 3f));
+        }   
     }
     [PunRPC]
     IEnumerator InvisC(float val, float time)
@@ -264,7 +269,37 @@ public class CatMovement : MonoBehaviour
             }
         }
     }
+    IEnumerator Bash()
+    {
+        focusTimerPause = true;//so the Focus buff will be reset to damagemultiplierF of 1
+        bashActive = true;
+        transform.GetComponent<PhotonView>().RPC("SetTrigger", PhotonTargets.All, "Attack3Trigger");
+        attackCooldownTimer = attackCooldownDelay;
+        yield return new WaitForSeconds(0.3f);
+        DealDamage();
+        bashActive = false;
+     /*   IEnumerator Attack()
+    {
+            float attackType = Random.Range(0f, 1f);
+            if (attackType <= 0.5f)
+                transform.GetComponent<PhotonView>().RPC("SetTrigger", PhotonTargets.All, "Attack3Trigger");
+            //animator.SetTrigger("Attack3Trigger");
+            else if (attackType > 0.5f)
+                //animator.SetTrigger("Attack6Trigger");
+                transform.GetComponent<PhotonView>().RPC("SetTrigger", PhotonTargets.All, "Attack6Trigger");
+            yield return new WaitForSeconds(0.3f);
+            DealDamage();
+        }*/
+    }
+    IEnumerator Stalker()
+    {
+        transform.GetComponent<PhotonView>().RPC("InvisC", PhotonTargets.AllBuffered, 0.2f, 1f);
+        isStalkerActive = true;
 
+        yield return new WaitForSeconds(5);
+        transform.GetComponent<PhotonView>().RPC("uncloak", PhotonTargets.AllBuffered);
+        isStalkerActive = false;
+    }
     void theHunter()
     {
         GameObject[] target;
@@ -290,7 +325,13 @@ public class CatMovement : MonoBehaviour
     {
 		switch(type){
 			case 0:
-				soundPlayer.PlayOneShot(footstepSound, t);
+                if (isStalkerActive)
+                {
+                    soundPlayer.PlayOneShot(footstepSound, 0.1f);
+                }else
+                {
+                    soundPlayer.PlayOneShot(footstepSound, t);
+                }
 				break;
 			case 1:
 				soundPlayer.PlayOneShot(jumpSound, t);
@@ -320,6 +361,16 @@ public class CatMovement : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.T))
         {
             transform.position = new Vector3(22, 0, 25);
+        }
+        //temporary for Bash skill
+        if (Input.GetKeyDown(KeyCode.B) && attackCooldownTimer <= 0 && !Input.GetKey(KeyCode.Escape))
+        {
+            StartCoroutine(Bash());
+        }
+        //temporary for stalker skill
+        if (Input.GetKeyDown(KeyCode.N))
+        {
+            StartCoroutine(Stalker());
         }
         //temporary for recoup skill
         if (Input.GetKeyDown(KeyCode.H))
@@ -421,7 +472,7 @@ public class CatMovement : MonoBehaviour
 		// left click
 		if (Input.GetMouseButtonDown(0) && attackCooldownTimer <= 0 && !Input.GetKey(KeyCode.Escape))
         {
-            uncloak();
+            transform.GetComponent<PhotonView>().RPC("uncloak", PhotonTargets.AllBuffered);
             focusTimerPause = true;
             attackCooldownTimer = attackCooldownDelay;
 			WaitForAnimation(0.7f);
@@ -534,8 +585,8 @@ public class CatMovement : MonoBehaviour
 				soundPlayer.pitch = Random.Range(0.9f, 1.1f);
 				if (Input.GetKey(KeyCode.A))
 				{
-                    uncloak();
-					//animator.Play("MoveLeft");
+                    transform.GetComponent<PhotonView>().RPC("uncloak", PhotonTargets.AllBuffered);
+                    //animator.Play("MoveLeft");
                     transform.GetComponent<PhotonView>().RPC("PlayAnim", PhotonTargets.All, "MoveLeft");
 
 				   	// play sound effect
@@ -550,7 +601,7 @@ public class CatMovement : MonoBehaviour
 				}
 				if (Input.GetKey(KeyCode.D))
 				{
-                    uncloak();
+                    transform.GetComponent<PhotonView>().RPC("uncloak", PhotonTargets.AllBuffered);
                     //animator.Play("MoveRight");
                     transform.GetComponent<PhotonView>().RPC("PlayAnim", PhotonTargets.All, "MoveRight");
                     // play sound effect
@@ -565,7 +616,7 @@ public class CatMovement : MonoBehaviour
 				}
 				if (Input.GetKey(KeyCode.W))
 				{
-                    uncloak();
+                    transform.GetComponent<PhotonView>().RPC("uncloak", PhotonTargets.AllBuffered);
                     if (!Input.GetKey(KeyCode.A) && !Input.GetKey(KeyCode.D))
                         //animator.Play("MoveForward");
                         transform.GetComponent<PhotonView>().RPC("PlayAnim", PhotonTargets.All, "MoveForward");
@@ -581,7 +632,7 @@ public class CatMovement : MonoBehaviour
 				}
 				if (Input.GetKey(KeyCode.S))
 				{
-                    uncloak();
+                    transform.GetComponent<PhotonView>().RPC("uncloak", PhotonTargets.AllBuffered);
                     if (!Input.GetKey(KeyCode.A) && !Input.GetKey(KeyCode.D))
 						//animator.Play("MoveBackward");
                         transform.GetComponent<PhotonView>().RPC("PlayAnim", PhotonTargets.All, "MoveBackward");
@@ -599,7 +650,7 @@ public class CatMovement : MonoBehaviour
 				}
 				if (Input.GetKeyDown(KeyCode.Space))
 				{
-                    uncloak();
+                    transform.GetComponent<PhotonView>().RPC("uncloak", PhotonTargets.AllBuffered);
                     //soundPlayer.PlayOneShot(jumpSound, 1f);
                     transform.GetComponent<PhotonView>().RPC("playSound", PhotonTargets.AllBuffered, 1, 1f);
                     isGrounded = false;
@@ -690,9 +741,15 @@ public class CatMovement : MonoBehaviour
                     currentEXP += 20;
 					
 				}
-
-				hitInfo.collider.transform.GetComponent<MonsterAI>().SendMessage("takeDamage", attackPowerM);
-
+                if (bashActive)
+                {
+                    hitInfo.collider.transform.GetComponent<MonsterAI>().SendMessage("takeDamage", attackPowerM+15f);
+                    hitInfo.collider.transform.GetComponent<MonsterAI>().SendMessage("isStunned");
+                }
+                else
+                {
+                    hitInfo.collider.transform.GetComponent<MonsterAI>().SendMessage("takeDamage", attackPowerM);
+                }	
             }
             if (hitInfo.collider.tag == "MonsterElite")
             {
@@ -723,7 +780,7 @@ public class CatMovement : MonoBehaviour
                 hitInfo.collider.transform.GetComponent<MonsterAI>().SendMessage("takeDamage", attackPowerM);
 
             }
-            if (hitInfo.collider.tag == "PuzzleBoss")
+            if (hitInfo.collider.tag == "PuzzleRoomBoss")
             {
                 Debug.Log("Trying to hurt " + hitInfo.collider.transform.name + " by calling script " + hitInfo.collider.transform.GetComponent<MonsterAI>().name);
 

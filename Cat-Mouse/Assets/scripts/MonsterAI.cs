@@ -177,7 +177,14 @@ public class MonsterAI : MonoBehaviour {
 		transform.GetComponent<NavMeshAgent>().enabled = true;
 		canMove = true;
 	}
-	
+    //when Monsters get stunned, this function will be called and will stop them from moving for 1 second
+    void isStunned()
+    {
+        Debug.Log("STUNNED");
+        transform.GetComponent<PhotonView>().RPC("SetTrigger", PhotonTargets.All, "Attack");
+        WaitForAnimation(1f);
+    }
+
     void takeDamage(float dmg)
     {
 		if (HP - dmg > 0){
@@ -218,19 +225,24 @@ public class MonsterAI : MonoBehaviour {
             }
         }
     }
-   
-	IEnumerator Death()
+
+    IEnumerator Death()
     {
         GetComponent<Animator>().SetBool("Death", true);
         yield return new WaitForSeconds(5);
-		// notify game manager of a monster death
-		
-		// remove monster from the game
+        // notify game manager of a monster death
+        if (this.monsterType == "PuzzleRoomBoss")
+        {
+            // notify game manager to spawn the key
+            GameManager gm = GameObject.Find("SCRIPTS").GetComponent<GameManager>();
+            gm.ClearedRoomSoSpawnKey(5);
+        }
+        // remove monster from the game
         PhotonNetwork.Destroy(this.gameObject);
 
     }
-	// turn left 2 degrees
-	void TurnLeft(){
+    // turn left 2 degrees
+    void TurnLeft(){
 		transform.Rotate (transform.up, -2f, Space.World);
 	}
 	
