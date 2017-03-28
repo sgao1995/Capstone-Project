@@ -910,4 +910,16 @@ public class MouseMovement : MonoBehaviour {
 		canMove = true;
 	}
 
+    /* Gets the number of Regular Skill Points available to the Character */
+    public int getRegularSP()
+    {
+        return this.skillPoints;
+    }
+
+    /* Gets the number of Ultimate Skill Points available to the Character */
+    public int getUltimateSP()
+    {
+        return this.ultimateSkillPoints;
+    }
+
 }
