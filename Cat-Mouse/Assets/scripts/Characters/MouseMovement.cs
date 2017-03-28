@@ -154,9 +154,13 @@ public class MouseMovement : MonoBehaviour {
         this.maxEXP = this.vitalLevelEXP[this.level - 1];
         this.currentEXP = 0;
     }
-
-	// wait function
-	public void WaitForAnimation(float seconds){
+    //when Explorers get stunned, this function will be called and will stop them from moving for 1 second
+    void isStunned()
+    {
+        Debug.Log("STUNNED");
+    }
+    // wait function
+    public void WaitForAnimation(float seconds){
 		StartCoroutine(_wait(seconds));
 	}
 	IEnumerator _wait(float time){
@@ -605,7 +609,7 @@ public class MouseMovement : MonoBehaviour {
                 hitInfo.collider.transform.GetComponent<MonsterAI>().SendMessage("takeDamage", damage);
 
             }
-            if (hitInfo.collider.tag == "PuzzleBoss")
+            if (hitInfo.collider.tag == "PuzzleRoomBoss")
             {
                 Debug.Log("Trying to hurt " + hitInfo.collider.transform.name + " by calling script " + hitInfo.collider.transform.GetComponent<MonsterAI>().name);
 
