@@ -78,8 +78,6 @@ public class MouseMovement : MonoBehaviour {
 	public AudioClip smokescreenSound;
 	public AudioSource soundPlayer;
 
-
-	
     private Collider[] hitCollider;
 
     void Start()
@@ -242,9 +240,9 @@ public class MouseMovement : MonoBehaviour {
 		Quaternion smokeRot = Quaternion.Euler(-90, 0, 0);
 		Vector3 smokePos = new Vector3(transform.position.x, 0.5f, transform.position.z) + transform.forward;
 		GameObject smokeScreen = (GameObject)PhotonNetwork.Instantiate("Smoke", smokePos, smokeRot, 0);
-     //   transform.Find("Smoke").GetComponent<ParticleSystem>().Play();
-      //  Destroy(gameObject, transform.Find("Smoke").GetComponent<ParticleSystem>().duration);
         StartCoroutine(Invis(0.2f, 3f));
+        yield return new WaitForSeconds(5f);
+        uncloak();
     }
     [PunRPC]
     void uncloak()
@@ -262,7 +260,15 @@ public class MouseMovement : MonoBehaviour {
         }
     }
 	void Update(){
-        
+        //jump function
+        if (isGrounded && !onSpikes)
+        {
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                jump();
+            }
+        }
+
         /* Updates the Character attributes and HUD state for the current player */
         if (GetComponent<PhotonView>().isMine)
         {
@@ -377,7 +383,7 @@ public class MouseMovement : MonoBehaviour {
 			flareCooldownTimer -= Time.deltaTime;
 		}
 	}
-	
+
     void FixedUpdate()
     {
 		if (canMove)
@@ -464,19 +470,18 @@ public class MouseMovement : MonoBehaviour {
 						moveV = new Vector3(moveV.x, 0, -1);
 					}
 				}
-				if (Input.GetKeyDown(KeyCode.Space))
-				{
-					//soundPlayer.PlayOneShot(jumpSound, 1f);
-                    transform.GetComponent<PhotonView>().RPC("playSound", PhotonTargets.AllBuffered, 1, 1f);
-                    isGrounded = false;
-                    //animator.SetTrigger("JumpTrigger");
-                    //animator.SetInteger("Jumping", 1);
-                    transform.GetComponent<PhotonView>().RPC("SetTrigger", PhotonTargets.All, "JumpTrigger");
-                    transform.GetComponent<PhotonView>().RPC("SetInteger", PhotonTargets.All, "Jumping", 1);
-                    mouserb.AddForce(new Vector3(0, jumpForce, 0));
-				}
+				
 			}
 		}
+    }
+    void jump()
+    {
+        transform.GetComponent<PhotonView>().RPC("playSound", PhotonTargets.AllBuffered, 1, 1f);
+        transform.GetComponent<PhotonView>().RPC("SetTrigger", PhotonTargets.All, "JumpTrigger");
+        transform.GetComponent<PhotonView>().RPC("SetInteger", PhotonTargets.All, "Jumping", 1);
+        mouserb.AddForce(new Vector3(0, jumpForce, 0));
+        isGrounded = false;
+        Debug.Log("Jumped");
     }
 
     // take a certain amount of damage
@@ -695,26 +700,29 @@ public class MouseMovement : MonoBehaviour {
     // collision with objects
     void OnCollisionEnter(Collision collisionInfo)
     {
-        isGrounded = true;
-        //animator.SetInteger("Jumping", 0);
+        
         transform.GetComponent<PhotonView>().RPC("SetInteger", PhotonTargets.All, "Jumping", 0);
         if (collisionInfo.gameObject.tag == "Ground")
         {
+            isGrounded = true;
             onLava = false;
 			onIce = false;
         }
         // if enters lava
         if (collisionInfo.gameObject.tag == "Lava")
         {
+            isGrounded = true;
             onLava = true;
         }
 		if (collisionInfo.gameObject.tag == "Ice")
         {
+            isGrounded = true;
             onIce = true;
         }
         // if steps on a mine
         if (collisionInfo.gameObject.tag == "Mine")
         {
+            isGrounded = true;
             Mine mine = collisionInfo.gameObject.GetComponent<Mine>();
             TakeDamage(mine.mineSize * 50);
             transform.GetComponent<PhotonView>().RPC("destroyMine", PhotonTargets.MasterClient, collisionInfo);

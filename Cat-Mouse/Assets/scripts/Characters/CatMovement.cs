@@ -357,6 +357,14 @@ public class CatMovement : MonoBehaviour
     }
 	
 	void Update(){
+        //jump function
+        if (isGrounded && !onSpikes)
+        {
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                jump();
+            }
+        }
         /* Updates the HUD state for the current player */
         if (Input.GetKeyDown(KeyCode.T))
         {
@@ -648,20 +656,19 @@ public class CatMovement : MonoBehaviour
 						moveV = new Vector3(moveV.x, 0, -1);
 					}
 				}
-				if (Input.GetKeyDown(KeyCode.Space))
-				{
-                    transform.GetComponent<PhotonView>().RPC("uncloak", PhotonTargets.AllBuffered);
-                    //soundPlayer.PlayOneShot(jumpSound, 1f);
-                    transform.GetComponent<PhotonView>().RPC("playSound", PhotonTargets.AllBuffered, 1, 1f);
-                    isGrounded = false;
-                    //animator.SetTrigger("JumpTrigger");
-                    //animator.SetInteger("Jumping", 1);
-                    transform.GetComponent<PhotonView>().RPC("SetTrigger", PhotonTargets.All, "JumpTrigger");
-                    transform.GetComponent<PhotonView>().RPC("SetInteger", PhotonTargets.All, "Jumping", 1);
-                    catrb.AddForce(new Vector3(0, jumpForce, 0));
-				}
+			
 			}
 		}
+    }
+    void jump()
+    {
+            transform.GetComponent<PhotonView>().RPC("uncloak", PhotonTargets.AllBuffered);
+            transform.GetComponent<PhotonView>().RPC("playSound", PhotonTargets.AllBuffered, 1, 1f);
+            isGrounded = false;
+            transform.GetComponent<PhotonView>().RPC("SetTrigger", PhotonTargets.All, "JumpTrigger");
+            transform.GetComponent<PhotonView>().RPC("SetInteger", PhotonTargets.All, "Jumping", 1);
+            catrb.AddForce(new Vector3(0, jumpForce, 0));
+        
     }
     [PunRPC]
     void PlayAnim(string a)
@@ -829,25 +836,32 @@ public class CatMovement : MonoBehaviour
 	
 	// collision with objects
 	void OnCollisionEnter(Collision collisionInfo){
-		isGrounded = true;
 
         //animator.SetInteger("Jumping", 0);
         transform.GetComponent<PhotonView>().RPC("SetInteger", PhotonTargets.All, "Jumping", 0);
         if (collisionInfo.gameObject.tag == "Ground"){
-			onLava = false;
+            isGrounded = true;
+
+            onLava = false;
 			onIce = false;
 		}
 		// if enters lava
 		if (collisionInfo.gameObject.tag == "Lava"){
-			onLava = true;
+            isGrounded = true;
+
+            onLava = true;
 		}
 		if (collisionInfo.gameObject.tag == "Ice")
         {
+            isGrounded = true;
+
             onIce = true;
         }
 		// if steps on a mine
 		if (collisionInfo.gameObject.tag == "Mine"){
-			Mine mine = collisionInfo.gameObject.GetComponent<Mine>();
+            isGrounded = true;
+
+            Mine mine = collisionInfo.gameObject.GetComponent<Mine>();
 			TakeDamage(mine.mineSize * 50);
             transform.GetComponent<PhotonView>().RPC("destroyMine", PhotonTargets.MasterClient, collisionInfo);
         }
