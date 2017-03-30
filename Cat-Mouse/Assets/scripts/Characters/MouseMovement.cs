@@ -996,5 +996,8 @@ public class MouseMovement : MonoBehaviour {
     {
         return this.ultimateSkillPoints;
     }
+    void respawn()
+    {
 
+    }
 }
