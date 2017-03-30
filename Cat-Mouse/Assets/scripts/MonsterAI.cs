@@ -31,13 +31,13 @@ public class MonsterAI : MonoBehaviour {
 
     // list of the players in the game
     private List<GameObject> playersInGame = new List<GameObject>();
-	public int targettedPlayer;
+	public int targettedPlayer = 0;
 	// patrol
 	float patrolTimer = 5f;
 	float turnTimer = 1.8f;
 	// attack
 	float retargetTimer = 5f;
-	private float timeUntilRetarget = 5f;
+	private float timeUntilRetarget = 1f;
 	
 	// utility variables
 	NavMeshAgent agent;
@@ -77,6 +77,13 @@ public class MonsterAI : MonoBehaviour {
 		modes.Add("Attack");
 		modes.Add("Sleeping");
 		
+		agent = GetComponent<NavMeshAgent>();
+		currentMode = "Sleeping";
+		soundPlayer = GetComponent<AudioSource>();
+	}
+	// sets the player list with the players in the game
+	private void setPlayerList(){
+		playersInGame = new List<GameObject>();
 		GameObject[] catArray = GameObject.FindGameObjectsWithTag("Cat");
 		for (int i = 0; i < catArray.Length; i++){
 			playersInGame.Add(catArray[i]);
@@ -85,11 +92,8 @@ public class MonsterAI : MonoBehaviour {
 		for (int i = 0; i < mouseArray.Length; i++){
 			playersInGame.Add(mouseArray[i]);
 		}
-		
-		agent = GetComponent<NavMeshAgent>();
-		currentMode = "Sleeping";
-		soundPlayer = GetComponent<AudioSource>();
 	}
+	
 	public void setMonsterType(string type){
 		this.monsterType = type;
 		if (type == "Monster"){
@@ -208,6 +212,7 @@ public class MonsterAI : MonoBehaviour {
 		if (currentMode != "Attack"){
 			currentMode = "Attack";
 			delayTimer = delayBetweenMovements;
+			setPlayerList();
 		}
     }
     // take damage
@@ -500,6 +505,7 @@ public class MonsterAI : MonoBehaviour {
 			}
 			else if (currentMode == "Attack"){
 				delayTimer = delayBetweenMovements;
+				setPlayerList();
 			}
 		}
 		

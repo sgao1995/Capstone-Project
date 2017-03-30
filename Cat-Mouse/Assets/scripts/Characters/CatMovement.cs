@@ -20,6 +20,8 @@ public class CatMovement : MonoBehaviour
     // movement speed
     private float movementModifier = 1;
     private float movementModifierTimer = 10f;
+	// invis duration
+	private float invisDuration = 0f;
 
     // attack
     private Animator animator;
@@ -238,7 +240,7 @@ public class CatMovement : MonoBehaviour
         if (!isStalkerActive)
         {
             pauseTimer = true;
-            StartCoroutine(InvisC(1f, 3f));
+            StartCoroutine(InvisC(1f, 1f));
         }   
     }
     [PunRPC]
@@ -478,7 +480,7 @@ public class CatMovement : MonoBehaviour
 		}
 		
 		// left click
-		if (Input.GetMouseButtonDown(0) && attackCooldownTimer <= 0 && !Input.GetKey(KeyCode.Escape))
+		if (Input.GetMouseButtonDown(0) && attackCooldownTimer <= 0 && !Input.GetKey(KeyCode.Escape) && !miniMenuShowing)
         {
             transform.GetComponent<PhotonView>().RPC("uncloak", PhotonTargets.AllBuffered);
             focusTimerPause = true;
@@ -548,6 +550,12 @@ public class CatMovement : MonoBehaviour
         {
             damageModifier = 1;
         }
+		if (invisDuration > 0f){
+			invisDuration -= Time.deltaTime;
+			if (invisDuration <= 0){
+				transform.GetComponent<PhotonView>().RPC("InvisC", PhotonTargets.AllBuffered, 1f, 1f);
+			}
+		}
         Debug.Log("DEAL THIS MUCH DAMAGE:" + attackPowerM);
 	}
     //heightenedSenses
@@ -593,7 +601,6 @@ public class CatMovement : MonoBehaviour
 				soundPlayer.pitch = Random.Range(0.9f, 1.1f);
 				if (Input.GetKey(KeyCode.A))
 				{
-                    transform.GetComponent<PhotonView>().RPC("uncloak", PhotonTargets.AllBuffered);
                     //animator.Play("MoveLeft");
                     transform.GetComponent<PhotonView>().RPC("PlayAnim", PhotonTargets.All, "MoveLeft");
 
@@ -609,7 +616,6 @@ public class CatMovement : MonoBehaviour
 				}
 				if (Input.GetKey(KeyCode.D))
 				{
-                    transform.GetComponent<PhotonView>().RPC("uncloak", PhotonTargets.AllBuffered);
                     //animator.Play("MoveRight");
                     transform.GetComponent<PhotonView>().RPC("PlayAnim", PhotonTargets.All, "MoveRight");
                     // play sound effect
@@ -624,7 +630,6 @@ public class CatMovement : MonoBehaviour
 				}
 				if (Input.GetKey(KeyCode.W))
 				{
-                    transform.GetComponent<PhotonView>().RPC("uncloak", PhotonTargets.AllBuffered);
                     if (!Input.GetKey(KeyCode.A) && !Input.GetKey(KeyCode.D))
                         //animator.Play("MoveForward");
                         transform.GetComponent<PhotonView>().RPC("PlayAnim", PhotonTargets.All, "MoveForward");
@@ -640,7 +645,6 @@ public class CatMovement : MonoBehaviour
 				}
 				if (Input.GetKey(KeyCode.S))
 				{
-                    transform.GetComponent<PhotonView>().RPC("uncloak", PhotonTargets.AllBuffered);
                     if (!Input.GetKey(KeyCode.A) && !Input.GetKey(KeyCode.D))
 						//animator.Play("MoveBackward");
                         transform.GetComponent<PhotonView>().RPC("PlayAnim", PhotonTargets.All, "MoveBackward");
@@ -662,7 +666,6 @@ public class CatMovement : MonoBehaviour
     }
     void jump()
     {
-            transform.GetComponent<PhotonView>().RPC("uncloak", PhotonTargets.AllBuffered);
             transform.GetComponent<PhotonView>().RPC("playSound", PhotonTargets.AllBuffered, 1, 1f);
             isGrounded = false;
             transform.GetComponent<PhotonView>().RPC("SetTrigger", PhotonTargets.All, "JumpTrigger");
@@ -689,7 +692,7 @@ public class CatMovement : MonoBehaviour
     // take a certain amount of damage
     public void TakeDamage(float amt)
     {
-        uncloak();
+        transform.GetComponent<PhotonView>().RPC("uncloak", PhotonTargets.AllBuffered);
         //   transform.GetComponent<PhotonView>().RPC("PlayAnim", PhotonTargets.All, "GetHit");
         //   WaitForAnimation(0.5f);
         transform.GetComponent<PhotonView>().RPC("changeHealth", PhotonTargets.AllBuffered, amt);
@@ -862,16 +865,14 @@ public class CatMovement : MonoBehaviour
             isGrounded = true;
 
             Mine mine = collisionInfo.gameObject.GetComponent<Mine>();
-			TakeDamage(mine.mineSize * 50);
-            transform.GetComponent<PhotonView>().RPC("destroyMine", PhotonTargets.MasterClient, collisionInfo);
+			mine.transform.GetComponent<PhotonView>().RPC("explode", PhotonTargets.MasterClient, 2f);
+			// if mine hasnt been exploded already then take damage
+			if (mine.exploded == false){
+				TakeDamage(mine.mineSize * 50);
+			}
         }
 	}
-    [PunRPC]
-    void destroyMine(Collision collisionInfo)
-    {
 
-        PhotonNetwork.Destroy(collisionInfo.gameObject);
-    }
     [PunRPC]
     void destroyPU(Collider obj)
     {
@@ -915,24 +916,35 @@ public class CatMovement : MonoBehaviour
 	void OnTriggerEnter(Collider obj){
 		if(obj.tag == "Powerup"){
 			Powerup pup = obj.GetComponent<Powerup>();
-			// movement speed boost
-			if (pup.powerupType == 0){
-				movementModifier = 1.5f;
-				movementModifierTimer = 10f;
-			}
-			// damage boost
-			else if (pup.powerupType == 1){
-                damageModifier = 2;
-                damageModifierTimer = 20f;
-			}
-			// invis
-			else if (pup.powerupType == 2){
-				
-			}
-			// exp boost
-			else if (pup.powerupType == 3){
-				
-			}
+            // movement speed boost
+            if (pup.powerupType == 0)
+            {
+                movementModifier = 1.25f;
+                movementModifierTimer = 10f;
+            }
+            // hp restore
+            else if (pup.powerupType == 1)
+            {
+				if (currentHealth < maxHealth){
+					// do nothing
+				}
+				else{
+					// heal for 20% of missing health
+					float missingHP = maxHealth - currentHealth;
+					currentHealth += missingHP*0.2f;
+				}
+            }
+            // invis
+            else if (pup.powerupType == 2)
+            {
+				transform.GetComponent<PhotonView>().RPC("InvisC", PhotonTargets.AllBuffered, 0.2f, 1f);
+				invisDuration = 15f;
+            }
+            // exp boost
+            else if (pup.powerupType == 3)
+            {
+				currentEXP += 100f;
+            }
             //Debug.Log("destroy " + obj);
             transform.GetComponent<PhotonView>().RPC("destroyPU", PhotonTargets.MasterClient, obj);
 		}

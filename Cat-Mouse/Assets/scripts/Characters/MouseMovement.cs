@@ -24,6 +24,8 @@ public class MouseMovement : MonoBehaviour {
     // movement speed
     private float movementModifier = 1f;
     private float movementModifierTimer = 10f;
+	// invis duration
+	private float invisDuration = 0f;
 
     // attack
     private Animator animator;
@@ -294,15 +296,16 @@ public class MouseMovement : MonoBehaviour {
 		Quaternion smokeRot = Quaternion.Euler(-90, 0, 0);
 		Vector3 smokePos = new Vector3(transform.position.x, 0.5f, transform.position.z) + transform.forward;
 		GameObject smokeScreen = (GameObject)PhotonNetwork.Instantiate("Smoke", smokePos, smokeRot, 0);
-        StartCoroutine(Invis(0.2f, 3f));
+        transform.GetComponent<PhotonView>().RPC("Invis", PhotonTargets.AllBuffered, 0.2f, 1f);
         yield return new WaitForSeconds(5f);
         uncloak();
     }
     [PunRPC]
     void uncloak()
     {
-        StartCoroutine(Invis(1.0f, 3f));
+        StartCoroutine(Invis(1.0f, 1f));
     }
+	[PunRPC]
     IEnumerator Invis(float val, float time)
     {
         for (float f = 1f; f >= 0; f -= Time.deltaTime/time)
@@ -383,6 +386,7 @@ public class MouseMovement : MonoBehaviour {
 		// left click
         if (Input.GetMouseButtonDown(0) && attackCooldownTimer <= 0 && !Input.GetKey(KeyCode.Escape) && !miniMenuShowing)
         {
+			transform.GetComponent<PhotonView>().RPC("uncloak", PhotonTargets.AllBuffered);
 			attackCooldownTimer = attackCooldownDelay;
 			WaitForAnimation(0.7f);
 			StartCoroutine(Attack());
@@ -448,6 +452,12 @@ public class MouseMovement : MonoBehaviour {
         }
 		if (flareCooldownTimer > 0f){
 			flareCooldownTimer -= Time.deltaTime;
+		}
+		if (invisDuration > 0f){
+			invisDuration -= Time.deltaTime;
+			if (invisDuration <= 0){
+				transform.GetComponent<PhotonView>().RPC("uncloak", PhotonTargets.AllBuffered);
+			}
 		}
 	}
 
@@ -554,6 +564,7 @@ public class MouseMovement : MonoBehaviour {
     // take a certain amount of damage
     public void TakeDamage(float amt)
     {
+		transform.GetComponent<PhotonView>().RPC("uncloak", PhotonTargets.AllBuffered);
         //animator.Play("GetHit");
        // transform.GetComponent<PhotonView>().RPC("PlayAnim", PhotonTargets.All, "GetHit");
         //WaitForAnimation(0.5f);
@@ -790,16 +801,14 @@ public class MouseMovement : MonoBehaviour {
         if (collisionInfo.gameObject.tag == "Mine")
         {
             isGrounded = true;
+			
             Mine mine = collisionInfo.gameObject.GetComponent<Mine>();
-            TakeDamage(mine.mineSize * 50);
-            transform.GetComponent<PhotonView>().RPC("destroyMine", PhotonTargets.MasterClient, collisionInfo);
+			mine.transform.GetComponent<PhotonView>().RPC("explode", PhotonTargets.MasterClient, 2f);
+			// if mine hasnt been exploded already then take damage
+			if (mine.exploded == false){
+				TakeDamage(mine.mineSize * 50);
+			}
         }
-    }
-    [PunRPC]
-    void destroyMine(Collision collisionInfo)
-    {
-
-        PhotonNetwork.Destroy(collisionInfo.gameObject);
     }
 	void OnTriggerStay(Collider obj){
 		// enters range to use an object. Certain objects take priority over others
@@ -863,23 +872,31 @@ public class MouseMovement : MonoBehaviour {
             // movement speed boost
             if (pup.powerupType == 0)
             {
-                movementModifier = 2;
+                movementModifier = 1.25f;
                 movementModifierTimer = 10f;
             }
             // hp restore
             else if (pup.powerupType == 1)
             {
-
+				if (currentHealth < maxHealth){
+					// do nothing
+				}
+				else{
+					// heal for 20% of missing health
+					float missingHP = maxHealth - currentHealth;
+					currentHealth += missingHP*0.2f;
+				}
             }
             // invis
             else if (pup.powerupType == 2)
             {
-
+				transform.GetComponent<PhotonView>().RPC("Invis", PhotonTargets.AllBuffered, 0.2f, 1f);
+				invisDuration = 15f;
             }
             // exp boost
             else if (pup.powerupType == 3)
             {
-
+				currentEXP += 100f;
             }
             //Debug.Log("destroy " + obj);
             transform.GetComponent<PhotonView>().RPC("destroyPU", PhotonTargets.MasterClient, obj);
