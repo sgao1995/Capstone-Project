@@ -11,12 +11,18 @@ public class SkillScrollView : MonoBehaviour {
     GameObject SkillSlot3;
     GameObject SkillSlot4;
     public int skillsLeveled=0;
+    public int RegularSP;  // Records the amount of Regular Skill Points available
+    public int UltimateSP;  // Records the amount of Ultimate Skill Points available
 
     /* Character Classes */
     public GameObject catCharObject;  // Game Object representing the 'Hunter' Class
     public GameObject mouseCharObject;  // Game Object representing the 'Explorer' Class
     public CatMovement catChar;  // Represents the 'Hunter' Class behaviour
     public MouseMovement mouseChar;  // Represents the 'Explorer' Class behaviour
+
+    /* Skill Point Display Object */
+    public GameObject regularSPObject;  // Represents the Regular Skill Points Object
+    public GameObject ultimateSPObject;  // Represents the Ultimate Skill Points Object
 
 	// initialize the GUI skills based on the character class
 	void Start () {
@@ -25,6 +31,10 @@ public class SkillScrollView : MonoBehaviour {
         SkillSlot3 = GameObject.Find("skillSlotThree");
         SkillSlot4 = GameObject.Find("skillSlotFour");
         GameObject content = transform.GetChild(0).gameObject;
+
+        /* Initialises and retrieves the Skill Point Display Objects */
+        regularSPObject = GameObject.Find("RegularSkillPoints");
+        ultimateSPObject = GameObject.Find("UltimateSkillPoints");
 
         /* Initialises and retrieves the Character Classes and associated behaviours */
         if (GameObject.Find("TeamSelectionOBJ").GetComponent<teamselectiondata>().playertype == 0)
@@ -73,7 +83,13 @@ public class SkillScrollView : MonoBehaviour {
             content.transform.GetChild(14).transform.GetChild(0).GetComponent<SkillButton>().SetName("Hunter/RelaodIcon");
             content.transform.GetChild(14).transform.GetChild(1).GetComponent<Text>().text = "Reload - Instantly refreshes all of your other ability cooldowns. 60 second cooldown.";
 
+            /* Sets the number of Skill Points available */
+
+            /* Retrieves the number of each type of Skill Point available */
+            this.RegularSP = catChar.getRegularSP();
+            this.UltimateSP = catChar.getUltimateSP();
         }
+
         // explorer
         else
         {
@@ -110,8 +126,13 @@ public class SkillScrollView : MonoBehaviour {
             content.transform.GetChild(14).transform.GetChild(0).GetComponent<SkillButton>().SetName("Explorer/SleepDartIcon");
             content.transform.GetChild(14).transform.GetChild(1).GetComponent<Text>().text = "Sleep Dart - Shoot a dart towards target location, putting the first enemy hit to sleep for 5 seconds, rendering them unable to take any action until the sleep wears off or they take damage. 100 second cooldown. ";
 
+            this.RegularSP = mouseChar.getRegularSP();
+            this.UltimateSP = mouseChar.getUltimateSP();
         }
 
+        /* Displays the number of each type of Skill Point available */
+        this.regularSPObject.GetComponent<Text>().text = "Regular Skill Points:  " + this.RegularSP.ToString();  // Displays the number of Regular Skill Points available
+        this.ultimateSPObject.GetComponent<Text>().text = "Ultimate Skill Points:  " + this.UltimateSP.ToString();  // Displays the number of Ultimate Skill Points available 
 
         /*
         NameList.Add("Alan");
@@ -216,6 +237,9 @@ public class SkillScrollView : MonoBehaviour {
                 default:  // Invalid Skill ID, do nothing
                     break;
             }
+
+            this.RegularSP = catChar.getRegularSP();
+            this.UltimateSP = catChar.getUltimateSP();
         }
 
         /* Else, Explorer Class */
@@ -259,6 +283,12 @@ public class SkillScrollView : MonoBehaviour {
                 default: 
                     break;
             }
+
+            this.RegularSP = mouseChar.getRegularSP();
+            this.UltimateSP = mouseChar.getUltimateSP();
         }
+
+        this.regularSPObject.GetComponent<Text>().text = "Regular Skill Points:  " + this.RegularSP.ToString();
+        this.ultimateSPObject.GetComponent<Text>().text = "Ultimate Skill Points:  " + this.UltimateSP.ToString();
     }
 } 

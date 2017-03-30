@@ -1,13 +1,14 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class CatCamMovement : MonoBehaviour {
+public class CamMovement : MonoBehaviour {
     Vector3 mouseMov; //vector that keeps track of mouse movement
     Vector3 smoothnessV;//vector to smooth mouse movement
     Vector3 CamPos; //starting position of the camera
     public float sensitivity = 3.0f; //mouse sensitivity
-    public float smoothness =4.0f; //smoothness value for camera movement
-    
+    public float smoothness = 4.0f; //smoothness value for camera movement
+    public string charType; 
+
     GameObject character;
     private Vector3 camPosition;
     public float distBehind;
@@ -20,12 +21,12 @@ public class CatCamMovement : MonoBehaviour {
 
     void Start()
     {
-        character = GameObject.FindWithTag("Cat");
+        character = GameObject.FindWithTag(charType);
     }
 
     void LateUpdate()
     {
-       
+
         CamControls();
         Vector3 offset = new Vector3(0, 0.5f, 0);
         Vector3 target = transform.parent.position + offset;
@@ -53,15 +54,15 @@ public class CatCamMovement : MonoBehaviour {
     }
     void CameraCollision(Vector3 target, ref Vector3 camPos) //used to check if camera is near an object, if so then we will move the camera forward
     {
-      
-        
+
+
         Debug.DrawLine(target, camPos, Color.cyan); //used to debug, to check the line cast
 
         RaycastHit hitInfo;
         if (Physics.Linecast(target, camPos, out hitInfo, layerMask)) //if there is an object between the target and camera, then we set distance to distance of where the line hit (distance is clamped to be within min and max dist values)
         {
-              Debug.DrawRay(hitInfo.point, -Vector3.forward , Color.red); //used to debug, check where we hit
-              camPos = new Vector3(hitInfo.point.x, camPos.y, hitInfo.point.z);
+            Debug.DrawRay(hitInfo.point, -Vector3.forward, Color.red); //used to debug, check where we hit
+            camPos = new Vector3(hitInfo.point.x, camPos.y, hitInfo.point.z);
 
         }
     }

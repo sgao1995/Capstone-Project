@@ -2,35 +2,40 @@
 using System.Collections;
 
 public class MouseCamMovement : MonoBehaviour {
-
     Vector3 mouseMov; //vector that keeps track of mouse movement
     Vector3 smoothnessV;//vector to smooth mouse movement
     Vector3 CamPos; //starting position of the camera
     public float sensitivity = 3.0f; //mouse sensitivity
-    public float smoothness = 2.0f; //smoothness value for camera movement
-
-    //variables for camera collision 
-    public float minDist = 0f;
-    public float maxDist = 4f;
-    public float smoothnessCol = 5.0f; //smoothness value for collision
-
-    Vector3 camDir;
-    float distance;
+    public float smoothness = 4.0f; //smoothness value for camera movement
 
     GameObject character;
+    private Vector3 camPosition;
+    public float distBehind;
+    public float distOntop;
+
+
+    //variables for camera collision 
+    int layerMask = ~(1 << 10); //used for collision, set to layer 10 so that anything on that layer is ignored by the linecast 
+
+
     void Start()
     {
-        camDir = transform.localPosition.normalized;
-        distance = transform.localPosition.magnitude;
-        character = this.transform.parent.gameObject; //set the character as the parent of the camera
+        character = GameObject.FindWithTag("Mouse");
     }
-    void Update()
+
+    void LateUpdate()
     {
+
         CamControls();
-        //  CameraCollision();
+        Vector3 offset = new Vector3(0, 0.5f, 0);
+        Vector3 target = transform.parent.position + offset;
+        CameraCollision(target, ref camPosition);
+        transform.position = camPosition;
+
     }
     void CamControls()
     {
+        camPosition = character.transform.position + Vector3.up * distOntop - character.transform.forward * distBehind; //set camera position
         float mx = Input.GetAxis("Mouse X");
         float my = Input.GetAxis("Mouse Y");
         mx = mx * sensitivity * smoothness; //multiply by smooth and sensitivity value
@@ -44,24 +49,20 @@ public class MouseCamMovement : MonoBehaviour {
         mouseMov.y = Mathf.Clamp(mouseMov.y, -30f, 60f);
         transform.localRotation = Quaternion.AngleAxis(-mouseMov.y, Vector3.right); //inverted rotate up and down with camera
         character.transform.localRotation = Quaternion.AngleAxis(mouseMov.x, character.transform.up); //rotate the character left/right
-    }
-    void CameraCollision() //used to check if camera is near an object, if so then we will move the camera forward
-    {
-        Vector3 camPos = transform.TransformPoint(camDir * maxDist);
-        Vector3 charPos = transform.parent.position;
 
-        Debug.DrawLine(charPos, camPos, Color.cyan); //used to debug, to check the line cast
+    }
+    void CameraCollision(Vector3 target, ref Vector3 camPos) //used to check if camera is near an object, if so then we will move the camera forward
+    {
+
+
+        Debug.DrawLine(target, camPos, Color.cyan); //used to debug, to check the line cast
 
         RaycastHit hitInfo;
-        if (Physics.Linecast(charPos, camPos, out hitInfo)) //if there is an object between the target and character, then we set distance to distance of there the line hit (distance is clamped to be within min and max dist values)
+        if (Physics.Linecast(target, camPos, out hitInfo, layerMask)) //if there is an object between the target and camera, then we set distance to distance of where the line hit (distance is clamped to be within min and max dist values)
         {
-            distance = Mathf.Clamp(hitInfo.distance, minDist, maxDist);
+            Debug.DrawRay(hitInfo.point, -Vector3.forward, Color.red); //used to debug, check where we hit
+            camPos = new Vector3(hitInfo.point.x, camPos.y, hitInfo.point.z);
+
         }
-        else //if nothing is hit, we set distance to maxDist
-        {
-            distance = maxDist;
-        }
-        //change position of cam based on collision
-        transform.localPosition = Vector3.Lerp(transform.localPosition, camDir * distance, Time.deltaTime * smoothnessCol);
     }
 }
