@@ -24,6 +24,7 @@ public class GameManager : Photon.PunBehaviour
     private bool bossRoomCleared = false;
     private GameObject[] ballArray;
     private GameObject[] targetArray;
+	private int mazeSize;
 
     private void Start()
     {
@@ -34,12 +35,16 @@ public class GameManager : Photon.PunBehaviour
         sm = GameObject.FindObjectsOfType<SpawnM>();
         PhotonNetwork.isMessageQueueRunning = true;
         PhotonNetwork.automaticallySyncScene = true;
+		
+		// instantiate the maze
+		mazeInstance = Instantiate(mazePrefab) as Maze;
         // create the monster spawn locations
+		mazeSize = mazeInstance.size.x - 4;
         for (int i = 0; i < 5; i++)
         {
             for (int j = 0; j < 5; j++)
             {
-                Vector3 spawnPos = new Vector3(40f - i * 20f, 0, 40f - j * 20f);
+                Vector3 spawnPos = new Vector3(mazeSize - i * (mazeSize*0.4f), 0, mazeSize - j * (mazeSize*0.4f));
                 Quaternion spawnRot = new Quaternion(0f, 0f, 0f, 0f);
                 MonsterSpawn newSpawn = Instantiate(mSpawn) as MonsterSpawn;
                 mSpawn.transform.position = spawnPos;
@@ -51,7 +56,7 @@ public class GameManager : Photon.PunBehaviour
         {
             allPuzzleTypes.Add(p);
         }
-		mazeInstance = Instantiate(mazePrefab) as Maze;
+
         for (int p = 0; p < 3; p++)
         {
 			float rseed = Mathf.PerlinNoise(mazeInstance.getMazeGenerationNumber() * p, p/mazeInstance.getMazeGenerationNumber());
@@ -264,7 +269,7 @@ public class GameManager : Photon.PunBehaviour
         if (PhotonNetwork.isMasterClient)
         {
             // need to add 0.5 or else they spawn on edges
-            Vector3 spawnPos = new Vector3(0.5f + Random.Range(-45, 46), 0.5f, 0.5f + Random.Range(-45, 46));
+            Vector3 spawnPos = new Vector3(0.5f + Random.Range(-mazeSize, mazeSize), 0.5f, 0.5f + Random.Range(-mazeSize, mazeSize));
             Quaternion spawnRot = new Quaternion(0f, 0f, 0f, 0f);
             GameObject newGO = (GameObject)PhotonNetwork.Instantiate("Powerup", spawnPos, spawnRot, 0);
             Powerup newPowerup = newGO.GetComponent<Powerup>();

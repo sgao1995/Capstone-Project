@@ -28,7 +28,7 @@ public class Maze : MonoBehaviour {
 	public List<Spike> spikeList = new List<Spike>();
 	
 	// set values to generate same maze every time
-	public static int mazeGenerationNumber = 40; // anything above 2 makes a decent maze (didnt test every number though), also dont go above the size
+	public static int mazeGenerationNumber = 8; // anything above 2 makes a decent maze (didnt test every number though), also dont go above the size
 	public static IntVector2 startPoint = new IntVector2(mazeGenerationNumber, mazeGenerationNumber);
 	public int roomTypeCount = 0;
 	public float cellSize = 1;
@@ -283,7 +283,7 @@ public class Maze : MonoBehaviour {
 		// go through puzzle room candidates, different sized rooms can hold different puzzles
 		// first cull small rooms from the list
 		for (int r = 0; r < rooms.Count; r++){
-			if (rooms[r].getCells().Count > 40 && rooms[r].getCells().Count < 50){
+			if (rooms[r].getCells().Count > 30 && rooms[r].getCells().Count < 50){
 				puzzleRooms.Add(rooms[r]);
 			}
 		}
