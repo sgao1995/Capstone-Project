@@ -73,9 +73,9 @@ public class CatMovement : MonoBehaviour
 	public bool miniMenuShowing = false;
 	private GameObject miniMenu;
     private GameObject Alert;
-	
-	/* Sound effects */
-	public AudioClip footstepSound;
+    private Text ObjectiveMsg;
+    /* Sound effects */
+    public AudioClip footstepSound;
 	public AudioClip jumpSound;
 	public AudioClip attackMissSound;
 	public AudioClip[] dealDamageSound;
@@ -115,12 +115,22 @@ public class CatMovement : MonoBehaviour
 		miniMenu.SetActive(false);
         Alert = GameObject.Find("Alert");
         Alert.SetActive(false);
-
-       	// find and initialize sound effects
-		soundPlayer = GetComponent<AudioSource>();
+        ObjectiveMsg = GameObject.Find("Objective").GetComponent<Text>();
+        StartCoroutine(ObjectiveMessage());
+        // find and initialize sound effects
+        soundPlayer = GetComponent<AudioSource>();
         soundPlayer.clip = footstepSound;
-		
 		// steel traps
+    }
+    IEnumerator ObjectiveMessage()
+    {
+        if (GameObject.Find("Objective").GetComponent<Text>())
+        {
+            Debug.Log("messagedisplayed");
+        }
+        ObjectiveMsg.text = "Find and Eliminate 3 Explorers";
+        yield return new WaitForSeconds(5);
+        ObjectiveMsg.text = "";
     }
 
 	// level up

@@ -69,7 +69,7 @@ public class MouseMovement : MonoBehaviour {
 	public bool miniMenuShowing = false;
 	private GameObject miniMenu;
     private GameObject Alert;
-
+    private Text ObjectiveMsg;
     /* Sound effects */
     public AudioClip footstepSound;
 	public AudioClip jumpSound;
@@ -103,16 +103,27 @@ public class MouseMovement : MonoBehaviour {
         GameObject interactiveText = GameObject.Find("Text");
 		interactText = interactiveText.GetComponent<Text>();
 		interactText.text = "";
-		
 		miniMenu = GameObject.Find("MiniMenu");
 		// need to disable the minimenu to begin with
 		miniMenu.SetActive(false);
         Alert = GameObject.Find("Alert");
         Alert.SetActive(false);
-
+        ObjectiveMsg = GameObject.Find("Objective").GetComponent<Text>();
+        StartCoroutine(ObjectiveMessage());
 
         soundPlayer = GetComponent<AudioSource>();
     }
+    IEnumerator ObjectiveMessage()
+    {
+        if (GameObject.Find("Objective").GetComponent<Text>())
+        {
+            Debug.Log("messagedisplayed");
+        }
+        ObjectiveMsg.text = "Gather Puzzle Pieces From Chests By Solving Puzzles And Find The Exit";
+        yield return new WaitForSeconds(5);
+        ObjectiveMsg.text = "";
+    }
+    
     void tagTeam() //Explorer Skill (passive): Increase movement speed by 50% when near another Explorer
     {
         hitCollider = Physics.OverlapSphere(this.transform.position, 5);
@@ -153,7 +164,26 @@ public class MouseMovement : MonoBehaviour {
     }
     void HiddenPassage()//Explorer Skill (active): If the user hits a wall, the wall will slide down and a new path can be taken
     {
+        transform.GetComponent<PhotonView>().RPC("SetTrigger", PhotonTargets.All, "Attack3Trigger");
+        RaycastHit hitInfo;
 
+        if (Physics.SphereCast(transform.position, 0.2f, transform.forward, out hitInfo, 1))
+        {
+            Debug.Log("We hit: " + hitInfo.collider.name);
+            if (hitInfo.collider.tag == "Wall")
+            {
+                PhotonNetwork.Destroy(hitInfo.collider.gameObject);
+            }
+        }
+        else
+        {
+            transform.GetComponent<PhotonView>().RPC("playSound", PhotonTargets.AllBuffered, 4, 1f);
+        }
+    }
+    [PunRPC]
+    void DestroyWall(GameObject obj)
+    {
+        PhotonNetwork.Destroy(obj);
     }
     void Disengage()//Explorer Skill (active): Player will jump backwards a certain amount
     {
@@ -324,6 +354,11 @@ public class MouseMovement : MonoBehaviour {
         }
 
         /* Updates the Character attributes and HUD state for the current player */
+        //temporary for hidden passage skill
+        if (Input.GetKeyDown(KeyCode.X))
+        {
+            HiddenPassage();
+        }
         //temporary for recoup skill
         if (Input.GetKeyDown(KeyCode.H))
         {

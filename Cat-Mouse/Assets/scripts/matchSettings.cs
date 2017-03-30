@@ -27,7 +27,18 @@ public class matchSettings : Photon.PunBehaviour
         Debug.Log(PhotonNetwork.playerList.Length);*/
 
     }
-  
+
+    void LeaveRoom()
+    {
+        PhotonNetwork.LeaveRoom();
+        
+    }
+    void OnLeftRoom()
+    {
+        Debug.Log("still leaving...");
+        PhotonNetwork.isMessageQueueRunning = false;
+        PhotonNetwork.LoadLevel("lobby");
+    }
     void JoinCat()
     {
         GameObject.Find("CatBtn").GetComponent<PhotonView>().RPC("setPid", PhotonTargets.AllBuffered, "CText",PhotonNetwork.player.ID.ToString());
@@ -99,6 +110,10 @@ public class matchSettings : Photon.PunBehaviour
                     Debug.Log("Choose a Team");
                 }
                 // }
+                break;
+            case "LeaveBtn":
+                Debug.Log("LeavingRoom");
+                LeaveRoom();
                 break;
             case "Cat":
 
