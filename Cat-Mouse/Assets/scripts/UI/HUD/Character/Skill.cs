@@ -16,6 +16,12 @@ public class Skill : MonoBehaviour {
     /* Represents the Skill Slot Objects in the HUD */
     public Image[] skillSlotObjects;
 
+    /* Represents the Skill Info Box in the HUD */
+    public GameObject skillInfoBoxObject;
+
+    /* Represents the Skill Info Objects in the HUD */
+    public Text[] skillInfoObjects;
+
     /* Represents all Skills available to the Character */
     public CharSkill[] charSkills;
     public int charSkillsNum;  // Represents number of Skills
@@ -278,9 +284,13 @@ public class Skill : MonoBehaviour {
         /* Retrieves and initialises the Skill Data source */
         this.skillDataSource = this.gameObject.GetComponent<SkillData>();
 
+        /* Retrieves and initialises the Skill Info Box */
+        this.skillInfoBoxObject = GameObject.Find("SkillInfo");
+
         for (int i = 0; i < this.skillSlots.Length; i++)
         {
             skillSlots[i] = new SkillSlot(this.skillSlotObjects[i], this.skillLocked, false);  // Initially, all Skill Slots are disabled
+            this.skillInfoObjects[i].text = "";  // Empty Skill Info for disabled Skill Slots
         }
 
         /* Retrieves the number of Skills available */
@@ -288,6 +298,9 @@ public class Skill : MonoBehaviour {
 
         /* Initialises all Skills available to the Character */
         charSkills = new CharSkill[this.getCharSkillsNum()];
+
+        /* Hides the Skill Info Box initially */
+        this.skillInfoBoxObject.SetActive(false);
     }
 	
 	// Updates the Skill System UI Elements every frame */
@@ -339,6 +352,25 @@ public class Skill : MonoBehaviour {
                         this.skillSlots[i].getSlotSkill().setCooldownPeriodActive(false);  // Sets the Cooldown Period of the Skill as inactive
                     }
                }
+
+                /* Updates the Skill Info Box to display the Player's current Skills */
+
+                /* Retrieves and populates text objects with Skill attributes */
+               this.skillInfoObjects[i].text = ("SLOT " + (i + 1) + ":   " + this.skillSlots[i].getSlotSkill().getSkillName() + " - " + this.skillSlots[i].getSlotSkill().getSkillDescription());
+            }
+        }
+
+       /* Detects whether user has pressed the Skill Info Box key */
+       if (Input.GetKeyDown(KeyCode.I))
+        {
+            /* Checks to see if the Skill Info Box is currently visible */
+            if (this.skillInfoBoxObject.GetActive() == false)  // If not visible
+            {
+                this.skillInfoBoxObject.SetActive(true);
+            }
+            else  // If visible 
+            {
+                this.skillInfoBoxObject.SetActive(false);
             }
         }
     }

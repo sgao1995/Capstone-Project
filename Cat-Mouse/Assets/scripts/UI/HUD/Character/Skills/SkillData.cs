@@ -35,7 +35,7 @@ public class SkillData : MonoBehaviour {
         this.skillListName.Add("Problem Solver");
         this.skillListName.Add("Smokescreen");
         this.skillListName.Add("Bandage");
-        this.skillListName.Add("Demolish");
+        this.skillListName.Add("Hidden Passage");
         this.skillListName.Add("Disengage");
         this.skillListName.Add("Cripple");
         this.skillListName.Add("Brawler");
@@ -65,7 +65,7 @@ public class SkillData : MonoBehaviour {
         this.skillListDescription.Add("An alert will show when nearby puzzle rooms. Passive ability.");
         this.skillListDescription.Add("Throw down a cloud of smoke, causing you to become invisible for 5 seconds. 30 second cooldown.");
         this.skillListDescription.Add("Restore 40 health over 10 seconds. 45 second cooldown.");
-        this.skillListDescription.Add("An attack in front of the Explorer. Can destroy walls. 30 second cooldown.");
+        this.skillListDescription.Add("Opens a hidden passage if a wall is hit. 30 second cooldown.");
         this.skillListDescription.Add("Instantly jump a large distance backwards. 20 second cooldown.");
         this.skillListDescription.Add("Perform an attack that cripples the first target hit, slowing their movement speed by 30% for 3 seconds. 20 second cooldown.");
         this.skillListDescription.Add("Your attacks deal 50% extra damage, and you become immune to enemy abilities. Lasts 5 seconds. 45 second cooldown.");

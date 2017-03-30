@@ -24,6 +24,7 @@ public class GameManager : Photon.PunBehaviour
     private bool bossRoomCleared = false;
     private GameObject[] ballArray;
     private GameObject[] targetArray;
+	private int mazeSize;
 
     private void Start()
     {
@@ -34,12 +35,16 @@ public class GameManager : Photon.PunBehaviour
         sm = GameObject.FindObjectsOfType<SpawnM>();
         PhotonNetwork.isMessageQueueRunning = true;
         PhotonNetwork.automaticallySyncScene = true;
+		
+		// instantiate the maze
+		mazeInstance = Instantiate(mazePrefab) as Maze;
         // create the monster spawn locations
+		mazeSize = mazeInstance.size.x - 4;
         for (int i = 0; i < 5; i++)
         {
             for (int j = 0; j < 5; j++)
             {
-                Vector3 spawnPos = new Vector3(40f - i * 20f, 0, 40f - j * 20f);
+                Vector3 spawnPos = new Vector3(mazeSize - i * (mazeSize*0.4f), 0, mazeSize - j * (mazeSize*0.4f));
                 Quaternion spawnRot = new Quaternion(0f, 0f, 0f, 0f);
                 MonsterSpawn newSpawn = Instantiate(mSpawn) as MonsterSpawn;
                 mSpawn.transform.position = spawnPos;
@@ -47,18 +52,18 @@ public class GameManager : Photon.PunBehaviour
                 monsterSpawnList.Add(newSpawn);
             }
         }
-
         for (int p = 0; p < 6; p++)
         {
             allPuzzleTypes.Add(p);
         }
+
         for (int p = 0; p < 3; p++)
         {
-            int getPuzzle = Random.Range(0, allPuzzleTypes.Count);
+			float rseed = Mathf.PerlinNoise(mazeInstance.getMazeGenerationNumber() * p, p/mazeInstance.getMazeGenerationNumber());
+            int getPuzzle = (int)(rseed * allPuzzleTypes.Count);
             activePuzzleTypes.Add(allPuzzleTypes[getPuzzle]);
             allPuzzleTypes.RemoveAt(getPuzzle);
         }
-        SpawnMaze();
         if (GameObject.Find("TeamSelectionOBJ").GetComponent<teamselectiondata>().playertype == 0)
         {
             SpawnCat();
@@ -67,6 +72,7 @@ public class GameManager : Photon.PunBehaviour
         {
             SpawnMouse();
         }
+		SpawnMaze();
         // spawn basic monsters and elite monsters
         for (int i = 0; i < monsterSpawnList.Count; i++)
         {
@@ -114,12 +120,13 @@ public class GameManager : Photon.PunBehaviour
     }
     void SpawnMaze()
     {
-        mazeInstance = Instantiate(mazePrefab) as Maze;
         var mazeScript = mazeInstance.GetComponent<Maze>();
         if (mazeScript != null)
         {
             mazeScript.StartMazeCreation();
         }
+		// master client spawns the chests
+		// also spawns the puzzles that are global
         if (PhotonNetwork.isMasterClient)
         {
             /*List<int> tempTypes = new List<int>();
@@ -132,6 +139,8 @@ public class GameManager : Photon.PunBehaviour
             mazeInstance.GenerateChestLocations();
             mazeInstance.GeneratePuzzles(activePuzzleTypes);
         }
+		// then EACH client needs to spawn local puzzles
+		mazeInstance.GenerateLocalPuzzles(activePuzzleTypes);
     }
     void SpawnCat()
     {
@@ -260,7 +269,7 @@ public class GameManager : Photon.PunBehaviour
         if (PhotonNetwork.isMasterClient)
         {
             // need to add 0.5 or else they spawn on edges
-            Vector3 spawnPos = new Vector3(0.5f + Random.Range(-45, 46), 0.5f, 0.5f + Random.Range(-45, 46));
+            Vector3 spawnPos = new Vector3(0.5f + Random.Range(-mazeSize, mazeSize), 0.5f, 0.5f + Random.Range(-mazeSize, mazeSize));
             Quaternion spawnRot = new Quaternion(0f, 0f, 0f, 0f);
             GameObject newGO = (GameObject)PhotonNetwork.Instantiate("Powerup", spawnPos, spawnRot, 0);
             Powerup newPowerup = newGO.GetComponent<Powerup>();
