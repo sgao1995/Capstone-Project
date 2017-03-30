@@ -47,18 +47,18 @@ public class GameManager : Photon.PunBehaviour
                 monsterSpawnList.Add(newSpawn);
             }
         }
-
         for (int p = 0; p < 6; p++)
         {
             allPuzzleTypes.Add(p);
         }
+		mazeInstance = Instantiate(mazePrefab) as Maze;
         for (int p = 0; p < 3; p++)
         {
-            int getPuzzle = Random.Range(0, allPuzzleTypes.Count);
+			float rseed = Mathf.PerlinNoise(mazeInstance.getMazeGenerationNumber() * p, p/mazeInstance.getMazeGenerationNumber());
+            int getPuzzle = (int)(rseed * allPuzzleTypes.Count);
             activePuzzleTypes.Add(allPuzzleTypes[getPuzzle]);
             allPuzzleTypes.RemoveAt(getPuzzle);
         }
-        SpawnMaze();
         if (GameObject.Find("TeamSelectionOBJ").GetComponent<teamselectiondata>().playertype == 0)
         {
             SpawnCat();
@@ -67,6 +67,7 @@ public class GameManager : Photon.PunBehaviour
         {
             SpawnMouse();
         }
+		SpawnMaze();
         // spawn basic monsters and elite monsters
         for (int i = 0; i < monsterSpawnList.Count; i++)
         {
@@ -114,12 +115,13 @@ public class GameManager : Photon.PunBehaviour
     }
     void SpawnMaze()
     {
-        mazeInstance = Instantiate(mazePrefab) as Maze;
         var mazeScript = mazeInstance.GetComponent<Maze>();
         if (mazeScript != null)
         {
             mazeScript.StartMazeCreation();
         }
+		// master client spawns the chests
+		// also spawns the puzzles that are global
         if (PhotonNetwork.isMasterClient)
         {
             /*List<int> tempTypes = new List<int>();
@@ -132,6 +134,8 @@ public class GameManager : Photon.PunBehaviour
             mazeInstance.GenerateChestLocations();
             mazeInstance.GeneratePuzzles(activePuzzleTypes);
         }
+		// then EACH client needs to spawn local puzzles
+		mazeInstance.GenerateLocalPuzzles(activePuzzleTypes);
     }
     void SpawnCat()
     {

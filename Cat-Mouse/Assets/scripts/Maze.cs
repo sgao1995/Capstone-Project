@@ -37,7 +37,7 @@ public class Maze : MonoBehaviour {
 	// format: [key1x, key1z, key2x, key2z, key3x, key3z]
 	private List<float> keyLocations = new List<float>();
 	private List<float> chestLocations = new List<float>();
-		
+	
 	// creates a new room 
 	private MazeRoom CreateRoom (int roomType) {
 		MazeRoom newRoom = ScriptableObject.CreateInstance<MazeRoom>();
@@ -349,8 +349,8 @@ public class Maze : MonoBehaviour {
 		}
 	}
 	
-	// generate the puzzles in the puzzle rooms
-	public void GeneratePuzzles(List<int> activePuzzleTypes){
+	// local puzzles that each client needs to spawn
+	public void GenerateLocalPuzzles(List<int> activePuzzleTypes){
 		for (int r = 0; r < 3; r++){
 			int puzzleType = activePuzzleTypes[r];
 			bool keyGenerated = false;
@@ -374,8 +374,30 @@ public class Maze : MonoBehaviour {
 					}
 				}
 			}
+			// ice room, low control over movement
+			else if (puzzleType == 4){
+				for (int c = 0; c < puzzleRooms[r].getCells().Count; c++){
+					// change all floor cells to ice
+					MazeCell changeThis = puzzleRooms[r].getCells()[c];
+					changeThis.transform.GetChild(0).gameObject.tag = "Ice";
+					changeThis.changeMaterial(iceMat);
+				}
+				float generatedNoise = Mathf.PerlinNoise(r*mazeGenerationNumber, r*mazeGenerationNumber);
+				int keyCell = (int)(generatedNoise*puzzleRooms[r].getCells().Count);
+				MazeCell currentCell = puzzleRooms[r].getCells()[keyCell];
+				keyLocations.Add(currentCell.transform.position.x + Mathf.PerlinNoise(currentCell.coordinates.x/(float)mazeGenerationNumber, currentCell.coordinates.x/(float)mazeGenerationNumber));
+				keyLocations.Add(currentCell.transform.position.z + Mathf.PerlinNoise(currentCell.coordinates.z/(float)mazeGenerationNumber, currentCell.coordinates.z/(float)mazeGenerationNumber));
+			}
+		}
+	}
+	
+	// generate the puzzles in the puzzle rooms, globally using photon objects
+	public void GeneratePuzzles(List<int> activePuzzleTypes){
+		for (int r = 0; r < 3; r++){
+			int puzzleType = activePuzzleTypes[r];
+			bool keyGenerated = false;
 			// minefield
-			else if (puzzleType == 1){
+			if (puzzleType == 1){
 				float mineMultiplier = puzzleRooms[r].getCells().Count/25f;
 				// spawn mines of varying size and damage based on Perlin noise
 				// number of mines varies with room size
@@ -473,20 +495,6 @@ public class Maze : MonoBehaviour {
 				keyLocations.Add(currentCell.transform.position.x + Mathf.PerlinNoise(currentCell.coordinates.x/(float)mazeGenerationNumber, currentCell.coordinates.x/(float)mazeGenerationNumber));
 				keyLocations.Add(currentCell.transform.position.z + Mathf.PerlinNoise(currentCell.coordinates.z/(float)mazeGenerationNumber, currentCell.coordinates.z/(float)mazeGenerationNumber));
 			}
-			// ice room, low control over movement
-			else if (puzzleType == 4){
-				for (int c = 0; c < puzzleRooms[r].getCells().Count; c++){
-					// change all floor cells to ice
-					MazeCell changeThis = puzzleRooms[r].getCells()[c];
-					changeThis.transform.GetChild(0).gameObject.tag = "Ice";
-					changeThis.changeMaterial(iceMat);
-				}
-				float generatedNoise = Mathf.PerlinNoise(r*mazeGenerationNumber, r*mazeGenerationNumber);
-				int keyCell = (int)(generatedNoise*puzzleRooms[r].getCells().Count);
-				MazeCell currentCell = puzzleRooms[r].getCells()[keyCell];
-				keyLocations.Add(currentCell.transform.position.x + Mathf.PerlinNoise(currentCell.coordinates.x/(float)mazeGenerationNumber, currentCell.coordinates.x/(float)mazeGenerationNumber));
-				keyLocations.Add(currentCell.transform.position.z + Mathf.PerlinNoise(currentCell.coordinates.z/(float)mazeGenerationNumber, currentCell.coordinates.z/(float)mazeGenerationNumber));
-			}
 			// boss room, fight a strong monster
 			else if (puzzleType == 5){
 				// spawn boss
@@ -540,6 +548,10 @@ public class Maze : MonoBehaviour {
 		Destroy(wallObject);
 		Exit currentWall = Instantiate(exitPrefab) as Exit;
 		currentWall.Initialize(whichCell, null, direction);
+	}
+	
+	public int getMazeGenerationNumber(){
+		return mazeGenerationNumber;
 	}
 	
 	void Update(){
