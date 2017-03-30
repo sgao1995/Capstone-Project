@@ -22,7 +22,7 @@ public class MouseMovement : MonoBehaviour {
     private List<int> learnedSkills;
     private float damage = 10f;
     // movement speed
-    private int movementModifier = 1;
+    private float movementModifier = 1f;
     private float movementModifierTimer = 10f;
 
     // attack
@@ -56,6 +56,7 @@ public class MouseMovement : MonoBehaviour {
     private int numSkillSlotsMaximum = 4;  // Sets the maximum number of Skill Slots for the Mouse
     private float[] skillCooldownTimers = new float[4]; // the cooldown timer
     private float[] skillCooldowns = new float[4]; // the max cooldown
+    private float healingAmt = 4f; //Needed for Bandage skill, if skill is active, explorer will heal 4 hp every second
 
     /* Vitality System attribute parameters */
     private float[] vitalLevelHP = {50, 65, 80, 110};  // Health Points of Mouse per Level
@@ -114,7 +115,7 @@ public class MouseMovement : MonoBehaviour {
 
         soundPlayer = GetComponent<AudioSource>();
     }
-    void tagTeam()
+    void tagTeam() //Explorer Skill (passive): Increase movement speed by 50% when near another Explorer
     {
         hitCollider = Physics.OverlapSphere(this.transform.position, 5);
         foreach (Collider C in hitCollider)
@@ -122,14 +123,67 @@ public class MouseMovement : MonoBehaviour {
             if (C.GetComponent<Collider>().transform.root != this.transform && C.GetComponent<Collider>().tag == "Mouse")
             {
                 Debug.Log("hit");
-                movementModifier = 2;
+                movementModifier = 1.5f;
 
             }
         }
     }
+    void TreasureHunter()//Explorer Skill (passive): Alert shows up when player is near chest or keys
+    {
+        
+    }
+    void ProblemSolver()//Explorer Skill (passive): Alert shows up when player is near puzzle rooms
+    {
+
+    }
+    IEnumerator Bandage()//Explorer Skill (active): Heals player 40 hp over 10 seconds
+    {
+        float time = 10;
+        if (currentHealth < maxHealth)
+        {
+            while (time > 0)
+            {
+                currentHealth += healingAmt;
+                if (currentHealth > maxHealth)
+                {
+                    currentHealth = maxHealth;
+                }
+                time = time - 1;
+                yield return new WaitForSeconds(1);
+            }
+        }
+    }
+    void HiddenPassage()//Explorer Skill (active): If the user hits a wall, the wall will slide down and a new path can be taken
+    {
+
+    }
+    void Disengage()//Explorer Skill (active): Player will jump backwards a certain amount
+    {
+        canMove = false;
+        mouserb.velocity = new Vector3(0,0,0);
+        mouserb.angularVelocity = new Vector3(0, 0, 0);
+        isGrounded = false;
+        transform.GetComponent<PhotonView>().RPC("SetTrigger", PhotonTargets.All, "JumpTrigger");
+        transform.GetComponent<PhotonView>().RPC("SetInteger", PhotonTargets.All, "Jumping", 1);
+        mouserb.AddForce(new Vector3(0, 120f, 0) + (-transform.forward * 300f));
+        canMove = true;
+    }
+    void Cripple()//Explorer Skill (active): Attack which cripples an enemy (slows them down by 30%)
+    {
+
+    }
+    void Hunted()//Explorer Skill (active): For 6 seconds become invisible instantly, increase movement speed by 50%, and footsteps are silent 
+    {
+
+    }
+    void SleepDart()//Explorer Skill (active): shoot a dart which stuns for 5 seconds (enemies will be able to move again if damaged)
+    {
+
+    }
     void LateUpdate()
     {
         tagTeam();
+
     }
     // level up
     public void LevelUp()
@@ -176,7 +230,7 @@ public class MouseMovement : MonoBehaviour {
         {
             // skills 1 and 2 are passive
             case 3:
-                Debug.Log("use smokescreen");
+                Debug.Log("use smokescreen"); //SmokeScreen, Explorer Skill (active): Throw down smokescreen, and become invisible for 5 seconds
                 // placeholder skill for a smoke screen
                 //	animator.Play("Throw");
                 transform.GetComponent<PhotonView>().RPC("PlayAnim", PhotonTargets.All, "Throw");
@@ -262,8 +316,21 @@ public class MouseMovement : MonoBehaviour {
         }
     }
 	void Update(){
-        
+
         /* Updates the Character attributes and HUD state for the current player */
+        //temporary for recoup skill
+        if (Input.GetKeyDown(KeyCode.H))
+        {
+            currentHealth = currentHealth - 80;
+        }
+        if (Input.GetKeyDown(KeyCode.F))
+        {
+            StartCoroutine(Bandage());
+        }
+        if (Input.GetKeyDown(KeyCode.J))
+        {
+            Disengage();
+        }
         if (GetComponent<PhotonView>().isMine)
         {
             /* If the Maximum Experience Points for the current Level is reached, Level Up the Character */
