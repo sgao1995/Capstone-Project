@@ -240,7 +240,7 @@ public class CatMovement : MonoBehaviour
     {
         //become invisible
         transform.GetComponent<PhotonView>().RPC("InvisC", PhotonTargets.AllBuffered, 0.2f, 3f);
-        Debug.Log("INVIS");
+        //Debug.Log("INVIS");
         yield return null;
     }
 
@@ -566,7 +566,7 @@ public class CatMovement : MonoBehaviour
 				transform.GetComponent<PhotonView>().RPC("InvisC", PhotonTargets.AllBuffered, 1f, 1f);
 			}
 		}
-        Debug.Log("DEAL THIS MUCH DAMAGE:" + attackPowerM);
+        //Debug.Log("DEAL THIS MUCH DAMAGE:" + attackPowerM);
 	}
     //heightenedSenses
     void heightenedSenses()
@@ -878,7 +878,7 @@ public class CatMovement : MonoBehaviour
 			mine.transform.GetComponent<PhotonView>().RPC("explode", PhotonTargets.MasterClient, 2f);
 			// if mine hasnt been exploded already then take damage
 			if (mine.exploded == false){
-				TakeDamage(mine.mineSize * 50);
+				TakeDamage(mine.mineSize * 50f);
 			}
         }
 	}
@@ -962,6 +962,12 @@ public class CatMovement : MonoBehaviour
 		if (obj.tag == "Spike"){
 			onSpikes = true;
 			canMove = false;
+		}
+		if (obj.tag == "Stomp"){
+			// player gets knocked down for 1.5 seconds
+			TakeDamage(10f);
+			transform.GetComponent<PhotonView>().RPC("PlayAnim", PhotonTargets.All, "Unarmed-Death1");
+			WaitForAnimation(1.5f);
 		}
 	}
     public float getHealth()

@@ -271,6 +271,19 @@ public class MonsterAI : MonoBehaviour {
       //  }
         DealDamage();
     }
+	// special ranged attack for the boss
+	void RangedAttack()
+	{
+		// doesnt cause a hitbox, just has a particle effect that does damage on its own
+		attackCooldownTimer = attackCooldownDelay;
+        transform.GetComponent<PhotonView>().RPC("SetTrigger", PhotonTargets.All, "Attack");
+        WaitForAnimation(1f);
+		// so we dont call deal damage, just spawn a particle effect
+		Quaternion bossAttackRot = Quaternion.LookRotation(transform.forward);
+		Vector3 bossAttackPos = new Vector3(transform.position.x, 1.2f, transform.position.z);
+		PhotonNetwork.Instantiate("BossAttack", bossAttackPos, bossAttackRot, 0);
+	}
+	
 	// cast a bash skill in front of monster
     void Bash()
     {
@@ -286,9 +299,14 @@ public class MonsterAI : MonoBehaviour {
     }
 	// cast stomp in aoe around monster
 	void Stomp(){
+		Debug.Log("stomp");
 		stompCooldownTimer = 20f;
         //		animator.Play("Stomp");
         transform.GetComponent<PhotonView>().RPC("SetTrigger", PhotonTargets.All, "Stomp");
+		// display cracks on ground
+		Quaternion crackRot = Quaternion.Euler(-90, 0, 0);
+		Vector3 crackPos = new Vector3(transform.position.x, 0.05f, transform.position.z);
+		PhotonNetwork.Instantiate("SplitEarth", crackPos, crackRot, 0);
         WaitForAnimation(1.5f);
 		transform.GetComponent<PhotonView>().RPC("playSound", PhotonTargets.AllBuffered, 7, 1f);
 	}
@@ -305,8 +323,19 @@ public class MonsterAI : MonoBehaviour {
 	
 	void DealDamage(){
 		RaycastHit hitInfo;
+		// default hit box size, change it for bigger monsters
+		float attackHitboxSize = 0.2f;
+		if (monsterType == "Monster"){
+			attackHitboxSize = 0.2f;
+		}
+		else if (monsterType == "MonsterElite"){
+			attackHitboxSize = 0.25f;
+		}
+		else if (monsterType == "PuzzleRoomBoss"){
+			attackHitboxSize = 0.4f;
+		}
 		
-        if (Physics.SphereCast(transform.position, 0.2f, transform.forward, out hitInfo, 1))
+        if (Physics.SphereCast(transform.position, attackHitboxSize, transform.forward, out hitInfo, 1))
         {
             if (hitInfo.collider.name == "Cat(Clone)")
             {
@@ -367,8 +396,6 @@ public class MonsterAI : MonoBehaviour {
                 if (!soundPlayer.isPlaying){
 					transform.GetComponent<PhotonView>().RPC("playSound", PhotonTargets.AllBuffered, 0, 1f);
 				}
-				transform.Translate(transform.forward * speed * Time.deltaTime, Space.World);
-                
 			}
 			else if (currentMode == "Attack"){
 
@@ -391,24 +418,10 @@ public class MonsterAI : MonoBehaviour {
 	// non motion based 
     void Update()
     {
-
         animDirection = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical")).normalized;
         
         if (canMove){
-			if (currentMode == "Patrol"){
-				// move back and forth
-				patrolTimer -= Time.deltaTime;
-				if (patrolTimer < 0){
-					// turn
-					turnTimer -= Time.deltaTime;
-					TurnLeft();
-					if (turnTimer < 0){
-						turnTimer = 1.8f;
-						patrolTimer = 5f;
-					}
-				}
-			}
-			else if (currentMode == "Attack"){
+			if (currentMode == "Attack"){
 				dist = Vector3.Distance(this.transform.position, playersInGame[targettedPlayer].transform.position);
 				// target a player upon mode attack
 				if (retargetTimer < 0){
@@ -423,7 +436,15 @@ public class MonsterAI : MonoBehaviour {
 						dist = Vector3.Distance(this.transform.position, playersInGame[p].transform.position);
 						if (dist < closestDist){
 							targettedPlayer = p;
-							agent.SetDestination(playersInGame[targettedPlayer].transform.position);
+							Vector3 offset;
+							if (monsterType == "Boss"){
+								offset = 1.5f* Vector3.Normalize(this.transform.position - playersInGame[p].transform.position);
+							}
+							else{
+								offset = Vector3.Normalize(this.transform.position - playersInGame[p].transform.position) /3f;
+							}
+							
+							agent.SetDestination(playersInGame[targettedPlayer].transform.position + offset);
 						}
 					}
 				}		
@@ -465,7 +486,7 @@ public class MonsterAI : MonoBehaviour {
 						if (dist < 4f){
 							attackChance = Random.Range(0, 1f);
 							if (attackChance < 0.15f){
-								Attack();
+								RangedAttack();
 							}
 							// 10% chance to heal 
 							else if (healCooldownTimer < 0 && attackChance < 0.25f){
@@ -502,6 +523,11 @@ public class MonsterAI : MonoBehaviour {
 			else if (currentMode == "Patrol"){
 				// patrol takes twice as long
 				delayTimer = delayBetweenMovements*2;
+				// upon change to patrol, pick a random location in the maze as target
+				int mazeSize = GameObject.Find("Maze(Clone)").GetComponent<Maze>().size.x;
+				// need to add 0.5 or else it will be on an edge
+				Vector3 targetLocation = new Vector3(0.5f + Random.Range(-mazeSize, mazeSize), 0.5f, 0.5f + Random.Range(-mazeSize, mazeSize));
+				agent.SetDestination(targetLocation);
 			}
 			else if (currentMode == "Attack"){
 				delayTimer = delayBetweenMovements;

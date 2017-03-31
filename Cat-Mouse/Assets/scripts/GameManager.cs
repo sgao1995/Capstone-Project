@@ -129,13 +129,12 @@ public class GameManager : Photon.PunBehaviour
 		// also spawns the puzzles that are global
         if (PhotonNetwork.isMasterClient)
         {
-            /*List<int> tempTypes = new List<int>();
+            List<int> tempTypes = new List<int>();
             tempTypes.Add(5);
             tempTypes.Add(3);
             tempTypes.Add(2);
-            mazeInstance.GeneratePuzzles(tempTypes);
             Debug.Log(tempTypes[0] + " " + tempTypes[1] + " " + tempTypes[2]);
-			activePuzzleTypes = tempTypes;*/
+			activePuzzleTypes = tempTypes;
             mazeInstance.GenerateChestLocations();
             mazeInstance.GeneratePuzzles(activePuzzleTypes);
         }

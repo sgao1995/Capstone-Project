@@ -975,6 +975,12 @@ public class MouseMovement : MonoBehaviour {
 			TakeDamage(5f);
 			obj.GetComponent<SteelTrap>().activate(this.gameObject);
 		}
+		if (obj.tag == "Stomp"){
+			// player gets knocked down for 1.5 seconds
+			TakeDamage(10f);
+			transform.GetComponent<PhotonView>().RPC("PlayAnim", PhotonTargets.All, "Unarmed-Death1");
+			WaitForAnimation(1.5f);
+		}
     }
     public float getHealth()
     {
