@@ -24,6 +24,8 @@ public class MouseMovement : MonoBehaviour {
     // movement speed
     private float movementModifier = 1f;
     private float movementModifierTimer = 10f;
+	// invis duration
+	private float invisDuration = 0f;
 
     // attack
     private Animator animator;
@@ -69,7 +71,7 @@ public class MouseMovement : MonoBehaviour {
 	public bool miniMenuShowing = false;
 	private GameObject miniMenu;
     private GameObject Alert;
-
+    private Text ObjectiveMsg;
     /* Sound effects */
     public AudioClip footstepSound;
 	public AudioClip jumpSound;
@@ -111,16 +113,27 @@ public class MouseMovement : MonoBehaviour {
         GameObject interactiveText = GameObject.Find("Text");
 		interactText = interactiveText.GetComponent<Text>();
 		interactText.text = "";
-		
 		miniMenu = GameObject.Find("MiniMenu");
 		// need to disable the minimenu to begin with
 		miniMenu.SetActive(false);
         Alert = GameObject.Find("Alert");
         Alert.SetActive(false);
-
+        ObjectiveMsg = GameObject.Find("Objective").GetComponent<Text>();
+        StartCoroutine(ObjectiveMessage());
 
         soundPlayer = GetComponent<AudioSource>();
     }
+    IEnumerator ObjectiveMessage()
+    {
+        if (GameObject.Find("Objective").GetComponent<Text>())
+        {
+            Debug.Log("messagedisplayed");
+        }
+        ObjectiveMsg.text = "Gather Puzzle Pieces From Chests By Solving Puzzles And Find The Exit";
+        yield return new WaitForSeconds(5);
+        ObjectiveMsg.text = "";
+    }
+    
     void tagTeam() //Explorer Skill (passive): Increase movement speed by 50% when near another Explorer
     {
         hitCollider = Physics.OverlapSphere(this.transform.position, 5);
@@ -161,7 +174,26 @@ public class MouseMovement : MonoBehaviour {
     }
     void HiddenPassage()//Explorer Skill (active): If the user hits a wall, the wall will slide down and a new path can be taken
     {
+        transform.GetComponent<PhotonView>().RPC("SetTrigger", PhotonTargets.All, "Attack3Trigger");
+        RaycastHit hitInfo;
 
+        if (Physics.SphereCast(transform.position, 0.2f, transform.forward, out hitInfo, 1))
+        {
+            Debug.Log("We hit: " + hitInfo.collider.name);
+            if (hitInfo.collider.tag == "Wall")
+            {
+                PhotonNetwork.Destroy(hitInfo.collider.gameObject);
+            }
+        }
+        else
+        {
+            transform.GetComponent<PhotonView>().RPC("playSound", PhotonTargets.AllBuffered, 4, 1f);
+        }
+    }
+    [PunRPC]
+    void DestroyWall(GameObject obj)
+    {
+        PhotonNetwork.Destroy(obj);
     }
     void Disengage()//Explorer Skill (active): Player will jump backwards a certain amount
     {
@@ -302,15 +334,16 @@ public class MouseMovement : MonoBehaviour {
 		Quaternion smokeRot = Quaternion.Euler(-90, 0, 0);
 		Vector3 smokePos = new Vector3(transform.position.x, 0.5f, transform.position.z) + transform.forward;
 		GameObject smokeScreen = (GameObject)PhotonNetwork.Instantiate("Smoke", smokePos, smokeRot, 0);
-        StartCoroutine(Invis(0.2f, 3f));
+        transform.GetComponent<PhotonView>().RPC("Invis", PhotonTargets.AllBuffered, 0.2f, 1f);
         yield return new WaitForSeconds(5f);
         transform.GetComponent<PhotonView>().RPC("uncloak", PhotonTargets.AllBuffered);
     }
     [PunRPC]
     void uncloak()
     {
-        StartCoroutine(Invis(1.0f, 3f));
+        StartCoroutine(Invis(1.0f, 1f));
     }
+	[PunRPC]
     IEnumerator Invis(float val, float time)
     {
         for (float f = 1f; f >= 0; f -= Time.deltaTime/time)
@@ -332,6 +365,11 @@ public class MouseMovement : MonoBehaviour {
         }
 
         /* Updates the Character attributes and HUD state for the current player */
+        //temporary for hidden passage skill
+        if (Input.GetKeyDown(KeyCode.X))
+        {
+            HiddenPassage();
+        }
         //temporary for recoup skill
         if (Input.GetKeyDown(KeyCode.H))
         {
@@ -391,6 +429,7 @@ public class MouseMovement : MonoBehaviour {
 		// left click
         if (Input.GetMouseButtonDown(0) && attackCooldownTimer <= 0 && !Input.GetKey(KeyCode.Escape) && !miniMenuShowing)
         {
+			transform.GetComponent<PhotonView>().RPC("uncloak", PhotonTargets.AllBuffered);
 			attackCooldownTimer = attackCooldownDelay;
 			WaitForAnimation(0.7f);
 			StartCoroutine(Attack());
@@ -456,6 +495,12 @@ public class MouseMovement : MonoBehaviour {
         }
 		if (flareCooldownTimer > 0f){
 			flareCooldownTimer -= Time.deltaTime;
+		}
+		if (invisDuration > 0f){
+			invisDuration -= Time.deltaTime;
+			if (invisDuration <= 0){
+				transform.GetComponent<PhotonView>().RPC("uncloak", PhotonTargets.AllBuffered);
+			}
 		}
 	}
 
@@ -562,6 +607,7 @@ public class MouseMovement : MonoBehaviour {
     // take a certain amount of damage
     public void TakeDamage(float amt)
     {
+		transform.GetComponent<PhotonView>().RPC("uncloak", PhotonTargets.AllBuffered);
         //animator.Play("GetHit");
        // transform.GetComponent<PhotonView>().RPC("PlayAnim", PhotonTargets.All, "GetHit");
         //WaitForAnimation(0.5f);
@@ -802,9 +848,13 @@ public class MouseMovement : MonoBehaviour {
         if (collisionInfo.gameObject.tag == "Mine")
         {
             isGrounded = true;
+			
             Mine mine = collisionInfo.gameObject.GetComponent<Mine>();
-            TakeDamage(mine.mineSize * 50);
-            transform.GetComponent<PhotonView>().RPC("destroyMine", PhotonTargets.MasterClient, collisionInfo);
+			mine.transform.GetComponent<PhotonView>().RPC("explode", PhotonTargets.MasterClient, 2f);
+			// if mine hasnt been exploded already then take damage
+			if (mine.exploded == false){
+				TakeDamage(mine.mineSize * 50);
+			}
         }
     }
     [PunRPC]
@@ -874,23 +924,31 @@ public class MouseMovement : MonoBehaviour {
             // movement speed boost
             if (pup.powerupType == 0)
             {
-                movementModifier = 2;
+                movementModifier = 1.25f;
                 movementModifierTimer = 10f;
             }
             // hp restore
             else if (pup.powerupType == 1)
             {
-
+				if (currentHealth < maxHealth){
+					// do nothing
+				}
+				else{
+					// heal for 20% of missing health
+					float missingHP = maxHealth - currentHealth;
+					currentHealth += missingHP*0.2f;
+				}
             }
             // invis
             else if (pup.powerupType == 2)
             {
-
+				transform.GetComponent<PhotonView>().RPC("Invis", PhotonTargets.AllBuffered, 0.2f, 1f);
+				invisDuration = 15f;
             }
             // exp boost
             else if (pup.powerupType == 3)
             {
-
+				currentEXP += 100f;
             }
             //Debug.Log("destroy " + obj);
             transform.GetComponent<PhotonView>().RPC("destroyPU", PhotonTargets.MasterClient, obj);
@@ -933,6 +991,12 @@ public class MouseMovement : MonoBehaviour {
 			WaitForAnimation(5f);
 			TakeDamage(5f);
 			obj.GetComponent<SteelTrap>().activate(this.gameObject);
+		}
+		if (obj.tag == "Stomp"){
+			// player gets knocked down for 1.5 seconds
+			TakeDamage(10f);
+			transform.GetComponent<PhotonView>().RPC("PlayAnim", PhotonTargets.All, "Unarmed-Death1");
+			WaitForAnimation(1.5f);
 		}
     }
     public float getHealth()

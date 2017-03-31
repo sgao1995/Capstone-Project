@@ -54,7 +54,7 @@ public class SkillScrollView : MonoBehaviour {
             content.transform.GetChild(1).transform.GetChild(1).GetComponent<Text>().text = "Heightened Senses - An alert will show when nearby an Explorer. Passive ability.";
 
             content.transform.GetChild(2).transform.GetChild(0).GetComponent<SkillButton>().SetName("Hunter/LieInWaitIcon");
-            content.transform.GetChild(2).transform.GetChild(1).GetComponent<Text>().text = "Lie in Wait - After 3 seconds of not moving or using any abilities, become invisible until your next motion or ability use. Passive ability.";
+            content.transform.GetChild(2).transform.GetChild(1).GetComponent<Text>().text = "Lie in Wait - After 3 seconds of not moving or using any abilities, become invisible until your next combat action or ability use. Passive ability.";
 
             content.transform.GetChild(3).transform.GetChild(0).GetComponent<SkillButton>().SetName("Hunter/FocusIcon");
             content.transform.GetChild(3).transform.GetChild(1).GetComponent<Text>().text = "Focus - After 10 seconds of not attacking, your next attack deals 200% damage. Passive ability.";

@@ -157,6 +157,36 @@ public class Maze : MonoBehaviour {
 			secondCell.Initialize(firstCell.room);
 		}
 		passage.Initialize(secondCell, firstCell, direction.GetOpposite());
+		
+		/*GameObject newPassage;
+		Vector3 newPassagePos = new Vector3(0, 0, 0);
+		Quaternion newPassageRot = new Quaternion(0f, 0f, 0f, 0f);
+		if (generatedNoise < 0.2){
+			newPassage = (GameObject) PhotonNetwork.Instantiate("Archway", newPassagePos, newPassageRot, 0);
+		}
+		else{
+			newPassage = (GameObject) PhotonNetwork.Instantiate("MazePassage", newPassagePos, newPassageRot, 0);
+		}
+		MazePassage passage = newPassage.GetComponent<MazePassage>();
+		passage.Initialize(firstCell, secondCell, direction);
+		
+		if (generatedNoise < 0.2){
+			newPassage = (GameObject) PhotonNetwork.Instantiate("Archway", newPassagePos, newPassageRot, 0);
+		}
+		else{
+			newPassage = (GameObject) PhotonNetwork.Instantiate("MazePassage", newPassagePos, newPassageRot, 0);
+		}
+
+		passage = newPassage.GetComponent<MazePassage>();
+		// create passage between two rooms
+		if (passage is MazeArch){
+			secondCell.Initialize(CreateRoom(firstCell.room.settingsIndex));
+		}
+		else{
+			secondCell.Initialize(firstCell.room);
+		}
+		
+		passage.Initialize(secondCell, firstCell, direction.GetOpposite());*/
 	}
 
 	// create a wall between two cells
@@ -169,6 +199,7 @@ public class Maze : MonoBehaviour {
 		else{
 			generatedNoise = Mathf.PerlinNoise((firstCell.coordinates.x * secondCell.coordinates.x)/(float)mazeGenerationNumber, (firstCell.coordinates.z * secondCell.coordinates.z)/(float)mazeGenerationNumber);
 		}
+		
 		MazeWall prefabType;
 		// torch
 		if (generatedNoise < 0.2){
@@ -186,6 +217,28 @@ public class Maze : MonoBehaviour {
 			wall = Instantiate(prefabType) as MazeWall;
 			wall.Initialize(secondCell, firstCell, direction.GetOpposite());
 		}
+		
+		// set the wall type, initialize with photon
+		
+		/*
+		GameObject newWall;
+		Vector3 newWallPos = new Vector3(0, 0, 0);
+		Quaternion newWallRot = new Quaternion(0f, 0f, 0f, 0f);
+		if (generatedNoise < 0.2){
+			newWall = (GameObject) PhotonNetwork.Instantiate("MazeWallTorch", newWallPos, newWallRot, 0);
+		}
+		else{
+			newWall = (GameObject) PhotonNetwork.Instantiate("MazeWall", newWallPos, newWallRot, 0);
+		}
+		MazeWall wall = newWall.GetComponent<MazeWall>();
+		wall.Initialize(firstCell, secondCell, direction);
+		// instantiate it again for the other cell (if it exists)
+		if (secondCell != null) {
+			newWall = (GameObject) PhotonNetwork.Instantiate("MazeWall", newWallPos, newWallRot, 0);
+			wall = newWall.GetComponent<MazeWall>();
+			wall.Initialize(secondCell, firstCell, direction.GetOpposite());
+		}
+		*/
 	}
 
 	// check to see if the coordinates are inside the maze 
@@ -266,9 +319,11 @@ public class Maze : MonoBehaviour {
 						existingWalls = ExistingWalls(currentCell, neighbor);
 						existingArches = ExistingArches(currentCell, neighbor);
 						if (existingWalls.Count > 1){
+							//PhotonNetwork.Destroy(existingWalls[1].transform.parent.gameObject);
 							Destroy(existingWalls[1].transform.parent.gameObject);
 						}
 						if (existingArches.Count > 1){
+							//PhotonNetwork.Destroy(existingArches[1].transform.parent.gameObject);
 							Destroy(existingArches[1].transform.parent.gameObject);
 						}
 					}
@@ -309,13 +364,23 @@ public class Maze : MonoBehaviour {
 			MazeCell cellOne;
 			MazeCell cellTwo;
 			MazeDirection dir;
+			// if it does, then replace it with a door
 			if (arch.cell.room.roomSettings.floorMaterial == roomSettings[roomSettings.Length -1].floorMaterial){
-				cellOne = arch.cell;
-				cellTwo = arch.otherCell;
-				dir = arch.direction;
-				MazePassage prefabType = doorPrefab; 
-				MazePassage passage = Instantiate(prefabType) as MazePassage;
-				passage.Initialize(cellOne, cellTwo, dir);
+				if (PhotonNetwork.isMasterClient){
+					cellOne = arch.cell;
+					cellTwo = arch.otherCell;
+					dir = arch.direction;
+					//MazePassage prefabType = doorPrefab; 
+					//MazePassage passage = Instantiate(prefabType) as MazePassage;
+					//passage.Initialize(cellOne, cellTwo, dir);
+					
+					GameObject newDoor;
+					Vector3 doorPos = new Vector3(0, 0, 0);
+					Quaternion doorRot = new Quaternion(0f, 0f, 0f, 0f);
+					newDoor = (GameObject) PhotonNetwork.Instantiate("Door", doorPos, doorRot, 0);
+					MazePassage passage = newDoor.GetComponent<MazePassage>();
+					passage.Initialize(cellOne, cellTwo, dir);
+				}
 			}
 		}
 	}
@@ -552,11 +617,5 @@ public class Maze : MonoBehaviour {
 	
 	public int getMazeGenerationNumber(){
 		return mazeGenerationNumber;
-	}
-	
-	void Update(){
-		
-		// if puzzle room is completed then spawn a key
-		
 	}
 }
