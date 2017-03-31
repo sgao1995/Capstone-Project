@@ -79,10 +79,18 @@ public class MouseMovement : MonoBehaviour {
 	public AudioClip smokescreenSound;
 	public AudioSource soundPlayer;
 
+    //hit collider for attacking
     private Collider[] hitCollider;
+
+    //list of spawns
+    SpawnM[] sm;
+    private float spawnDelay=10;
 
     void Start()
     {
+        //for spawns:
+        sm = GameObject.FindObjectsOfType<SpawnM>();
+
         mouserb = GetComponent<Rigidbody>();
         Cursor.lockState = CursorLockMode.Locked; //cursor is gone from screen
 
@@ -296,7 +304,7 @@ public class MouseMovement : MonoBehaviour {
 		GameObject smokeScreen = (GameObject)PhotonNetwork.Instantiate("Smoke", smokePos, smokeRot, 0);
         StartCoroutine(Invis(0.2f, 3f));
         yield return new WaitForSeconds(5f);
-        uncloak();
+        transform.GetComponent<PhotonView>().RPC("uncloak", PhotonTargets.AllBuffered);
     }
     [PunRPC]
     void uncloak()
@@ -577,12 +585,16 @@ public class MouseMovement : MonoBehaviour {
     {
         Debug.Log("player died");
         alive = false;
-       // animator.Play("Unarmed-Death1");
+        GetComponent<MouseMovement>().enabled = false;
+        CamMovement cam = gameObject.GetComponentInChildren<CamMovement>();
+        cam.enabled = false;
         transform.GetComponent<PhotonView>().RPC("PlayAnim", PhotonTargets.All, "Unarmed-Death1");
         WaitForAnimation(5f);
+        transform.GetComponent<PhotonView>().RPC("respawn", PhotonTargets.AllBuffered);
+
     }
 
-	[PunRPC]
+    [PunRPC]
 	void HideMiniMenu(){
 		Cursor.lockState = CursorLockMode.Locked;
 		miniMenu.SetActive(false);
@@ -798,7 +810,6 @@ public class MouseMovement : MonoBehaviour {
     [PunRPC]
     void destroyMine(Collision collisionInfo)
     {
-
         PhotonNetwork.Destroy(collisionInfo.gameObject);
     }
 	void OnTriggerStay(Collider obj){
@@ -996,8 +1007,19 @@ public class MouseMovement : MonoBehaviour {
     {
         return this.ultimateSkillPoints;
     }
-    void respawn()
+    [PunRPC]
+    IEnumerator respawn()
     {
-
+        yield return new WaitForSeconds(spawnDelay);
+        //spawns at random mouse spawn location
+        SpawnM mys = sm[Random.Range(0, 2)];
+        transform.position = mys.transform.position;
+        transform.rotation = mys.transform.rotation;
+        //enable movement and cam movement again
+        GetComponent<MouseMovement>().enabled = true;
+        CamMovement cam = gameObject.GetComponentInChildren<CamMovement>();
+        cam.enabled = true;
+        transform.GetComponent<PhotonView>().RPC("PlayAnim", PhotonTargets.All, "Unarmed-Idle");
     }
+
 }
