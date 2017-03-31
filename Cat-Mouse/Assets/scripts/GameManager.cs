@@ -131,8 +131,8 @@ public class GameManager : Photon.PunBehaviour
         {
             List<int> tempTypes = new List<int>();
             tempTypes.Add(5);
-            tempTypes.Add(3);
-            tempTypes.Add(2);
+            tempTypes.Add(0);
+            tempTypes.Add(4);
             Debug.Log(tempTypes[0] + " " + tempTypes[1] + " " + tempTypes[2]);
 			activePuzzleTypes = tempTypes;
             mazeInstance.GenerateChestLocations();

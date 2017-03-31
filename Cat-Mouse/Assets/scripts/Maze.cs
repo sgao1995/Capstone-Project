@@ -461,8 +461,24 @@ public class Maze : MonoBehaviour {
 		for (int r = 0; r < 3; r++){
 			int puzzleType = activePuzzleTypes[r];
 			bool keyGenerated = false;
+			// lava room
+			if (puzzleType == 0){
+				for (int c = 0; c < puzzleRooms[r].getCells().Count; c++){
+					// use Perlin noise to find lava areas
+					float generatedNoise;
+					MazeCell currentCell = puzzleRooms[r].getCells()[c];
+					generatedNoise = Mathf.PerlinNoise((currentCell.coordinates.x * currentCell.coordinates.x)/(float)mazeGenerationNumber, (currentCell.coordinates.z * currentCell.coordinates.z)/(float)mazeGenerationNumber);
+					if (generatedNoise < 0.5){
+						// add mist particle systems
+						MazeCell addHere = puzzleRooms[r].getCells()[c];
+						Vector3 lavaPos = new Vector3(addHere.transform.position.x, 0f, addHere.transform.position.z);
+						Quaternion lavaRot = new Quaternion(0f, 0f, 0f, 0f);
+						PhotonNetwork.Instantiate("FireyMist", lavaPos, lavaRot, 0);
+					}
+				}
+			}
 			// minefield
-			if (puzzleType == 1){
+			else if (puzzleType == 1){
 				float mineMultiplier = puzzleRooms[r].getCells().Count/25f;
 				// spawn mines of varying size and damage based on Perlin noise
 				// number of mines varies with room size
@@ -559,6 +575,16 @@ public class Maze : MonoBehaviour {
 				MazeCell currentCell = puzzleRooms[r].getCells()[itemCells[6]];
 				keyLocations.Add(currentCell.transform.position.x + Mathf.PerlinNoise(currentCell.coordinates.x/(float)mazeGenerationNumber, currentCell.coordinates.x/(float)mazeGenerationNumber));
 				keyLocations.Add(currentCell.transform.position.z + Mathf.PerlinNoise(currentCell.coordinates.z/(float)mazeGenerationNumber, currentCell.coordinates.z/(float)mazeGenerationNumber));
+			}
+			// for the ice room we spawn "icy mist"
+			else if (puzzleType == 4){
+				for (int c = 0; c < puzzleRooms[r].getCells().Count; c++){
+					// add mist particle systems
+					MazeCell addHere = puzzleRooms[r].getCells()[c];
+					Vector3 mistPos = new Vector3(addHere.transform.position.x, 0f, addHere.transform.position.z);
+					Quaternion mistRot = new Quaternion(0f, 0f, 0f, 0f);
+					PhotonNetwork.Instantiate("IcyMist", mistPos, mistRot, 0);
+				}
 			}
 			// boss room, fight a strong monster
 			else if (puzzleType == 5){
