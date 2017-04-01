@@ -483,7 +483,7 @@ public class CatMovement : MonoBehaviour
 
         // status effects
         if (onLava){
-			TakeDamage(0.5f);
+			TakeDamage(0.2f);
 		}
 		if (onSpikes){
 			TakeDamage(0.2f);
