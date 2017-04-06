@@ -202,6 +202,15 @@ public class MonsterAI : MonoBehaviour
         transform.GetComponent<PhotonView>().RPC("SetTrigger", PhotonTargets.All, "Attack");
         WaitForAnimation(1f);
     }
+    //when Monsters get crippled, this function will be called
+    [PunRPC]
+    IEnumerator Crippled()
+    {
+        agent.speed = 1.4f;
+        Debug.Log("CRIPPLED");
+        yield return new WaitForSeconds(5);
+        agent.speed = 2f;
+    }
 
     void takeDamage(float dmg)
     {

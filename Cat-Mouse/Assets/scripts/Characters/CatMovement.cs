@@ -20,8 +20,9 @@ public class CatMovement : MonoBehaviour
     // movement speed
     private float movementModifier = 1;
     private float movementModifierTimer = 10f;
-	// invis duration
-	private float invisDuration = 0f;
+    private float crippledSpeedMod = 1f; //speed mod that depends on if the cat gets crippled by a mouse
+    // invis duration
+    private float invisDuration = 0f;
 
     // attack
     private Animator animator;
@@ -593,10 +594,10 @@ public class CatMovement : MonoBehaviour
 		if (canMove)
         {	
 			if (onIce){
-				moveV = moveV.normalized * speed * movementModifier * Time.deltaTime * 0.1f;
+				moveV = moveV.normalized * speed * movementModifier * Time.deltaTime * 0.1f*crippledSpeedMod;
 			}
 			else{
-				moveV = moveV.normalized * speed * movementModifier * Time.deltaTime;
+				moveV = moveV.normalized * speed * movementModifier * Time.deltaTime*crippledSpeedMod;
 			}
             transform.Translate(moveV);
             // attack power modifier
@@ -707,6 +708,15 @@ public class CatMovement : MonoBehaviour
         //   WaitForAnimation(0.5f);
         transform.GetComponent<PhotonView>().RPC("changeHealth", PhotonTargets.AllBuffered, amt);
 		transform.GetComponent<PhotonView>().RPC("playSound", PhotonTargets.AllBuffered, 2, 1f);
+    }
+    //if crippled by explorer, speed is modified to be 30% slower
+    [PunRPC]
+    IEnumerator Crippled()
+    {
+        crippledSpeedMod = 0.7f;
+        Debug.Log("CRIPPLED");
+        yield return new WaitForSeconds(5);
+        crippledSpeedMod = 1f;
     }
     [PunRPC]
     void changeHealth(float dmg)
