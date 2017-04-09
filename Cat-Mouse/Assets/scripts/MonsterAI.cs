@@ -135,7 +135,23 @@ public class MonsterAI : MonoBehaviour
             expDrop = 250f;
         }
     }
-
+    private void OnCollisionEnter(Collision collisionInfo)
+    {
+        // if gets hit by a dart
+        if (collisionInfo.gameObject.tag == "dart")
+        {
+            Debug.Log("hit by dart");
+            StartCoroutine(Asleep());
+        }
+    }
+    IEnumerator Asleep()//if is hit by a sleeping dart, is put to sleep for 5 seconds
+    {
+        canMove = false;
+        Debug.Log("can't move");
+        yield return new WaitForSeconds(5);
+        canMove = true;
+        Debug.Log("can move");
+    }
     [PunRPC]
     void playSound(int type, float t)
     {

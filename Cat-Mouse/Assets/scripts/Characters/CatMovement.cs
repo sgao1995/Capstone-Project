@@ -732,7 +732,8 @@ public class CatMovement : MonoBehaviour
     }
     
     void Death(){
-		Debug.Log("player died");
+        StopCoroutine(recoup());
+        Debug.Log("player died");
 		alive = false;
         //animator.Play("Unarmed-Death1");
         transform.GetComponent<PhotonView>().RPC("PlayAnim", PhotonTargets.All, "Unarmed-Death1");
@@ -891,8 +892,19 @@ public class CatMovement : MonoBehaviour
 				TakeDamage(mine.mineSize * 50f);
 			}
         }
+        // if gets hit by a dart
+        if (collisionInfo.gameObject.tag == "dart")
+        {
+            StartCoroutine(Asleep());
+        }
 	}
-
+    IEnumerator Asleep()//if is hit by a sleeping dart, is put to sleep for 5 seconds
+    {
+        canMove = false;
+        Debug.Log("can't move");
+        yield return new WaitForSeconds(5);
+        canMove = true;
+    }
     [PunRPC]
     void destroyPU(Collider obj)
     {

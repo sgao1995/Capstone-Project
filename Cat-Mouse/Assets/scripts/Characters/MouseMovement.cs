@@ -152,11 +152,31 @@ public class MouseMovement : MonoBehaviour {
     }
     void TreasureHunter()//Explorer Skill (passive): Alert shows up when player is near chest or keys
     {
-        
+        hitCollider = Physics.OverlapSphere(this.transform.position, 10);
+        foreach (Collider C in hitCollider)
+        {
+            if (C.GetComponent<Collider>().transform.root != this.transform && (C.GetComponent<Collider>().tag == "Key" || C.GetComponent<Collider>().tag == "Key(Clone)"))
+            {
+                Debug.Log("Key Detected");
+                interactText.text = "A key is nearby...";
+            }else if (C.GetComponent<Collider>().transform.root != this.transform && (C.GetComponent<Collider>().tag == "Chest" || C.GetComponent<Collider>().tag == "Chest(Clone)"))
+            {
+                Debug.Log("Chest Detected");
+                interactText.text = "A treasure chest is nearby...";
+            }
+        }
     }
     void ProblemSolver()//Explorer Skill (passive): Alert shows up when player is near puzzle rooms
     {
-
+        hitCollider = Physics.OverlapSphere(this.transform.position, 10);
+        foreach (Collider C in hitCollider)
+        {
+            if (C.GetComponent<Collider>().transform.root != this.transform && (C.GetComponent<Collider>().tag == "PuzzleRoomBoss" || C.GetComponent<Collider>().tag == "Spike(Clone)" || C.GetComponent<Collider>().tag == "IcyMist(Clone)" || C.GetComponent<Collider>().tag == "Mine(Clone)" || C.GetComponent<Collider>().tag == "FireyMist(Clone)"))
+            {
+                Debug.Log("Puzzle Detected");
+                interactText.text = "A puzzle room is nearby...";
+            }
+        }
     }
     IEnumerator Bandage()//Explorer Skill (active): Heals player 40 hp over 10 seconds
     {
@@ -228,9 +248,18 @@ public class MouseMovement : MonoBehaviour {
         isHuntedActive = false;
         movementModifier2 = 1f;
     }
-    void SleepDart()//Explorer Skill (active): shoot a dart which stuns for 5 seconds (enemies will be able to move again if damaged)
+    [PunRPC]
+    IEnumerator SleepDart()//Explorer Skill (active): shoot a dart which stuns for 5 seconds (enemies will be able to move again if damaged)
     {
-
+        yield return new WaitForSeconds(0.3f);
+        Camera mouseCam = transform.Find("MouseCam").GetComponent<Camera>();
+        Quaternion dartRot = Quaternion.Euler(0, 0, 0);
+        Vector3 dartPos = transform.localPosition;
+        Vector3 PosMod = new Vector3(0.5f, 1, 0);
+        Ray ray = mouseCam.ViewportPointToRay(new Vector3(0.5F, 0.5F, 0));
+        Quaternion rayRot = Quaternion.LookRotation(ray.direction, Vector3.up);
+        GameObject dart = PhotonNetwork.Instantiate("dart", dartPos+PosMod, rayRot, 0);
+        dart.GetComponent<Rigidbody>().AddForce(transform.forward * 25f);
     }
     void LateUpdate()
     {
@@ -387,16 +416,18 @@ public class MouseMovement : MonoBehaviour {
 
         /* Updates the Character attributes and HUD state for the current player */
         hitCollider = Physics.OverlapSphere(this.transform.position, 10);
+        //temporary for SleepDart
+        if (Input.GetKeyDown(KeyCode.V))
+        {
+            transform.GetComponent<PhotonView>().RPC("SleepDart", PhotonTargets.AllBuffered);
+        }
+        //temporary for problemsolver
         foreach (Collider C in hitCollider)
         {
-            if (C.GetComponent<Collider>().transform.root != this.transform && (C.GetComponent<Collider>().tag == "Monster" || C.GetComponent<Collider>().tag == "Monster(Clone)"))
+            if (C.GetComponent<Collider>().transform.root != this.transform && (C.GetComponent<Collider>().tag == "PuzzleRoomBoss" || C.GetComponent<Collider>().tag == "Spike(Clone)" || C.GetComponent<Collider>().tag == "PuzzleRoom" || C.GetComponent<Collider>().tag == "Mine(Clone)" ))
             {
-                Debug.Log("Monster Detected");
-                Alert.SetActive(true);
-            }
-            else
-            {
-                Alert.SetActive(false);
+                Debug.Log("Puzzle Detected");
+                interactText.text = "A puzzle room is nearby...";
             }
         }
         //temporary for cripple skill
@@ -666,14 +697,15 @@ public class MouseMovement : MonoBehaviour {
 			currentHealth -= dmg;
 			if (currentHealth <= 0)
 			{
-				currentHealth = 0;
-				Death();
+                mouseVitality.setCurrentHealthPoints(0);
+                Death();
 			}
 		}
     }
 
     void Death()
     {
+        StopCoroutine(Bandage());
         Debug.Log("player died");
         alive = false;
         GetComponent<MouseMovement>().enabled = false;
@@ -1150,6 +1182,8 @@ public class MouseMovement : MonoBehaviour {
         transform.position = mys.transform.position;
         transform.rotation = mys.transform.rotation;
         //enable movement and cam movement again
+        alive = true;
+        currentHealth = maxHealth;
         GetComponent<MouseMovement>().enabled = true;
         CamMovement cam = gameObject.GetComponentInChildren<CamMovement>();
         cam.enabled = true;
