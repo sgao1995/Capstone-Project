@@ -60,7 +60,7 @@ public class GameManager : Photon.PunBehaviour
 		// setup spawn locations
 		// only the master needs to do this
 		MazeCell[,] cellsInMaze = mazeInstance.getMazeCells();
-		if (PhotonNetwork.isMasterClient){
+		//if (PhotonNetwork.isMasterClient){
 			// modify the spawn locations of the players 
 			// random coordinates, rerandom if its in a puzzle room
 			bool goodLocation = false;
@@ -87,7 +87,7 @@ public class GameManager : Photon.PunBehaviour
 				}
 				sm[i].transform.position = cellsInMaze[locX, locZ].transform.position;
 			}
-		}
+	//	}
 		int numSpawnLocations = (int)Mathf.Sqrt((mazeSize+4)/2f);
 		int interval = (int)((mazeSize+4)/numSpawnLocations);
 		// spawn locations for monsters

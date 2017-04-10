@@ -23,7 +23,7 @@ public class Mine : MonoBehaviour {
 		soundPlayer.PlayOneShot(explosionSound, t);
 		Quaternion explosionRot = Quaternion.Euler(0, 0, 0);
 		Vector3 explosionPos = transform.position;
-		GameObject explosion = (GameObject)PhotonNetwork.InstantiateSceneObject("Explosion", explosionPos, explosionRot, 0);
+		GameObject explosion = (GameObject)PhotonNetwork.Instantiate("Explosion", explosionPos, explosionRot, 0,null);
 	}
 	
 	[PunRPC]
