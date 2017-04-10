@@ -15,14 +15,16 @@
     urlcolor=blue
 }
 \usepackage[round]{natbib}
-\title{CS 4ZP6A: Design Document\\Cat and Mouse Game}
-\author{\textbf{Team \#8, ClawSome Games}
+\title{CS 4ZP6: Design Document
+\\Cat and Mouse Game
+\\ Revision 1}
+\author{\textbf{Group \#08, ClawSome Games}
 		\\ Yuan Gao (1330064)
 		\\ Su Gao (1330065)
 		\\ James Lee (1318125)
 		\\ James Zhu (1317457) 
 }
-\newdate{date}{11}{01}{2017}
+\newdate{date}{09}{04}{2017}
 \date{\displaydate{date}}
 \begin{document}
 \maketitle
@@ -35,7 +37,9 @@
 \begin{tabularx}{\textwidth}{p{3cm}p{2cm}X}
 \toprule {\bf Date} & {\bf Version} & {\bf Notes}\\
 \midrule
-1/11/2017 & 1.0 & Design Document 0\\
+11 Jan 2017 & 0 & Design Document 0\\
+\midrule
+9 April 2017 & 1 & Revised document according to feedback provided by Customer.\\
 \bottomrule
 \end{tabularx}
 \end{table}
@@ -103,6 +107,11 @@
     \item updateDisplayMP(): Integer$<$currentMP$>$  \\ Updates the currently displayed Mana Points of the player.
     \item showPlayerStats(): HUD \\ Displays the current statistics (including Health, attributes and skills) of the player.
 \end{itemize}
+\subsubsection{COMPONENT: Skill}
+\paragraph{}The skill module includes all the information about the abilities of the cat and mouse, such as skill name, cooldown, type, tier and so on. It includes many functions that allow the other classes to access the information, such as if the ability is on cooldown. It also updates the HUD in the Update() function when the user applies their skill points, so the skill will show up in the user's available skills.
+This skill consists of a few small classes, such as the SkillSlot class, which handles a skill's images and indicators on the HUD, the CharSkill class, which handles the skill descriptions as well as it's attributes, and the main class Skill which includes the Start() function, Update() function, and various other helper functions.
+\subsubsection{COMPONENT: Vitality}
+\paragraph{}This component handles the character type, level, health points and experience points. It also displays the appropriate images for these elements, all in the bottom left corner of the HUD. The Update() function in this component constantly sets the indicators to the user's current statistics, so if the user takes damage the health bar will display the change immediately. The other helper functions such as setCurrentExperiencePoints() and getExp() are used by other classes to indicate changes towards the vitality system.
 \subsection{Characters}
 \paragraph{} In this section we discuss about the Character components, this includes the player controlled Mouse and Cat characters.
 \subsubsection{COMPONENT: Cat}
@@ -116,6 +125,9 @@
 \subsubsection{COMPONENT: Abilities}
 \paragraph{} In this section we discuss the abilities component. Abilities, which also include powerups, are picked up on the map and are spawned by the map generation functions described in the Maze section below. Scripts and functions relating to how specific abilities work are under this component. These functions include void raiseHealth(), raiseMana(), raiseSpeed(), raiseJump(), isVisible(), raiseDamage(), doubleJump().
 \paragraph{} The function raiseHealth() will increase a player's Health points by a fixed amount along with healing it. This will increase the value of the maxHealth variable. raiseMana() will increase a player's Mana points by a fixed amount, affecting the maxMana variable. raiseSpeed() will increase a character's movement speed, affecting the speed variable. raiseJump() will increase jumping height for a player and affect the jumpForce variable. raiseDamage() will increase a player's damage dealt when they attack and affect the attackPower variable. isVisible() allows users to become less visible for a set period of time. doubleJump() will allow users of the ability to jump twice before landing on the ground.
+\subsubsection{COMPONENT: MonsterAI}
+\paragraph{}This component handles the "brain" of the monsters in the maze. All the monsters use this same script, but they have different behaviours based on a variable \texttt{monsterType}. These monsters have 3 modes, sleeping (where they do nothing until they are attacked, upon which they switch to attack mode), patrol (where they walk aimlessly around the maze), and attack (where they follow and attack the closest player). This component handles all of the monster calculations, including attack chance, ability usage, switching of modes, and what to do when the monster is defeated. One major detail to note is that this component does not handle the movement of the monsters, it only sets the destination, as the NavMeshAgent (a built in component in Unity) will handle the movement of the monsters through the maze. 
+The function setMonsterType() sets the monster type, playSound() plays the appropriate sound based on a type code and duration, and dealDamage() casts a sphere in front of the monster and deals damage to game objects hit. FixedUpdate() handles the animations of the monster, and Update() deals with the chances that the monster wlll attack or use abilities, as well as the timers until the monsters will change modes or until their abilities are off cooldown. 
 \subsection{Maze}
 \paragraph{} This section will be on Maze components, which creates the room and generates a maze.
 \subsubsection{COMPONENT: Maze}

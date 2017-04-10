@@ -2,20 +2,23 @@
 \usepackage[utf8]{inputenc}
 \usepackage{datetime}
 \usepackage[tablegrid]{vhistory}
-\title{CS 4ZP6A: Test Report\\Cat and Mouse Game}
-\author{\textbf{Team \#8, ClawSome Games}
+\title{CS 4ZP6: Test Report
+\\Cat and Mouse Game
+\\ Revision 1}
+\author{\textbf{Group \#08, ClawSome Games}
 		\\ Yuan Gao (1330064)
 		\\ Su Gao (1330065)
 		\\ James Lee (1318125)
 		\\ James Zhu (1317457) 
 }
-\newdate{date}{26}{03}{2017}
-\date{\displaydate{date}\\revision 0}
+\newdate{date}{09}{04}{2017}
+\date{\displaydate{date}}
 \begin{document}
 \maketitle
 \newpage
 \begin{versionhistory}
-  \vhEntry{0}{22.01.04}{YG, SG, JL, JZ}{created the test report document}
+  \vhEntry{0}{22.03.2017}{YG, SG, JL, JZ}{created the test report document}
+  \vhEntry{1}{09.04.2017}{YG, SG, JL, JZ}{Revised document according to feedback provided by Customer. }
 \end{versionhistory}
 
 \tableofcontents
@@ -87,6 +90,8 @@
     \paragraph{Expected Results:} If the user pressed 'w' on their keyboards for 1 second, the user controlled character will move forward from a stationary position for a second. If 's', user controlled character will move backwards from a stationary position for a second. If 'a', user controlled character will move to the left from a stationary position for a second. If 'd', user controlled character will move to the right from a stationary position for a second.
     \paragraph{Actual Results:} \textbf{Passed}. The character the user controls will move to a direction given by the user when the character starts from a stationary position.
     \paragraph{Analysis of Performance:} The \emph{pass} result from this Test Case indicates given input from the user does indeed cause the character to move to the intended direction from a stationary state. This test case is not expected to involve any considerable performance measurements.
+    \paragraph{Functional Requirements:} Requirement 8
+    \paragraph{MIS Component:} Mouse, Cat 
     
     \subsubsection{Test 3.1.1.5: Continuous movement in one direction, when the same key is held down}
     \paragraph{}\textbf{void FixedUpdate()}
@@ -96,6 +101,8 @@
     \paragraph{Expected Results:} If the user holds down either 'a', 'b', 'c', 'd' on their keyboards, the character will continue moving in the direction of the key held, and will stop if the key is released.
     \paragraph{Actual Results:} \textbf{Passed}. The character controlled does move to the given input's direction until the button is released. 
     \paragraph{Analysis of Performance:} The \emph{pass} result from this Test Case indicates that the user is able to move their characters in a given input's direction for however long the button was held for. This test case is not expected to involve any considerable performance measurements.
+    \paragraph{Functional Requirements:} Requirement 8
+    \paragraph{MIS Component:} Mouse, Cat 
     
     \subsubsection{Test 3.1.1.6: Jump, while standing still}
     \paragraph{}\textbf{void FixedUpdate()}
@@ -105,6 +112,8 @@
     \paragraph{Expected Results:} If the user pressed the spacebar, the character will perform a jump action (so their Y axis velocity is increased, and then they drop back down to the ground after a while)
     \paragraph{Actual Results:} \textbf{Passed}. The character performed a jump action after user hit the spacebar key.
     \paragraph{Analysis of Performance:} Although the character does change they Y axis position during the jump action for a specified amount of time, certain tests have shown us that the character jumps higher than expected. These instances are rare, and as such the result is still satisfactory. This test case is not expected to involve any considerable performance measurements.
+    \paragraph{Functional Requirements:} Requirement 8
+    \paragraph{MIS Component:} Mouse, Cat 
     
     \subsubsection{Test 3.1.1.7: Jump, while already in motion in a given direction}
     \paragraph{}\textbf{void FixedUpdate()}
@@ -114,6 +123,8 @@
     \paragraph{Expected Results:} If the user is currently moving their character in a direction using the keys 'w','a','s','d' (with the keys being held), and then presses the space key, the character should be performing a jump action towards the direction it was going before the jump key was hit. 
     \paragraph{Actual Results:} \textbf{Passed}. The character jumps towards the direction they are going in.
     \paragraph{Analysis of Performance:} The \emph{pass} result from this Test Case indicates that the user was able to have their character perform a jump action that is going in a certain direction. This test case is not expected to involve any considerable performance measurements.
+    \paragraph{Functional Requirements:} Requirement 8
+    \paragraph{MIS Component:} Mouse, Cat 
     
     \subsubsection{Test 3.1.1.8: A change in direction}
     \paragraph{}\textbf{void FixedUpdate()}
@@ -123,6 +134,8 @@
     \paragraph{Expected Results:} If the user is currently moving the character in one direction (button held), and then tries to move them in another, the the result would be that the character moves in the direction of the 2 buttons being held. For example if the forward button is held (key 'w'), and the left button is held (key 'a'), then the character will move diagonally to the left.  
     \paragraph{Actual Results:} \textbf{Passed}. The intended behaviour takes place when 2 directional keys are held.
     \paragraph{Analysis of Performance:} The \emph{pass} result from this Test Case indicates that the user is able to move their characters in a direction determined by the two buttons being held. This test case is not expected to involve any considerable performance measurements.
+    \paragraph{Functional Requirements:} Requirement 8
+    \paragraph{MIS Component:} Mouse, Cat 
     
     \subsubsection{Test 3.1.1.9: Returning to a stationary position, when originally in motion}
     \paragraph{}\textbf{void FixedUpdate()}
@@ -131,7 +144,9 @@
     \paragraph{}\textbf{Test Inputs:} A keyboard so that the user can press and hold keys, which FixedUpdate() will check for. For this test FixedUpdate will check for when no keys are being pressed.
     \paragraph{Expected Results:} If the user's character was currently in motion and then releases all/any key being held down, then the character will stop moving.
     \paragraph{Actual Results:} \textbf{Passed}. Characters will stop moving as soon as all/any key being held down are released. 
-    \paragraph{Analysis of Performance:} The \emph{pass} result from this Test Case indicates that the user was able to stop their character from moving by releasing all/any keys being held down. When this was testing on an ice platform, the character will take a small amount of time to stop completely (as expected from moving on ice). This test case is not expected to involve any considerable performance measurements. 
+    \paragraph{Analysis of Performance:} The \emph{pass} result from this Test Case indicates that the user was able to stop their character from moving by releasing all/any keys being held down. When this was testing on an ice platform, the character will take a small amount of time to stop completely (as expected from moving on ice). This test case is not expected to involve any considerable performance measurements.
+    \paragraph{Functional Requirements:} Requirement 8
+    \paragraph{MIS Component:} Mouse, Cat 
     
     \subsection{Camera Input Tests}
     
@@ -142,7 +157,9 @@
     \paragraph{}\textbf{Test Inputs:} A mouse that the user can move so that CamControls() can keep track of X and Y axis values.
     \paragraph{Expected Results:} If the user moves their mouse to the left for an inch, then the camera will look to the left (rotates 60 degrees to the left). If the user moves their mouse to the right for an inch, then the camera will look the the right (rotates 60 degrees to the right).
     \paragraph{Actual Results:} \textbf{Passed}. When the user moves their mouse to the left or right, the camera looks to the corresponding direction. 
-    \paragraph{Analysis of Performance:} The \emph{pass} result from this Test Case indicates that the user was able to get the camera to look where they moved their mouse to. This test case is not expected to involve any considerable performance measurements. 
+    \paragraph{Analysis of Performance:} The \emph{pass} result from this Test Case indicates that the user was able to get the camera to look where they moved their mouse to. This test case is not expected to involve any considerable performance measurements.
+    \paragraph{Functional Requirements:} Requirement 7
+    \paragraph{MIS Component:} Mouse, Cat 
     
     \subsubsection{Test 3.1.2.3 to Test 3.1.2.4: Camera rotation along the X axis, backwards/forwards}
     \paragraph{}\textbf{void CamControls()}
@@ -151,7 +168,9 @@
     \paragraph{}\textbf{Test Inputs:} A mouse that the user can move so that CamControls() can keep track of X and Y axis values.
     \paragraph{Expected Results:} If the user moves their mouse down for an inch, then the camera will look down (rotates 60 degrees downwards). If the user moves their mouse up for an inch, then the camera will look up (rotates 60 degrees upwards).
     \paragraph{Actual Results:} \textbf{Passed}. When the user moves their mouse up or down, the camera looks to the corresponding direction. 
-    \paragraph{Analysis of Performance:} The \emph{pass} result from this Test Case indicates that the user was able to get the camera to look where they moved their mouse to. This test case is not expected to involve any considerable performance measurements. 
+    \paragraph{Analysis of Performance:} The \emph{pass} result from this Test Case indicates that the user was able to get the camera to look where they moved their mouse to. This test case is not expected to involve any considerable performance measurements.
+    \paragraph{Functional Requirements:} Requirement 7
+    \paragraph{MIS Component:} Mouse, Cat
     
     \subsubsection{Test 3.1.2.5: Camera rotation across multiple axis at once}
     \paragraph{}\textbf{void CamControls()}
@@ -160,7 +179,9 @@
     \paragraph{}\textbf{Test Inputs:} A mouse that the user can move so that CamControls() can keep track of X and Y axis values.
     \paragraph{Expected Results:} If the user moves their mouse 1/2 inch fowards and to the left, then 1/2 inch forwards and to the right, then 1/2 inch backwards and to the left, then finally 1/2 inch backwards to the right, then the camera should rotate 30 degrees counterclockwise along the Y axis, 30 degrees backwards along the X axis, then 30 degrees backwards along the X axis, then 30 degrees counterclockwise along the Y axis, then 30 degrees forwards along the X axis, then 30 degrees clockwise along the Y axis, and finally 30 degrees forwards along the X axis.
     \paragraph{Actual Results:} \textbf{Passed}. When the user moves their mouse to the given instruction, the camera looks to the corresponding direction. 
-    \paragraph{Analysis of Performance:} The \emph{pass} result from this Test Case indicates that the user was able to get the camera to look where they moved their mouse to. This test case is not expected to involve any considerable performance measurements. 
+    \paragraph{Analysis of Performance:} The \emph{pass} result from this Test Case indicates that the user was able to get the camera to look where they moved their mouse to. This test case is not expected to involve any considerable performance measurements.
+    \paragraph{Functional Requirements:} Requirement 7
+    \paragraph{MIS Component:} Mouse, Cat
     
     \subsubsection{Test 3.1.2.6 to Test 3.1.2.7: Maximum camera rotation along the X axis, upwards/downwards}
     \paragraph{}\textbf{void CamControls()}
@@ -169,7 +190,9 @@
     \paragraph{}\textbf{Test Inputs:} A mouse that the user can move so that CamControls() can keep track of X and Y axis values.
     \paragraph{Expected Results:} If the user moves their mouse upwards as much as they can, the camera will stop when the rotation degree is 90 upwards. If the user moves their mouse downwards as much as they can, then camera will stop rotation when the rotation is 90 degrees downwards
     \paragraph{Actual Results:} \textbf{Passed}. The camera will eventually stop following the user's mouse when moving up or down after max degree value is reached.
-    \paragraph{Analysis of Performance:} The \emph{pass} result from this Test Case indicates that the camera stopped when it had reached its bound when the user is looking up or down. This test case is not expected to involve any considerable performance measurements. 
+    \paragraph{Analysis of Performance:} The \emph{pass} result from this Test Case indicates that the camera stopped when it had reached its bound when the user is looking up or down. This test case is not expected to involve any considerable performance measurements.
+    \paragraph{Functional Requirements:} Requirement 7
+    \paragraph{MIS Component:} Mouse, Cat
     
     \subsection{Map Tests}
     \subsubsection{Test 3.1.3.1 to Test 3.1.3.4: Collision tests}
@@ -179,9 +202,10 @@
     \paragraph{}\textbf{Test Inputs:} A keyboard so that the user can press and hold keys, which FixedUpdate() will check for. For these tests, user will have the move the character and run into different game objects. 
     \paragraph{Expected Results:} For the collision test with the ground, when the user moves around, they should not fall below the ground. For the collision test with a wall, the character should not go through the wall and must be stopped by the wall. For the collision test with stationary objects, the character should stop moving once they hit said objects. For collision test with another player's character, the character should stop moving once they hit the second character. 
     \paragraph{Actual Results:} \textbf{Passed}. The character successfully passed the first two test. The character did not stop once they hit a stationary object (such as a ball) or a player, but they did experience collision as they moved the object/player with them as they moved.
-    \paragraph{Analysis of Performance:} The \emph{pass} result from this Test Case indicates that the user's character can experience collision with different game objects in the game environment. This test case is not expected to involve any considerable performance measurements. 
+    \paragraph{Analysis of Performance:} The \emph{pass} result from this Test Case indicates that the user's character can experience collision with different game objects in the game environment. This test case is not expected to involve any considerable performance measurements.
+    \paragraph{Functional Requirements:} Requirement 7
+    \paragraph{MIS Component:} Mouse, Cat, Maze
     
-    \subsection{Map Tests}
     \subsubsection{Test 3.1.3.5: Pick up and use a consumable}
     \paragraph{}\textbf{void FixedUpdate()}
     \paragraph{} Checks to see if the user has collided with a consumable item.
@@ -190,6 +214,52 @@
     \paragraph{Expected Results:} Upon colliding with a consumable (powerup) the consumable item disappears and the corresponding effect occurs.
     \paragraph{Actual Results:} When the user collides with a consumable, the item disappears and the user immediately feels the corresponding effects of the item.
     \paragraph{Analysis of Performance:} The \emph{pass} result from this Test Case indicates that the powerup system works as expected, and they will correctly give the player the correct bonuses upon use.
+    \paragraph{Functional Requirements:} Requirement 7
+    \paragraph{MIS Component:} Mouse, Cat, Maze
+    
+     \subsubsection{Test 3.1.3.6: Interact with an Interactive Object}
+    \paragraph{}\textbf{void FixedUpdate()}
+    \paragraph{} Checks to see if the User is within range of an Interactive Object, and applies pre-defined behaviour(s) to the Object on user interaction.
+    \paragraph{}\textbf{Pre-Conditions:} User must be positioned within the range of a closed door.
+    \paragraph{}\textbf{Test Inputs:} The Interact key is pressed and released by the user.
+    \paragraph{Expected Results:} The door opens with an animation and the player is able to pass through it.
+    \paragraph{Actual Results:} The door opens with an animation and the player is able to pass through it.
+    \paragraph{Analysis of Performance:} The \emph{pass} result from this Test Case indicates that the Maze component interacts with the Cat and Mouse Components correctly.
+    \paragraph{Functional Requirements:} Requirement 7
+    \paragraph{MIS Component:} Mouse, Cat, Maze
+    
+     \subsubsection{Test 3.1.3.7 to Test 3.1.3.9: Player Character performs an attack against another Character}
+    \paragraph{}\textbf{void FixedUpdate()}
+    \paragraph{} Checks to see if the Character is within range of another Character, and if that character is on the same Team. If not, then the effects of any regular attacks and Skills are applied to the Character(s) within the range of that attack and/or Skill.
+    \paragraph{}\textbf{Pre-Conditions:} Three users must be connected to the same Match, and at the same location within the Map Environment. Two of these users must be on the same Team, while the remaining user is on the Opposing Team to these first two users. There is also an Environment-Controlled (AI) Character at that location.
+    \paragraph{}\textbf{Test Inputs:} The users on the same team uses Regular Attacks and Skills targeted at each other. The users on two different teams uses Regular Attacks and Skills targeted at each other. One of the users  uses Regular Attacks and Skills targeted at the AI character.
+    \paragraph{Expected Results:} The users on the same team do not cause any negative effects to the attributes of each others' Characters. The users from different teams do cause negative effects to the attributes of each others' Characters. The user do cause negative effects to the attributes of the AI Character.
+    \paragraph{Actual Results:} The attacks by users on the same team do not affect any attributes of each others' Characters. The attacks by users from different teams led to a decrease in the Health Points (HP) of the attacked Character. The attack by a user on the AI Character does led to a decrease in the HP of the AI Character.
+    \paragraph{Analysis of Performance:} The \emph{pass} result from this Test Case indicates that the Maze component interacts with the Cat and Mouse Components correctly.
+    \paragraph{Functional Requirements:} Requirement 9, Requirement 15
+    \paragraph{MIS Component:} Mouse, Cat, Maze, Abilities, Skill, Vitality, NetworkManager
+    
+    \subsubsection{Test 3.1.3.10 to Test 3.1.3.11: Character Death}
+    \paragraph{}\textbf{void playerDie()}, \textbf{void characterDie()}
+    \paragraph{} Disables the controls of the Character and removes the character from the Map Environment. In the case of playerDie(), the user is sent back to the Match Room Screen. In the case of characterDie(), the AI character may be respawned within the Map Environment after a set period of time.
+    \paragraph{}\textbf{Pre-Conditions:} Two users must be connected to the same Match, and at the same location within the Map Environment. Both users must be from different Teams. There is also an Environment-Controlled (AI) Character at that location.
+    \paragraph{}\textbf{Test Inputs:} One of the users uses Regular Attacks and Skills targeted at the AI Character, until their Health Point value reaches 0. Then, both users uses Regular Attacks and Skills targeted at each other, until one of the users' Health Point value reaches 0.
+    \paragraph{Expected Results:} The AI Character will be unable to interact with entities within the Map Environment, and the victorious user is granted a set number of Experience Points and Match Points. After a set period of time, the AI Character respawns at its set location. The defeated user will be unable to interact with entities within the Map Environment, and the victorious user is granted a set number of Experience Points and Match Points. After a set period of time, the defeated user will be removed from the Map Environment and returned to the Match Room Screen.
+    \paragraph{Actual Results:} Upon reaching a Health Point value of 0, the AI Monster becomes unable to interact with the map environment and the victorious player is granted a set amount of Experience Points and Match Points. Upon reaching a Health Point value of 0, the defeated user is taken out of the Map Environment and returned to the Match Room Screen. The victorious player is granted a set amount of Experience Points and Match Points.
+    \paragraph{Analysis of Performance:} The \emph{pass} result from this Test Case indicates the quality of the connection between users (clients) and the Multiplayer Server is sufficient to prevent any match-terminating errors.
+    \paragraph{Functional Requirements:} Requirement 9, Requirement 10, Requirement 15
+    \paragraph{MIS Component:} Mouse, Cat, Maze, Abilities, Skill, Vitality, NetworkManager
+    
+    \subsubsection{Test 3.1.3.12: Environmental Effects Test}
+    \paragraph{}\textbf{void fixedUpdate()}
+    \paragraph{} Decreases the Health Points of the character within range of the object or area to which the effect is attached. A fire and smoke animation is also activated.
+    \paragraph{}\textbf{Pre-Conditions:} A Player Character must be nearby a lava tile within the Map Environment.
+    \paragraph{}\textbf{Test Inputs:} The Player Character comes into contact with the lava tile and breaks contact with the lava tile 3 seconds later.
+    \paragraph{Expected Results:} The Health Points of the affected Player Character is decreased by a certain amount per unit time. This effect lasts a set period of time after last contact with the lava tile. A fire and smoke animation is visible on the Character.
+    \paragraph{Actual Results:} Upon contact with the lava tile, the affected Character's Health Point value began to decrease by a set amount per unit time. A fire and smoke animation is visible on the Character. When the Character breaks contact with the lava tile, they continued to lose Health Points for an additional 5 seconds.
+    \paragraph{Analysis of Performance:} No performance metrics are required to be measured in this test case.
+    \paragraph{Functional Requirements:} Requirement 20
+    \paragraph{MIS Component:} Mouse, Cat, Maze,  Vitality
     
     \subsection{User Interface and Heads Up Display (HUD) Tests}
     \subsubsection{Test 3.1.4.1: Minimap Accuracy Test}
@@ -200,17 +270,21 @@
     \paragraph{Expected Results:} The minimap follows the player's movements and correctly displays the area around the player.
     \paragraph{Actual Results:} The minimap follows the player's movements and correctly displays the area around the player.
     \paragraph{Analysis of Performance:} The \emph{pass} result from this Test Case indicates that the minimap works as expected, and accurately represents the area around the user.
+    \paragraph{Functional Requirements:} Requirement 21
+    \paragraph{MIS Component:} HUD
     
-    \subsubsection{Test 3.1.4.2: Ability Use Test}
-    \paragraph{}\textbf{void useSkill()}
-    \paragraph{} Upon a key press corresponding to an ability usage (Keyboard keys 1, 2, 3, 4), the corresponding ability is used if the ability is not on cooldown and has been learned.
-    \paragraph{}\textbf{Pre-Conditions:} At least one ability has been learned and is currently off cooldown and ready to be used.
+    \subsubsection{Test 3.1.4.2: Skill Use Test}
+    \paragraph{}\textbf{void useSkill(int skillID)}
+    \paragraph{} Upon a key press corresponding to an active Skill Slot (Keyboard keys 1, 2, 3, 4), the corresponding Skill is used if the ability is not on cooldown and has been learned.
+    \paragraph{}\textbf{Pre-Conditions:} At least one Skill has been learned and is currently off cooldown and ready to be used.
     \paragraph{}\textbf{Test Inputs:} Keyboard input.
-    \paragraph{Expected Results:} Upon key press, the corresponding ability is used and then placed on cooldown. If the skill is a passive ability, then nothing happens.
-    \paragraph{Actual Results:} When the user presses the skill key, the corresponding ability is used and then placed on cooldown. If the skill is a passive ability, nothing happens. 
+    \paragraph{Expected Results:} Upon key press, the corresponding Skill is used and then placed on cooldown. If the skill is a passive ability, then nothing happens.
+    \paragraph{Actual Results:} When the user presses a key corresponding to a Skill Slot, the corresponding Skill within the Slot  is used and then placed on cooldown. If the skill is a passive ability, nothing happens. 
     \paragraph{Analysis of Performance:}The \emph{pass} result from this Test Case indicates that the ability usage system works as expected.
+    \paragraph{Functional Requirements:} Requirement 9, Requirement 23
+    \paragraph{MIS Component:} Skill
     
-    \subsubsection{Test 3.1.4.3: Ability on Cooldown Use Test}
+    \subsubsection{Test 3.1.4.3: Skill on Cooldown Use Test}
     \paragraph{}\textbf{}
     \paragraph{}Checks user input, to see if the user pressed a button.
     \paragraph{}\textbf{Pre-Conditions:} The user is currently in a match, with at least one skill available, with that skill currently on cooldown.
@@ -218,6 +292,8 @@
     \paragraph{Expected Results:} When the user presses the key corresponding to that skill, the skill will not be used and an indicator will show up indicating that the ability is still on cooldown and is not yet ready.
     \paragraph{Actual Results:} When the user presses the key corresponding to the skill, the skill is not used and an indicator shows up informing the player that the skill is still on cooldown.
     \paragraph{Analysis of Performance:}The \emph{pass} result from this Test Case indicates that the ability cooldown code is working as expected.
+    \paragraph{Functional Requirements:} Requirement 23
+    \paragraph{MIS Component:} Skill
     
     \subsubsection{Test 3.1.4.4: Menu Buttons Test}
     \paragraph{}\textbf{}
@@ -227,6 +303,8 @@
     \paragraph{Expected Results:} Upon a button press, the corresponding correct action is performed.
     \paragraph{Actual Results:} \textbf{Passed}, When the user presses a button, the correct action is performed.
     \paragraph{Analysis of Performance:} The \emph{pass} result from this Test Case indicates that the function indicated above works as expected, as well as the menu buttons working as expected.
+    \paragraph{Functional Requirements:} Requirement 1, Requirement 2, Requirement 3, Requirement 4, Requirement 22, Requirement 23
+    \paragraph{MIS Component:} MainMenu, OptionsMenu, HUD, NetworkManager
     
     \subsubsection{Test 3.1.4.5: Options Menu Test - Changing the Screen Resolution}
     \paragraph{}\textbf{void drpScreenResolutionOnValueChanged (int index)}
@@ -235,7 +313,9 @@
     \paragraph{}\textbf{Test Inputs:} drpScreenResolutionOnValueChanged is passed in with index values from 0 to the highest index within the supportedScreenResolutions array.
     \paragraph{Expected Results:} setResolution is set to the Resolution value stored within the index value being tested within the supportedScreenResolutions array.
     \paragraph{Actual Results:} \textbf{Passed}, for each index value passed into the function.
-    \paragraph{Analysis of Performance:} The \emph{pass} result from this Test Case indicates that the function indicated above works as expected. This test case is not expected to involve any considerable performance measurements.   
+    \paragraph{Analysis of Performance:} The \emph{pass} result from this Test Case indicates that the function indicated above works as expected. This test case is not expected to involve any considerable performance measurements.
+    \paragraph{Functional Requirements:} Requirement 1
+    \paragraph{MIS Component:} OptionsMenu
     
     \subsubsection{Test 3.1.4.5: Options Menu Test - Changing the Full-Screen Option}
     \paragraph{}\textbf{void tglFullscreenOnValueChanged (bool status)}
@@ -245,6 +325,8 @@
     \paragraph{Expected Results:} setFullScreen is set to the status  of the isOn attribute of the Toggle Box for Full Screen object
     \paragraph{Actual Results:} \textbf{Passed}. When the Toggle Box is unticked, the setFullScreen is set to either \emph{true} or \emph{false}, corresponding to the respective isOn status of the Toggle Box.
     \paragraph{Analysis of Performance:} The \emph{pass} result from this Test Case indicates that the function indicated above works as expected. This test case is not expected to involve any considerable performance measurements.
+    \paragraph{Functional Requirements:} Requirement 1
+    \paragraph{MIS Component:} OptionsMenu
     
     \subsubsection{Test 3.1.4.5: Options Menu Test - Changing the Graphics Quality Option}
     \paragraph{}\textbf{void drpGraphicsQualityOnValueChanged (int index)}
@@ -254,6 +336,8 @@
     \paragraph{Expected Results:} setGraphicsQuality is set to the Graphics Quality value stored within the index value being tested within the supportedGraphicsQuality array.
     \paragraph{Actual Results:} \textbf{Passed}, for each index value passed into the function.
     \paragraph{Analysis of Performance:} The \emph{pass} result from this Test Case indicates that the function indicated above works as expected. This test case is not expected to involve any considerable performance measurements.
+    \paragraph{Functional Requirements:} Requirement 1
+    \paragraph{MIS Component:} OptionsMenu
     
     \subsubsection{Test 3.1.4.5: Options Menu Test - Changing the Volume Slider Option}
     \paragraph{}\textbf{void slidVolumeLevelOnValueChanged (float silderValue)}
@@ -263,6 +347,8 @@
     \paragraph{Expected Results:} setVolumeLevel is set to the specified floating point value corresponding to the current value of the Volume Slider.
     \paragraph{Actual Results:} \textbf{Passed}, for each floating point value passed into the function.
     \paragraph{Analysis of Performance:} The \emph{pass} result from this Test Case indicates that the function indicated above works as expected. This test case is not expected to involve any considerable performance measurements.
+    \paragraph{Functional Requirements:} Requirement 1
+    \paragraph{MIS Component:} OptionsMenu
     
      \subsubsection{Test 3.1.4.5: Options Menu Test - Clicking the Apply Button}
     \paragraph{}\textbf{void btnPnlGameOptionsApplyClick}
@@ -272,6 +358,8 @@
     \paragraph{Expected Results:} The game is set to: \emph{the second-lowest available resolution, displayed in windowed mode, using the Faster graphic quality setting, with a Volume Level set to 0.5 on the Volume Slider, and the Volume not muted.}
     \paragraph{Actual Results:} \textbf{Passed}. The above values are present and states updated in the game correspondingly when the Apply Button is clicked.
     \paragraph{Analysis of Performance:} The \emph{pass} result from this Test Case indicates that the function indicated above works as expected. This test case is not expected to involve any considerable performance measurements.
+    \paragraph{Functional Requirements:} Requirement 1
+    \paragraph{MIS Component:} OptionsMenu
     
      \subsubsection{Test 3.1.4.6: New Game Menu Test - Creating a Game }
     \paragraph{}\textbf{void btnNewGameClick}
@@ -283,6 +371,8 @@
     \paragraph{Expected Results:} The lobby scene is loaded, and the MainMenu Scene is replaced by the lobby scene. The lobby scene corresponds to the Multiplayer Hub. The Player is then able to create a new Room within the Lobby, in which they are the solo player. The created Room should be visible to other Players connected to the Multiplayer Hub, upon selection of the RefreshBtn after the creation of the Room, and they should be able to join this Room.
     \paragraph{Actual Results:} \textbf{Passed}. When the btnNewGameClick function is executed, the Main Menu Scene is replaced with the lobby scene. Then, if the CreateBtn is clicked, a new Room is created and the Player is put inside it. Additionally, other Players are able to see and join the newly created Room from the Multiplayer Lobby, upon selection of the RefreshBtn after the creation of the Room.
     \paragraph{Analysis of Performance:} The \emph{pass} result from this Test Case indicates that the function indicated above works as expected. This test case is not expected to involve any considerable performance measurements.
+    \paragraph{Functional Requirements:} Requirement 2
+    \paragraph{MIS Component:} MainMenu, Lobby, NetworkManager
     
      \subsubsection{Test 3.1.4.7: Multiplayer Hub - Joining an Existing Room}
     \paragraph{}\textbf{void refresh}
@@ -297,6 +387,8 @@
     \paragraph{Expected Results:} The current Player is added to the list of Players within the selected Room, and the Room Information Screen is displayed, communicating to the Player the current Status (eg. other Players) of the Room and allowing them to select a corresponding (non-full) Team.
     \paragraph{Actual Results:} \textbf{Passed}.The correct roomName is passed as an argument into the JoinRoom function, and the Room Information Screen is displayed, communicating to the Player the current status of the Room and allowing them to select a Team.
     \paragraph{Analysis of Performance:} A specific measure of the performance of this Action is that the time to connect to a server should not exceed 20 seconds, and also that the connection to the Multiplayer Server should not be dropped at any time. Out of 10 iterations run, 8 iterations were able to connect to and join the specified Room successfully. The 2 failure cases may occur due to connectivity and bandwidth issues on either the side of the Client or the Server, in addition to the instability of the UDP protocol which is used.  Thus, a pass rate of 80\% , satisfactorily verifies the correctness of the functions which facilitates the joining of an Existing Room.  
+     \paragraph{Functional Requirements:} Requirement 2
+    \paragraph{MIS Component:} Lobby, NetworkManager
     
     \subsubsection{Test 3.1.4.8: Multiplayer Hub - Entering the Ready State}
     \paragraph{} Verifies that the Player is able to enter a Ready State while within an existing Room.
@@ -305,6 +397,8 @@
     \paragraph{Expected Results:} The Player is now in the Ready State for the selected Team. The Room Information Screen is updated to show the occupation of the Player within the selected Slot.
     \paragraph{Actual Results:} \textbf{Passed}. Upon selecting an Open Slot underneath the respective Team they wish to join, the Player is added to the list of Players assigned to the Team, and the Room Information Screen is updated to reflect the Player's Team selection.
     \paragraph{Analysis of Performance:} A specific measure of the performance of this Action is that the time from request to the update of the Room Information Screen to reflect the Player's Team Selection should not exceed 10 seconds, and also that the connection to the Multiplayer Server should not be dropped at any time. Out of 10 iterations run, 10 iterations were able to indicate and update the Room Information Screen to indicate the Player's Team selection successfully within the allocated time.  Thus, a pass rate of 100\% , satisfactorily verifies the correctness of the functions which facilitates the Player entering the Ready State within an existing Room.
+     \paragraph{Functional Requirements:} Requirement 4
+    \paragraph{MIS Component:}  Lobby, NetworkManager
     
     \subsubsection{Test 3.1.4.9: Multiplayer Hub - Starting a New Match when all Players in Room have entered the Ready State}
     \paragraph{} Verifies that all Players connected to an existing Room, wherein everyone has entered the Ready State, may then enter a Match.
@@ -313,6 +407,8 @@
     \paragraph{Expected Results:} All the Players within the Room should be connected to the identical Game Match, and be spawned at on the Map at the designated location according to their respective Team.
     \paragraph{Actual Results:} \textbf{Passed}. Upon selection of the Start Game button, all Players are connected to the identical Game Match and spawned onto the Map. 
     \paragraph{Analysis of Performance:} A specific measure of the performance of this Action is that the time from request of the Start of a new Match to the connection and spawning of each Player onto he Map should not exceed 20 seconds. Furthermore, the connection to the Multiplayer Server should not be dropped at any time. Out of 4 Players in the Ready State and connecting to a Game Match, 2 Players were able to connect successfully to the Match on the first attempt. These players which were not able to initially connect to the Match were able to connect on subsequent attempts (one on their 2nd attempt, and one on their 3rd attempt)  Thus, a pass rate of 50\% , is observed. Ideally, this should be raised to become a 100 \% pass rate.
+     \paragraph{Functional Requirements:} Requirement 5
+    \paragraph{MIS Component:} Lobby, NetworkManager
     
     \subsubsection{Test 3.1.4.10: Multiplayer Hub - Player Exiting a Match}
     \paragraph{} Verifies that all Players connected to an active Game Match may at any time, leave this Match and return to the Multiplayer Hub of the current session.
@@ -321,6 +417,49 @@
     \paragraph{Expected Results:} The Player is removed from the current Active Match and returned to the Multiplayer Hub, whilst still connected to current session on the Multiplayer Server. 
     \paragraph{Actual Results:} \textbf{Passed}. Upon selected the Exit Match button, the Player is removed from the list of active players currently within the Match, de-registered from the corresponding Room, and taken back to the Multiplayer Hub.
     \paragraph{Analysis of Performance:} A specific measure of the performance of this Action is that the time from request of the Ending of a Match to the return to the Multiplayer Hub should not exceed 20 seconds. Furthermore, the connection to the Multiplayer Server should not be dropped at any time. Out of 4 Players within the Active Match and upon each selecting the Exit Match button, all 4 were able to leave the Match and return to the Multiplayer Hub within the allotted period of time. These Players were additionally able to remain connected to the Multiplayer Hub upon their successful exit from the Match.  Thus, a pass rate of 100\% , is observed, which satisfactorily verifies the correctness of the functionality provided to allow Players within a Active Match to leave from that Match and re-enter the Multiplayer Hub.
+     \paragraph{Functional Requirements:} Requirement 16
+    \paragraph{MIS Component:} Lobby, NetworkManager, Maze, Cat, Mouse
+    
+    \subsubsection{Test 3.1.4.11: Add Skill Test}
+    \paragraph{} Verifies that the player has the requsite type and number of Skill Points to acquire the selected Skill, and that the aforementioned Skill has not already been learnt.
+    \paragraph{}\textbf{Pre-Conditions:}The player currently has one or more available Skill Points to use.
+    \paragraph{}\textbf{Test Inputs:} The Player selects the "Add Skill" button next to a desired Skill.
+    \paragraph{Expected Results:} The selected Skill is added to a Skill Slot in the Skill Bar. The number of the respective type of Skill Points is decremented. If the Skill is already in the Skill Bar, nothing occurs. 
+    \paragraph{Actual Results:} \textbf{Passed}. Upon selection of the desired Skill, the number of Regular Skill Points is decreased by 1 and the selected Skill appears and is usable by the user in a Skill Slot in the Skill Bar.
+    \paragraph{Analysis of Performance:} As no Network Events are required to carry out this test case, there are no performance metrics to be measured.
+     \paragraph{Functional Requirements:} Requirement 15
+    \paragraph{MIS Component:} HUD, Skill
+    
+    \subsubsection{Test 3.1.4.12: Open Mini Menu Test}
+    \paragraph{} Opens a Panel with buttons to open the Skills Menu, activate Signal Assist and activate Signal Danger.
+    \paragraph{}\textbf{Pre-Conditions:} The player is currently situated in the Map Environment and is not under attack by any Character or under the influence of any Vitality-modifying effects.
+    \paragraph{}\textbf{Test Inputs:} The Player presses the Right Mouse Button.
+    \paragraph{Expected Results:} The Mini Menu becomes visible on the primary display, with options to open the Skills Menu, and activate the Skill Assist and Signal Danger features.
+    \paragraph{Analysis of Performance:} As no Network Events are required to carry out this test case, there are no performance metrics to be measured. However, the Mini Menu should open 3 seconds of delay or less.
+    \paragraph{Actual Results:} \textbf{Passed}. Upon click of the Right Mouse Button, the Mini Menu appears with all the aforementioned options functional.
+    
+     \paragraph{Functional Requirements:} Requirement 22
+    \paragraph{MIS Component:} HUD, Skill
+    
+     \subsubsection{Test 3.1.4.13: Vitality and Skill System Status Test}
+    \paragraph{} Notifies the player of the current status of the current status of the Vitality and Skill Systems of their Character.
+    \paragraph{}\textbf{Pre-Conditions:} There is a Character from the opposing Team positioned in front of the Player.
+    \paragraph{}\textbf{Test Inputs:} The player activates a Regular Attack or an active Skill.
+    \paragraph{Expected Results:} The Vitality and Skill Systems of both Players are updated to reflect any changes to their status.
+    \paragraph{Actual Results:} \textbf{Passed}. Upon the use of a Regular Attack by one Player directed towards the opposing Player, the latter's Health Points value is decreased by the amount of damage dealt by the attacking Character. Upon the use of an active Skill, the Cooldown Indicator on the Skill Bar for that specific Skill is activated.
+     \paragraph{Analysis of Performance:} The Vitality and Skill System should be updated with the Character's status within 1 second of any change in the Character's attributes and/or Skills.
+     \paragraph{Functional Requirements:} Requirement 23
+    \paragraph{MIS Component:} HUD, Skill, NetworkManager, Cat, Mouse
+    
+    \subsubsection{Test 3.1.4.14: Character Level Up Test}
+    \paragraph{} Upon reaching the Maximum Experience Point for the current Level, the Character is granted an increase of one Level.
+    \paragraph{}\textbf{Pre-Conditions:} he character currently has 10 experience points less than the Maximum  Experience  Point  for  their  current  level.There  is  an  environment-controlled  (AI)  Character positioned in front of them.
+    \paragraph{}\textbf{Test Inputs:} The  player  activates a Regular Attack or an active Skill until the Health Point value of the AI Character reaches 0.
+    \paragraph{Expected Results:} The Character's Level is increased by one, and is granted one Regular Skill Point, if they have not already reached the Maximum Allowable Level. In addition, the Character's Maximum Health Points is increased and Current Health Points set to the maximum value. The Character's Maximum Experience is increased and their current Experience is reset to 0.
+    \paragraph{Actual Results:} \textbf{Passed}. Upon the use of a Regular Attack by one Player directed towards the opposing Player, the latter's Health Points value is decreased by the amount of damage dealt by the attacking Character. Upon the use of an active Skill, the Cooldown Indicator on the Skill Bar for that specific Skill is activated.
+     \paragraph{Analysis of Performance:} The Vitality and Skill System should be updated with the Character's status within 1 second of any change in the Character's attributes and/or Skills.
+     \paragraph{Functional Requirements:} Requirement 15, 23
+    \paragraph{MIS Component:} HUD, Skill, NetworkManager, Cat, Mouse
     
     \subsection{Networking Tests}
      \subsubsection{Test 3.1.5.1: Networking - Joining a Room from the Multiplayer Hub}
@@ -330,6 +469,8 @@
     \paragraph{Expected Results:} The Player is added to the list of Players which are currently a part of the selected Room. The Player is then able to see the Room Information Screen for the selected Room, in addition to other Player already in the Room able to see the newly-added Player. 
     \paragraph{Actual Results:} \textbf{Passed}. Upon the selection of an available Room within the Room Browser Interface, the Player is able to connect to the specified Room, see the statuses of the other Players currently connected to that Room, as well as update their own status within the Room (eg. by joining a Team).
     \paragraph{Analysis of Performance:} A specific measure of the performance of this Action is that the time from request of the joining of a Room to the display of the Room Information Screen should not exceed 10 seconds. Furthermore, the connection to the Multiplayer Server should not be dropped at any time. Out of 4 Players all selecting the same room in the Room Browser Interface, all 4 were able to connect to and see the Room Information Screen for the specified Room within the allotted period of time.  Thus, a pass rate of 100\% , is observed, which satisfactorily verifies the correctness of the functionality provided to allow Players connected to the Multiplayer Hub on the Multiplayer Server to join an existing Room as listed in the Room Browser.
+    \paragraph{Functional Requirements:} Requirement 2
+    \paragraph{MIS Component:} Lobby, NetworkManager
     
     \subsubsection{Test 3.1.5.2: Networking - Leaving a Room and returning to the Multiplayer Hub}
     \paragraph{} Verifies that a Player connected to an active Room are able to disconnect from that Room and return to the Multiplayer Hub.
@@ -338,6 +479,8 @@
     \paragraph{Expected Results:} The Player is de-registered from the list of Players currently connected to the specified Room, and is returned to the Multiplayer Hub, where they can choose to join another Room.
     \paragraph{Actual Results:} \textbf{Passed}. Upon the selection of the Leave Session button, the Player is removed from the list of Players currently connected to the Room, is disconnected from the Room, and then is returned to the Multiplayer Hub. This Player can then join another Room.
     \paragraph{Analysis of Performance:} A specific measure of the performance of this Action is that the time from request of the leaving of a Room to the display of the Multiplayer Hub should not exceed 10 seconds. Furthermore, the connection to the Multiplayer Server should not be dropped at any time. Out of 4 Players selecting the Leave Session button whilst within the same Room all 4 were able to return to the Multiplayer Hub within the allotted period of time.  Thus, a pass rate of 100\% , is observed, which satisfactorily verifies the correctness of the functionality provided to allow Players connected to a Room to disconnect from the Room and return to the Mutiplayer Hub.
+    \paragraph{Functional Requirements:} Requirement 16
+    \paragraph{MIS Component:} HUD, NetworkManager, Cat, Mouse, Lobby
     
 \section{Usability Tests}
 \subsection{Appearance Test}

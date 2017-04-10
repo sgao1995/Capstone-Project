@@ -1,6 +1,7 @@
 \documentclass[12pt, titlepage]{article}
 \usepackage{booktabs}
 \usepackage{tabularx}
+\usepackage{datetime}
 \usepackage{hyperref}
 \usepackage{graphicx}
 \graphicspath{ {Images/} }
@@ -14,14 +15,17 @@
     urlcolor=blue
 }
 \usepackage[round]{natbib}
-\title{CS 4ZP6A: Software Requirements Specification\\Cat-and-Mouse Game}
-\author{Team \#8, Claw-some Games
+\title{CS 4ZP6: Software Requirements Specification
+\\Cat-and-Mouse Game
+\\Revision 1}
+\author{\textbf{Group \#08, ClawSome Games}
 		\\ Yuan Gao (1330064)
 		\\ Su Gao (1330065)
 		\\ James Lee (1318125)
 		\\ James Zhu (1317457) 
 }
-\date{\today}
+\newdate{date}{09}{04}{2017}
+\date{\displaydate{date}}
 %\input{../Comments}
 \begin{document}
 \maketitle
@@ -36,13 +40,13 @@
     \arabic{BusinessEventList}.
 }
 
-\begin{table}[bp]
+\begin{table}[hp]
 \caption{\bf Revision History}
 \begin{tabularx}{\textwidth}{p{3cm}p{2cm}X}
 \toprule {\bf Date} & {\bf Version} & {\bf Notes}\\
 \midrule
-Oct. 9, 2016 & 1.0 & First Draft\\
-Nov. 17, 2016 & 1.1 & Made document more abstract\\
+9 October 2016 & Revision 0 & First Draft\\
+9 April 2017 & Revision 1 & Revised the document according to feedback provided by Customer.\\
 \bottomrule
 \end{tabularx}
 \end{table}
@@ -54,52 +58,59 @@ template~\citep{RobertsonAndRobertson2012}.
 \section{Project Drivers}
 \subsection{The Purpose of the Project}
 \subsubsection{Background of the Project}
-\paragraph{}This project's purpose is to create an online multiplayer game that is both entertaining and promotes teamwork between players. Our motivation for the project stems from the popularity and commercial success of games which emphasise postive player interaction and collaboration, such as Overwatch and League of Legends.
+\paragraph{}This project's purpose is to create an online multiplayer game which, while being a source of entertainment, also fosters interpersonal and team-based problem solving skills thorugh meaningful social interaction between players. Our motivation for the project stems from the marked decrease in the quantity and quality of social experiences between individuals within our highly-digitalised and depersonalised world.
 \subsubsection{Goal of the Project}
-\paragraph{}The goal of this project is to create a  multiplayer game which allows users to control characters which interact with a virtual envrionment, in order to complete various objectives. Such objectives should require effective strategic collaboration and teamwork in order to be accomplished.  Collaboration should be possible through a network connection to a server, and the product should be usable on desktop computers running on the Microsoft Windows operating system.
+\paragraph{}The goal of this project is to create a  multiplayer game which allows users to control characters which interact with a virtual envrionment, in order to complete various objectives in a team-centric setting. Therefore, such objectives should require effective strategic collaboration and teamwork in order to be accomplished.  Collaboration should be possible through a network connection to a server, and the product should be usable on desktop computers running on the Microsoft Windows operating system.
 \subsection{The Stakeholders}
 \subsubsection{The Client}
-\paragraph{}This game will be developed for \href{http://www.cas.mcmaster.ca/~smiths/}{Dr. Spencer Smith} and Dr. Wenbo He. 
+\paragraph{}This game will be developed for \href{http://www.cas.mcmaster.ca/~smiths/}{Dr. Spencer Smith} and Dr. Wenbo He, of the \href{http://www.cas.mcmaster.ca}{Department of Computing and Software} at \href{http://www.mcmaster.ca}{McMaster University}, in Hamilton, Canada.
 \subsubsection{The Customers}
-\paragraph{}Our goal for this project would be to target people of all ages interested in playing an online strategic video game where they can develop teamwork, communication, and planning skills. As a video game, it is also meant for individuals who want to take a break with a few minutes of entertainment.
+\paragraph{}Our goal for this project would be to target people of all ages interested in playing an online strategic video game where they can develop teamwork, communication, and planning skills. To promote a sense of commardarie between players, it is primarily designed for individuals seeking light, casual interactive entertainment with a limited time investment.
 \subsubsection{Other Stakeholders}
-\paragraph{} Game testers will be necessary, as we will need their feedback to help us improve the game's overall experience.
+\paragraph{} Game testers will be necessary, as their input and feedback will play a crucial role in the setting and improving of the game's mechanics, atmosphere and general experience.
 \subsection{Mandated Constraints}
 \subsubsection{Solution Constraints}
-\textbf{Constraint 1:} Game must be created using a game engine.\\
-\textbf{Rationale:} a game engine will allow us to the develop the game faster as we do not have to create features such as shaders from scratch.\\
+\textbf{Constraint 1:} Game must be created using the Unity 5 game engine.\\
+\textbf{Rationale:} The Unity 5 game engine will allow us to the develop the game faster as we do not have to create features such as shaders from scratch.\\
 \textbf{Fit criterion:} The developers and customers confirm that the game is using the Unity 5 engine.
 \\\\
-\textbf{Constraint 2:} The product will have network capabilities.\\
-\textbf{Rationale:} A major part of our game is the multiplayer, therefore we need to be able to implement it. \\
-\textbf{Fit criterion:} Multiplayer works. If the host leaves the game, it should not kick everyone else out of the game due to the dedicated server.
+\textbf{Constraint 2:} The product will use Photon Unity Networking (PUN).\\
+\textbf{Rationale:} Photon Unity Network allows us to create an online multiplayer game with a dedicated server, with better performance than the default networking feature built into Unity 5.\\
+\textbf{Fit criterion:} Multiplayer works, and it is using Photon Unity Networking. If the host leaves the game, it should not kick everyone else out of the game due to the dedicated server.
 \\\\
 \textbf{Constraint 3:} Game will only be playable with computers that runs on a Windows Operating System from Windows 7 and onwards\\ 
 \textbf{Rationale:} To cater to Windows Operating System users.\\
 \textbf{Fit criterion:} Developers must confirm that the game runs on Windows Operating Systems (Windows 7 and onwards).
 
 \subsubsection{Implementation Environment of the Current System}
-\paragraph{}The game will be written in an object-oriented language and created a game engine. 3D modeling software will be used to create 3D models for use in game. 
+\paragraph{}The game will be written in C\# and created with the Unity 5 game engine. Blender will be used to create 3D models and Photon Unity Networking (PUN) will be used to handle multiplayer. The game should be usable on systems running the Microsoft Windows operating System, XP or higher, and be operable using a Mouse and Keyboard as inputs and a display monitor as output. Users should additionally be able to connect to the Multiplayer Server with a Internet connection with download speeds of 5 Mbps or higher and upload speeds of 1 Mbps.
 \subsubsection{Partner or Collaborative Applications}
 \paragraph{}\href{https://www.blender.org/}{Blender} for making the 3D models that will be used for characters and other objects in this game.
 \subsubsection{Off-the-Shelf Software}
-\paragraph{}Off-the-Shelf Software may include Unity 5 game engine, Photon Unity Networking, and Blender.
+\paragraph{}Off-the-Shelf Software includes Unity 5 game engine, Photon Unity Networking, and Blender.
 \subsubsection{Anticipated Workplace Environment}
 \paragraph{}Users will be using our product at home on their Personal Computers. Other environments include at school, in internet cafes, and public locations that people use their laptops in. We anticipate that most people will play this game at home, as it is not intended to be a game for mobile devices. The environment should not affect the game's visual and audio cues. 
 \subsubsection{Schedule Constraints}
 \begin{itemize}
-    \item Proof of Concept Plan, October 26th
-    \item Test Plan Revision 0, November 2nd
-    \item Proof of Concept Demonstratio, November 21st to November 25th
-    \item Design Document Revision, January 11th
-    \item Demonstration Revision 0, February 13rd to February 17th
-    \item User’s Guide Revision 0, March 1st
-    \item Test Report Revision 0, March 22nd
-    \item Final Demonstration (Revision 1), April 11th to April 27th
-    \item Final Documentation (Revision 1), April 5th
+    \item Proof of Concept Plan, October 26, 2016
+    \item Test Plan Revision 0, November 2, 2016
+    \item Proof of Concept Demonstration, November 23, 2016
+    \item Design Document Revision, January 11, 2017
+    \item Demonstration Revision 0,  February 17, 2017
+    \item User’s Guide Revision 0, March 4, 2017
+    \item Test Report Revision 0, March 22, 2017
+    \item Final Documentation (Revision 1), April 9, 2017
+    \item Final Demonstration (Revision 1), April 24, 2017
 \end{itemize}
 \subsubsection{Budget Constraints}
-\paragraph{}N/A
+\paragraph{}As this Project is developed for an educational institution, the financial requirements of the game is limited to the amount of funds personally contributable by the McMaster University in coordination with the development team.
+\paragraph{}Thus, the available resources should include: 
+\begin{itemize}
+    \item \textbf{Four members forming the Development Team}, each contributing \textbf{approximately 9 man-hours} a week, for a total of \textbf{36 man-hours} a week.
+    \item \textbf{A personal computer available for the use of each member of the Development Team}. The systems should be capable of running the Unity Development Environment, with a persistent broadband Internet connection and utilising the Microsoft Windows operating system.
+    \item \textbf{Free-to-use or public domain assets}, such as sound, model and image  files, for use as textures, models and sound effects in the game. Furthermore, free-to-use libaries such as Photon Unity Networking (PUN) and particle and effect systems will be utilised and adapted to fit the core requirements and functionality of the game to the available financial and personnel resources.
+    
+\end{itemize}
 \subsubsection{Enterprise Constraints}
 \paragraph{}N/A
 \subsection{Naming Conventions and Terminology}
@@ -126,91 +137,131 @@ This means that the users have proper internet access and hardware that meet the
 \paragraph{}A list displaying all business events to which the game responds is indicated in \textbf{Table 2}. These 'real-world' events represent the general operations allowed in the game and indicates the action(s), if any, which should be taken.
 \\
 \\
+\\ \textbf{Note:} The \textbf{"Input and Output"} for each \textbf{Business Event} in the Business Event List is:
 \\
-\begin{longtable}{| p{0.40\textwidth}p{0.20\textwidth}p{0.40\textwidth}|} 
+\\ \textbf{\emph{Change of game state (in); Update game state (out); Composite deterministic game state (in);  Rasterization of game state (out); Generation of digital audio (out); Indicate new game state - Visual (out); Indicate new game state - Auditory (out)}}
+\\
+\begin{longtable}{| p{0.40\textwidth}p{0.60\textwidth}|} 
 \caption{\bf Business Event List for the Cat-and-Mouse Game}\\
 \hline
-{\textbf{Event Name}} & {\textbf{Input and Output}}  & {\textbf{Summary of BUC}}\\
+{\textbf{Event Name}}  & {\textbf{Summary of BUC}}\\
 \hline
 \hline
 \\
-\printBusinessEvent  Player begins a new multiplayer session & \multirow{25}{0.20\textwidth}{Change of game state (in);\newline Update game state (out);\newline Composite deterministic game state (in);\newline Rasterization of game state (out);\newline Generation of digital audio (out);\newline Indicate new game state - Visual (out);\newline Indicate new game state - Auditory (out)} & A new multiplayer session is started on the server.\\
+\printBusinessEvent  Player begins a new multiplayer session &  A new multiplayer session is started on the server.
 \\
-\printBusinessEvent  Player enters an existing multiplayer session & & A new player is added to 'Lobby Screen' of the specified multiplayer session.\\
+\hline
+\printBusinessEvent  Player enters an existing multiplayer session & A new player is added to 'Lobby Screen' of the specified multiplayer session.
 \\
-\printBusinessEvent  Player requests to start the Tutorial & & A single player session is started on the server. The tutorial maps are loaded. The Player is assigned to a Cat or Mouse character (of their choice).\\
+\hline
+\printBusinessEvent  Players select an open character slot on a Team & Each player is assigned to the their chosen character slot, if available. If the selected slot is already taken, it is indicated as such and the player must select another open slot.\\
 \\
-\printBusinessEvent  Players vote on the mode of gameplay & & Each player is randomly assigned to a Team and a map is loaded. If the vote is tied, mode of gameplay is randomly selected.\\
+\hline
+\printBusinessEvent  A single Player in a multiplayer session requests to start the match & Displays 'Player Ready' notification for that Player.\\
 \\
-\printBusinessEvent  A single Player in a multiplayer session requests to start the match && Displays 'Player Ready' notification for that Player.\\
+\hline
+\printBusinessEvent  All Players in a session request to start the match & The Players are assigned to their selected Teams and all players are placed ("spawned") within a randomly-generated Map Environment at the pre-defined Spawn Point for their respective Team.\\
 \\
-\printBusinessEvent  All Players in a session request to start the match && All Players are assigned to a character on a Team randomly. The selected map and game mode are loaded.\\
+\hline
+\printBusinessEvent  Player leaves the match & The  current match should continue if there are any remaining active players in the match. \\
 \\
-\printBusinessEvent  Player leaves the match && The  current match (if active) should continue. Players may be switched between Teams to rebalance.\\
+\hline
+\printBusinessEvent  Player Character is moved & The Player's character is moved within the Map Environment.\\
 \\
-\printBusinessEvent  Player Character is moved && The Player's character is moved within the map.\\
+\hline
+\printBusinessEvent  Player Character makes contact with the environment  & Depending on the type of environment, will affect the character's state in varying ways.\\
 \\
-\printBusinessEvent  Player Character makes contact with the environment  && Depending on the type of environment, will affect the character's state in varying ways.\\
+\hline
+\printBusinessEvent  Player Character requests the current location of the Character within the Map Environment. & The current position of a Player Character within the Map Environment, and in relation to other Player-Controlled and Environment-Controlled Characters, Map Objects, Objectives and Tasks should be indicated through a Map in the Heads-Up Display.\\
 \\
-\printBusinessEvent  Player Character is near an Item && The character is able to pick up the Item.\\
+\hline
+\printBusinessEvent  Player Character is near an Item & The character is able to pick up the Item.\\
 \\
-\printBusinessEvent  Player Character picks up Item && The Item is transferred into character's inventory.\\
+\hline
+\printBusinessEvent  Player Character is near an Item & The character is able to pick up the Item.\\
 \\
-\printBusinessEvent  Player Character drops Item &&  The Item is removed from character's inventory. May be picked up by other characters. \\
+\hline
+\printBusinessEvent  Player Character is within the range of a Interactive Object. & The Character is able to utilise the Interaction Key to perform a (selection) of pre-defined behaviours on the object. \\
 \\
-\printBusinessEvent  Player Character uses Item in inventory && Affects the Attributes, Skills and/or Items of the character.\\
+\hline
+\printBusinessEvent  Player Character picks up Item & The Item's effects (if any) are transferred to the Character. This may include changes in the Player's Vitality, Skills and Match Points of the Player's Team.\\
 \\
-\printBusinessEvent  Player Character makes contact with another Player Character from the same Team && Both players' movement is stopped.\\
+\hline
+\printBusinessEvent  Player Character makes contact with another Player Character from the same Team & Both players' movement is stopped.\\
 \\
-\printBusinessEvent  Player Character makes contact with Monster && Will drain the Health Points (HP) of the Player Character. May also inflict other effects.\\
+\hline
+\printBusinessEvent  Player Character makes contact with Monster Character & Will drain the Health Points (HP) of the Player Character. May also inflict other effects on either of the Characters depending on each Character's respective Skills and Attributes.\\
 \\
-\printBusinessEvent Player Character makes contact with another Player from the opposing Team && Both Players' movement is stopped. Other effects may take place dependent on each character's respective Skills and Attributes.\\
+\hline
+\printBusinessEvent Player Character makes contact with another Player from the opposing Team & Both Players' movement is stopped. Other effects may take place dependent on each character's respective Skills and Attributes.\\
 \\
-\printBusinessEvent  Player Character is near a Non-Playable Character (NPC) && Character can interact with the NPC to receive Tasks.\\
+\hline
+\printBusinessEvent  Player Character starts a Task within an active Match & Players provided with specific conditions which must be furfilled.\\
 \\
-\printBusinessEvent  Player Character starts Task && Players provided with specific conditions which must be furfilled.\\
+\hline
+\printBusinessEvent  Player Character finishes Task & Players granted enhanced Attribute(s), Skill(s), Items and/or Match Points.
 \\
-\printBusinessEvent  Player Character finishes Task && Players granted enhanced Attribute(s), Skill(s) and/or Item(s).\\
+\hline
+\printBusinessEvent  Player Character attacks another Player Character from the same Team & Nothing occurs.\\
 \\
-\printBusinessEvent  Player Character attacks another Player Character from the same Team && Nothing occurs.\\
+\hline
+\printBusinessEvent  Player Character attacks another Player Character from the opposing Team & Will drain the Health Points (HP) of the opposing Player Character (dependent on Attributes and Skills). May also inflict other effects.\\
 \\
-\printBusinessEvent  Player Character attacks another Player Character from the opposing Team && Will drain the Health Points (HP) of the opposing Player Character (dependent on Attributes and Skills). May also inflict other effects.\\
+\hline
+\printBusinessEvent  Player Character attacks Monster  & Drains the Health Points (HP) of the Monster. May also inflict other effects.\\
+\hline
+\printBusinessEvent  Player Character beats Monster & Grants Player Character with enhanced Attribute(s), Skills(s), Items(s) and/or Match Points.
 \\
-\printBusinessEvent  Player Character attacks Monster  && Drains the Health Points (HP) of the Monster. May also inflict other effects.\\
+\hline
+\printBusinessEvent  Player Character uses Skill & Affects the attributes of the Player Character and/or the envrionment around them (including other characters). May trigger a Skill Cooldown Period (if applicable).\\
 \\
-\printBusinessEvent  Player Character beats Monster && Grants Player Character with enhanced Attribute(s), Skills(s) and/or Item(s).
+\hline
+\printBusinessEvent  Player Character gains enough Experience Points to advance a Level. & If the Character is not currently at the Maximum Permissible Level, the Player is advanced one Level, granted one additional Skill Point, and has their Health Points set to full and Experience Points set to empty.\\
 \\
-\printBusinessEvent  Player Character uses Skill && Affects the attributes of the Player Character and/or the envrionment around them (including other characters). May use up Mana Points (MP).\\
+\hline
+\printBusinessEvent  Player Character selects to learn a Skill & If the Character has the requsite number and type of Skill Points to acquire the desired Skill, and they have not previously obtained that Skill, the Skill is added to their Skill Bar and made available for use. Information regarding the behaviours and intended duration of the Skill should also be indicated to the Player. \\
 \\
-\printBusinessEvent  Player Quits the game  && Player is disconnected from the server and the game returns to the "Main Menu".\\
+\hline
+\printBusinessEvent  Player Character selects to view or modify their current Skills during an active Match.  & Skill information and modification dialogs should be displayed through the activation of a pre-defined of utility input sequence (Combination of Mouse and Keyboard input). \\
+\\
+\hline
+\printBusinessEvent  Player Character selects to view the current status of and utilise their Attributes and Skills. & The game displays a Heads-Up Display (HUD), which displays basic Attribute and SKill information and allows for the use and/or activation of these attributes and skills.\\
+\\
+\hline
+\printBusinessEvent  Player Quits the game  & Player is disconnected from the server and the game returns to the "Main Menu".\\
 \\
 \hline
 \hline
 \\
 %No user input Business events
-\printBusinessEvent  Monster attacks Player Character & \multirow{7}{0.20\textwidth}{Update game state (out);\newline Composite deterministic game state (in);\newline Rasterization of game state (out);\newline Generation of digital audio (out);\newline Indicate new game state - Visual (out);\newline Indicate new game state - Auditory (out)} & Drains the Health Points (HP) of the Player Character. May also inflict other effects. \\
+\printBusinessEvent  Monster attacks Player Character & Drains the Health Points (HP) of the Player Character. May also inflict other effects. \\
 \\
-\printBusinessEvent  Player Character's Health Points (HP) reaches zero &  & The Player Character will die.\\
+\hline
+\printBusinessEvent  Player Character's Health Points (HP) reaches zero & The Player Character will die.\\
 \\
-\printBusinessEvent  Player Character's Mana Points (MP) reaches zero && The Player Character will be unable to use Skills which require MP.\\
+\hline
+\printBusinessEvent  Player Character dies & The Player Character will be returned to the "Match Room Screen" of the Multiplayer Hub.\\
 \\
-\printBusinessEvent  Player Character dies && The Player Character will be returned to the "Lobby Screen".\\
+\hline
+\printBusinessEvent  All Player Characters on a Team are beaten.  &  The current match will end. The team with the most Match Points is declared to the the "Winner" of the current Match. All Players will be returned to the "Match Room Screen" for the session.\\
 \\
-\printBusinessEvent  All Player Characters on a Team are beaten.  && The opposing Team is granted one Point. The current match will end. The Players will be returned to the "Lobby Screen" for the session.\\
+\hline
+\printBusinessEvent  Player disconnects from the server & The player will be returned to the "Main Menu". An error message is displayed.\\
 \\
-\printBusinessEvent  Player disconnects from the server && The player will be returned to the "Main Menu". An error message is displayed.\\
-\\
-\printBusinessEvent  All Players have left the multiplayer session && The session (and all connections) will be closed.\\
+\hline
+\printBusinessEvent  All Players have left the multiplayer session & The session (and all connections) will be closed.\\
 \\
 \hline
 \hline
 \\
 % No multiplayer input Business events
-\printBusinessEvent  Player starts the Cat-and-Mouse Game & \multirow{3}{0.20\textwidth}{Change of game state (in);\newline  Rasterization of game state (out);\newline Generation of digital audio (out);\newline Indicate new game state - Visual (out);\newline Indicate new game state - Auditory (out)} & Displays the "Main Menu". Options to "Start New Multiplayer Session", "Start Tutorial", access "Game Options", and "Quit Game".\\
+\printBusinessEvent  Player starts the Cat-and-Mouse Game &  Displays the "Main Menu". Options to "Start Game", access "Options", and "Quit Game".\\
 \\
-\printBusinessEvent  Player selects the "Options" Menu from the Main Menu && Allows the Player to adjust various settings for the game (eg. graphics, audio, gameplay, etc).\\
+\hline
+\printBusinessEvent  Player selects the "Options" Menu from the Main Menu & Allows the Player to adjust various settings for the game (eg. graphics, audio, gameplay, etc).\\
 \\
-\printBusinessEvent  Player selects the "Quit Game" option from the Main Menu && Allows the Player to terminate the game.\\
+\hline
+\printBusinessEvent  Player selects the "Quit Game" option from the Main Menu & Allows the Player to terminate the game.\\
 \\
 \hline
 \hline
@@ -218,47 +269,142 @@ This means that the users have proper internet access and hardware that meet the
 \newpage
 \subsubsection{Individual Product Use Cases}
 \paragraph{}Ideally, the user would receive the game from an online source such as a game distribution platform such as Steam, where they would download the game and install it. Individually, the game cannot be played but when they join the game's online rooms they will be able to find other players also looking for games to join. The user will then be able to play the game with other people online. 
+
+\paragraph{}\textbf{Note:} \emph{The Cat-and-Mouse Game} refers tothe client-side and multiplayer aspects of the game. The server-side is provided thorugh the \emph{Photon Unity Networking} service. 
 \subsection{Functional Requirements}
-\textbf{Requirement 1:}  The Cat-and-Mouse Game should allow players to adjust in-game options (such as graphics, audio, the UI and gameplay settings) to suit their preferred experience and hardware.\\
-\textbf{Rationale:}  This will allow for the product to be accessible to a broader audience as well as a wider variety of hardware.\\
-\textbf{Fit criterion:}  Players have the ability to set the graphics fidelity in-game to match their computer's capabilities, toggle audio (background music, sound effects), customise input controls, as well as personalise the placement of various elements of the User Interface to their liking.\\
-\\\\
-\textbf{Requirement 2:}  The Cat-and-Mouse Game should allow players to join a Multiplayer Hub located on a server wherein they can interact and communicate with other players.\\
-\textbf{Rationale:}  This will allow Players to meet and greet their teammates for the upcoming Match and foster a sense of camaraderie. Players will also have the chance to decide together on a game mode and discuss strategy during the match. \\
-\textbf{Fit criterion:}  Players are able to connect successfully to the game server and communicate via text or voice with their teammates both in the Multiplayer Hub and while a match is in progress.\\
-\\\\
-\textbf{Requirement 3:}  The Cat-and-Mouse Game should allow players to collaboratively customise various aspects of the Match to suit their preferences.\\
+
+\textbf{Requirement 1:}  The Cat-and-Mouse Game should allow players to adjust in-game options (such as graphics, audio, the UI and gameplay settings) to suit their preferred experience and hardware.
+\\
+\textbf{Rationale:}  This will allow for the product to be accessible to a broader audience as well as a wider variety of hardware.
+\\
+\textbf{Fit criterion:}  Players have the ability to set the graphics fidelity in-game to match their computer's capabilities, toggle audio (background music, sound effects), as well as personalise the placement of various elements of the User Interface to their liking.
+\\
+\\
+\\ \textbf{Requirement 2:}  The Cat-and-Mouse Game should allow players to join a Multiplayer Hub located on a server wherein they can create or join an existing Multiplayer Session ("Room").
+\\
+\textbf{Rationale:}  This will allow Players participate in the team-based aspect of the game, through joining multiplayer matches hosted on a remote server. 
+\\
+\textbf{Fit criterion:}  Players are able to connect successfully to the game server,  and create or join an existing match.
+\\
+\\
+\\ \textbf{Requirement 3:}  The Cat-and-Mouse Game should allow players to select the Team they wish to join for the current Match.\\
+\textbf{Rationale:}  This enables players to participate in Matches with selected users (or new users). This encourages closer team cohesion and collaboration with individuals whom a player may work well with, as well as provide an oppotunity to play with new players.
+\\
+\textbf{Fit criterion:}  Players are able to select a Character Slot on the Team which they prefer to play on for the current Match, and will be placed into that slot if it is available.
+\\
+\\
+\\ \textbf{Requirement 4:}  The Cat-and-Mouse Game should allow players to request to start the current Match.\\
+\textbf{Rationale:}  This enables players to enter the "Ready" State and indicate to other players that they have made their Team Selection and is ready to enter the map environment. \\
+\textbf{Fit criterion:}  A "Player Ready" notification is displayed in addition to the Player Name next to their selected Character Slot on a Team.
+\\
+\\
+\\ \textbf{Requirement 5:}  The Cat-and-Mouse Game should allow all players to enter the Map Environment when all Players within the current Match have requested to start the Match.\\
+\textbf{Rationale:}  This allows for players to enter the Map Environment and interact with each other upon all Players indicating their readiness to start the Match. \\
+\textbf{Fit criterion:} The Players are assigned to their selected Teams and all players are placed ("spawned") within a randomly-generated Map Environment at the pre-defined Spawn Point for their respective Team.
+\\
+\\
+\\ \textbf{Requirement 6:}  The Cat-and-Mouse Game should provide multiple objectives, character attributes, character skills and game-modes within each Match.\\
 \textbf{Rationale:}  To appeal to a wide audience, players should have the freedom to adapt their gameplay experience according to their interests, skill level and play style.\\
-\textbf{Fit criterion:}  Players are able to chose from a variety of in-game modes, maps and difficulty settings. Players should be able to agree on these settings through a vote-based system.\\
-\\\\
-\textbf{Requirement 4:}  The Cat-and-Mouse Game should randomly assign Players to play on either the 'Cat' or 'Mouse' team for every Match.\\
-\textbf{Rationale:}  This introduces a competitive element to the game, as well as fosters a sense of camaraderie, to encourage effective teamwork and collaboration between members fighting for the same cause. \\
-\textbf{Fit criterion:}  Players are able to chose from a variety of in-game modes, maps and difficulty settings. Players should be able to agree on these settings through a vote-based system.\\
-\\\\
-\textbf{Requirement 5:}  The Cat-and-Mouse Game should allow players to see and interact with each other through avatars in real-time to complete tasks and obectives within a virtual maze. \\
+\textbf{Fit criterion:}  Players are able to participate from a variety of abilities, skills, objectives, maps and game modes to fit their personal prefrences. The two different Teams should also have varying attribute and Skill behaviours and progression paths. 
+\\
+\\
+\\ \textbf{Requirement 7:}  The Cat-and-Mouse Game should allow players to see and interact with each other through avatars in real-time to complete tasks and obectives within a virtual maze. \\
 \textbf{Rationale:}  This aspect enables key collaborative elements around which the core mechanics and gameplay have been designed.\\
-\textbf{Fit criterion:}  Individuals are able to see the position and status of, as well as interact with the virtual environment simultaneously with the other players participating in the match.\\
-\\\\
-\textbf{Requirement 6:}  The Cat-and-Mouse Game should allow players to move their characters around the map as the environment allows. \\
+\textbf{Fit criterion:}  Individuals are able to see the position and status of, as well as interact with the virtual environment simultaneously with the other players participating in the match.
+\\
+\\
+\\ \textbf{Requirement 8:}  The Cat-and-Mouse Game should allow players to move their characters around the map as the environment allows. \\
 \textbf{Rationale:}  Ensuring freedom of movement encourages players to be adventurous and creative in their interactions with not only the game objectives, but other fellow participants as well.\\
-\textbf{Fit criterion:}  Individuals are able to move to any point in the map without going through walls or solid objects.\\
-\\\\
-\textbf{Requirement 7:}  The Cat-and-Mouse Game should allow players to attack and deal damage to the corresponding players on the opposing team. \\
+\textbf{Fit criterion:}  Individuals are able to move to any point in the map (subject to the laws of physics as defined by the Physics module and defined boundaries).\\
+\\
+\\
+\textbf{Requirement 9:}  The Cat-and-Mouse Game should allow players to attack and deal damage to the corresponding players on the opposing team though regular attacks and Skill-based attacks and effects. \\
 \textbf{Rationale:}  This allows for game progression, and encourages team cooperation by introducing a survival element to the gameplay.\\
-\textbf{Fit criterion:}  Players are able to wield various attack and defensive skills to cause damage to a player on the opposing team. The ability to utilise  skills is regulated by a Mana Indicator, which must be kept filled. Remaining Health is also indicated and upon reaching a certain level, the player "dies" and is (temporarily) unable to participate further in the match.\\
-\\\\
-\textbf{Requirement 8:}  The Cat-and-Mouse Game should allow teams to gain points through acomplishing certain in-game tasks or objectives, depending on the selected game mode. Game modes include: capture the flag, escape the maze, and team deathmatch. killing opponents, capturing the flag, and killing cpu controlled monsters all give points.\\
-\textbf{Rationale:}  This allows for game progression, and a the competitive element encourages greater team cohesion in order to get ahead.\\
-\textbf{Fit criterion:}  Each team is granted points for accomplishing certain objectives over the course of a match. Dependent on the mode and parameters of the match, the game is considered "won" either when a Team attains the highest number of points after a certain period of time, a special condition has been fulfilled (e.g. capture the flag), or all members of the opposing Team have been eliminated.  \\
-\\\\
-\textbf{Requirement 9:}  The Cat-and-Mouse Game should ensure that all players start on an even level playing field, so that there is a lower barrier of entry for new and casual players.\\
+\textbf{Fit criterion:}  Players are able to wield various attack and defensive skills to cause damage and/or negative effects to a player on the opposing team. The ability to utilise  skills may be regulated by a Skill Cooldown indicator, which indicates the remaining time until the next possible use of the Skill . Remaining Health is also indicated and upon reaching a Health Point value of 0, the player "dies" and is (temporarily) unable to participate further in the match. The victorious Player will be granted increased Vitality attributes in addition to Match Points.
+\\
+\\
+\textbf{Requirement 10:}  The Cat-and-Mouse Game should allow players to attack and deal damage to the Monsters within the Map though regular attacks and Skill-based attacks and effects. \\
+\textbf{Rationale:}  This allows for game progression, and encourages team cooperation by increasing the survival element within the game.\\
+\textbf{Fit criterion:}  Players are able to wield various attack and defensive skills to cause damage and/or negative effects to a Monster within the Map Environment. The ability to utilise  skills may be regulated by a Skill Cooldown indicator, which indicates the remaining time until the next possible use of the Skill . Remaining Health is also indicated and upon reaching a Health Point value of 0, the monster will die, and (may) be respawned after a certain period of time. The victorious Player will be granted increased Vitality attributes in addition to Match Points.
+\\
+\\
+\\ \textbf{Requirement 11:}  The Cat-and-Mouse Game should allow teams to gain points through acomplishing certain in-game tasks or objectives.\\
+\textbf{Rationale:}  This allows for game progression, and a the competitive element encourages greater team cohesion in order to get ahead. Furthermore, a variety of objectives and paths towards progression encourages greater creativity with regards to developing unique play-styles and fosters team collaboration to advance the Team thorugh the completion of many different tasks simulataneously. The latter also facilitates deeper and longer-term player engagement thorugh a diversity in available activities.\\
+\textbf{Fit criterion:}  Each team is granted points for accomplishing certain objectives over the course of a match. Dependent on the mode and parameters of the match, the game is considered "won" either when a Team attains the highest number of points after a certain period of time, a special condition has been fulfilled (e.g. capture the flag), or all members of the opposing Team have been eliminated.  
+\\
+\\
+\\ \textbf{Requirement 12:}  The Cat-and-Mouse Game should allow teams to gain points through collecting various objects placed thorughout the Map Environment.\\
+\textbf{Rationale:}  This allows for game progression, and a the competitive element encourages greater team cohesion in order to get ahead. Furthermore, a variety of objectives and paths towards progression encourages greater creativity with regards to developing unique play-styles and fosters team collaboration to advance the Team thorugh the completion of many different tasks simulataneously. The latter also facilitates deeper and longer-term player engagement thorugh a diversity in available activities.\\
+\textbf{Fit criterion:}  Special objects are placed randomly throughout the Map Environment that when picked up, grants a number of Match Points to the Player's Team. The object may (or may not) be continue to be collectable after being picked up by a Character. 
+\\
+\\
+\\ \textbf{Requirement 13:}  The Cat-and-Mouse Game should allow teams to interact with Interactive Objects placed within the Map Environment.\\
+\textbf{Rationale:} This allows for an additional dimension of interaction within the Map Environment when completing match objectives. This increases the level of fidelity and player engagement within the Match. \\
+\textbf{Fit criterion:}  Special objects are placed randomly throughout the Map Environment that when the Player is within the range of, allows for the execution of (several) pre-defined behaviours on the object which modifies the Map Environment in some manner. 
+\\
+\\
+\\ \textbf{Requirement 14:}  The Cat-and-Mouse Game should ensure that all players start on an even level playing field, so that there is a lower barrier of entry for new and casual players.\\
 \textbf{Rationale:}  The social nature of the game and strong focus of the game around teamwork and cooperation is such that the need for such skills to succeed should not be mitigated by the sheer amount of time spent in-game.\\
-\textbf{Fit criterion:}  Limited or no game state data is retained upon the termination of a multiplayer session. When starting a new game, previous player performance and accomplishments do not impact the skills or abilities which are granted to a player. Although both the 'Cat' and 'Mouse' Teams host varying Skills and Attributes, the game mechanic will be balanced so that neither team has a predetermined advantage over the other.\\
-\\\\
-\textbf{Requirement 10:}  The Cat-and-Mouse Game should allow for opportunities for Players to enhance their Skills and Attributes through various in game interactions, such as by completing quests, defeating Monsters and collecting Items and Consumerables.   \\
+\textbf{Fit criterion:}  Limited or no game state data is retained upon the termination of a multiplayer session. When starting a new game, previous player performance and accomplishments do not impact the skills or abilities which are granted to a player. Although both the 'Cat' and 'Mouse' Teams host varying Skills and Attributes, the game mechanic will be balanced so that neither team has a predetermined advantage over the other.
+\\
+\\
+\\\textbf{Requirement 15:}  The Cat-and-Mouse Game should allow for opportunities for Players to enhance their Skills and Attributes through various in game interactions, such as by completing quests, defeating Monsters and collecting Items and Consumerables.   \\
 \textbf{Rationale:}  The ability (and indeed, necessity) for a Player to work their way up from baseline in every session motivates individuals to fully explore all the possbilities which are present in every situation. Thus, all participants will be fully engaged in the game experience, and newcomers to the game will not be at a disadvantage in term of enjoyment (e.g. in terms of more 'experienced' players using the same skills over and over again in every match).\\
-\textbf{Fit criterion:}  All Players are able and encouraged to interact with the game envrionment (and other players) in new and innovative ways in every match, and a variety of different paths to the same goal will provide for high replay value for even the most seasoned players.\\
-\\\\
+\textbf{Fit criterion:}  All Players are able and encouraged to interact with the game envrionment (and other players) in new and innovative ways in every match, and a variety of different paths to the same goal will provide for high replay value for even the most seasoned players. This interaction should lead to the advancement of the Player's Attributes and/or Skills.
+\\
+\\
+\\ \textbf{Requirement 16:}  The Cat-and-Mouse Game should allow for opportunities for Players quit the Current Match without terminating the Match for any Players still active within the Room.\\
+\textbf{Rationale:}  This allows for players to leave an active match without other team members and players incurring negative effects (excluding the potiential loss of a team member). This decreases the chance of negative perceptions towards players developing within the community.\\
+\textbf{Fit criterion:}  Upon the choice to quit the Current Match being made, a disconnection from the Match Room or any other operational events occurring which causes a Player to be disconnected from the Match Room, the other Players continue to remain in the Match Room (or Map Environment if the match is active), with no change in their status or the game state.
+\\
+\\
+\\\textbf{Requirement 17:}  The Cat-and-Mouse Game should terminate a match upon the fulfillment of one or more pre-defined condition(s).\\
+\textbf{Rationale:}  This enables match progression to lead to one or more "end-game goals". This increases player engagement and thus, encourages greater team and player co-operation towards a shared goal. \\
+\textbf{Fit criterion:}  The following conditions will result in the ending of the Match. The team  with the most Match Points is then declared to be the Winner. All Players are then returned to the Match Room Screen for the current multiplayer session: (i)  \emph{Upon the defeat (or exit from the Match) of all members of the opposing Team}; (ii) \emph{Upon the exit from the Maze component of the Map Environment by all members any team, as indicated by designated exit points.}  
+\\
+\\
+\\\textbf{Requirement 18:}  The Cat-and-Mouse Game should not allow for members of the same Team to deal damage to one another.\\
+\textbf{Rationale:}  This facilitates greater cohesion, co-coperation and commanderie between members of a Team, and decreases the chances of tension and/or disagreement.   \\
+\textbf{Fit criterion:}  When a member of a Team utilises an attack or skill directed towards or within the vicinity of another Player of the same Team, any effects which decrease the Health Points of the latter Character is negated.
+\\
+\\
+\\ \textbf{Requirement 19:}  The Cat-and-Mouse Game should enable the effects of Skills which carry benefits to nearby Characters or members of the same Team to affect the attributes and Skills of these Players.\\
+\textbf{Rationale:}  This promotes positive team collaboration and mutual assistance between players. Individuals are also more likely to adopt an approach which provides the best advantage to the entire team, and correspondingly less likely to engage in behaviours which only provide \emph{self-satisifying} benefits.  \\
+\textbf{Fit criterion:}  When a member of a Team utilises a supportive Skill with an \emph{area of effect} or \emph{which is directed towards one or more team members} some or all of the effects of that Skill is applied to the applicable Characters.
+\\
+\\
+\\ \textbf{Requirement 20:}  The Cat-and-Mouse Game should define certain areas of the Map Environment which apply one or more effects to nearby Players on passage of some area and/or trigger of some condition by a Character. \\
+\textbf{Rationale:}  This increases the dynamicity and interactivity of the Map Environment, which in addition to increasing the intensity and duration player engagement, further fosters team coordination to devise unique solutions to the obsticles posed by these effect(s) .  \\
+\textbf{Fit criterion:}  When a Character enters a designated area or block within the Map Environment, one or more effects will be applied to their attributes and/or Skills, such as decreasing their flexibility of motion or Vitality.
+\\
+\\
+\\ \textbf{Requirement 21:}  The Cat-and-Mouse Game should provide for common gains and losses with regards to certain attributes within a Team.  \\
+\textbf{Rationale:}  This increases the actual and perceived benefit of greater team co-operation and cohesion, while introducing penalties for a solo and self-satisfying approach. This will also encourage each individual to contribute to the overall performance of the Team by utilising their individual areas of strength to complete tasks and objectives.  \\
+\textbf{Fit criterion:}  Experience points within a Character's Vitality attributes are shared between all members of the Team. Thus, character Level Progression and acquisition of additional Skills and attributes are closely correlated to the performance of the Team as a whole, rather than any one specific individual.
+\\
+\\
+\\ \textbf{Requirement 22:}  The Cat-and-Mouse Game should provide a secondary, non-instrusive interface to view and modify Character Attributes and Skills.  \\
+\textbf{Rationale:} Due to the fast-paced, survival-centric nature of the game, as well as the input methods and layout available to the Player, a seperate (series) of interfaces should be provided, disjoint from the main Heads Up Display (HUD), the latter which indicates the status of and allows for the use the Character's basic Attributes and Skills.  \\
+\textbf{Fit criterion:}  A (series) of dialog boxes, seperated and visually distinguishable from the HUD, allows for the Player to view detailed descriptions relating to the status and behaviour of their Character's attributes and learned Skills. Additionally, through these dialog boxes, users are able to make additons and modifications with regards to these attributes and Skills, dependent on the completion of certain match objectives. The activation of these secondary interfaces is through a combination of Mouse and Keyboard commands, in a \emph{moded} configuration.
+\\
+\\
+\\ \textbf{Requirement 23:}  The Cat-and-Mouse Game should provide a Heads-Up Display, visible on the primary interface upon the start of a Match, which indicates the status of basic Character Attributes and Skills, as well as enables for their activation and/or use as desired by the Player. \\
+\textbf{Rationale:} Due to the fast-paced, survival-centric nature of the game, rapid access to basic information regarding the status of a Character's primary attributes and skills, as well the latter's as streamlined distinguishability and activation by the Player is crucial to the effectiveness of the game in conveying its intended message(s). This is as the former  enables for the rapid acqusition of the most important operational concepts and requisite knowledge required by the Player to facilitate  full and effective participation in the game. Correspondingly, this leads to a maximisation of a Player's attention and resources on team collaboration and coordination to complete the core game tasks and objectives, while limiting any potiential frustration and time spent on the logistics of the interface. \\
+\textbf{Fit criterion:} A few prominent and easily-distinguishable Interface Bars, Labels and other indicators display to the user the current status of the Character's primary Attributes (such as Level, Health and Experience Points). In addition, a Skill Bar allows for the user to view currently learned and available Skills, as well as enables for their rapid use through the activation of pre-defined hotkeys designated to each Skill Slot.
+\\
+\\
+\\ \textbf{Requirement 24:}  The Cat-and-Mouse Game should provide a Minimap which indicates the current position of the Player, in relation to other Player-Controlled and Environment-Controlled Characters, major geographical features, interactive objects and task or objective-related locations, characters and/or items. \\
+\textbf{Rationale:} Due to the fast-paced, survival-centric nature of the game, rapid access to basic information regarding the status of a Character's location in relation other Characters, as well as major features, within the Map Environment provides direction to Players regarding the location of their team members, enemy players and monsters. as well as  regarding the tasks and objectives of the Match. This facilitates team coordination and strategic planning, in addition to minimsing any potiential sources of player confusion and frustration. \\
+\textbf{Fit criterion:} A few prominent and easily-distinguishable Interface Bars, Labels and other indicators display to the user the current status of the Character's primary Attributes (such as Level, Health and Experience Points). In addition, a Skill Bar allows for the user to view currently learned and available Skills, as well as enables for their rapid use through the activation of pre-defined hotkeys designated to each Skill Slot.
+\\
+\\
+\\ \textbf{Requirement 25:}  The Cat-and-Mouse Game should provide easily visible and distinguishable messages to the Player indicating the conditions of various Match Tasks and Objectives, as well as the status of any Tasks and Objectives which are currently in-progress or active. \\
+\textbf{Rationale:} Due to the fast-paced, survival-centric nature of the game, strealined access to information regarding the availiblity and status of Tasks and Objectives within the Map Environment sets the framework for effective teamwork and mutual formation and understanding of the goals of the Team. This further encourages positive social interactions and co-operation between Team Members, while limiting any potiential for frustration. Additionally, the provision of relevant information aiding match progression provides context for the data provided to the Player by the Heads-Up Display and the Minimap, as well as assists in future planning and decision-making processes regarding the selection of Skills and paths for character progression.  \\
+\textbf{Fit criterion:} Clearly-contrasted text in large-font and bright colours is displayed on the primary interface upon the start of a Match and  the commencement of major tasks, objectives, events and/or  the triggering of certain conditions, so as to provide guidance and critical information to Players relating to the successful navigation of these elements within the Map Environment. The finer details will be omitted from these messages, in order to encourage critical and creative thinking, as well as team cooperation. A Game Manual will also be provided to provide a basic control, mechanics and objective reference to players. 
+\\
+\\
+\\
+
 \section{Non-Functional Requirements}
 \subsection{Look and Feel Requirements}
 \subsubsection{Appearance Requirements}
@@ -267,10 +413,10 @@ This means that the users have proper internet access and hardware that meet the
 \paragraph{}We want this game to appear simple and intuitive, so that it does not intimidate certain age groups. However, it will have a mature look to it and a western art style, and together they will create a intense, dungeon-like feel. The players should feel a light sense of tension when playing, the Cat because he wants to find the Mice as soon as possible and the Mice because they do not want to be found.  
 \subsection{Usability and Humanity Requirements}
 \subsubsection{Ease of Use Requirements}
-\paragraph{}The product will be easy to use for users of all ages, requiring basic English skills and use of a computer mouse and keyboard. The user should be able to learn the basics of the game very easily, namely the controls, core mechanics, and the objective of the game with merely going through a quick tutorial. All players who successfully complete the tutorial should be able to understand the basic components of the game. 
+\paragraph{}The product will be easy to use for users of all ages, requiring basic English skills and use of a computer mouse and keyboard. The user should be able to learn the basic concepts and components of the game very easily, namely the controls, core mechanics, and the objective of the game, through simple on-screen messages, as well as by refrencing the included Game Manual. 
 \subsubsection{Personalization and Internalionalization Requirements}
 \paragraph{}The basic controls will be customizable, allowing the user to change certain hotkeys to whatever they please. The interface will be semi-customizable, allowing the user to move or resize items to their preference. 
-\paragraph{}The first release of the product will only support English, but it will be very basic English that even individuals not fluent in English will be able to understand. Upon further development, we may include language packs such as French or Chinese. 
+\paragraph{}The first release of the product will only support English, but it will be written in simplistic and easy-to-understand diction such that even individuals not fluent in English will be able to quickly grasp the basics of the game. Upon further development, we may include language packs such as Chinese and French. 
 \subsubsection{Learning Requirements}
 \paragraph{}Even though the game will be designed to be easy to learn, and easy to get a basic feel of the game, it will be very hard to master. Playing this game at the highest level will require the user to memorize the most efficient paths or abilties, and make very few errors in terms of gameplay. The game should be difficult enough to inspire motivation to improve, but also easy enough to avoid discouraging users from playing. A benchmark will be such that a new user will have a general feel of the game after going through the tutorial, but becoming a master at the game will take hundreds of hours of gameplay. The game should have a lasting impression on the users in terms of fun and desire to improve, and make them want to come back and play again. 
 \subsubsection{Understandability and Politeness Requirements}
@@ -280,8 +426,8 @@ This means that the users have proper internet access and hardware that meet the
 \subsection{Performance Requirements}
 \paragraph{}We hope to target players of all demographics, and we hope that they will be able to enjoy our game even if they do not have the latest computer systems. We will thus design our game to run smoothly on older computers as well as newer models.
 \subsubsection{Speed and Latency Requirements}
-\paragraph{}As the game operates at a real time level and is also multiplayer, we want each player to constantly have updates on the current game state. This would require information packets to be sent to each player multiple times every second, and each group of packets will contain information such as other the movements or actions of other players. The users will therefore be required to have a minimum internet connection speed of 1 Mbps. 
-\paragraph{}Latency is also an important issue to consider in a real time game such as the one we are developing. Players need to be able to react immediately to what is going on in the game, so their latency should be as low as possible. We will aim to limit each player's ping to 100 ms or less, as any more than this causes an obvious delay between the user's physical actions and their characters actions. 
+\paragraph{}As the game operates at a real time level and is also multiplayer, we want each player to constantly have updates on the current game state. This would require information packets to be sent to each player multiple times every second, and each group of packets will contain information such as other the movements or actions of other players. The users will therefore be required to have a minimum internet connection speed of 1 Mbps. This latter bandwidth requirement will ensure for a stable connection and effective communication between the user's computer and the Multiplayer Servers.
+\paragraph{}Latency is also an important issue to consider in a real-time game such as the one we are developing. Players need to be able to react immediately to what is going on in the game, so their latency should be as low as possible. We will aim to limit the ping between each player to the Multiplayer Server to be 100 ms or less, as any more than this causes an obvious delay between the user's physical actions and their characters actions. This latter latency limit assumes an average frame-rate of 30 Frames Per Second, as well as a \emph{sync packet} requested once every frame, thus enabling  successful synchronisation between the client and server at least once every 5 frames, accounting for a 40 \% margin of error on synchronisation requests.
 \subsubsection{Safety-Critical Requirements}
 \paragraph{}The game will not have any extremely flashy effects that can cause seizures for certain individuals. 
 \subsubsection{Precision or Accuracy Requirements}
@@ -324,7 +470,7 @@ This means that the users have proper internet access and hardware that meet the
 \subsubsection{Immunity Requirements}
 \paragraph{}Users having anti-virus software should be sufficient for protection against unauthorized programs like viruses.
 \subsection{Cultural Requirements}
-\paragraph{}The product will not have anything offensive or sensitive, culturally or religiously. The game will be in english and is not intended for a market outside of the US and Canada.
+\paragraph{}The product will not have anything offensive or sensitive, culturally or religiously. The game's primary language will be in English and is not intended for a market outside of the US and Canada.
 \subsection{Legal Requirements}
 \subsubsection{Compliance Requirements}
 \paragraph{}All of our assets and code will be created by ourselves or royalty free.
