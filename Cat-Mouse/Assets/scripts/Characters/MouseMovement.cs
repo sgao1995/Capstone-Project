@@ -21,6 +21,7 @@ public class MouseMovement : MonoBehaviour {
     private int ultimateSkillPoints;
     private List<int> learnedSkills;
     private float damage = 10f;
+    private float damageMod = 1; //current damage modifier
     // movement speed
     private float movementModifier = 1f;
     private float movementModifier2 = 1f; //this is for the Hunted skill, so it will be additional movement speed if active.
@@ -62,6 +63,10 @@ public class MouseMovement : MonoBehaviour {
     private float healingAmt = 4f; //Needed for Bandage skill, if skill is active, explorer will heal 4 hp every second
     private bool isHuntedActive = false; //Needed for Hunted skill, if true, will muffle footstep sound
     private bool isCrippled = false; //Needed for Cripple skill
+    private bool tagTeamActive = false; //Needed for tag team skill
+    private bool problemSolverActive = false; //needed for problem solver skill
+    private bool treasureActive = false;//Needed for trasure hunter skill
+    private bool canUseSkills = true;
 
     /* Vitality System attribute parameters */
     private float[] vitalLevelHP = {50, 65, 80, 110};  // Health Points of Mouse per Level
@@ -71,6 +76,7 @@ public class MouseMovement : MonoBehaviour {
     public Vitality mouseVitality;  // Vitality System component
     public Skill mouseSkill;  // Skill System component
     public Text interactText;
+    public Text skillText;
 	public bool miniMenuShowing = false;
 	private GameObject miniMenu;
     private GameObject Alert;
@@ -114,9 +120,12 @@ public class MouseMovement : MonoBehaviour {
         mouseSkill = mouseSkillGameObject.GetComponent<Skill>();
 
         GameObject interactiveText = GameObject.Find("Text");
+        GameObject skillsText = GameObject.Find("SkillText");
 		interactText = interactiveText.GetComponent<Text>();
 		interactText.text = "";
-		miniMenu = GameObject.Find("MiniMenu");
+        skillText = skillsText.GetComponent<Text>();
+        skillText.text = "";
+        miniMenu = GameObject.Find("MiniMenu");
 		// need to disable the minimenu to begin with
 		miniMenu.SetActive(false);
         Alert = GameObject.Find("Alert");
@@ -147,34 +156,6 @@ public class MouseMovement : MonoBehaviour {
                 Debug.Log("hit");
                 movementModifier = 1.5f;
 
-            }
-        }
-    }
-    void TreasureHunter()//Explorer Skill (passive): Alert shows up when player is near chest or keys
-    {
-        hitCollider = Physics.OverlapSphere(this.transform.position, 10);
-        foreach (Collider C in hitCollider)
-        {
-            if (C.GetComponent<Collider>().transform.root != this.transform && (C.GetComponent<Collider>().tag == "Key" || C.GetComponent<Collider>().tag == "Key(Clone)"))
-            {
-                Debug.Log("Key Detected");
-                interactText.text = "A key is nearby...";
-            }else if (C.GetComponent<Collider>().transform.root != this.transform && (C.GetComponent<Collider>().tag == "Chest" || C.GetComponent<Collider>().tag == "Chest(Clone)"))
-            {
-                Debug.Log("Chest Detected");
-                interactText.text = "A treasure chest is nearby...";
-            }
-        }
-    }
-    void ProblemSolver()//Explorer Skill (passive): Alert shows up when player is near puzzle rooms
-    {
-        hitCollider = Physics.OverlapSphere(this.transform.position, 10);
-        foreach (Collider C in hitCollider)
-        {
-            if (C.GetComponent<Collider>().transform.root != this.transform && (C.GetComponent<Collider>().tag == "PuzzleRoomBoss" || C.GetComponent<Collider>().tag == "Spike(Clone)" || C.GetComponent<Collider>().tag == "IcyMist(Clone)" || C.GetComponent<Collider>().tag == "Mine(Clone)" || C.GetComponent<Collider>().tag == "FireyMist(Clone)"))
-            {
-                Debug.Log("Puzzle Detected");
-                interactText.text = "A puzzle room is nearby...";
             }
         }
     }
@@ -261,10 +242,59 @@ public class MouseMovement : MonoBehaviour {
         GameObject dart = PhotonNetwork.Instantiate("dart", dartPos+PosMod, rayRot, 0);
         dart.GetComponent<Rigidbody>().AddForce(transform.forward * 25f);
     }
+    IEnumerator Brawler()//Explorer Skill (active): gains 50% damage and is immune to enemy abilities for 5 seconds
+    {
+        damageMod = 1.5f;
+        transform.Find("Cat").GetComponent<PhotonView>().RPC("BrawlerActive", PhotonTargets.AllBuffered);
+        yield return new WaitForSeconds(5);
+        transform.Find("Cat").GetComponent<PhotonView>().RPC("BrawlerNotActive", PhotonTargets.AllBuffered);
+        damageMod = 1f;
+    }
     void LateUpdate()
     {
-        tagTeam();
-
+        if (tagTeamActive)
+        {
+            tagTeam();
+        }
+        //problemsolver passive
+        if (problemSolverActive)
+        {
+            foreach (Collider C in hitCollider)
+            {
+                if (C.GetComponent<Collider>().transform.root != this.transform && (C.GetComponent<Collider>().tag == "PuzzleRoomBoss" || C.GetComponent<Collider>().tag == "Spike(Clone)" || C.GetComponent<Collider>().tag == "PuzzleRoom" || C.GetComponent<Collider>().tag == "Mine(Clone)"))
+                {
+                    Debug.Log("Puzzle Detected");
+                    skillText.text = "A puzzle room is nearby...";
+                    new WaitForSeconds(2);
+                }
+                else
+                {
+                    skillText.text = "";
+                }
+            }
+        }
+        //treasurehunter passive
+        if (treasureActive)
+        {
+            foreach (Collider C in hitCollider)
+            {
+                if (C.GetComponent<Collider>().transform.root != this.transform && (C.GetComponent<Collider>().tag == "Key"))
+                {
+                    Debug.Log("Key Detected");
+                    skillText.text = "A Key is nearby...";
+                    new WaitForSeconds(2);
+                }
+                else if (C.GetComponent<Collider>().transform.root != this.transform && (C.GetComponent<Collider>().tag == "Chest"))
+                {
+                    Debug.Log("Chest Detected");
+                    skillText.text = "A Treasure Chest is nearby...";
+                    new WaitForSeconds(2);
+                }else
+                {
+                    skillText.text = "";
+                }
+            }
+        }
     }
     // level up
     public void LevelUp()
@@ -290,10 +320,25 @@ public class MouseMovement : MonoBehaviour {
         this.currentEXP = 0;
     }
     //when Explorers get stunned, this function will be called and will stop them from moving for 1 second
-    void isStunned()
+    public void Stunned()
+    {
+        transform.GetComponent<PhotonView>().RPC("isStunned", PhotonTargets.AllBuffered);
+    }
+    
+    [PunRPC]
+    IEnumerator isStunned()
     {
         Debug.Log("STUNNED");
+        canMove = false;
+        canUseSkills = false;
+        Debug.Log("is Stunned");
+        transform.GetComponent<PhotonView>().RPC("PlayAnim", PhotonTargets.All, "StunnedAnim");
+        yield return new WaitForSeconds(3);
+        Debug.Log("is not Stunned");
+        canMove = true;
+        canUseSkills = true;
     }
+
     // wait function
     public void WaitForAnimation(float seconds){
 		StartCoroutine(_wait(seconds));
@@ -307,38 +352,73 @@ public class MouseMovement : MonoBehaviour {
     // execute a skill (not jump or attack)
     public void useSkill(int skillCode)
     {
-        switch (skillCode)
+        if (canUseSkills)
         {
-            // skills 1 and 2 are passive
-            case 3:
-                Debug.Log("use smokescreen"); //SmokeScreen, Explorer Skill (active): Throw down smokescreen, and become invisible for 5 seconds
-                // placeholder skill for a smoke screen
-                //	animator.Play("Throw");
-                transform.GetComponent<PhotonView>().RPC("PlayAnim", PhotonTargets.All, "Throw");
-                WaitForAnimation(0.7f);
-                transform.GetComponent<PhotonView>().RPC("cloak", PhotonTargets.AllBuffered);
-				transform.GetComponent<PhotonView>().RPC("playSound", PhotonTargets.AllBuffered, 5, 1f);
-
-                break;
-            case 4:
-                Debug.Log("use 4");
-                transform.GetComponent<PhotonView>().RPC("uncloak", PhotonTargets.AllBuffered);
-
-                break;
-            case 5:
-                Debug.Log("use 5");
-                break;
-            case 6:
-                Debug.Log("use 6");
-                break;
-            case 7:
-                break;
-            case 8:
-                break;
-            case 9:
-				transform.GetComponent<PhotonView>().RPC("playSound", PhotonTargets.AllBuffered, 6, 1f);
-                break;
-        }
+            switch (skillCode)
+            {
+                case 0:
+                    Debug.Log("use 0");
+                    //tagteam skill
+                    tagTeamActive = true;
+                    break;
+                case 1:
+                    Debug.Log("use 1");
+                    //treasure hunter skill
+                    treasureActive = true;
+                    break;
+                case 2:
+                    Debug.Log("use 4");
+                    //problem solver skill
+                    problemSolverActive = true;
+                    break;
+                case 3:
+                    Debug.Log("use smokescreen"); //SmokeScreen, Explorer Skill (active): Throw down smokescreen, and become invisible for 5 seconds
+                                                  // placeholder skill for a smoke screen
+                                                  //	animator.Play("Throw");
+                    transform.GetComponent<PhotonView>().RPC("PlayAnim", PhotonTargets.All, "Throw");
+                    WaitForAnimation(0.7f);
+                    transform.GetComponent<PhotonView>().RPC("cloak", PhotonTargets.AllBuffered);
+                    transform.GetComponent<PhotonView>().RPC("playSound", PhotonTargets.AllBuffered, 5, 1f);
+                    break;
+                case 4:
+                    Debug.Log("use 4");
+                    //bandage skill
+                    StartCoroutine(Bandage());
+                    break;
+                case 5:
+                    Debug.Log("use 5");
+                    //hidden passage skill
+                    break;
+                case 6:
+                    Debug.Log("use 6");
+                    //disengage skill
+                    Disengage();
+                    break;
+                case 7:
+                    Debug.Log("use 7");
+                    //cripple skill
+                    Cripple();
+                    break;
+                case 8:
+                    Debug.Log("use 8");
+                    //brawler skill
+                    StartCoroutine(Brawler());
+                    break;
+                case 9:
+                    Debug.Log("use 9");
+                    //The hunted skill
+                    transform.GetComponent<PhotonView>().RPC("playSound", PhotonTargets.AllBuffered, 6, 1f);
+                    StartCoroutine(Hunted());
+                    break;
+                case 10:
+                    Debug.Log("use 10");
+                    //Sleep dart skill
+                    transform.GetComponent<PhotonView>().RPC("PlayAnim", PhotonTargets.All, "Throw");
+                    WaitForAnimation(0.7f);
+                    transform.GetComponent<PhotonView>().RPC("SleepDart", PhotonTargets.AllBuffered);
+                    break;
+            }
+        }     
     }
     [PunRPC]
     void playSound(int type, float t)
@@ -413,50 +493,14 @@ public class MouseMovement : MonoBehaviour {
                 jump();
             }
         }
-
         /* Updates the Character attributes and HUD state for the current player */
         hitCollider = Physics.OverlapSphere(this.transform.position, 10);
         //temporary for SleepDart
         if (Input.GetKeyDown(KeyCode.V))
         {
+            transform.GetComponent<PhotonView>().RPC("PlayAnim", PhotonTargets.All, "Throw");
+            WaitForAnimation(0.7f);
             transform.GetComponent<PhotonView>().RPC("SleepDart", PhotonTargets.AllBuffered);
-        }
-        //temporary for problemsolver
-        foreach (Collider C in hitCollider)
-        {
-            if (C.GetComponent<Collider>().transform.root != this.transform && (C.GetComponent<Collider>().tag == "PuzzleRoomBoss" || C.GetComponent<Collider>().tag == "Spike(Clone)" || C.GetComponent<Collider>().tag == "PuzzleRoom" || C.GetComponent<Collider>().tag == "Mine(Clone)" ))
-            {
-                Debug.Log("Puzzle Detected");
-                interactText.text = "A puzzle room is nearby...";
-            }
-        }
-        //temporary for cripple skill
-        if (Input.GetKeyDown(KeyCode.R))
-        {
-            Cripple();
-        }
-        //temporary for hunted skill
-        if (Input.GetKeyDown(KeyCode.K))
-        {
-            StartCoroutine(Hunted());
-        }
-        //temporary for hidden passage skill
-        if (Input.GetKeyDown(KeyCode.X))
-        {
-            HiddenPassage();
-        }
-        //temporary for recoup skill
-        if (Input.GetKeyDown(KeyCode.H))
-        {
-            currentHealth = currentHealth - 80;
-        }
-        if (Input.GetKeyDown(KeyCode.F))
-        {
-            StartCoroutine(Bandage());
-        }
-        if (Input.GetKeyDown(KeyCode.J))
-        {
-            Disengage();
         }
         if (GetComponent<PhotonView>().isMine)
         {
@@ -707,14 +751,13 @@ public class MouseMovement : MonoBehaviour {
     {
         StopCoroutine(Bandage());
         Debug.Log("player died");
-        alive = false;
-        GetComponent<MouseMovement>().enabled = false;
+        alive = false;    
         CamMovement cam = gameObject.GetComponentInChildren<CamMovement>();
         cam.enabled = false;
         transform.GetComponent<PhotonView>().RPC("PlayAnim", PhotonTargets.All, "Unarmed-Death1");
+        GetComponent<MouseMovement>().enabled = false;
         WaitForAnimation(5f);
         transform.GetComponent<PhotonView>().RPC("respawn", PhotonTargets.AllBuffered);
-
     }
 
     [PunRPC]
@@ -776,7 +819,7 @@ public class MouseMovement : MonoBehaviour {
             {
                 Debug.Log("Trying to hurt " + hitInfo.collider.transform.name + " by calling script " + hitInfo.collider.transform.GetComponent<MonsterAI>().name);
 				
-				if (hitInfo.collider.transform.GetComponent<MonsterAI>().getHealth() > 0 && hitInfo.collider.transform.GetComponent<MonsterAI>().getHealth() - damage <= 0){
+				if (hitInfo.collider.transform.GetComponent<MonsterAI>().getHealth() > 0 && hitInfo.collider.transform.GetComponent<MonsterAI>().getHealth() - damage*damageMod <= 0){
                     //currentEXP += hitInfo.collider.transform.GetComponent<MonsterAI>().getExpDrop();
                     //mouseVitality.setCurrentExperiencePoints(currentEXP);
                     Debug.Log("got EXP");
@@ -784,7 +827,7 @@ public class MouseMovement : MonoBehaviour {
 					
 				}
 
-				hitInfo.collider.transform.GetComponent<MonsterAI>().SendMessage("takeDamage", damage);
+				hitInfo.collider.transform.GetComponent<MonsterAI>().SendMessage("takeDamage", damage*damageMod);
                 if (isCrippled)
                 {
                     hitInfo.collider.transform.GetComponent<PhotonView>().RPC("Crippled", PhotonTargets.AllBuffered);
@@ -796,7 +839,7 @@ public class MouseMovement : MonoBehaviour {
             {
                 Debug.Log("Trying to hurt " + hitInfo.collider.transform.name + " by calling script " + hitInfo.collider.transform.GetComponent<MonsterAI>().name);
 
-                if (hitInfo.collider.transform.GetComponent<MonsterAI>().getHealth() > 0 && hitInfo.collider.transform.GetComponent<MonsterAI>().getHealth() - damage <= 0)
+                if (hitInfo.collider.transform.GetComponent<MonsterAI>().getHealth() > 0 && hitInfo.collider.transform.GetComponent<MonsterAI>().getHealth() - damage* damageMod <= 0)
                 {
                     //currentEXP += hitInfo.collider.transform.GetComponent<MonsterAI>().getExpDrop();
                     //mouseVitality.setCurrentExperiencePoints(currentEXP);
@@ -804,7 +847,7 @@ public class MouseMovement : MonoBehaviour {
 					
                 }
 
-                hitInfo.collider.transform.GetComponent<MonsterAI>().SendMessage("takeDamage", damage);
+                hitInfo.collider.transform.GetComponent<MonsterAI>().SendMessage("takeDamage", damage* damageMod);
                 if (isCrippled)
                 {
                     hitInfo.collider.transform.GetComponent<PhotonView>().RPC("Crippled", PhotonTargets.AllBuffered);
@@ -816,14 +859,14 @@ public class MouseMovement : MonoBehaviour {
             {
                 Debug.Log("Trying to hurt " + hitInfo.collider.transform.name + " by calling script " + hitInfo.collider.transform.GetComponent<MonsterAI>().name);
 
-                if (hitInfo.collider.transform.GetComponent<MonsterAI>().getHealth() > 0 && hitInfo.collider.transform.GetComponent<MonsterAI>().getHealth() - damage <= 0)
+                if (hitInfo.collider.transform.GetComponent<MonsterAI>().getHealth() > 0 && hitInfo.collider.transform.GetComponent<MonsterAI>().getHealth() - damage* damageMod <= 0)
                 {
                     //currentEXP += hitInfo.collider.transform.GetComponent<MonsterAI>().getExpDrop();
                     //mouseVitality.setCurrentExperiencePoints(currentEXP);
                     currentEXP += 200;
                 }
 
-                hitInfo.collider.transform.GetComponent<MonsterAI>().SendMessage("takeDamage", damage);
+                hitInfo.collider.transform.GetComponent<MonsterAI>().SendMessage("takeDamage", damage* damageMod);
                 if (isCrippled)
                 {
                     hitInfo.collider.transform.GetComponent<PhotonView>().RPC("Crippled", PhotonTargets.AllBuffered);
@@ -835,14 +878,14 @@ public class MouseMovement : MonoBehaviour {
             {
                 Debug.Log("Trying to hurt " + hitInfo.collider.transform.name + " by calling script " + hitInfo.collider.transform.GetComponent<MonsterAI>().name);
 
-                if (hitInfo.collider.transform.GetComponent<MonsterAI>().getHealth() > 0 && hitInfo.collider.transform.GetComponent<MonsterAI>().getHealth() - damage <= 0)
+                if (hitInfo.collider.transform.GetComponent<MonsterAI>().getHealth() > 0 && hitInfo.collider.transform.GetComponent<MonsterAI>().getHealth() - damage* damageMod <= 0)
                 {
                     //currentEXP += hitInfo.collider.transform.GetComponent<MonsterAI>().getExpDrop();
                     //mouseVitality.setCurrentExperiencePoints(currentEXP);
                     currentEXP += 200;
                 }
 
-                hitInfo.collider.transform.GetComponent<MonsterAI>().SendMessage("takeDamage", damage);
+                hitInfo.collider.transform.GetComponent<MonsterAI>().SendMessage("takeDamage", damage* damageMod);
                 if (isCrippled)
                 {
                     hitInfo.collider.transform.GetComponent<PhotonView>().RPC("Crippled", PhotonTargets.AllBuffered);
@@ -854,13 +897,13 @@ public class MouseMovement : MonoBehaviour {
             {
                 Debug.Log("Trying to hurt " + hitInfo.collider.transform.name + " by calling script " + hitInfo.collider.transform.GetComponent<CatMovement>().name);
                 
-                if (hitInfo.collider.transform.GetComponent<CatMovement>().getHealth() > 0 && hitInfo.collider.transform.GetComponent<CatMovement>().getHealth() - damage <= 0)
+                if (hitInfo.collider.transform.GetComponent<CatMovement>().getHealth() > 0 && hitInfo.collider.transform.GetComponent<CatMovement>().getHealth() - damage* damageMod <= 0)
                 {
                     GameObject.Find("WinObj").GetComponent<WinScript>().setCatDeaths();
                     currentEXP += 100;
                 }
 				
-				hitInfo.collider.transform.GetComponent<CatMovement>().SendMessage("TakeDamage", damage);
+				hitInfo.collider.transform.GetComponent<CatMovement>().SendMessage("TakeDamage", damage* damageMod);
                 if (isCrippled)
                 {
                     hitInfo.collider.transform.GetComponent<PhotonView>().RPC("Crippled", PhotonTargets.AllBuffered);
@@ -926,8 +969,7 @@ public class MouseMovement : MonoBehaviour {
     }
     // collision with objects
     void OnCollisionEnter(Collision collisionInfo)
-    {
-        
+    {   
         transform.GetComponent<PhotonView>().RPC("SetInteger", PhotonTargets.All, "Jumping", 0);
         if (collisionInfo.gameObject.tag == "Ground")
         {
