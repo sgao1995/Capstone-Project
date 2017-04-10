@@ -153,6 +153,11 @@ public class MonsterAI : MonoBehaviour
         Debug.Log("can move");
     }
     [PunRPC]
+    void PlayAnim(string a)
+    {
+        GetComponent<Animator>().Play(a);
+    }
+    [PunRPC]
     void playSound(int type, float t)
     {
         switch (type)
@@ -210,13 +215,6 @@ public class MonsterAI : MonoBehaviour
         yield return new WaitForSeconds(time);
         transform.GetComponent<NavMeshAgent>().enabled = true;
         canMove = true;
-    }
-    //when Monsters get stunned, this function will be called and will stop them from moving for 1 second
-    void isStunned()
-    {
-        Debug.Log("STUNNED");
-        transform.GetComponent<PhotonView>().RPC("SetTrigger", PhotonTargets.All, "Attack");
-        WaitForAnimation(1f);
     }
     //when Monsters get crippled, this function will be called
     [PunRPC]

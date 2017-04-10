@@ -18,32 +18,36 @@ Platform assembly: C:\Users\SmugFug\Documents\GitHub\Cat-and-Mouse-Game\Cat-Mous
 Loading C:\Users\SmugFug\Documents\GitHub\Cat-and-Mouse-Game\Cat-Mouse\C&M_Data\Managed\UnityEngine.Networking.dll into Unity Child Domain
 Platform assembly: C:\Users\SmugFug\Documents\GitHub\Cat-and-Mouse-Game\Cat-Mouse\C&M_Data\Managed\Photon3Unity3D.dll (this message is harmless)
 Loading C:\Users\SmugFug\Documents\GitHub\Cat-and-Mouse-Game\Cat-Mouse\C&M_Data\Managed\Photon3Unity3D.dll into Unity Child Domain
-- Completed reload, in  0.076 seconds
+- Completed reload, in  0.111 seconds
 Platform assembly: C:\Users\SmugFug\Documents\GitHub\Cat-and-Mouse-Game\Cat-Mouse\C&M_Data\Managed\System.Core.dll (this message is harmless)
 Platform assembly: C:\Users\SmugFug\Documents\GitHub\Cat-and-Mouse-Game\Cat-Mouse\C&M_Data\Managed\System.dll (this message is harmless)
+desktop: 1920x1080 60Hz; virtual: 1920x1080 at 0,0
 <RI> Initializing input.
 <RI> Input initialized.
-desktop: 1920x1080 60Hz; virtual: 1920x1080 at 0,0
 <RI> Initialized touch support.
 The referenced script on this Behaviour (Game Object 'Main Camera') is missing!
  
 (Filename:  Line: 1656)
 
-UnloadTime: 0.942112 ms
+UnloadTime: 4.923438 ms
 Setting up 2 worker threads for Enlighten.
-  Thread -> id: 386c -> priority: 1 
-  Thread -> id: 2704 -> priority: 1 
+  Thread -> id: 4f8 -> priority: 1 
+  Thread -> id: 1264 -> priority: 1 
 Unloading 6 Unused Serialized files (Serialized files now loaded: 0)
-UnloadTime: 6.858927 ms
+UnloadTime: 6.614869 ms
 
-Unloading 5 unused Assets to reduce memory usage. Loaded Objects now: 565.
-Total: 0.387911 ms (FindLiveObjects: 0.036985 ms CreateObjectMapping: 0.049216 ms MarkObjects: 0.291807 ms  DeleteObjects: 0.008736 ms)
+Unloading 3 unused Assets to reduce memory usage. Loaded Objects now: 580.
+Total: 0.699520 ms (FindLiveObjects: 0.039606 ms CreateObjectMapping: 0.043101 ms MarkObjects: 0.608076 ms  DeleteObjects: 0.007863 ms)
 
 SwitchToProtocol: Udp PhotonNetwork.connected: False
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
 
 CreateRoom failed. Client is not on Master Server or not yet ready to call operations. Wait for callback: OnJoinedLobby or OnConnectedToMaster.
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+Operation 229 could not be executed (yet). Wait for state JoinedLobby or ConnectedToMaster and their callbacks before calling operations. WebRPCs need a server-side configuration. Enum OperationCode helps identify the operation.
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
 
@@ -68,32 +72,12 @@ playerWhoIsIt: 1
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
 
 Unloading 4 Unused Serialized files (Serialized files now loaded: 0)
-UnloadTime: 1.032392 ms
+UnloadTime: 1.760159 ms
 
-Unloading 145 unused Assets to reduce memory usage. Loaded Objects now: 512.
-Total: 0.773784 ms (FindLiveObjects: 0.047469 ms CreateObjectMapping: 0.031743 ms MarkObjects: 0.477899 ms  DeleteObjects: 0.215797 ms)
+Unloading 150 unused Assets to reduce memory usage. Loaded Objects now: 542.
+Total: 0.790091 ms (FindLiveObjects: 0.042809 ms CreateObjectMapping: 0.032908 ms MarkObjects: 0.484014 ms  DeleteObjects: 0.229775 ms)
 
 1
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
-
-HEY IT WORKS1
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
-
-HEY IT WORKS2
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
-
-HEY IT WORKS1
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
-
-IT WORKS
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
-
-HEY IT WORKS2
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
 
@@ -110,76 +94,32 @@ TerrainData is missing splat texture 1.
  
 (Filename:  Line: 206)
 
-UnloadTime: 1.509127 ms
+UnloadTime: 1.389722 ms
 
-Unloading 9 unused Assets to reduce memory usage. Loaded Objects now: 1030.
-Total: 1.164316 ms (FindLiveObjects: 0.082416 ms CreateObjectMapping: 0.037859 ms MarkObjects: 0.758058 ms  DeleteObjects: 0.285400 ms)
+Unloading 11 unused Assets to reduce memory usage. Loaded Objects now: 1088.
+Total: 1.182662 ms (FindLiveObjects: 0.060283 ms CreateObjectMapping: 0.037276 ms MarkObjects: 0.792421 ms  DeleteObjects: 0.291806 ms)
 
-System.Collections.Generic.List`1[System.Int32]
+donemaze, 69
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
 
-System.Collections.Generic.List`1[System.Int32]
+15
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
 
-System.Collections.Generic.List`1[System.Int32]
+length 3
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
 
-System.Collections.Generic.List`1[System.Int32]
+finished editng spawns
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
 
-System.Collections.Generic.List`1[System.Int32]
+spawn mouse
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
 
-System.Collections.Generic.List`1[System.Int32]
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
-
-donemaze, 148
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
-
-22
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
-
-23
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
-
-8
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
-
-43
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
-
-31
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
-
-1
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
-
-2
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
-
-22
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
-
-5 3 2
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
-
-player died
+messagedisplayed
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
 

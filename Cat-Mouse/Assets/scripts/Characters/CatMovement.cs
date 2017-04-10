@@ -64,6 +64,11 @@ public class CatMovement : MonoBehaviour
     private float stalkerTime = 5f;
     private bool isStalkerActive = false;
     private bool bashActive = false;
+    private bool isBrawlerActive = false; //this one tells the cat is the brawler skill for the mouse is active or not
+    private bool HSActive = false; //Needed for heightened sense skill
+    private bool LIWActive = false; //Needed for lieinwait skill
+    private bool FocusActive = false; //Needed for focus skill
+    private bool canUseSkills = true;
 
     /* Vitality System attribute parameters */
     private float[] vitalLevelHP = {100, 125, 160, 200};  // Health Points of Cat per Level
@@ -170,41 +175,100 @@ public class CatMovement : MonoBehaviour
 	
 	// execute a skill (not jump or attack)
 	public void useSkill(int skillCode){
-		switch (skillCode){
-			// skills 1 and 2 are passive
-			case 3: 
-				Debug.Log("use 3");
-				// a placeholder skill for a leap
-				isGrounded = false;
-                transform.GetComponent<PhotonView>().RPC("SetTrigger", PhotonTargets.All, "JumpTrigger");
-                transform.GetComponent<PhotonView>().RPC("SetInteger", PhotonTargets.All, "Jumping", 1);
-                //animator.SetTrigger("JumpTrigger");
-                //animator.SetInteger("Jumping", 1);
-                catrb.AddForce(new Vector3(0, 350f, 0) + (transform.forward*150f));
-				break;
-			case 4:
-				Debug.Log("use 4");
-				break;
-			case 5: 
-				Debug.Log("use 5");
-				break;
-			case 6:
-				Debug.Log("use 6");
-				break;
-			case 7: 
-				break;
-			case 18:
-				/* "Lasso - Throw out a rope that pulls the first enemy hit to you. 15 second cooldown." */
-				transform.GetComponent<PhotonView>().RPC("PlayAnim", PhotonTargets.All, "Throw");
-                WaitForAnimation(0.7f);
-                transform.GetComponent<PhotonView>().RPC("Lasso", PhotonTargets.AllBuffered);
-				break;
-			case 19: 
-				Debug.Log("Place trap");
-				/* "Trap - Lay down a steel trap that lasts 300 seconds that will snare the first enemy that steps on it for 4 seconds. Maximum of 5 traps at once. 10 second cooldown. */
-				transform.GetComponent<PhotonView>().RPC("PlaceTrap", PhotonTargets.AllBuffered);
-				break;
-		}
+        if (canUseSkills)
+        {
+            switch (skillCode)
+            {
+                case 11:
+                    Debug.Log("use 11");
+                    //heightened Senses
+                    HSActive = true;
+                    break;
+                case 12:
+                    //lie in wait
+                    Debug.Log("use 12");
+                    LIWActive = true;
+                    break;
+                case 13:
+                    Debug.Log("use 13");
+                    //Focus skill
+                    //temporary for focus skill
+                    if (!focusTimerPause)
+                    {
+                        beginT3 += Time.deltaTime;
+                    }
+                    if (focusTimerPause)
+                    {
+                        beginT3 = 0f;
+                    }
+                    if (beginT3 >= 10.0f)
+                    {
+                        if (!isBrawlerActive)
+                        {
+                            damageModifierF = 2;
+                        }
+                        else
+                        {
+                            damageModifierF = 1;
+                        }
+                    }
+                    else
+                    {
+                        damageModifierF = 1;
+                    }
+                    focusTimerPause = false;
+                    break;
+                case 14:
+                    Debug.Log("use 14");
+                    //Leap skill
+                    isGrounded = false;
+                    transform.GetComponent<PhotonView>().RPC("SetTrigger", PhotonTargets.All, "JumpTrigger");
+                    transform.GetComponent<PhotonView>().RPC("SetInteger", PhotonTargets.All, "Jumping", 1);
+                    catrb.AddForce(new Vector3(0, 350f, 0) + (transform.forward * 150f));
+                    break;
+                case 15:
+                    Debug.Log("use 15");
+                    //Recoup skill
+                    //temporary for recoup skill
+                    StartCoroutine(recoup());
+                    break;
+                case 16:
+                    //Stalker skill
+                    Debug.Log("use 16");
+                    StartCoroutine(Stalker());
+                    break;
+                case 17:
+                    //Bash skill 
+                    Debug.Log("use 17");
+                    if (attackCooldownTimer <= 0 && !Input.GetKey(KeyCode.Escape) && !miniMenuShowing)
+                    {
+                        WaitForAnimation(0.7f);
+                        StartCoroutine(Bash());
+                    }
+                    break;
+                case 18:
+                    /* "Lasso - Throw out a rope that pulls the first enemy hit to you. 15 second cooldown." */
+                    Debug.Log("use 18");
+                    transform.GetComponent<PhotonView>().RPC("PlayAnim", PhotonTargets.All, "Throw");
+                    WaitForAnimation(0.7f);
+                    transform.GetComponent<PhotonView>().RPC("Lasso", PhotonTargets.AllBuffered);
+                    break;
+                case 19:
+                    Debug.Log("use 19");
+                    /* "Trap - Lay down a steel trap that lasts 300 seconds that will snare the first enemy that steps on it for 4 seconds. Maximum of 5 traps at once. 10 second cooldown. */
+                    transform.GetComponent<PhotonView>().RPC("PlaceTrap", PhotonTargets.AllBuffered);
+                    break;
+                case 20:
+                    Debug.Log("use 20");
+                    //The Hunter skill
+                    theHunter();
+                    break;
+                case 21:
+                    Debug.Log("use 21");
+                    //reload skill
+                    break;
+            }
+        }
 	}
 	
 	/* Function that placed a trap on the ground in front of the player */
@@ -222,6 +286,19 @@ public class CatMovement : MonoBehaviour
 			steelTrapsList.RemoveAt(0);
 		}
 	}
+    //if mouse has brawler skill active, skills that affect the mouse are disabled
+    [PunRPC]
+    void BrawlerActive()
+    {
+        isBrawlerActive = true;
+        Debug.Log("BRAWLER IS ACTIVE");
+    }
+    [PunRPC]
+    void BrawlerNotActive()
+    {
+        isBrawlerActive = false;
+        Debug.Log("BRAWLER IS NOT ACTIVE");
+    }
 	
 	/* Throws a lasso in front of the player, pulling monsters and players towards the cat if connected*/
 	[PunRPC]
@@ -237,7 +314,7 @@ public class CatMovement : MonoBehaviour
 		Vector3 endPos = ray.origin + ray.direction * 10f;
 		newLasso.Initialize(transform.position + (transform.up*0.7f) + (transform.right*0.5f) + (transform.forward*0.5f), endPos, ray, transform.gameObject);
     }
-    IEnumerator lieInWait()
+    IEnumerator lieInWait() //lieinwait skill, wait 3 seconds and become invisible
     {
         //become invisible
         transform.GetComponent<PhotonView>().RPC("InvisC", PhotonTargets.AllBuffered, 0.2f, 3f);
@@ -265,7 +342,7 @@ public class CatMovement : MonoBehaviour
             yield return null;
         }
     }
-    IEnumerator recoup()
+    IEnumerator recoup() //Recoup skill, heals 75 hp over 10 seconds
     {
         float time = 10;
         if(currentHealth < maxHealth)
@@ -282,38 +359,29 @@ public class CatMovement : MonoBehaviour
             }
         }
     }
-    IEnumerator Bash()
+    IEnumerator Bash() //Bash Skill, stun effect will only work on enemy players
     {
         focusTimerPause = true;//so the Focus buff will be reset to damagemultiplierF of 1
-        bashActive = true;
+        if (!isBrawlerActive)
+        {
+            bashActive = true;
+        }
         transform.GetComponent<PhotonView>().RPC("SetTrigger", PhotonTargets.All, "Attack3Trigger");
         attackCooldownTimer = attackCooldownDelay;
         yield return new WaitForSeconds(0.3f);
         DealDamage();
         bashActive = false;
-     /*   IEnumerator Attack()
-    {
-            float attackType = Random.Range(0f, 1f);
-            if (attackType <= 0.5f)
-                transform.GetComponent<PhotonView>().RPC("SetTrigger", PhotonTargets.All, "Attack3Trigger");
-            //animator.SetTrigger("Attack3Trigger");
-            else if (attackType > 0.5f)
-                //animator.SetTrigger("Attack6Trigger");
-                transform.GetComponent<PhotonView>().RPC("SetTrigger", PhotonTargets.All, "Attack6Trigger");
-            yield return new WaitForSeconds(0.3f);
-            DealDamage();
-        }*/
     }
-    IEnumerator Stalker()
+    IEnumerator Stalker() //activate to become invisible for 5 seconds with muffled footsteps
     {
         transform.GetComponent<PhotonView>().RPC("InvisC", PhotonTargets.AllBuffered, 0.2f, 1f);
         isStalkerActive = true;
-
         yield return new WaitForSeconds(5);
-        transform.GetComponent<PhotonView>().RPC("uncloak", PhotonTargets.AllBuffered);
+        Debug.Log("Stalker inactive");
         isStalkerActive = false;
+        transform.GetComponent<PhotonView>().RPC("uncloak", PhotonTargets.AllBuffered);
     }
-    void theHunter()
+    void theHunter() //Ultimate skill, teleports you to a random enemy player
     {
         GameObject[] target;
         target = GameObject.FindGameObjectsWithTag("Mouse");
@@ -383,71 +451,44 @@ public class CatMovement : MonoBehaviour
         {
             transform.position = new Vector3(22, 0, 25);
         }
-        //temporary for Bash skill
-        if (Input.GetKeyDown(KeyCode.B) && attackCooldownTimer <= 0 && !Input.GetKey(KeyCode.Escape))
+        //focus skill passive
+        if (FocusActive)
         {
-            StartCoroutine(Bash());
-        }
-        //temporary for stalker skill
-        if (Input.GetKeyDown(KeyCode.N))
-        {
-            StartCoroutine(Stalker());
-        }
-        //temporary for recoup skill
-        if (Input.GetKeyDown(KeyCode.H))
-        {
-            currentHealth = currentHealth - 80;
-        }
-        if (Input.GetKeyDown(KeyCode.F))
-        {
-            StartCoroutine(recoup());
-        }
-
-        //temporary for TheHunter skill
-        
-        if (Input.GetKeyDown(KeyCode.P))
-        {
-            beginT = Time.time;
-        }
-        if (Input.GetKey(KeyCode.P))
-        {
-            if (beginT + holdT <= Time.time)
+            if (!focusTimerPause)
             {
-                theHunter();
+                beginT3 += Time.deltaTime;
             }
+            if (focusTimerPause)
+            {
+                beginT3 = 0f;
+            }
+            if (beginT3 >= 10.0f)
+            {
+                damageModifierF = 2;
+            }
+            else
+            {
+                damageModifierF = 1;
+            }
+            focusTimerPause = false;
         }
-        //temporary for focus skill
-        if (!focusTimerPause)
+        //lieInWait passive
+        if (LIWActive)
         {
-            beginT3 += Time.deltaTime;
-        }
-        if (focusTimerPause)
-        {
-            beginT3 = 0f;
-        }
-        if (beginT3 >= 10.0f)
-        {
-            damageModifierF = 2;
-        }else
-        {
-            damageModifierF = 1;
-        }
-        focusTimerPause = false;
-        //temporary for lieInWait Skill
-        if (!pauseTimer)
-        {
-            beginT2 += Time.deltaTime;
-        }
-        if (pauseTimer)
-        {
-            beginT2 = 0f;
-        }
-        if (beginT2>=3.0f)
-        {
-            StartCoroutine(lieInWait());
-        }
-        pauseTimer = false;
-
+            if (!pauseTimer)
+            {
+                beginT2 += Time.deltaTime;
+            }
+            if (pauseTimer)
+            {
+                beginT2 = 0f;
+            }
+            if (beginT2 >= 3.0f)
+            {
+                StartCoroutine(lieInWait());
+            }
+            pauseTimer = false;
+        }     
         /* Updates the Character attributes and HUD state for the current player */
         if (GetComponent<PhotonView>().isMine)
         {
@@ -578,7 +619,14 @@ public class CatMovement : MonoBehaviour
             if (C.GetComponent<Collider>().transform.root != this.transform && (C.GetComponent<Collider>().tag == "Mouse" || C.GetComponent<Collider>().tag == "Mouse(Clone)"))
             {
                 Debug.Log("Mice Detected");
-                Alert.SetActive(true);
+                if (!isBrawlerActive)
+                {
+                    Alert.SetActive(true);
+                }else
+                {
+                    Alert.SetActive(false);
+                }
+
             }else
             {
                 Alert.SetActive(false);
@@ -587,7 +635,10 @@ public class CatMovement : MonoBehaviour
     }
     void LateUpdate()
     {
-        heightenedSenses();
+        if (HSActive)
+        {
+            heightenedSenses();
+        }
     }
     void FixedUpdate()
     {
@@ -757,7 +808,7 @@ public class CatMovement : MonoBehaviour
 		DealDamage();
     }
 	
-    void DealDamage()
+    public void DealDamage()
     {
 		RaycastHit hitInfo;
 		
@@ -778,7 +829,6 @@ public class CatMovement : MonoBehaviour
                 if (bashActive)
                 {
                     hitInfo.collider.transform.GetComponent<MonsterAI>().SendMessage("takeDamage", attackPowerM+15f);
-                    hitInfo.collider.transform.GetComponent<MonsterAI>().SendMessage("isStunned");
                 }
                 else
                 {
@@ -797,7 +847,14 @@ public class CatMovement : MonoBehaviour
 					
                 }
 
-                hitInfo.collider.transform.GetComponent<MonsterAI>().SendMessage("takeDamage", attackPowerM);
+                if (bashActive)
+                {
+                    hitInfo.collider.transform.GetComponent<MonsterAI>().SendMessage("takeDamage", attackPowerM + 15f);
+                }
+                else
+                {
+                    hitInfo.collider.transform.GetComponent<MonsterAI>().SendMessage("takeDamage", attackPowerM);
+                }
 
             }
             if (hitInfo.collider.tag == "Boss")
@@ -811,7 +868,14 @@ public class CatMovement : MonoBehaviour
                     currentEXP += 200;
                 }
 
-                hitInfo.collider.transform.GetComponent<MonsterAI>().SendMessage("takeDamage", attackPowerM);
+                if (bashActive)
+                {
+                    hitInfo.collider.transform.GetComponent<MonsterAI>().SendMessage("takeDamage", attackPowerM + 15f);
+                }
+                else
+                {
+                    hitInfo.collider.transform.GetComponent<MonsterAI>().SendMessage("takeDamage", attackPowerM);
+                }
 
             }
             if (hitInfo.collider.tag == "PuzzleRoomBoss")
@@ -825,7 +889,14 @@ public class CatMovement : MonoBehaviour
                     currentEXP += 200;
                 }
 
-                hitInfo.collider.transform.GetComponent<MonsterAI>().SendMessage("takeDamage", attackPowerM);
+                if (bashActive)
+                {
+                    hitInfo.collider.transform.GetComponent<MonsterAI>().SendMessage("takeDamage", attackPowerM + 15f);
+                }
+                else
+                {
+                    hitInfo.collider.transform.GetComponent<MonsterAI>().SendMessage("takeDamage", attackPowerM);
+                }
 
             }
             if (hitInfo.collider.tag == "Mouse")
@@ -837,7 +908,16 @@ public class CatMovement : MonoBehaviour
                     currentEXP += 100;
                 }
 				
-				hitInfo.collider.transform.GetComponent<MouseMovement>().SendMessage("TakeDamage", attackPowerM);
+				if (bashActive)
+                {
+                    Debug.Log("TRYING TO STUN!");
+                    hitInfo.collider.transform.GetComponent<MouseMovement>().SendMessage("Stunned");
+                    hitInfo.collider.transform.GetComponent<MouseMovement>().SendMessage("TakeDamage", attackPowerM+15f);     
+                }
+                else
+                {
+                    hitInfo.collider.transform.GetComponent<MouseMovement>().SendMessage("TakeDamage", attackPowerM);
+                }	
             }
 			transform.GetComponent<PhotonView>().RPC("playSound", PhotonTargets.AllBuffered, 3, 1f);
         }
@@ -897,15 +977,21 @@ public class CatMovement : MonoBehaviour
         // if gets hit by a dart
         if (collisionInfo.gameObject.tag == "dart")
         {
-            StartCoroutine(Asleep());
+            transform.GetComponent<PhotonView>().RPC("Asleep", PhotonTargets.AllBuffered);
         }
 	}
+    [PunRPC]
     IEnumerator Asleep()//if is hit by a sleeping dart, is put to sleep for 5 seconds
     {
+        Debug.Log("STUNNED");
         canMove = false;
-        Debug.Log("can't move");
+        canUseSkills = false;
+        Debug.Log("is Stunned");
+        transform.GetComponent<PhotonView>().RPC("PlayAnim", PhotonTargets.All, "Unarmed-Death1");
         yield return new WaitForSeconds(5);
+        Debug.Log("is not Stunned");
         canMove = true;
+        canUseSkills = true;
     }
     [PunRPC]
     void destroyPU(Collider obj)
