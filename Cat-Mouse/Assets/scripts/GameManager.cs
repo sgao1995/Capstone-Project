@@ -144,7 +144,7 @@ public class GameManager : Photon.PunBehaviour
     void SpawnCat()
     {
         SpawnC mys = sc[0];
-        GameObject myCat = (GameObject)PhotonNetwork.Instantiate("Cat", mys.transform.position, mys.transform.rotation, 0);
+        GameObject myCat = (GameObject)PhotonNetwork.InstantiateSceneObject("Cat", mys.transform.position, mys.transform.rotation, 0);
         myCat.GetComponent<CatMovement>().enabled = true;
         myCat.transform.FindChild("CatCam").gameObject.SetActive(true);
         //myCat.GetComponent<NetworkPlayer>().enabled = false;
@@ -155,7 +155,7 @@ public class GameManager : Photon.PunBehaviour
     void SpawnMouse()
     {
         SpawnM mys = sm[Random.Range(0, 2)];
-        GameObject myMouse = (GameObject)PhotonNetwork.Instantiate("Mouse", mys.transform.position, mys.transform.rotation, 0);
+        GameObject myMouse = (GameObject)PhotonNetwork.InstantiateSceneObject("Mouse", mys.transform.position, mys.transform.rotation, 0);
         myMouse.GetComponent<MouseMovement>().enabled = true;
         myMouse.transform.FindChild("MouseCam").gameObject.SetActive(true);
         //myMouse.GetComponent<NetworkPlayer>().enabled = false;
@@ -174,7 +174,7 @@ public class GameManager : Photon.PunBehaviour
             // 1 normal monster
             if (formation < 500)
             {
-                GameObject monsterGO = (GameObject)PhotonNetwork.Instantiate("Monster", monsterSpawn.transform.position, monsterSpawn.transform.rotation, 0);
+                GameObject monsterGO = (GameObject)PhotonNetwork.InstantiateSceneObject("Monster", monsterSpawn.transform.position, monsterSpawn.transform.rotation, 0);
                 monsterGO.GetComponent<MonsterAI>().enabled = true;
                 MonsterAI monster = monsterGO.GetComponent<MonsterAI>();
                 monster.setMonsterType("Monster");
@@ -185,7 +185,7 @@ public class GameManager : Photon.PunBehaviour
             {
                 for (int i = 0; i < 2; i++)
                 {
-                    GameObject monsterGO = (GameObject)PhotonNetwork.Instantiate("Monster", monsterSpawn.transform.position, monsterSpawn.transform.rotation, 0);
+                    GameObject monsterGO = (GameObject)PhotonNetwork.InstantiateSceneObject("Monster", monsterSpawn.transform.position, monsterSpawn.transform.rotation, 0);
                     monsterGO.GetComponent<MonsterAI>().enabled = true;
                     MonsterAI monster = monsterGO.GetComponent<MonsterAI>();
                     monster.setMonsterType("Monster");
@@ -195,12 +195,12 @@ public class GameManager : Photon.PunBehaviour
             // 1 normal monster and 1 elite monster
             else if (formation <= 1000)
             {
-                GameObject monsterGO = (GameObject)PhotonNetwork.Instantiate("Monster", monsterSpawn.transform.position, monsterSpawn.transform.rotation, 0);
+                GameObject monsterGO = (GameObject)PhotonNetwork.InstantiateSceneObject("Monster", monsterSpawn.transform.position, monsterSpawn.transform.rotation, 0);
                 monsterGO.GetComponent<MonsterAI>().enabled = true;
                 MonsterAI monster = monsterGO.GetComponent<MonsterAI>();
                 monster.setMonsterType("Monster");
 
-                GameObject monsterGO2 = (GameObject)PhotonNetwork.Instantiate("MonsterElite", monsterSpawn.transform.position, monsterSpawn.transform.rotation, 0);
+                GameObject monsterGO2 = (GameObject)PhotonNetwork.InstantiateSceneObject("MonsterElite", monsterSpawn.transform.position, monsterSpawn.transform.rotation, 0);
                 monsterGO2.GetComponent<MonsterAI>().enabled = true;
                 MonsterAI monster2 = monsterGO2.GetComponent<MonsterAI>();
                 monster2.setMonsterType("MonsterElite");
@@ -211,7 +211,7 @@ public class GameManager : Photon.PunBehaviour
             {
                 for (int i = 0; i < 2; i++)
                 {
-                    GameObject monsterGO = (GameObject)PhotonNetwork.Instantiate("MonsterElite", monsterSpawn.transform.position, monsterSpawn.transform.rotation, 0);
+                    GameObject monsterGO = (GameObject)PhotonNetwork.InstantiateSceneObject("MonsterElite", monsterSpawn.transform.position, monsterSpawn.transform.rotation, 0);
                     monsterGO.GetComponent<MonsterAI>().enabled = true;
                     MonsterAI monster = monsterGO.GetComponent<MonsterAI>();
                     monster.setMonsterType("MonsterElite");
@@ -226,7 +226,7 @@ public class GameManager : Photon.PunBehaviour
         // pick a random spawn to spawn at
         int location = Random.Range(0, monsterSpawnList.Count);
         MonsterSpawn bossSpawn = monsterSpawnList[location];
-        GameObject monsterGO = (GameObject)PhotonNetwork.Instantiate("Boss", bossSpawn.transform.position, bossSpawn.transform.rotation, 0);
+        GameObject monsterGO = (GameObject)PhotonNetwork.InstantiateSceneObject("Boss", bossSpawn.transform.position, bossSpawn.transform.rotation, 0);
         monsterGO.GetComponent<MonsterAI>().enabled = true;
         MonsterAI monster = monsterGO.GetComponent<MonsterAI>();
         monster.setMonsterType("Boss");
@@ -251,11 +251,11 @@ public class GameManager : Photon.PunBehaviour
                 {
                     Vector3 keyPos = new Vector3(keyLocations[i], 1, keyLocations[i + 1]);
                     Quaternion keyRot = new Quaternion(0f, 0f, 0f, 0f);
-                    PhotonNetwork.Instantiate("Key", keyPos, keyRot, 0);
+                    PhotonNetwork.InstantiateSceneObject("Key", keyPos, keyRot, 0);
                 }
                 Vector3 chestPos = new Vector3(chestLocations[i], 0.35f, chestLocations[i + 1]);
                 Quaternion chestRot = new Quaternion(0f, 0f, 0f, 0f);
-                GameObject chest = (GameObject)PhotonNetwork.Instantiate("Chest", chestPos, chestRot, 0);
+                GameObject chest = (GameObject)PhotonNetwork.InstantiateSceneObject("Chest", chestPos, chestRot, 0);
                 Chest newChest = chest.GetComponent<Chest>();
                 newChest.whichPieceInside = (i / 2) + 1;
             }
@@ -270,7 +270,7 @@ public class GameManager : Photon.PunBehaviour
             // need to add 0.5 or else they spawn on edges
             Vector3 spawnPos = new Vector3(0.5f + Random.Range(-mazeSize, mazeSize), 0.5f, 0.5f + Random.Range(-mazeSize, mazeSize));
             Quaternion spawnRot = new Quaternion(0f, 0f, 0f, 0f);
-            GameObject newGO = (GameObject)PhotonNetwork.Instantiate("Powerup", spawnPos, spawnRot, 0);
+            GameObject newGO = (GameObject)PhotonNetwork.InstantiateSceneObject("Powerup", spawnPos, spawnRot, 0);
             Powerup newPowerup = newGO.GetComponent<Powerup>();
             newPowerup.setType(Random.Range(0, 4));
             powerupList.Add(newPowerup);
@@ -290,7 +290,7 @@ public class GameManager : Photon.PunBehaviour
         int whichPuzzle = activePuzzleTypes.IndexOf(whichRoom) * 2;
         Vector3 keyPos = new Vector3(keyLocations[whichPuzzle], 1, keyLocations[whichPuzzle + 1]);
         Quaternion keyRot = new Quaternion(0f, 0f, 0f, 0f);
-        PhotonNetwork.Instantiate("Key", keyPos, keyRot, 0);
+        PhotonNetwork.InstantiateSceneObject("Key", keyPos, keyRot, 0);
     }
 
     void Update()

@@ -377,7 +377,7 @@ public class Maze : MonoBehaviour {
 					GameObject newDoor;
 					Vector3 doorPos = new Vector3(0, 0, 0);
 					Quaternion doorRot = new Quaternion(0f, 0f, 0f, 0f);
-					newDoor = (GameObject) PhotonNetwork.Instantiate("Door", doorPos, doorRot, 0);
+					newDoor = (GameObject) PhotonNetwork.InstantiateSceneObject("Door", doorPos, doorRot, 0);
 					MazePassage passage = newDoor.GetComponent<MazePassage>();
 					passage.Initialize(cellOne, cellTwo, dir);
 				}
@@ -473,7 +473,7 @@ public class Maze : MonoBehaviour {
 						MazeCell addHere = puzzleRooms[r].getCells()[c];
 						Vector3 lavaPos = new Vector3(addHere.transform.position.x, 0f, addHere.transform.position.z);
 						Quaternion lavaRot = new Quaternion(0f, 0f, 0f, 0f);
-						PhotonNetwork.Instantiate("FireyMist", lavaPos, lavaRot, 0);
+						PhotonNetwork.InstantiateSceneObject("FireyMist", lavaPos, lavaRot, 0);
 					}
 				}
 			}
@@ -492,7 +492,7 @@ public class Maze : MonoBehaviour {
 						float mineSize = Mathf.PerlinNoise(c/(float)mazeGenerationNumber, c/(float)mazeGenerationNumber);
 						Vector3 spawnPos = new Vector3(mineX, -0.45f, mineZ);
 						Quaternion spawnRot = new Quaternion(0f, 0f, 0f, 0f);
-						GameObject newGO = (GameObject)PhotonNetwork.Instantiate("Mine", spawnPos, spawnRot, 0);
+						GameObject newGO = (GameObject)PhotonNetwork.InstantiateSceneObject("Mine", spawnPos, spawnRot, 0);
 						Mine newMine = newGO.GetComponent<Mine>();
 						newMine.setMine(mineSize);
 						CapsuleCollider cap = newMine.GetComponent<CapsuleCollider>();
@@ -523,7 +523,7 @@ public class Maze : MonoBehaviour {
 						float spikeTimer = Mathf.PerlinNoise(c/(float)mazeGenerationNumber, c/(float)mazeGenerationNumber);
 						Vector3 spawnPos = new Vector3(spikeX, 0.0f, spikeZ);
 						Quaternion spawnRot = new Quaternion(0f, 0f, 0f, 0f);
-						GameObject newGO = (GameObject)PhotonNetwork.Instantiate("Spike", spawnPos, spawnRot, 0);
+						GameObject newGO = (GameObject)PhotonNetwork.InstantiateSceneObject("Spike", spawnPos, spawnRot, 0);
 						Spike newSpike = newGO.GetComponent<Spike>();
 						newSpike.setSpike(spikeSize, spikeTimer);
 						spikeList.Add(newSpike);
@@ -558,7 +558,7 @@ public class Maze : MonoBehaviour {
 				for (int b = 0; b < 3; b++){
 					Vector3 spawnPos = new Vector3(puzzleRooms[r].getCells()[itemCells[b]].transform.position.x, 0.5f, puzzleRooms[r].getCells()[itemCells[b]].transform.position.z);
 					Quaternion spawnRot = new Quaternion(0f, 0f, 0f, 0f);
-					GameObject newGO = (GameObject)PhotonNetwork.Instantiate("Ball", spawnPos, spawnRot, 0);
+					GameObject newGO = (GameObject)PhotonNetwork.InstantiateSceneObject("Ball", spawnPos, spawnRot, 0);
 					Ball newBall = newGO.GetComponent<Ball>();
 					newBall.setSize(0.5f);
 					ballList.Add(newBall);
@@ -567,7 +567,7 @@ public class Maze : MonoBehaviour {
 				for (int h = 3; h < 6; h++){
 					Vector3 spawnPos = new Vector3(puzzleRooms[r].getCells()[itemCells[h]].transform.position.x, 0f, puzzleRooms[r].getCells()[itemCells[h]].transform.position.z);
 					Quaternion spawnRot = new Quaternion(0f, 0f, 0f, 0f);
-					GameObject newGO = (GameObject)PhotonNetwork.Instantiate("Target", spawnPos, spawnRot, 0);
+					GameObject newGO = (GameObject)PhotonNetwork.InstantiateSceneObject("Target", spawnPos, spawnRot, 0);
 					Target newTarget = newGO.GetComponent<Target>();
 					newTarget.setSize(0.5f);
 					targetList.Add(newTarget);
@@ -583,7 +583,7 @@ public class Maze : MonoBehaviour {
 					MazeCell addHere = puzzleRooms[r].getCells()[c];
 					Vector3 mistPos = new Vector3(addHere.transform.position.x, 0f, addHere.transform.position.z);
 					Quaternion mistRot = new Quaternion(0f, 0f, 0f, 0f);
-					PhotonNetwork.Instantiate("IcyMist", mistPos, mistRot, 0);
+					PhotonNetwork.InstantiateSceneObject("IcyMist", mistPos, mistRot, 0);
 				}
 			}
 			// boss room, fight a strong monster
@@ -592,7 +592,7 @@ public class Maze : MonoBehaviour {
 				MazeCell bossCell = puzzleRooms[r].getCells()[Random.Range(0, puzzleRooms[r].getCells().Count)];
 				Vector3 bossPos = new Vector3(bossCell.transform.position.x, 0f, bossCell.transform.position.z);
 				Quaternion bossRot = new Quaternion(0f, 0f, 0f, 0f);
-				GameObject monsterGO = (GameObject)PhotonNetwork.Instantiate("PuzzleRoomBoss", bossPos, bossRot, 0);
+				GameObject monsterGO = (GameObject)PhotonNetwork.InstantiateSceneObject("PuzzleRoomBoss", bossPos, bossRot, 0);
 				monsterGO.GetComponent<MonsterAI>().enabled = true;
 				MonsterAI monster = monsterGO.GetComponent<MonsterAI>();
 				monster.setMonsterType("PuzzleRoomBoss");

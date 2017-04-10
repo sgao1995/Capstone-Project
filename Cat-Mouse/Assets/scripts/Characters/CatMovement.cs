@@ -212,7 +212,7 @@ public class CatMovement : MonoBehaviour
 		yield return new WaitForSeconds(0.3f);
 		Quaternion trapRot = Quaternion.Euler(0, 0, 0);
 		Vector3 trapPos = new Vector3(transform.position.x, -0.051f, transform.position.z) + transform.forward;
-		GameObject trapGO = (GameObject)PhotonNetwork.Instantiate("SteelTrap", trapPos, trapRot, 0);
+		GameObject trapGO = (GameObject)PhotonNetwork.InstantiateSceneObject("SteelTrap", trapPos, trapRot, 0);
 		steelTrapsList.Add(trapGO);
 		// if there are more than 5 traps, remove the earliest placed one
 		if (steelTrapsList.Count > 5){
@@ -229,7 +229,7 @@ public class CatMovement : MonoBehaviour
 		yield return new WaitForSeconds(0.3f);
 		Quaternion lassoRot = Quaternion.Euler(0, 0, 0);
 		Vector3 lassoPos = transform.position;
-		Lasso newLasso = ((GameObject)PhotonNetwork.Instantiate("Lasso", lassoPos, lassoRot, 0)).GetComponent<Lasso>();
+		Lasso newLasso = ((GameObject)PhotonNetwork.InstantiateSceneObject("Lasso", lassoPos, lassoRot, 0)).GetComponent<Lasso>();
 		// range of 10 units
 		Camera catCam = transform.Find("CatCam").GetComponent<Camera>();
 		Ray ray = catCam.ViewportPointToRay(new Vector3(0.5F, 0.5F, 0));
@@ -723,7 +723,8 @@ public class CatMovement : MonoBehaviour
     
     void Death(){
 		Debug.Log("player died");
-		alive = false;
+        GameObject.Find("GUI").GetComponent<WinScript>().setCatDeaths();
+        alive = false;
         //animator.Play("Unarmed-Death1");
         transform.GetComponent<PhotonView>().RPC("PlayAnim", PhotonTargets.All, "Unarmed-Death1");
         WaitForAnimation(5f);
@@ -820,7 +821,6 @@ public class CatMovement : MonoBehaviour
 
                 if (hitInfo.collider.transform.GetComponent<MouseMovement>().getHealth() > 0 && hitInfo.collider.transform.GetComponent<MouseMovement>().getHealth() - attackPowerM <= 0)
                 {
-                    GameObject.Find("WinObj").GetComponent<WinScript>().setMouseDeaths();
                     currentEXP += 100;
                 }
 				
@@ -841,7 +841,7 @@ public class CatMovement : MonoBehaviour
         int i = 0;
         while (i < hitColliders.Length) {
 			if (hitColliders[i].tag == "Door"){
-				hitColliders[i].transform.GetComponent<MazeDoor>().Interact();
+                hitColliders[i].transform.GetComponent<MazeDoor>().SendMessage("Interact");
 			}
             i++;
         }

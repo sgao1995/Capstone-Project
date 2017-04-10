@@ -18,7 +18,13 @@ public class MazeDoor : MazePassage {
 	}
 
 	// interact with the door
-	public void Interact(){
+   
+    public void Interact()
+    {
+        transform.GetComponent<PhotonView>().RPC("InteractRPC", PhotonTargets.AllBuffered);
+    }
+    [PunRPC]
+    public void InteractRPC(){
 		if (inTransition == false){
 			if (doorOpen){
 				doorClosing = true;
