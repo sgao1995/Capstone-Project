@@ -322,7 +322,7 @@ public class MonsterAI : MonoBehaviour
         // so we dont call deal damage, just spawn a particle effect
         Quaternion bossAttackRot = Quaternion.LookRotation(transform.forward);
         Vector3 bossAttackPos = new Vector3(transform.position.x, 1.2f, transform.position.z) + (transform.forward * 0.5f);
-        PhotonNetwork.Instantiate("BossAttack", bossAttackPos, bossAttackRot, 0);
+        PhotonNetwork.InstantiateSceneObject("BossAttack", bossAttackPos, bossAttackRot, 0);
     }
 
     // cast a bash skill in front of monster
@@ -348,7 +348,7 @@ public class MonsterAI : MonoBehaviour
         // display cracks on ground
         Quaternion crackRot = Quaternion.Euler(-90, 0, 0);
         Vector3 crackPos = new Vector3(transform.position.x, 0.05f, transform.position.z);
-        PhotonNetwork.Instantiate("SplitEarth", crackPos, crackRot, 0);
+        PhotonNetwork.InstantiateSceneObject("SplitEarth", crackPos, crackRot, 0);
         WaitForAnimation(1.5f);
         transform.GetComponent<PhotonView>().RPC("playSound", PhotonTargets.AllBuffered, 7, 1f);
     }
@@ -386,10 +386,6 @@ public class MonsterAI : MonoBehaviour
         {
             if (hitInfo.collider.name == "Cat(Clone)")
             {
-                if (hitInfo.collider.transform.GetComponent<CatMovement>().getHealth() > 0 && hitInfo.collider.transform.GetComponent<CatMovement>().getHealth() - attackPower <= 0)
-                {
-                    GameObject.Find("WinObj").GetComponent<WinScript>().setCatDeaths();
-                }
                 hitInfo.collider.transform.GetComponent<CatMovement>().SendMessage("TakeDamage", attackPower);
             }
             if (hitInfo.collider.name == "Mouse(Clone)")

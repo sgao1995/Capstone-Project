@@ -239,7 +239,7 @@ public class MouseMovement : MonoBehaviour {
         Vector3 PosMod = new Vector3(0.5f, 1, 0);
         Ray ray = mouseCam.ViewportPointToRay(new Vector3(0.5F, 0.5F, 0));
         Quaternion rayRot = Quaternion.LookRotation(ray.direction, Vector3.up);
-        GameObject dart = PhotonNetwork.Instantiate("dart", dartPos+PosMod, rayRot, 0);
+        GameObject dart = PhotonNetwork.Instantiate("dart", dartPos+PosMod,rayRot,0,null);
         dart.GetComponent<Rigidbody>().AddForce(transform.forward * 25f);
     }
     IEnumerator Brawler()//Explorer Skill (active): gains 50% damage and is immune to enemy abilities for 5 seconds
@@ -463,7 +463,7 @@ public class MouseMovement : MonoBehaviour {
 		yield return new WaitForSeconds(0.3f);
 		Quaternion smokeRot = Quaternion.Euler(-90, 0, 0);
 		Vector3 smokePos = new Vector3(transform.position.x, 0.5f, transform.position.z) + transform.forward;
-		GameObject smokeScreen = (GameObject)PhotonNetwork.Instantiate("Smoke", smokePos, smokeRot, 0);
+		GameObject smokeScreen = (GameObject)PhotonNetwork.InstantiateSceneObject("Smoke", smokePos, smokeRot, 0);
         transform.GetComponent<PhotonView>().RPC("Invis", PhotonTargets.AllBuffered, 0.2f, 1f);
         yield return new WaitForSeconds(5f);
         transform.GetComponent<PhotonView>().RPC("uncloak", PhotonTargets.AllBuffered);
@@ -752,6 +752,9 @@ public class MouseMovement : MonoBehaviour {
         StopCoroutine(Bandage());
         Debug.Log("player died");
         alive = false;    
+        GameObject.Find("GUI").GetComponent<WinScript>().setMouseDeaths();
+        alive = false;
+        GetComponent<MouseMovement>().enabled = false;
         CamMovement cam = gameObject.GetComponentInChildren<CamMovement>();
         cam.enabled = false;
         transform.GetComponent<PhotonView>().RPC("PlayAnim", PhotonTargets.All, "Unarmed-Death1");
@@ -787,10 +790,10 @@ public class MouseMovement : MonoBehaviour {
 		Quaternion flareRot = Quaternion.Euler(90, 0, 0);
 		Vector3 flarePos = new Vector3(transform.position.x, transform.position.y + 1f, transform.position.z) + transform.right/2f;
 		if (color == 1){
-			GameObject newGO = (GameObject)PhotonNetwork.Instantiate("SignalFlareRed", flarePos, flareRot, 0);
+			GameObject newGO = (GameObject)PhotonNetwork.InstantiateSceneObject("SignalFlareRed", flarePos, flareRot, 0);
 		}
 		else if (color == 2){
-			GameObject newGO = (GameObject)PhotonNetwork.Instantiate("SignalFlareBlue", flarePos, flareRot, 0);	
+			GameObject newGO = (GameObject)PhotonNetwork.InstantiateSceneObject("SignalFlareBlue", flarePos, flareRot, 0);	
 		}
 	}
 
@@ -899,7 +902,6 @@ public class MouseMovement : MonoBehaviour {
                 
                 if (hitInfo.collider.transform.GetComponent<CatMovement>().getHealth() > 0 && hitInfo.collider.transform.GetComponent<CatMovement>().getHealth() - damage* damageMod <= 0)
                 {
-                    GameObject.Find("WinObj").GetComponent<WinScript>().setCatDeaths();
                     currentEXP += 100;
                 }
 				
@@ -926,9 +928,9 @@ public class MouseMovement : MonoBehaviour {
         int i = 0;
         while (i < hitColliders.Length) {
 			if (hitColliders[i].tag == "Door"){
-				hitColliders[i].transform.GetComponent<MazeDoor>().Interact();
-			}
-			if (hitColliders[i].tag == "Key"){
+                hitColliders[i].transform.GetComponent<MazeDoor>().SendMessage("Interact");
+            }
+            if (hitColliders[i].tag == "Key"){
 				hitColliders[i].transform.GetComponent<Key>().Interact();
 				numKeysHeld++;
 				interactText.text = "";

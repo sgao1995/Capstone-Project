@@ -2403,7 +2403,7 @@ public static class PhotonNetwork
     /// <param name="rotation">Rotation Quaternion to apply on instantiation.</param>
     /// <param name="group">The group for this PhotonView.</param>
     /// <returns>The new instance of a GameObject with initialized PhotonView.</returns>
-    public static GameObject Instantiate(string prefabName, Vector3 position, Quaternion rotation, int group)
+    public static GameObject InstantiateSceneObject(string prefabName, Vector3 position, Quaternion rotation, int group)
     {
         return Instantiate(prefabName, position, rotation, group, null);
     }

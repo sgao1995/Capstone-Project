@@ -59,7 +59,7 @@ public class NetworkManager : Photon.MonoBehaviour
     void SpawnCat()
     {
         Spawn mys = s[Random.Range(0,s.Length)];
-        GameObject myCat = (GameObject)PhotonNetwork.Instantiate("Cat_Test", mys.transform.position, mys.transform.rotation, 0);
+        GameObject myCat = (GameObject)PhotonNetwork.InstantiateSceneObject("Cat_Test", mys.transform.position, mys.transform.rotation, 0);
         myCat.GetComponent<CatMovement>().enabled=true;
         myCat.transform.FindChild("CatCam").gameObject.SetActive(true);
         //myCat.GetComponent<NetworkPlayer>().enabled = false;
@@ -69,7 +69,7 @@ public class NetworkManager : Photon.MonoBehaviour
 	void SpawnMonsters()
 	{
 		Spawn monsterSpawn = s[1];
-        GameObject monster = (GameObject)PhotonNetwork.Instantiate("Monster", monsterSpawn.transform.position, monsterSpawn.transform.rotation, 0);
+        GameObject monster = (GameObject)PhotonNetwork.InstantiateSceneObject("Monster", monsterSpawn.transform.position, monsterSpawn.transform.rotation, 0);
         monster.GetComponent<MonsterAI>().enabled=true;
 	}
 	public void destroy(){

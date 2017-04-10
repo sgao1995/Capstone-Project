@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
 
 public class WinScript : MonoBehaviour {
@@ -7,24 +8,38 @@ public class WinScript : MonoBehaviour {
     int mouseDeaths;
 	bool exitOpen = false;
 	int numPuzzlePieces = 0;
+    Text GOText;
+    Animator anim;
     // Use this for initialization
     void Start () {
+        anim = GetComponent<Animator>();
         catDeaths = 0;
         mouseDeaths = 0;
-	}
+        GOText = GameObject.Find("GameOverText").GetComponent<Text>();
+    }
 	
 	// Update is called once per frame
 	void Update () {
         if (catDeaths >= 1 || exitOpen)
         {
-            GameOver("The Mice Win!");
+            transform.GetComponent<PhotonView>().RPC("GameOver", PhotonTargets.AllBuffered, "The Explorers Win!");
         }
         if (mouseDeaths >= 3)
         {
-            GameOver("The Cat Wins!");
+            transform.GetComponent<PhotonView>().RPC("GameOver", PhotonTargets.AllBuffered, "The Hunter Wins!");
         }
 	}
+    void LeaveRoom()
+    {
+        PhotonNetwork.LeaveRoom();
 
+    }
+    void OnLeftRoom()
+    {
+        Debug.Log("still leaving...");
+        PhotonNetwork.isMessageQueueRunning = false;
+        PhotonNetwork.LoadLevel("lobby");
+    }
     void Awake()
     {
         DontDestroyOnLoad(transform.gameObject);
@@ -60,14 +75,14 @@ public class WinScript : MonoBehaviour {
     {
         return mouseDeaths;
     }
-    void GameOver(string win)//function to change scene to the game over scene if a team wins
+    [PunRPC]
+    IEnumerator GameOver(string win)//function to change scene to the game over scene if a team wins
     {
-       // if (PhotonNetwork.isMasterClient)
-        //{
-            winner = win;
-            PhotonNetwork.LoadLevel("GameOver");
-       // }
-      
+        Debug.Log("GAMEOVER");
+        GOText.text = win;
+        anim.SetTrigger("GameOver");
+        yield return new WaitForSeconds(5);
+        LeaveRoom();
     }
 }
 

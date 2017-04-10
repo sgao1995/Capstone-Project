@@ -36,7 +36,7 @@ public class Chest : MonoBehaviour {
 			Vector3 spawnPos = new Vector3(this.transform.position.x, -1f, this.transform.position.z);
 			Quaternion spawnRot = new Quaternion(0f, 0f, 0f, 0f);
 			string whichPiece = "PuzzlePiece" + whichPieceInside;
-			GameObject newGO = (GameObject)PhotonNetwork.Instantiate(whichPiece, spawnPos, spawnRot, 0);
+			GameObject newGO = (GameObject)PhotonNetwork.InstantiateSceneObject(whichPiece, spawnPos, spawnRot, 0);
 			puzzlePieceSpawned = true;
 			PuzzlePiece newPiece = newGO.GetComponent<PuzzlePiece>();
 			newPiece.pieceID = whichPieceInside;
