@@ -1076,7 +1076,7 @@ public class MouseMovement : MonoBehaviour {
             // hp restore
             else if (pup.powerupType == 1)
             {
-				if (currentHealth < maxHealth){
+				if (currentHealth >= maxHealth){
 					// do nothing
 				}
 				else{
@@ -1097,7 +1097,12 @@ public class MouseMovement : MonoBehaviour {
 				currentEXP += 100f;
             }
             //Debug.Log("destroy " + obj);
-            transform.GetComponent<PhotonView>().RPC("destroyPU", PhotonTargets.MasterClient, obj);
+            //transform.GetComponent<PhotonView>().RPC("destroyPU", PhotonTargets.MasterClient, obj);
+
+            if (PhotonNetwork.isMasterClient)
+            {
+                PhotonNetwork.Destroy(obj.gameObject);
+            }
         }
 
         // put spikes here because we dont want spikes displacing the player
@@ -1233,5 +1238,4 @@ public class MouseMovement : MonoBehaviour {
         cam.enabled = true;
         transform.GetComponent<PhotonView>().RPC("PlayAnim", PhotonTargets.All, "Unarmed-Idle");
     }
-
 }
