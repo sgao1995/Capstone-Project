@@ -258,7 +258,7 @@ public class MouseMovement : MonoBehaviour {
         Vector3 PosMod = new Vector3(0.5f, 1, 0);
         Ray ray = mouseCam.ViewportPointToRay(new Vector3(0.5F, 0.5F, 0));
         Quaternion rayRot = Quaternion.LookRotation(ray.direction, Vector3.up);
-        GameObject dart = PhotonNetwork.Instantiate("dart", dartPos+PosMod, rayRot, 0);
+        GameObject dart = PhotonNetwork.Instantiate("dart", dartPos+PosMod,rayRot,0,null);
         dart.GetComponent<Rigidbody>().AddForce(transform.forward * 25f);
     }
     void LateUpdate()

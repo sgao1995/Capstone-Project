@@ -140,7 +140,7 @@ public class GameManager : Photon.PunBehaviour
 		
         GameObject.Find("Timer").GetComponent<Timer>().enabled = true;
     }
-    void OnGUI()
+   /* void OnGUI()
     {
         if (Input.GetKey(KeyCode.Escape))
         {
@@ -151,7 +151,7 @@ public class GameManager : Photon.PunBehaviour
             }
             GUILayout.EndArea();
         }
-    }
+    }*/
     void OnLeftRoom()
     {
         SceneManager.LoadScene("lobby", LoadSceneMode.Single);
@@ -188,7 +188,7 @@ public class GameManager : Photon.PunBehaviour
     {
 		Debug.Log("spawn cat");
         SpawnC mys = sc[0];
-        GameObject myCat = (GameObject)PhotonNetwork.InstantiateSceneObject("Cat", mys.transform.position, mys.transform.rotation, 0);
+        GameObject myCat = (GameObject)PhotonNetwork.Instantiate("Cat", mys.transform.position, mys.transform.rotation, 0,null);
         myCat.GetComponent<CatMovement>().enabled = true;
         myCat.transform.FindChild("CatCam").gameObject.SetActive(true);
         //myCat.GetComponent<NetworkPlayer>().enabled = false;
@@ -200,7 +200,7 @@ public class GameManager : Photon.PunBehaviour
     {
 		Debug.Log("spawn mouse");
         SpawnM mys = sm[Random.Range(0, 2)];
-        GameObject myMouse = (GameObject)PhotonNetwork.InstantiateSceneObject("Mouse", mys.transform.position, mys.transform.rotation, 0);
+        GameObject myMouse = (GameObject)PhotonNetwork.Instantiate("Mouse", mys.transform.position, mys.transform.rotation, 0,null);
         myMouse.GetComponent<MouseMovement>().enabled = true;
         myMouse.transform.FindChild("MouseCam").gameObject.SetActive(true);
         //myMouse.GetComponent<NetworkPlayer>().enabled = false;
