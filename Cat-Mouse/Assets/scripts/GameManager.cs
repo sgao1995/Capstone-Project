@@ -25,6 +25,7 @@ public class GameManager : Photon.PunBehaviour
     private GameObject[] ballArray;
     private GameObject[] targetArray;
 	private int mazeSize;
+	public Material puzzleRoomMat;
 
     private void Start()
     {
@@ -38,20 +39,9 @@ public class GameManager : Photon.PunBehaviour
 		
 		// instantiate the maze
 		mazeInstance = Instantiate(mazePrefab) as Maze;
-        // create the monster spawn locations
 		mazeSize = mazeInstance.size.x - 4;
-        for (int i = 0; i < 5; i++)
-        {
-            for (int j = 0; j < 5; j++)
-            {
-                Vector3 spawnPos = new Vector3(mazeSize - i * (mazeSize*0.4f), 0, mazeSize - j * (mazeSize*0.4f));
-                Quaternion spawnRot = new Quaternion(0f, 0f, 0f, 0f);
-                MonsterSpawn newSpawn = Instantiate(mSpawn) as MonsterSpawn;
-                mSpawn.transform.position = spawnPos;
-                mSpawn.transform.rotation = spawnRot;
-                monsterSpawnList.Add(newSpawn);
-            }
-        }
+		
+		// puzzle rooms
         for (int p = 0; p < 6; p++)
         {
             allPuzzleTypes.Add(p);
@@ -64,15 +54,57 @@ public class GameManager : Photon.PunBehaviour
             activePuzzleTypes.Add(allPuzzleTypes[getPuzzle]);
             allPuzzleTypes.RemoveAt(getPuzzle);
         }
-        if (GameObject.Find("TeamSelectionOBJ").GetComponent<teamselectiondata>().playertype == 0)
-        {
-            SpawnCat();
-        }
-        else
-        {
-            SpawnMouse();
-        }
+		
 		SpawnMaze();
+		
+		// setup spawn locations
+		// only the master needs to do this
+		MazeCell[,] cellsInMaze = mazeInstance.getMazeCells();
+		if (PhotonNetwork.isMasterClient){
+			// modify the spawn locations of the players 
+			// random coordinates, rerandom if its in a puzzle room
+			bool goodLocation = false;
+			int locX = 0;
+			int locZ = 0;
+			while (goodLocation == false){
+				locX = Random.Range(0, mazeSize+3);
+				locZ = Random.Range(0, mazeSize+3);
+				if (cellsInMaze[locX, locZ].transform.GetChild(0).GetComponent<Renderer>().material != puzzleRoomMat){
+					goodLocation = true;
+				}
+			}
+			sc[0].transform.position = cellsInMaze[locX, locZ].transform.position;
+			
+			// then modify mouse locations, same thing as above except an extra range check because we dont want mice spawning too close to the cat
+			for (int i = 0; i < sm.Length; i++){
+				goodLocation = false;
+				while (goodLocation == false){
+					locX = Random.Range(0, mazeSize+3);
+					locZ = Random.Range(0, mazeSize+3);
+					if (cellsInMaze[locX, locZ].transform.GetChild(0).GetComponent<Renderer>().material != puzzleRoomMat && Vector3.Distance(sc[0].transform.position, cellsInMaze[locX, locZ].transform.position) > 10f){
+						goodLocation = true;
+					}
+				}
+				sm[i].transform.position = cellsInMaze[locX, locZ].transform.position;
+			}
+		}
+		int numSpawnLocations = (int)Mathf.Sqrt((mazeSize+4)/2f);
+		int interval = (int)((mazeSize+4)/numSpawnLocations);
+		// spawn locations for monsters
+		for (int i = 0; i < numSpawnLocations; i++)
+		{
+			for (int j = 0; j < numSpawnLocations; j++)
+			{
+				MazeCell spawnCell = cellsInMaze[interval*i+5, interval*j+5];
+				Vector3 spawnPos = spawnCell.transform.position;
+				Quaternion spawnRot = new Quaternion(0f, 0f, 0f, 0f);
+				MonsterSpawn newSpawn = Instantiate(mSpawn) as MonsterSpawn;
+				mSpawn.transform.position = spawnPos;
+				mSpawn.transform.rotation = spawnRot;
+				monsterSpawnList.Add(newSpawn);
+			}
+		}
+		Debug.Log("finished editng spawns");
         // spawn basic monsters and elite monsters
         for (int i = 0; i < monsterSpawnList.Count; i++)
         {
@@ -89,12 +121,23 @@ public class GameManager : Photon.PunBehaviour
         }
 
         // if applicable, get ball/target lists
-        if (activePuzzleTypes.IndexOf(3) != -1)
+        if (activePuzzleTypes.IndexOf(3) >= 0 && activePuzzleTypes.IndexOf(3) <= 3)
         {
             ballArray = GameObject.FindGameObjectsWithTag("Ball");
             targetArray = GameObject.FindGameObjectsWithTag("Target");
         }
-
+		
+		// finally, spawn the players
+		if (GameObject.Find("TeamSelectionOBJ").GetComponent<teamselectiondata>().playertype == 0)
+        {
+            SpawnCat();
+        }
+        else
+        {
+            SpawnMouse();
+        }
+		
+		
         GameObject.Find("Timer").GetComponent<Timer>().enabled = true;
     }
     void OnGUI()
@@ -133,8 +176,8 @@ public class GameManager : Photon.PunBehaviour
             tempTypes.Add(5);
             tempTypes.Add(0);
             tempTypes.Add(4);
-            Debug.Log(tempTypes[0] + " " + tempTypes[1] + " " + tempTypes[2]);
 			activePuzzleTypes = tempTypes;
+			Debug.Log("length " + activePuzzleTypes.Count);
             mazeInstance.GenerateChestLocations();
             mazeInstance.GeneratePuzzles(activePuzzleTypes);
         }
@@ -143,6 +186,7 @@ public class GameManager : Photon.PunBehaviour
     }
     void SpawnCat()
     {
+		Debug.Log("spawn cat");
         SpawnC mys = sc[0];
         GameObject myCat = (GameObject)PhotonNetwork.InstantiateSceneObject("Cat", mys.transform.position, mys.transform.rotation, 0);
         myCat.GetComponent<CatMovement>().enabled = true;
@@ -154,6 +198,7 @@ public class GameManager : Photon.PunBehaviour
 
     void SpawnMouse()
     {
+		Debug.Log("spawn mouse");
         SpawnM mys = sm[Random.Range(0, 2)];
         GameObject myMouse = (GameObject)PhotonNetwork.InstantiateSceneObject("Mouse", mys.transform.position, mys.transform.rotation, 0);
         myMouse.GetComponent<MouseMovement>().enabled = true;
@@ -322,7 +367,7 @@ public class GameManager : Photon.PunBehaviour
         }
 
         // if ball/target room is active then check to see if balls are on targets
-        if (activePuzzleTypes.IndexOf(3) != -1)
+        if (activePuzzleTypes.IndexOf(3) >= 0 && activePuzzleTypes.IndexOf(3) <= 3)
         {
             if (ballRoomCleared == false)
             {

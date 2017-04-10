@@ -611,13 +611,13 @@ public class Maze : MonoBehaviour {
 	private void CreateExit(){
 		// determine which edge of the map it will be on
 		float whichSide = Mathf.PerlinNoise(mazeGenerationNumber, mazeGenerationNumber);
-		int cellCoord = (int)(Mathf.PerlinNoise(mazeGenerationNumber, mazeGenerationNumber)*49);
+		int cellCoord = (int)(Mathf.PerlinNoise(mazeGenerationNumber, mazeGenerationNumber)*(size.x-1));
 		Debug.Log(cellCoord);
 		MazeCell whichCell;
 		MazeDirection direction;
 		if (whichSide < 0.25f){
-			// x, 49 side
-			whichCell = cells[cellCoord, 49];
+			// x, size.x-1 side
+			whichCell = cells[cellCoord, size.x-1];
 			direction = (MazeDirection)0;
 		}
 		else if (whichSide < 0.5f){
@@ -626,13 +626,13 @@ public class Maze : MonoBehaviour {
 			direction = (MazeDirection)2;
 		}
 		else if (whichSide < 0.75f){
-			// 49, x side
-			whichCell = cells[49, cellCoord];
+			// size.x-1, x side
+			whichCell = cells[size.x-1, cellCoord];
 			direction = (MazeDirection)1;
 		}
 		else{
 			// 0, x side
-			whichCell = cells[49, cellCoord];
+			whichCell = cells[size.x-1, cellCoord];
 			direction = (MazeDirection)3;
 		}
 		GameObject wallObject = whichCell.transform.Find("MazeWall(Clone)").gameObject;
@@ -643,5 +643,9 @@ public class Maze : MonoBehaviour {
 	
 	public int getMazeGenerationNumber(){
 		return mazeGenerationNumber;
+	}
+	
+	public MazeCell[,] getMazeCells(){
+		return cells;
 	}
 }

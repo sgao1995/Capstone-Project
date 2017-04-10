@@ -20,8 +20,9 @@ public class CatMovement : MonoBehaviour
     // movement speed
     private float movementModifier = 1;
     private float movementModifierTimer = 10f;
-	// invis duration
-	private float invisDuration = 0f;
+    private float crippledSpeedMod = 1f; //speed mod that depends on if the cat gets crippled by a mouse
+    // invis duration
+    private float invisDuration = 0f;
 
     // attack
     private Animator animator;
@@ -483,7 +484,7 @@ public class CatMovement : MonoBehaviour
 
         // status effects
         if (onLava){
-			TakeDamage(0.5f);
+			TakeDamage(0.2f);
 		}
 		if (onSpikes){
 			TakeDamage(0.2f);
@@ -593,10 +594,10 @@ public class CatMovement : MonoBehaviour
 		if (canMove)
         {	
 			if (onIce){
-				moveV = moveV.normalized * speed * movementModifier * Time.deltaTime * 0.1f;
+				moveV = moveV.normalized * speed * movementModifier * Time.deltaTime * 0.1f*crippledSpeedMod;
 			}
 			else{
-				moveV = moveV.normalized * speed * movementModifier * Time.deltaTime;
+				moveV = moveV.normalized * speed * movementModifier * Time.deltaTime*crippledSpeedMod;
 			}
             transform.Translate(moveV);
             // attack power modifier
@@ -708,6 +709,15 @@ public class CatMovement : MonoBehaviour
         transform.GetComponent<PhotonView>().RPC("changeHealth", PhotonTargets.AllBuffered, amt);
 		transform.GetComponent<PhotonView>().RPC("playSound", PhotonTargets.AllBuffered, 2, 1f);
     }
+    //if crippled by explorer, speed is modified to be 30% slower
+    [PunRPC]
+    IEnumerator Crippled()
+    {
+        crippledSpeedMod = 0.7f;
+        Debug.Log("CRIPPLED");
+        yield return new WaitForSeconds(5);
+        crippledSpeedMod = 1f;
+    }
     [PunRPC]
     void changeHealth(float dmg)
     {
@@ -725,6 +735,9 @@ public class CatMovement : MonoBehaviour
 		Debug.Log("player died");
         GameObject.Find("GUI").GetComponent<WinScript>().setCatDeaths();
         alive = false;
+        StopCoroutine(recoup());
+        Debug.Log("player died");
+		alive = false;
         //animator.Play("Unarmed-Death1");
         transform.GetComponent<PhotonView>().RPC("PlayAnim", PhotonTargets.All, "Unarmed-Death1");
         WaitForAnimation(5f);
@@ -881,8 +894,19 @@ public class CatMovement : MonoBehaviour
 				TakeDamage(mine.mineSize * 50f);
 			}
         }
+        // if gets hit by a dart
+        if (collisionInfo.gameObject.tag == "dart")
+        {
+            StartCoroutine(Asleep());
+        }
 	}
-
+    IEnumerator Asleep()//if is hit by a sleeping dart, is put to sleep for 5 seconds
+    {
+        canMove = false;
+        Debug.Log("can't move");
+        yield return new WaitForSeconds(5);
+        canMove = true;
+    }
     [PunRPC]
     void destroyPU(Collider obj)
     {
