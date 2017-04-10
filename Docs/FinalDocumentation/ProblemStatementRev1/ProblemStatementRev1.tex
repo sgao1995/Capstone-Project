@@ -1,0 +1,168 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage{datetime}
+\usepackage[tablegrid]{vhistory}
+\pagenumbering{roman}
+\title{CS 4ZP6: Problem Statement
+\\Cat-and-Mouse Game
+\\ Revision 1}
+\author{\textbf{Group \#08, ClawSome Games}
+		\\ Yuan Gao (1330064)
+		\\ Su Gao (1330065)
+		\\ James Lee (1318125)
+		\\ James Zhu (1317457)
+}
+\newdate{date}{09}{04}{2017}
+\date{\displaydate{date}}
+
+\begin{document}
+\maketitle
+\newpage
+\begin{versionhistory}
+  \vhEntry{0}{28 Sep 2016}{YG, SG, JL, JZ}{Drafted the Problem Statement document.}
+  \vhEntry{1}{9 April 2017}{YG, SG, JL, JZ}{Revised the Problem Statement document according to feedback provided by Customer.}
+\end{versionhistory}
+
+\tableofcontents
+\newpage
+\pagenumbering{arabic}
+
+\section{Introduction}
+
+\paragraph{}For our Computer Science Senior Capstone Project, we propose to create a \textbf{Cat-and-Mouse
+game}. Within this game, players will control either a \textbf{Cat} or \textbf{Mouse} character, and play on one of two teams with up to three other players thorough a multiplayer service. 
+
+\paragraph{}The goal provided to the players will be to \textbf{compete with the opposing team in achieving various objectives within a maze-based environment}. In addition, both teams will be able to engage in combat with monsters within the maze, as well as perform various tasks, to gain experience points and obtain new or improved skills or attributes.
+
+\paragraph{}Teams will consist of \textbf{one Cat character}, and \textbf{up to three Mouse characters}. Each Character Class will have unique attributes and skills which will be adapted to the intended play style and mechanics of the Character. For instance, as \emph{Mice} are more numerous, they will have weakened attributes in comparison to the \emph{Cat}. This will also require the mice to co-operate as a team in order to make cohesive, tactical decisions which will defeat their more powerful foe.
+
+\section{Description of the Problem}
+
+\subsection{Background and Motivation}
+
+\paragraph{}Within this Digital Age, the emergence of digital solutions for tasks and problems that we face in our daily lives has led to a marked decrease in the quantity and quality of social experiences entered to by individuals in general. Interactions which were formerly conducted in-person and through participation in a shared, physical, activity are increasingly becoming \emph{depersonalised} through their adaptation for a hyper-connected and globalised virtual world. As a result, the level of \emph{social cohesion} and \emph{co-operation} within the general population as a whole has deteriorated.
+
+\subsection{Our Approach to a Solution}
+
+\paragraph{}Through the creation of this game, we aim to introduce a product that will encourage \textbf{meaningful social interaction}, as well as foster \textbf{team-based problem-solving} and \textbf{interpersonal skills}, to the range of  entertainment options available presently. This will be implemented with consideration to the secondary goal of providing an enjoyable and varied experience to the user. The latter supports the fulfillment of the overall aims of the product, as it will not only increase the novelty and attraction of the game to its target demographic, but also encourage deeper, longer-term engagement with, and thus greater receptiveness to, the intended messages being conveyed.
+
+\section{Objectives}
+\paragraph{}The game should:
+
+\begin{enumerate}
+    \item \textbf{Appeal to and be accessible for users of all ages and demographics.}
+        
+        \begin{itemize}
+            \item Ensuring that the play-style, mechanics and objectives of the product appeals to a big and diversified demographic increases the reach and receptiveness of the intended messages(s).
+            
+            \item This includes decreasing the barrier to access, such as by eliminating any substantial benefit provided to users with a high amount of previous experience, compared to new users.
+        \end{itemize}
+        
+    \item \textbf{Provide a creative and unique experience to the user whilst encouraging deep and long-term engagement in the Product.}
+    
+    \begin{itemize}
+            \item Implementing multiple game modes with differing, flexible and multifaceted objectives to foster variation in play-styles.
+           
+            \item Introducing different attributes and skills for each of the Cat and Mouse teams, to encourage repetition of game modes and scenarios from different perspectives and utilising unique strategies.
+            
+            \item Designing and setting a unified, fast-pace in-game atmosphere and theme in order to increase psychological investment into the game and thus increase the user's  exposure and receptiveness to the game's intended message(s).
+        \end{itemize}
+        
+    \item {Encourage and provide mechanisms to promote team-based problem solving and tactical co-operation in achieving game objectives.}
+    
+    \begin{itemize}
+            \item Facilitating for \textbf{\emph{shared benefit}} and \textbf{\emph{shared loss}} between members of a team. This may be enabled through the use of a \textbf{common experience point and health  system} and team-wide \textbf{area of effect for skills} between all players on the Mouse Team, for  instance.
+           
+            \item Rewarding co-operative gameplay approaches while lowering the effectiveness of a solo play-style in completing game objectives. This includes the weakening of each individual Mouse Character in relation to a Cat Character, as well as the design of skills and attributes which have greater benefit when working in a group or in close proximity to other team members. Additionally, Skills may be created for the Cat Character such that the they may only be overcome by the Mouse Characters as a unified team. An example of the latter would be a Skill which will teleport the Cat directly to the location of a Mouse, which would require either a combined and coordinated attack from the Mouse team to overcome, or the sacrifice of a fellow team member in order to distract the Cat and allow for other members to escape.
+            
+            \item Decreasing the need for \emph{self-serving behaviours}. This is provided by a \textbf{lack of character progress}, such that the amount of time invested into game does not (as stated in \textbf{Objective 1}) place the user at a substantial advantage over a new player. The latter thus \emph{lowers} the perceived benefits of a protectionist approach  whilst \emph{raises} the benefits gained by the team as a whole through mutual co-operation  and assistance. Additionally, this also encourages users to develop a more casual attitude to gameplay, and as a result, display a higher level of respect and camaraderie towards their fellow players. 
+        \end{itemize}
+        
+    \item \textbf{Introduce attributes, skills and other gameplay elements which create a fair and balanced environment for both teams.}
+    
+     \begin{itemize}
+            \item Skills and attributes should be adjusted in relation to each other, and with consideration to the size of a team. This will ensure that players are encouraged to focus on the development of greater team cohesion and co-operation in order to gain an advantage, rather than attempts to harass fellow players or circumvent the intended use of a system.
+        \end{itemize}
+\end{enumerate}
+
+\section{Technological Aspects}
+
+\paragraph{}The Unity Game Engine and the associated Integrated Development Environment (IDE)  will be the main platform during development. It has native support for both Windows and Mac based-PC’s (where the majority of our target audience lies), in
+addition to Mobile support, which allows for flexibility with regards to future expansion.
+
+\paragraph{}Additionally, the main language of development is \textbf{C\#} , which is imperative and object-oriented, and
+thus, well-suited to a game such as ours, which will involve the rendering and manipulation of many objects
+(such as potions, characters, map elements, etc). C\# is one of the main scripting languages (along with JavaScript), which is supported natively by the Unity Engine.
+
+\paragraph{}The Unity Engine also has a relative short "start-up time" and relatively fast learning curve. This is because it is not only based upon a simple, object-oriented development model, but further provides both a comprehensive series of tutorials which cover in detail all the major aspects of utilising the engine, as well as to sports a very active development community. These aspects enables both novice and expert developers to familiarise themselves, and start using the engine in production very quickly, and thus, is well-suited for a medium-term project with a smaller team size, such as the one which is defined here.
+
+\section{Challenges}
+
+\paragraph{}There are numerous challenges which may arise when developing a game such as Cat-and-Mouse. Firstly, as none of our team members have prior experience with creating a multiplayer game using the Unity Engine, there are many technical and logistic challenges to overcome during the development process.
+
+\paragraph{}In addition to the technical basis for the game, the team must also consider how to make this game appeal to, and bring replay value for a mainstream audience. For instance, to make a multiplayer game enjoyable, we have to take in consideration of whether or not the game is fair to both teams. 
+
+\subsection{Ensuring Fairness and Balance}
+
+\subsubsection{Asymmetricality of Teams}
+\paragraph{}As the teams in this game are generally \textbf{\emph{asymmetrical}}, -- meaning teams are not equal (in both individual strength and number),  the concept of \textbf{balance} becomes a concern. This is due to the fact that as one team could easily be made too powerful, and thus, violating one of the stated Objects for this product. 
+ 
+ \paragraph{}To remedy this, we will create unique level-up opportunities and benefits for each side. Another unique problem that comes with this asymmetry is that while the Cat team consists of only one player, the Mice have three. This may create situation where if the players are well-coordinated in terms of communication, they could easily overpower
+the Cat on each play. Vice-versa, if the Mice are bad at communicating with each other, the Cat will
+dominate every match.
+
+\subsection{Procedurally-Generated Map}
+
+\paragraph{}However, the creation of \textbf{\emph{a procedurally-generated map}} , should also minimise any unfair advantage gained by a team through prior knowledge, as well as allow for both teams to play to their respective strengths. In as much, designing an algorithm that will create such “balanced” maps would be a major challenge in itself. The algorithm must not create a maze with no “sealed rooms” meaning every point within the map is accessible, as well as having dead ends and balanced neutral monster spawn camps, meaning that they are not placed too close or too far from either the Cat or Mice spawn points. Additionally, the distribution of objects (such as power-ups) should not be overly-biased towards one team.
+
+\paragraph{}However, the map should also present a reasonable challenge to all of the players. As such, a
+variety of different terrain and environmental conditions must be possible (eg. mountainous, desert, rain,
+snow etc), each presenting their own tasks and obstacles which must be overcome. This should be done in
+a way that ensures continuity and harmony within the overall map, in addition to ensuring that it does not
+grant an unfair advantage to a certain team.
+
+\section{Assumptions}
+
+\subsection{Targeted Demographics}
+
+\paragraph{}We assume that individuals from all backgrounds and age groups would be interested  in and have the requisite technology to play a fast-paced, horror-themed online multiplayer video game. The amount of video game titles and the number of unique game designs over the past few decades have resulted in a steady increase in gamers across all generations. We would therefore assume that a game of this nature will spark interest among a large section of the general population.
+
+\subsection{Technical Requirements}
+
+\paragraph{}In terms of technical requirements to play the game, would assume that most individuals own and can operate and navigate through basic operating system functions (such as copy files and installing programs) on a Windows-based PC, which are the main targeted devices for this project.
+
+\paragraph{}We also assume that they have the necessary hardware specifications, as well as software, programs and libraries installed required to operate the product effectively. For instance, Windows XP Service Pack 2 or higher with at least 2 Gigabytes of RAM and a graphics card with at support for the Microsoft DirectX 9 API or higher is required to start the game. 
+
+\subsection{Accessibility}
+
+\paragraph{}We also assume that members of the target demographic for this product possess sufficient mobility to operate and make use of the full range of functions and input and output methods provided.  This includes the assumptions that: 
+
+\begin{itemize}
+    \item Users will have sufficient vision to quickly read and distinguish text displayed on a screen.
+    
+    \item Users possess full range of motion to adjust and move a mouse to a desired location in a short span of time (under 5 seconds).
+    
+    \item Users do not suffer for any condition which may be affected by flashing lights and/or moving images.
+\end{itemize}
+
+\subsection{Originality}
+
+\paragraph{}Lastly, we assume that the proposed game concepts has not already been brought to production by another developer, and thus, will introduce original objectives, mechanics and play-style which will promote uptake of the product by its target demographic.
+
+\section{Constraints}
+
+\subsection{Time and Resources}
+
+\paragraph{}Time is a major constraint as we have a time span of approximately \textbf{seven months} to plan, design and implement the product entirely from scratch.  It has to be considered that whilst may commercial game developers have considerably more resources and manpower designing their games, it can often be the case that they require 2 years or more to release a finished product, notwithstanding any major technical and logistic challenges encountered during development. 
+
+
+\paragraph{}However, it is anticipated that our game will not require as many resources, as we will also not be undertaking the
+numerous additional tasks that commercial game companies have to consider when releasing a product, such as advertising, employee salaries and, the costs of porting it to multiple platforms, among others.
+
+\subsection{Availability of Assets and Game Models}
+
+\paragraph{}Availability of \textbf{Graphics and audio} is another constraint that we will have to deal with. As the development team does not include any digital artists, the quality of the art utilised in the game (such as models and sound effects), may not match that of other game titles on the market. Sound effects will additionally have to either be made from scratch at high expense to available manpower, or sourced from free and public domain providers. Similarly, background music would also have to either be originally-produced or be used with permission from the creators. The consideration must be made however, as if we create the required assets ourselves, the art and design style may be styled as a distinctive and unique aspect of our game in of itself.
+
+\paragraph{}Additionally, we would have to design the game and our assets in a way that does not infringe on the intellectual property and copyright laws enjoyed by any existing commercial or private entity. This may be achieved by ensuring that the characters, game mechanics and art style are reasonably distinguishable from that which is present in existing products.
+
+\end{document}
