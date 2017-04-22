@@ -173,8 +173,8 @@ public class GameManager : Photon.PunBehaviour
         if (PhotonNetwork.isMasterClient)
         {
             List<int> tempTypes = new List<int>();
-            tempTypes.Add(5);
-            tempTypes.Add(0);
+            tempTypes.Add(1);
+            tempTypes.Add(2);
             tempTypes.Add(4);
 			activePuzzleTypes = tempTypes;
 			Debug.Log("length " + activePuzzleTypes.Count);

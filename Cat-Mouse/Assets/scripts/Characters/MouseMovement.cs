@@ -4,10 +4,6 @@ using System.Collections;
 using System.Collections.Generic;
 
 public class MouseMovement : MonoBehaviour {
-    private const int expToLevel2 = 100;
-    private const int expToLevel3 = 200;
-    private const int expToLevel4 = 400;
-
     // stats
     private int level = 0;
     private float currentEXP = 0;
@@ -70,7 +66,7 @@ public class MouseMovement : MonoBehaviour {
 
     /* Vitality System attribute parameters */
     private float[] vitalLevelHP = {50, 65, 80, 110};  // Health Points of Mouse per Level
-    private float[] vitalLevelEXP = {320, 640, 1280, 2500};  // Experience Points Mouse per Level
+    private float[] vitalLevelEXP = {100, 200, 300, 400};  // Experience Points Mouse per Level
 
     /* HUD state */
     public Vitality mouseVitality;  // Vitality System component
@@ -826,7 +822,7 @@ public class MouseMovement : MonoBehaviour {
                     //currentEXP += hitInfo.collider.transform.GetComponent<MonsterAI>().getExpDrop();
                     //mouseVitality.setCurrentExperiencePoints(currentEXP);
                     Debug.Log("got EXP");
-                    currentEXP += 20;
+                    currentEXP += 50;
 					
 				}
 
@@ -846,7 +842,7 @@ public class MouseMovement : MonoBehaviour {
                 {
                     //currentEXP += hitInfo.collider.transform.GetComponent<MonsterAI>().getExpDrop();
                     //mouseVitality.setCurrentExperiencePoints(currentEXP);
-                    currentEXP += 50;
+                    currentEXP += 100;
 					
                 }
 
@@ -866,7 +862,7 @@ public class MouseMovement : MonoBehaviour {
                 {
                     //currentEXP += hitInfo.collider.transform.GetComponent<MonsterAI>().getExpDrop();
                     //mouseVitality.setCurrentExperiencePoints(currentEXP);
-                    currentEXP += 200;
+                    currentEXP += 500;
                 }
 
                 hitInfo.collider.transform.GetComponent<MonsterAI>().SendMessage("takeDamage", damage* damageMod);
@@ -885,7 +881,7 @@ public class MouseMovement : MonoBehaviour {
                 {
                     //currentEXP += hitInfo.collider.transform.GetComponent<MonsterAI>().getExpDrop();
                     //mouseVitality.setCurrentExperiencePoints(currentEXP);
-                    currentEXP += 200;
+                    currentEXP += 250;
                 }
 
                 hitInfo.collider.transform.GetComponent<MonsterAI>().SendMessage("takeDamage", damage* damageMod);
@@ -902,7 +898,7 @@ public class MouseMovement : MonoBehaviour {
                 
                 if (hitInfo.collider.transform.GetComponent<CatMovement>().getHealth() > 0 && hitInfo.collider.transform.GetComponent<CatMovement>().getHealth() - damage* damageMod <= 0)
                 {
-                    currentEXP += 100;
+                    currentEXP += 150;
                 }
 				
 				hitInfo.collider.transform.GetComponent<CatMovement>().SendMessage("TakeDamage", damage* damageMod);

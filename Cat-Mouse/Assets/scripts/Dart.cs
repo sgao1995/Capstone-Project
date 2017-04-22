@@ -14,7 +14,7 @@ public class Dart : MonoBehaviour {
 	}
     private void OnCollisionEnter(Collision collision)
     {
-        Destroy(gameObject);
+        PhotonNetwork.Destroy(gameObject);
         Debug.Log("hit");
     }
 }

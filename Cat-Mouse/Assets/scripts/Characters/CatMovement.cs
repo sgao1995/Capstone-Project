@@ -72,7 +72,7 @@ public class CatMovement : MonoBehaviour
 
     /* Vitality System attribute parameters */
     private float[] vitalLevelHP = {100, 125, 160, 200};  // Health Points of Cat per Level
-    private float[] vitalLevelEXP = {200, 400, 800, 2000};  // Experience Points Cat per Level
+    private float[] vitalLevelEXP = {150, 250, 350, 450};  // Experience Points Cat per Level
 
     /* HUD state */
     public Vitality catVitality;  // Vitality System component
@@ -397,8 +397,7 @@ public class CatMovement : MonoBehaviour
                 dist = dt;
             }
         }
-        Vector3 temp = new Vector3(2f, 0, 0);
-        transform.position = targetMouse.transform.position + temp;
+        transform.position = targetMouse.transform.position + (Vector3.back*2f);
     }
 
 	[PunRPC]
@@ -823,7 +822,7 @@ public class CatMovement : MonoBehaviour
                     //currentEXP += hitInfo.collider.transform.GetComponent<MonsterAI>().getExpDrop();
                     //mouseVitality.setCurrentExperiencePoints(currentEXP);
                     Debug.Log("got exp Cat");
-                    currentEXP += 20;
+                    currentEXP += 50;
 					
 				}
                 if (bashActive)
@@ -843,7 +842,7 @@ public class CatMovement : MonoBehaviour
                 {
                     //currentEXP += hitInfo.collider.transform.GetComponent<MonsterAI>().getExpDrop();
                     //mouseVitality.setCurrentExperiencePoints(currentEXP);
-                    currentEXP += 50;
+                    currentEXP += 100;
 					
                 }
 
@@ -865,7 +864,7 @@ public class CatMovement : MonoBehaviour
                 {
                     //currentEXP += hitInfo.collider.transform.GetComponent<MonsterAI>().getExpDrop();
                     //mouseVitality.setCurrentExperiencePoints(currentEXP);
-                    currentEXP += 200;
+                    currentEXP += 500;
                 }
 
                 if (bashActive)
@@ -886,7 +885,7 @@ public class CatMovement : MonoBehaviour
                 {
                     //currentEXP += hitInfo.collider.transform.GetComponent<MonsterAI>().getExpDrop();
                     //mouseVitality.setCurrentExperiencePoints(currentEXP);
-                    currentEXP += 200;
+                    currentEXP += 250;
                 }
 
                 if (bashActive)
@@ -905,7 +904,7 @@ public class CatMovement : MonoBehaviour
 
                 if (hitInfo.collider.transform.GetComponent<MouseMovement>().getHealth() > 0 && hitInfo.collider.transform.GetComponent<MouseMovement>().getHealth() - attackPowerM <= 0)
                 {
-                    currentEXP += 100;
+                    currentEXP += 120;
                 }
 				
 				if (bashActive)
