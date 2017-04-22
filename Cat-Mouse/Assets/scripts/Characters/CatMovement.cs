@@ -71,7 +71,7 @@ public class CatMovement : MonoBehaviour
     private bool canUseSkills = true;
 
     /* Vitality System attribute parameters */
-    private float[] vitalLevelHP = {100, 125, 160, 200};  // Health Points of Cat per Level
+    private float[] vitalLevelHP = {200, 225, 250, 200};  // Health Points of Cat per Level
     private float[] vitalLevelEXP = {150, 250, 350, 450};  // Experience Points Cat per Level
 
     /* HUD state */
@@ -148,9 +148,7 @@ public class CatMovement : MonoBehaviour
 			ultimateSkillPoints += 1;
 		else
 			skillPoints += 1;
-		power = 5 + level * 5;
-		attackPower = power;
-		maxHealth = 80 + level * 20;
+		attackPower = 5f + level * 5f;;
 		jumpForce = 300f;
 		attackCooldownDelay = 1.1f;
 		

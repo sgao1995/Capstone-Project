@@ -8,7 +8,6 @@ public class MouseMovement : MonoBehaviour {
     private int level = 0;
     private float currentEXP = 0;
     private float maxEXP;
-    public float power;
     private float speed = 3.0f; //speed value
     private float jumpForce;//amount of jump force
     public float currentHealth=100;
@@ -27,7 +26,6 @@ public class MouseMovement : MonoBehaviour {
 
     // attack
     private Animator animator;
-    private float attackPower;
     private float attackCooldownDelay;
     private float attackCooldownTimer = 1f;
 
@@ -300,12 +298,9 @@ public class MouseMovement : MonoBehaviour {
             ultimateSkillPoints += 1;
         else
             skillPoints += 1;
-        power = 5 + level * 5;
-        attackPower = power;
-        maxHealth = 80 + level * 20;
+		damage = 8 + level * 2f;
         jumpForce = 250f;
         attackCooldownDelay = 1.1f;
-        currentHealth = maxHealth;
 
         /* Sets Character Maximum Health for new Level */
         this.maxHealth = this.vitalLevelHP[this.level - 1];
