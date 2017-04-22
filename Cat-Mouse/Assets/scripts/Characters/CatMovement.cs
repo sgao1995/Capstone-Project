@@ -64,7 +64,6 @@ public class CatMovement : MonoBehaviour
     private float stalkerTime = 5f;
     private bool isStalkerActive = false;
     private bool bashActive = false;
-    private bool isBrawlerActive = false; //this one tells the cat is the brawler skill for the mouse is active or not
     private bool HSActive = false; //Needed for heightened sense skill
     private bool LIWActive = false; //Needed for lieinwait skill
     private bool FocusActive = false; //Needed for focus skill
@@ -201,14 +200,7 @@ public class CatMovement : MonoBehaviour
                     }
                     if (beginT3 >= 10.0f)
                     {
-                        if (!isBrawlerActive)
-                        {
-                            damageModifierF = 2;
-                        }
-                        else
-                        {
-                            damageModifierF = 1;
-                        }
+                        damageModifierF = 2;
                     }
                     else
                     {
@@ -284,20 +276,7 @@ public class CatMovement : MonoBehaviour
 			steelTrapsList.RemoveAt(0);
 		}
 	}
-    //if mouse has brawler skill active, skills that affect the mouse are disabled
-    [PunRPC]
-    void BrawlerActive()
-    {
-        isBrawlerActive = true;
-        Debug.Log("BRAWLER IS ACTIVE");
-    }
-    [PunRPC]
-    void BrawlerNotActive()
-    {
-        isBrawlerActive = false;
-        Debug.Log("BRAWLER IS NOT ACTIVE");
-    }
-	
+
 	/* Throws a lasso in front of the player, pulling monsters and players towards the cat if connected*/
 	[PunRPC]
     IEnumerator Lasso()
@@ -360,10 +339,7 @@ public class CatMovement : MonoBehaviour
     IEnumerator Bash() //Bash Skill, stun effect will only work on enemy players
     {
         focusTimerPause = true;//so the Focus buff will be reset to damagemultiplierF of 1
-        if (!isBrawlerActive)
-        {
-            bashActive = true;
-        }
+        bashActive = true;
         transform.GetComponent<PhotonView>().RPC("SetTrigger", PhotonTargets.All, "Attack3Trigger");
         attackCooldownTimer = attackCooldownDelay;
         yield return new WaitForSeconds(0.3f);
@@ -616,14 +592,7 @@ public class CatMovement : MonoBehaviour
             if (C.GetComponent<Collider>().transform.root != this.transform && (C.GetComponent<Collider>().tag == "Mouse" || C.GetComponent<Collider>().tag == "Mouse(Clone)"))
             {
                 Debug.Log("Mice Detected");
-                if (!isBrawlerActive)
-                {
-                    Alert.SetActive(true);
-                }else
-                {
-                    Alert.SetActive(false);
-                }
-
+				Alert.SetActive(true);
             }else
             {
                 Alert.SetActive(false);

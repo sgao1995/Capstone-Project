@@ -61,6 +61,7 @@ public class MouseMovement : MonoBehaviour {
     private bool problemSolverActive = false; //needed for problem solver skill
     private bool treasureActive = false;//Needed for trasure hunter skill
     private bool canUseSkills = true;
+	private bool brawlerActive = false;
 
     /* Vitality System attribute parameters */
     private float[] vitalLevelHP = {50, 65, 80, 110};  // Health Points of Mouse per Level
@@ -70,7 +71,6 @@ public class MouseMovement : MonoBehaviour {
     public Vitality mouseVitality;  // Vitality System component
     public Skill mouseSkill;  // Skill System component
     public Text interactText;
-    public Text skillText;
 	public bool miniMenuShowing = false;
 	private GameObject miniMenu;
     private GameObject Alert;
@@ -114,11 +114,8 @@ public class MouseMovement : MonoBehaviour {
         mouseSkill = mouseSkillGameObject.GetComponent<Skill>();
 
         GameObject interactiveText = GameObject.Find("Text");
-        GameObject skillsText = GameObject.Find("SkillText");
 		interactText = interactiveText.GetComponent<Text>();
 		interactText.text = "";
-        skillText = skillsText.GetComponent<Text>();
-        skillText.text = "";
         miniMenu = GameObject.Find("MiniMenu");
 		// need to disable the minimenu to begin with
 		miniMenu.SetActive(false);
@@ -239,9 +236,9 @@ public class MouseMovement : MonoBehaviour {
     IEnumerator Brawler()//Explorer Skill (active): gains 50% damage and is immune to enemy abilities for 5 seconds
     {
         damageMod = 1.5f;
-        transform.Find("Cat").GetComponent<PhotonView>().RPC("BrawlerActive", PhotonTargets.AllBuffered);
+		brawlerActive = true;
         yield return new WaitForSeconds(5);
-        transform.Find("Cat").GetComponent<PhotonView>().RPC("BrawlerNotActive", PhotonTargets.AllBuffered);
+        brawlerActive = false;
         damageMod = 1f;
     }
     void LateUpdate()
@@ -258,12 +255,12 @@ public class MouseMovement : MonoBehaviour {
                 if (C.GetComponent<Collider>().transform.root != this.transform && (C.GetComponent<Collider>().tag == "PuzzleRoomBoss" || C.GetComponent<Collider>().tag == "Spike(Clone)" || C.GetComponent<Collider>().tag == "PuzzleRoom" || C.GetComponent<Collider>().tag == "Mine(Clone)"))
                 {
                     Debug.Log("Puzzle Detected");
-                    skillText.text = "A puzzle room is nearby...";
-                    new WaitForSeconds(2);
+					Alert.transform.GetComponent<Text>().text = "A puzzle room is nearby...";
+                    Alert.SetActive(true);
                 }
                 else
                 {
-                    skillText.text = "";
+                    Alert.SetActive(false);
                 }
             }
         }
@@ -275,17 +272,18 @@ public class MouseMovement : MonoBehaviour {
                 if (C.GetComponent<Collider>().transform.root != this.transform && (C.GetComponent<Collider>().tag == "Key"))
                 {
                     Debug.Log("Key Detected");
-                    skillText.text = "A Key is nearby...";
-                    new WaitForSeconds(2);
+                    Alert.transform.GetComponent<Text>().text = "A key is nearby...";
+                    Alert.SetActive(true);
                 }
                 else if (C.GetComponent<Collider>().transform.root != this.transform && (C.GetComponent<Collider>().tag == "Chest"))
                 {
                     Debug.Log("Chest Detected");
-                    skillText.text = "A Treasure Chest is nearby...";
+                    Alert.transform.GetComponent<Text>().text = "A chest is nearby...";
+                    Alert.SetActive(true);
                     new WaitForSeconds(2);
                 }else
                 {
-                    skillText.text = "";
+                    Alert.SetActive(false);
                 }
             }
         }
@@ -313,7 +311,10 @@ public class MouseMovement : MonoBehaviour {
     //when Explorers get stunned, this function will be called and will stop them from moving for 1 second
     public void Stunned()
     {
-        transform.GetComponent<PhotonView>().RPC("isStunned", PhotonTargets.AllBuffered);
+		// if brawler is not true then stun
+		if (!brawlerActive){
+			transform.GetComponent<PhotonView>().RPC("isStunned", PhotonTargets.AllBuffered);
+		}
     }
     
     [PunRPC]
@@ -635,12 +636,12 @@ public class MouseMovement : MonoBehaviour {
 				if (Input.GetKey(KeyCode.A))
 				{
 				//	animator.Play("MoveLeft");
-                    transform.GetComponent<PhotonView>().RPC("PlayAnim", PhotonTargets.All, "MoveLeft");
-                    // play sound effect
-                    if (!soundPlayer.isPlaying){
-                        //soundPlayer.PlayOneShot(footstepSound, 1f);
-                        transform.GetComponent<PhotonView>().RPC("playSound", PhotonTargets.AllBuffered, 0, 1f);
-                    }
+					transform.GetComponent<PhotonView>().RPC("PlayAnim", PhotonTargets.All, "MoveLeft");
+					// play sound effect
+					if (!soundPlayer.isPlaying){
+						//soundPlayer.PlayOneShot(footstepSound, 1f);
+						transform.GetComponent<PhotonView>().RPC("playSound", PhotonTargets.AllBuffered, 0, 1f);
+					}
 
 					if (onIce)
 						mouserb.AddRelativeForce(Vector3.left*0.2f, ForceMode.Impulse);
@@ -651,12 +652,12 @@ public class MouseMovement : MonoBehaviour {
 				if (Input.GetKey(KeyCode.D))
 				{
 			//		animator.Play("MoveRight");
-                    transform.GetComponent<PhotonView>().RPC("PlayAnim", PhotonTargets.All, "MoveRight");
-                    // play sound effect
-                    if (!soundPlayer.isPlaying){
-                        //soundPlayer.PlayOneShot(footstepSound, 1f);
-                        transform.GetComponent<PhotonView>().RPC("playSound", PhotonTargets.AllBuffered, 0, 1f);
-                    }
+					transform.GetComponent<PhotonView>().RPC("PlayAnim", PhotonTargets.All, "MoveRight");
+					// play sound effect
+					if (!soundPlayer.isPlaying){
+						//soundPlayer.PlayOneShot(footstepSound, 1f);
+						transform.GetComponent<PhotonView>().RPC("playSound", PhotonTargets.AllBuffered, 0, 1f);
+					}
 					
 					if (onIce)
 						mouserb.AddRelativeForce(Vector3.right*0.2f, ForceMode.Impulse);
@@ -669,13 +670,13 @@ public class MouseMovement : MonoBehaviour {
 					// play animation
 					if (!Input.GetKey(KeyCode.A) && !Input.GetKey(KeyCode.D))
 					//	animator.Play("MoveForward");
-                        transform.GetComponent<PhotonView>().RPC("PlayAnim", PhotonTargets.All, "MoveForward");
+						transform.GetComponent<PhotonView>().RPC("PlayAnim", PhotonTargets.All, "MoveForward");
 
-                    // play sound effect
-                    if (!soundPlayer.isPlaying){
+					// play sound effect
+					if (!soundPlayer.isPlaying){
 						//soundPlayer.PlayOneShot(footstepSound, 1f);
-                        transform.GetComponent<PhotonView>().RPC("playSound", PhotonTargets.AllBuffered, 0, 1f);
-                    }
+						transform.GetComponent<PhotonView>().RPC("playSound", PhotonTargets.AllBuffered, 0, 1f);
+					}
 					
 					if (onIce)
 						mouserb.AddRelativeForce(Vector3.forward*0.2f, ForceMode.Impulse);
@@ -687,12 +688,12 @@ public class MouseMovement : MonoBehaviour {
 				{
 					if (!Input.GetKey(KeyCode.A) && !Input.GetKey(KeyCode.D))
 						//animator.Play("MoveBackward");
-                        transform.GetComponent<PhotonView>().RPC("PlayAnim", PhotonTargets.All, "MoveBackward");
-                    // play sound effect
-                    if (!soundPlayer.isPlaying){
-                        //soundPlayer.PlayOneShot(footstepSound, 1f);
-                        transform.GetComponent<PhotonView>().RPC("playSound", PhotonTargets.AllBuffered, 0, 1f);
-                    }
+						transform.GetComponent<PhotonView>().RPC("PlayAnim", PhotonTargets.All, "MoveBackward");
+					// play sound effect
+					if (!soundPlayer.isPlaying){
+						//soundPlayer.PlayOneShot(footstepSound, 1f);
+						transform.GetComponent<PhotonView>().RPC("playSound", PhotonTargets.AllBuffered, 0, 1f);
+					}
 					
 					if (onIce)
 						mouserb.AddRelativeForce(Vector3.back*0.2f, ForceMode.Impulse);
@@ -1100,7 +1101,9 @@ public class MouseMovement : MonoBehaviour {
         if (obj.tag == "Spike")
         {
             onSpikes = true;
-			canMove = false;
+			if (!brawlerActive){
+				canMove = false;
+			}
         }
 	
 		if (obj.tag == "Key"){
@@ -1130,15 +1133,19 @@ public class MouseMovement : MonoBehaviour {
 		if (obj.tag == "SteelTrap"){
 			// trap just stops movement for 5 seconds, can use the wait for animation function for this
 			transform.position = new Vector3(obj.transform.position.x, transform.position.y, obj.transform.position.z);
-			WaitForAnimation(5f);
+			if (!brawlerActive){
+				WaitForAnimation(5f);
+			}
 			TakeDamage(5f);
 			obj.GetComponent<SteelTrap>().activate(this.gameObject);
 		}
 		if (obj.tag == "Stomp"){
 			// player gets knocked down for 1.5 seconds
 			TakeDamage(10f);
-			transform.GetComponent<PhotonView>().RPC("PlayAnim", PhotonTargets.All, "Unarmed-Death1");
-			WaitForAnimation(1.5f);
+			if (!brawlerActive){
+				transform.GetComponent<PhotonView>().RPC("PlayAnim", PhotonTargets.All, "Unarmed-Death1");
+				WaitForAnimation(1.5f);
+			}
 		}
     }
     public float getHealth()

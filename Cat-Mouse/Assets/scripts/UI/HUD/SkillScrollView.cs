@@ -69,7 +69,7 @@ public class SkillScrollView : MonoBehaviour {
             content.transform.GetChild(7).transform.GetChild(1).GetComponent<Text>().text = "Stalker - Become invisible and lower the volume of your footsteps for 5 seconds. 20 second cooldown.";
 
             content.transform.GetChild(9).transform.GetChild(0).GetComponent<SkillButton>().SetName("Hunter/BashIcon");
-            content.transform.GetChild(9).transform.GetChild(1).GetComponent<Text>().text = "Bash - Perform a heavy attack a short range in front of you, dealing damage and stunning the target for 1 second. 20 second cooldown.";
+            content.transform.GetChild(9).transform.GetChild(1).GetComponent<Text>().text = "Bash - Perform a heavy attack a short range in front of you, dealing damage and stunning the target for 3 seconds. 20 second cooldown.";
 
             content.transform.GetChild(10).transform.GetChild(0).GetComponent<SkillButton>().SetName("Hunter/LassoIcon");
             content.transform.GetChild(10).transform.GetChild(1).GetComponent<Text>().text = "Lasso - Throw out a rope that pulls the first enemy hit to you. 15 second cooldown.";
