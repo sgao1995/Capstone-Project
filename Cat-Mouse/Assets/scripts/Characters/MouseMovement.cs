@@ -90,6 +90,8 @@ public class MouseMovement : MonoBehaviour {
     //list of spawns
     SpawnM[] sm;
     private float spawnDelay=10;
+	
+	private float lastTime;
 
     void Start()
     {
@@ -137,17 +139,24 @@ public class MouseMovement : MonoBehaviour {
         ObjectiveMsg.text = "";
     }
     
-    void tagTeam() //Explorer Skill (passive): Increase movement speed by 50% when near another Explorer
+	void tagTeam() //Explorer Skill (passive): Increase movement speed by 50% when near another Explorer
     {
         hitCollider = Physics.OverlapSphere(this.transform.position, 5);
+        bool TT = false;
         foreach (Collider C in hitCollider)
         {
             if (C.GetComponent<Collider>().transform.root != this.transform && C.GetComponent<Collider>().tag == "Mouse")
             {
-                Debug.Log("hit");
-                movementModifier = 1.5f;
-
+                TT = true;
             }
+        }
+        if (TT)
+        {
+            movementModifier = 1.5f;
+        }
+        else
+        {
+            movementModifier = 1f;
         }
     }
     IEnumerator Bandage()//Explorer Skill (active): Heals player 40 hp over 10 seconds
@@ -247,41 +256,60 @@ public class MouseMovement : MonoBehaviour {
         //problemsolver passive
         if (problemSolverActive)
         {
+            hitCollider = Physics.OverlapSphere(this.transform.position, 10);
+            bool PP = false;
+
             foreach (Collider C in hitCollider)
             {
-                if (C.GetComponent<Collider>().transform.root != this.transform && (C.GetComponent<Collider>().tag == "PuzzleRoomBoss" || C.GetComponent<Collider>().tag == "Spike(Clone)" || C.GetComponent<Collider>().tag == "PuzzleRoom" || C.GetComponent<Collider>().tag == "Mine(Clone)"))
+                if (C.GetComponent<Collider>().transform.root != this.transform && (C.GetComponent<Collider>().tag == "Door"))
                 {
-                    Debug.Log("Puzzle Detected");
-					Alert.transform.GetComponent<Text>().text = "A puzzle room is nearby...";
-                    Alert.SetActive(true);
+                    PP = true; 
                 }
-                else
-                {
-                    Alert.SetActive(false);
-                }
+            }
+            if (PP)
+            {
+                Debug.Log("Puzzle Detected");
+                Alert.transform.GetComponent<Text>().text = "A puzzle room is nearby...";
+                Alert.SetActive(true);
+            }
+            else
+            {
+                Alert.SetActive(false);
             }
         }
         //treasurehunter passive
         if (treasureActive)
         {
+            hitCollider = Physics.OverlapSphere(this.transform.position, 10);
+            bool T = false;
+            bool T2 = false;
             foreach (Collider C in hitCollider)
             {
+             
                 if (C.GetComponent<Collider>().transform.root != this.transform && (C.GetComponent<Collider>().tag == "Key"))
                 {
-                    Debug.Log("Key Detected");
-                    Alert.transform.GetComponent<Text>().text = "A key is nearby...";
-                    Alert.SetActive(true);
+                    T = true;
                 }
                 else if (C.GetComponent<Collider>().transform.root != this.transform && (C.GetComponent<Collider>().tag == "Chest"))
                 {
-                    Debug.Log("Chest Detected");
-                    Alert.transform.GetComponent<Text>().text = "A chest is nearby...";
-                    Alert.SetActive(true);
-                    new WaitForSeconds(2);
-                }else
-                {
-                    Alert.SetActive(false);
+                    T2 = true;
                 }
+            }
+            if (T)
+            {
+                Debug.Log("Key Detected");
+                Alert.transform.GetComponent<Text>().text = "A key is nearby...";
+                Alert.SetActive(true);
+            }
+            else if (T2)
+            {
+                Debug.Log("Chest Detected");
+                Alert.transform.GetComponent<Text>().text = "A chest is nearby...";
+                Alert.SetActive(true);
+            }
+            else
+            {
+                Alert.SetActive(false);
             }
         }
     }
@@ -524,15 +552,17 @@ public class MouseMovement : MonoBehaviour {
             mouseSkill.setSlotAssign(learnedSkills);
         }
 
-        // status effects
-        if (onLava)
-        {
-            TakeDamage(0.2f);
-        }
-        if (onSpikes)
-        {
-            TakeDamage(0.2f);
-        }
+        // dps effects
+		if (Time.time - lastTime > 0.5f){
+			lastTime = Time.time;
+			// status effects
+			if (onLava){
+				TakeDamage(5f);
+			}
+			if (onSpikes){
+				TakeDamage(5f);
+			}
+		}
 		
 		// left click
         if (Input.GetMouseButtonDown(0) && attackCooldownTimer <= 0 && !Input.GetKey(KeyCode.Escape) && !miniMenuShowing)
@@ -745,13 +775,15 @@ public class MouseMovement : MonoBehaviour {
     // take a certain amount of damage
     public void TakeDamage(float amt)
     {
-		transform.GetComponent<PhotonView>().RPC("uncloak", PhotonTargets.AllBuffered);
-        //animator.Play("GetHit");
-       // transform.GetComponent<PhotonView>().RPC("PlayAnim", PhotonTargets.All, "GetHit");
-        //WaitForAnimation(0.5f);
-        transform.GetComponent<PhotonView>().RPC("changeHealth", PhotonTargets.AllBuffered, amt);
-		transform.GetComponent<PhotonView>().RPC("playSound", PhotonTargets.AllBuffered, 2, 1f);
-        Debug.Log("Took Damage");
+		if (alive){
+			transform.GetComponent<PhotonView>().RPC("uncloak", PhotonTargets.AllBuffered);
+			//animator.Play("GetHit");
+		   // transform.GetComponent<PhotonView>().RPC("PlayAnim", PhotonTargets.All, "GetHit");
+			//WaitForAnimation(0.5f);
+			transform.GetComponent<PhotonView>().RPC("changeHealth", PhotonTargets.AllBuffered, amt);
+			transform.GetComponent<PhotonView>().RPC("playSound", PhotonTargets.AllBuffered, 2, 1f);
+			Debug.Log("Took Damage");
+		}
     }
     [PunRPC]
     void changeHealth(float dmg)
@@ -1089,7 +1121,7 @@ public class MouseMovement : MonoBehaviour {
             // movement speed boost
             if (pup.powerupType == 0)
             {
-                movementModifier = 1.25f;
+                movementModifier *= 1.25f;
                 movementModifierTimer = 10f;
             }
             // hp restore

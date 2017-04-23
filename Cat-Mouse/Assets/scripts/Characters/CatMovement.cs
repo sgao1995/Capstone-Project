@@ -17,7 +17,7 @@ public class CatMovement : MonoBehaviour
     private int ultimateSkillPoints;
     private List<int> learnedSkills;
     // movement speed
-    private float movementModifier = 1;
+    private float movementModifier = 1f;
     private float movementModifierTimer = 10f;
     private float crippledSpeedMod = 1f; //speed mod that depends on if the cat gets crippled by a mouse
     // invis duration
@@ -89,6 +89,8 @@ public class CatMovement : MonoBehaviour
 	public AudioSource soundPlayer;
 
     private Collider[] hitCollider;
+	
+	private float lastTime;
 	
 	// list of traps the player has set
 	private List<GameObject> steelTrapsList = new List<GameObject>();
@@ -273,7 +275,7 @@ public class CatMovement : MonoBehaviour
                 /* Checks to see the Skill is not an Ultimate Skill */
                 if (catSkill.getSkillSlot(i).getSlotSkill().getSkillTier() == 0)
                 {
-                    catSkill.getSkillSlot(i).getSlotSkill().setSkillCooldownElapsed(catSkill.getSkillSlot(i).getSlotSkill().getSkillCooldownTotal());
+                    catSkill.getSkillSlot(i).getSlotSkill().setSkillCooldownElapsed(catSkill.getSkillSlot(i).getSlotSkill().getSkillCooldownTotal()-0.1f);
                     Debug.Log("The cooldown for Skill Slot " + i + " is now: " + catSkill.getSkillSlot(i).getSlotSkill().getSkillCooldownElapsed());
                 }
             }
@@ -513,12 +515,16 @@ public class CatMovement : MonoBehaviour
            catSkill.setSlotAssign(learnedSkills);
         }
 
-        // status effects
-        if (onLava){
-			TakeDamage(0.2f);
-		}
-		if (onSpikes){
-			TakeDamage(0.2f);
+		// dps effects
+		if (Time.time - lastTime > 0.5f){
+			lastTime = Time.time;
+			// status effects
+			if (onLava){
+				TakeDamage(5f);
+			}
+			if (onSpikes){
+				TakeDamage(5f);
+			}
 		}
 		
 		// left click
@@ -578,7 +584,7 @@ public class CatMovement : MonoBehaviour
 		if (movementModifierTimer > 0f)
 			movementModifierTimer -= Time.deltaTime;
 		else{
-			movementModifier = 1;
+			movementModifier = 1f;
 		}
 		if (attackCooldownTimer > 0){
 			attackCooldownTimer -= Time.deltaTime;
@@ -629,20 +635,26 @@ public class CatMovement : MonoBehaviour
             this.currentEXP += 20;
         }
 	}
-    //heightenedSenses
+	
+	//heightenedSenses
     void heightenedSenses()
     {
         hitCollider = Physics.OverlapSphere(this.transform.position, 10);
+        bool HS = false;
         foreach (Collider C in hitCollider)
         {
             if (C.GetComponent<Collider>().transform.root != this.transform && (C.GetComponent<Collider>().tag == "Mouse" || C.GetComponent<Collider>().tag == "Mouse(Clone)"))
             {
-                Debug.Log("Mice Detected");
-				Alert.SetActive(true);
-            }else
-            {
-                Alert.SetActive(false);
+                HS = true;
             }
+        }
+        if (HS)
+        {
+            Alert.SetActive(true);
+        }
+        else
+        {
+            Alert.SetActive(false);
         }
     }
     void LateUpdate()
@@ -766,11 +778,13 @@ public class CatMovement : MonoBehaviour
     // take a certain amount of damage
     public void TakeDamage(float amt)
     {
-        transform.GetComponent<PhotonView>().RPC("uncloak", PhotonTargets.AllBuffered);
-        //   transform.GetComponent<PhotonView>().RPC("PlayAnim", PhotonTargets.All, "GetHit");
-        //   WaitForAnimation(0.5f);
-        transform.GetComponent<PhotonView>().RPC("changeHealth", PhotonTargets.AllBuffered, amt);
-		transform.GetComponent<PhotonView>().RPC("playSound", PhotonTargets.AllBuffered, 2, 1f);
+		if (alive){
+			transform.GetComponent<PhotonView>().RPC("uncloak", PhotonTargets.AllBuffered);
+			//   transform.GetComponent<PhotonView>().RPC("PlayAnim", PhotonTargets.All, "GetHit");
+			//   WaitForAnimation(0.5f);
+			transform.GetComponent<PhotonView>().RPC("changeHealth", PhotonTargets.AllBuffered, amt);
+			transform.GetComponent<PhotonView>().RPC("playSound", PhotonTargets.AllBuffered, 2, 1f);
+		}
     }
     //if crippled by explorer, speed is modified to be 30% slower
     [PunRPC]
@@ -1046,7 +1060,7 @@ public class CatMovement : MonoBehaviour
             // movement speed boost
             if (pup.powerupType == 0)
             {
-                movementModifier = 1.25f;
+                movementModifier *= 1.25f;
                 movementModifierTimer = 10f;
             }
             // hp restore

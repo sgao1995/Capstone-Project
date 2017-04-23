@@ -190,6 +190,20 @@ public class SkillScrollView : MonoBehaviour {
 
     }
 
+	void Update(){
+		if (GameObject.Find("TeamSelectionOBJ").GetComponent<teamselectiondata>().playertype == 0){
+			this.RegularSP = catChar.getRegularSP();
+            this.UltimateSP = catChar.getUltimateSP();
+		}
+		else{
+			this.RegularSP = mouseChar.getRegularSP();
+            this.UltimateSP = mouseChar.getUltimateSP();
+		}
+		
+        this.regularSPObject.GetComponent<Text>().text = "Regular Skill Points:  " + this.RegularSP.ToString();
+        this.ultimateSPObject.GetComponent<Text>().text = "Ultimate Skill Points:  " + this.UltimateSP.ToString();
+	}
+	
     /* Adds selected Skill to the Player's list of Learned Skills */
     public void addSkill(int skillID)
     {

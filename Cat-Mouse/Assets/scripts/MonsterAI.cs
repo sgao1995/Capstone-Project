@@ -107,7 +107,7 @@ public class MonsterAI : MonoBehaviour
         if (type == "Monster")
         {
             HP = 40f;
-            attackPower = 3f;
+            attackPower = 6f;
             attackCooldownDelay = 3f;
             attackCooldownTimer = 3f;
             expDrop = 50f;
@@ -115,7 +115,7 @@ public class MonsterAI : MonoBehaviour
         else if (type == "MonsterElite")
         {
             HP = 80f;
-            attackPower = 7f;
+            attackPower = 12f;
             attackCooldownDelay = 2f;
             attackCooldownTimer = 2f;
             expDrop = 100f;
@@ -270,6 +270,8 @@ public class MonsterAI : MonoBehaviour
     IEnumerator Death()
     {
         GetComponent<Animator>().SetBool("Death", true);
+		canMove = false;
+        transform.GetComponent<NavMeshAgent>().enabled = false;
         yield return new WaitForSeconds(5);
         // notify game manager of a monster death
         if (this.monsterType == "PuzzleRoomBoss")
@@ -358,6 +360,7 @@ public class MonsterAI : MonoBehaviour
 
         //  GetComponent<Animator>().SetTrigger("Heal");
         WaitForAnimation(3f);
+		HP += 40f;
         transform.GetComponent<PhotonView>().RPC("playSound", PhotonTargets.AllBuffered, 6, 1f);
     }
 
@@ -492,6 +495,16 @@ public class MonsterAI : MonoBehaviour
                 // then retarget every .5 seconds
                 if (retargetTimer == timeUntilRetarget)
                 {
+					Vector3 offset;
+					if (monsterType == "Boss")
+					{
+						offset = 1.5f * Vector3.Normalize(this.transform.position - playersInGame[targettedPlayer].transform.position);
+					}
+					else
+					{
+						offset = Vector3.Normalize(this.transform.position - playersInGame[targettedPlayer].transform.position) / 3f;
+					}
+					agent.SetDestination(playersInGame[targettedPlayer].transform.position + offset);
                     // find closest player
                     float closestDist = float.MaxValue;
                     for (int p = 0; p < playersInGame.Count; p++)
@@ -500,17 +513,6 @@ public class MonsterAI : MonoBehaviour
                         if (dist < closestDist)
                         {
                             targettedPlayer = p;
-                            Vector3 offset;
-                            if (monsterType == "Boss")
-                            {
-                                offset = 1.5f * Vector3.Normalize(this.transform.position - playersInGame[p].transform.position);
-                            }
-                            else
-                            {
-                                offset = Vector3.Normalize(this.transform.position - playersInGame[p].transform.position) / 3f;
-                            }
-
-                            agent.SetDestination(playersInGame[targettedPlayer].transform.position + offset);
                         }
                     }
                 }
@@ -568,7 +570,7 @@ public class MonsterAI : MonoBehaviour
                                 RangedAttack();
                             }
                             // 10% chance to heal 
-                            else if (healCooldownTimer < 0 && attackChance < 0.25f)
+                            else if (healCooldownTimer < 0 && attackChance < 0.25f && HP <= 200f)
                             {
                                 Heal();
                             }
