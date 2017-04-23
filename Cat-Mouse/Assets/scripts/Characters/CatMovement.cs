@@ -989,17 +989,6 @@ public class CatMovement : MonoBehaviour
 
             onIce = true;
         }
-		// if steps on a mine
-		if (collisionInfo.gameObject.tag == "Mine"){
-            isGrounded = true;
-
-            Mine mine = collisionInfo.gameObject.GetComponent<Mine>();
-			mine.transform.GetComponent<PhotonView>().RPC("explode", PhotonTargets.MasterClient, 2f);
-			// if mine hasnt been exploded already then take damage
-			if (mine.exploded == false){
-				TakeDamage(mine.mineSize * 50f);
-			}
-        }
 	}
     [PunRPC]
     IEnumerator Asleep()//if is hit by a sleeping dart, is put to sleep for 5 seconds
@@ -1110,6 +1099,18 @@ public class CatMovement : MonoBehaviour
         {
             transform.GetComponent<PhotonView>().RPC("Asleep", PhotonTargets.AllBuffered);
 			PhotonNetwork.Destroy(obj.gameObject);
+        }
+		// if steps on a mine
+		if (obj.tag == "Mine"){
+            isGrounded = true;
+			Mine mine = obj.gameObject.GetComponent<Mine>();
+			if (mine.exploded == false){
+				TakeDamage(mine.mineSize * 50f);
+			}
+            
+			mine.transform.GetComponent<PhotonView>().RPC("explode", PhotonTargets.MasterClient, 2f);
+			// if mine hasnt been exploded already then take damage
+
         }
 	}
     public float getHealth()

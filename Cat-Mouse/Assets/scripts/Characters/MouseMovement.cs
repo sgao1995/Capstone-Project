@@ -1045,18 +1045,7 @@ public class MouseMovement : MonoBehaviour {
             isGrounded = true;
             onIce = true;
         }
-        // if steps on a mine
-        if (collisionInfo.gameObject.tag == "Mine")
-        {
-            isGrounded = true;
-			
-            Mine mine = collisionInfo.gameObject.GetComponent<Mine>();
-			mine.transform.GetComponent<PhotonView>().RPC("explode", PhotonTargets.MasterClient, 2f);
-			// if mine hasnt been exploded already then take damage
-			if (mine.exploded == false){
-				TakeDamage(mine.mineSize * 50);
-			}
-        }
+        
     }
     [PunRPC]
     void destroyMine(Collision collisionInfo)
@@ -1210,6 +1199,19 @@ public class MouseMovement : MonoBehaviour {
 				WaitForAnimation(1.5f);
 			}
 		}
+		// if steps on a mine
+        if (obj.tag == "Mine")
+        {
+            isGrounded = true;
+			Mine mine = obj.gameObject.GetComponent<Mine>();
+			if (mine.exploded == false){
+				TakeDamage(mine.mineSize * 50);
+			}
+            
+			mine.transform.GetComponent<PhotonView>().RPC("explode", PhotonTargets.MasterClient, 2f);
+			// if mine hasnt been exploded already then take damage
+
+        }
     }
     public float getHealth()
     {
