@@ -232,14 +232,12 @@ public class MouseMovement : MonoBehaviour {
     [PunRPC]
     IEnumerator SleepDart()//Explorer Skill (active): shoot a dart which stuns for 5 seconds (enemies will be able to move again if damaged)
     {
-        if (GetComponent<PhotonView>().isMine){
-			yield return new WaitForSeconds(0.3f);
-			Camera mouseCam = transform.Find("MouseCam").GetComponent<Camera>();
-			Quaternion dartRot = Quaternion.Euler(0, 0, 0);
-			Vector3 dartPos = transform.position;
-			GameObject dart = PhotonNetwork.InstantiateSceneObject("dart", dartPos+(transform.up*0.6f) + (transform.right*0.5f) + (transform.forward*0.3f),dartRot,0);
-			dart.GetComponent<Rigidbody>().AddForce(transform.forward * 20f);
-		}
+        yield return new WaitForSeconds(0.3f);
+        Camera mouseCam = transform.Find("MouseCam").GetComponent<Camera>();
+        Quaternion dartRot = Quaternion.Euler(0, 0, 0);
+        Vector3 dartPos = transform.position;
+        GameObject dart = PhotonNetwork.InstantiateSceneObject("dart", dartPos+(transform.up*0.6f) + (transform.right*0.5f) + (transform.forward*0.3f),dartRot,0);
+        dart.GetComponent<Rigidbody>().AddForce(transform.forward * 20f);
     }
     IEnumerator Brawler()//Explorer Skill (active): gains 50% damage and is immune to enemy abilities for 5 seconds
     {
