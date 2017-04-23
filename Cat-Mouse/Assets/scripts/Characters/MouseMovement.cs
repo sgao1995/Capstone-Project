@@ -802,8 +802,8 @@ public class MouseMovement : MonoBehaviour {
     {
         StopCoroutine(Bandage());
         Debug.Log("player died");
-        alive = false;    
-        GameObject.Find("GUI").GetComponent<WinScript>().setMouseDeaths();
+        alive = false;
+        transform.GetComponent<PhotonView>().RPC("setMouseDeath", PhotonTargets.AllBuffered);
         alive = false;
         GetComponent<MouseMovement>().enabled = false;
         CamMovement cam = gameObject.GetComponentInChildren<CamMovement>();
@@ -813,7 +813,11 @@ public class MouseMovement : MonoBehaviour {
         WaitForAnimation(5f);
         transform.GetComponent<PhotonView>().RPC("respawn", PhotonTargets.AllBuffered);
     }
-
+    [PunRPC]
+    void setMouseDeath()
+    {
+        GameObject.Find("GUI").GetComponent<WinScript>().setMouseDeaths();
+    }
     [PunRPC]
 	void HideMiniMenu(){
 		Cursor.lockState = CursorLockMode.Locked;

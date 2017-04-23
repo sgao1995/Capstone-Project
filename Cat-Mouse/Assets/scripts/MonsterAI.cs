@@ -392,7 +392,7 @@ public class MonsterAI : MonoBehaviour
             {
                 if (hitInfo.collider.transform.GetComponent<MouseMovement>().getHealth() > 0 && hitInfo.collider.transform.GetComponent<MouseMovement>().getHealth() - attackPower <= 0)
                 {
-                    GameObject.Find("GUI").GetComponent<WinScript>().setMouseDeaths();
+                    transform.GetComponent<PhotonView>().RPC("setMouseDeath", PhotonTargets.AllBuffered);
                 }
                 hitInfo.collider.transform.GetComponent<MouseMovement>().SendMessage("TakeDamage", attackPower);
             }
@@ -402,6 +402,11 @@ public class MonsterAI : MonoBehaviour
         {
             transform.GetComponent<PhotonView>().RPC("playSound", PhotonTargets.AllBuffered, 4, 1f);
         }
+    }
+    [PunRPC]
+    void setMouseDeath()
+    {
+        GameObject.Find("GUI").GetComponent<WinScript>().setMouseDeaths();
     }
 
     void FixedUpdate()
