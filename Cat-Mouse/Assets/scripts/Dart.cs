@@ -2,7 +2,8 @@
 using System.Collections;
 
 public class Dart : MonoBehaviour {
-    private float damage = 10f;
+    private float timeAlive = 2f;
+	private float timer = 0f;
 	// Use this for initialization
 	void Start () {
 	
@@ -10,11 +11,9 @@ public class Dart : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-	
+		timer += Time.deltaTime;
+		if (timer >= timeAlive){
+			PhotonNetwork.Destroy(this.gameObject);
+		}
 	}
-    private void OnCollisionEnter(Collision collision)
-    {
-        PhotonNetwork.Destroy(gameObject);
-        Debug.Log("hit");
-    }
 }

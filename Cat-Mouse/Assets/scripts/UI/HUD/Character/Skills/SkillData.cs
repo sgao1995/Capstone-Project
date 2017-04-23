@@ -109,7 +109,7 @@ public class SkillData : MonoBehaviour {
         this.skillListCooldown.Add(20f);
         this.skillListCooldown.Add(45f);
         this.skillListCooldown.Add(120f);
-        this.skillListCooldown.Add(100f);
+        this.skillListCooldown.Add(3f);
 
         /* Data for Hunter Class */
         this.skillListCooldown.Add(0f);

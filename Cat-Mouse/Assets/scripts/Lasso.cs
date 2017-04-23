@@ -19,8 +19,15 @@ public class Lasso : MonoBehaviour {
 	
 	private GameObject cat;
 	
+	private Vector3 initialLocation;
+	private float startTime;
+	
+	private float travelTime;
+	
 	/* Detect if something is hit AS SOON AS LASSO IS CAST */
-	public void Initialize(Vector3 st, Vector3 en, Ray ray, GameObject c){
+	public void Initialize(Vector3 st, Vector3 en, GameObject c){
+		initialLocation = st;
+		startTime = Time.time;
 		start = st;
 		end = en;
 		cat = c;
@@ -37,9 +44,25 @@ public class Lasso : MonoBehaviour {
         if (Physics.SphereCast(start, 0.2f, dir, out hitInfo, 10f))
         {
             Debug.Log("raycast hit : " + hitInfo.collider.name);
-			hitThisTarget(hitInfo.collider.gameObject);
+			target = hitInfo.collider.gameObject;
+			if (hitInfo.collider.name == "Monster(Clone)" || hitInfo.collider.name == "MonsterElite(Clone)" || hitInfo.collider.name == "Boss(Clone)" || hitInfo.collider.name == "Mouse(Clone)" || hitInfo.collider.name == "Ball"){
+				pullObject = true;
+				//onWayBack = true;
+				// stop actions until the lasso finishes pulling object
+				if (hitInfo.collider.name == "Mouse(Clone)"){
+					target.GetComponent<MouseMovement>().denyPlayerMovement();
+				}
+				else if (hitInfo.collider.name == "Monster(Clone)" || hitInfo.collider.name == "MonsterElite" || hitInfo.collider.name == "Boss"){
+					target.GetComponent<MonsterAI>().denyMonsterMovement();
+				}
+			}
+			else{
+				hitUnpullable = true;
+			}
 		}
 	}
+
+	
 	
 	void Awake(){
 		begin = true;
@@ -47,6 +70,15 @@ public class Lasso : MonoBehaviour {
 	
 	void Update(){
 		if (begin){
+			if (hitUnpullable){
+				Debug.Log(Vector3.Distance(initialLocation + (10f * dir * (Time.time - startTime)), target.transform.parent.transform.position));
+				Vector3 distToWall = initialLocation + (10f * dir * (Time.time - startTime));
+				if (Vector3.Distance(new Vector3(distToWall.x, 0f, distToWall.z), target.transform.parent.transform.position) <= 1f){
+					Debug.Log("hit wall");
+					onWayBack = true;
+				}
+			}
+			
 			cat.GetComponent<CatMovement>().denyPlayerMovement();
 			if (pullObject && onWayBack){
 				if (target.tag != "Ball")
@@ -90,23 +122,6 @@ public class Lasso : MonoBehaviour {
 		}
 	}
 
-	public void hitThisTarget(GameObject go){
-		target = go;
-		if (target.tag == "Monster" || target.tag == "MonsterElite" || target.tag == "Boss" || target.tag == "Mouse(Clone)"	|| target.tag == "Ball" ){
-			pullObject = true;
-			//onWayBack = true;
-			// stop actions until the lasso finishes pulling object
-			if (target.tag == "Mouse(Clone)"){
-				target.GetComponent<MouseMovement>().denyPlayerMovement();
-			}
-			else if (target.tag == "Monster" || target.tag == "MonsterElite" || target.tag == "Boss"){
-				target.GetComponent<MonsterAI>().denyMonsterMovement();
-			}
-		}
-		else{
-			hitUnpullable = true;
-		}
-	}
 	
 	/*
 	void OnCollisionEnter(Collision obj){

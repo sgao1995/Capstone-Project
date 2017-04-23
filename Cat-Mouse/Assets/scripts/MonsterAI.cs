@@ -137,21 +137,16 @@ public class MonsterAI : MonoBehaviour
             expDrop = 250f;
         }
     }
-    private void OnCollisionEnter(Collision collisionInfo)
-    {
-        // if gets hit by a dart
-        if (collisionInfo.gameObject.tag == "dart")
-        {
-            Debug.Log("hit by dart");
-            StartCoroutine(Asleep());
-        }
-    }
+
     IEnumerator Asleep()//if is hit by a sleeping dart, is put to sleep for 5 seconds
     {
         canMove = false;
+		transform.GetComponent<PhotonView>().RPC("PlayAnim", PhotonTargets.All, "Death");
+		agent.SetDestination(transform.position);
         Debug.Log("can't move");
         yield return new WaitForSeconds(5);
         canMove = true;
+		transform.GetComponent<PhotonView>().RPC("PlayAnim", PhotonTargets.All, "Idle");
         Debug.Log("can move");
     }
     [PunRPC]
@@ -494,7 +489,7 @@ public class MonsterAI : MonoBehaviour
                 {
                     retargetTimer = timeUntilRetarget;
                 }
-                // then retarget every 5 seconds
+                // then retarget every .5 seconds
                 if (retargetTimer == timeUntilRetarget)
                 {
                     // find closest player
@@ -675,6 +670,13 @@ public class MonsterAI : MonoBehaviour
             WaitForAnimation(5f);
             takeDamage(5f);
             obj.GetComponent<SteelTrap>().activate(this.gameObject);
+        }
+		// if gets hit by a dart
+        if (obj.tag == "Dart")
+        {
+            Debug.Log("hit by dart");
+			PhotonNetwork.Destroy(obj.gameObject);
+            StartCoroutine(Asleep());
         }
     }
     //rpc for triggers

@@ -492,4 +492,10 @@ public class Skill : MonoBehaviour {
     {
         return this.charSkillsNum;
     }
+	
+	/* Gets the specified Skill Slot Object */
+    public SkillSlot getSkillSlot(int slotNum)
+    {
+        return skillSlots[slotNum - 1];
+    }
 }

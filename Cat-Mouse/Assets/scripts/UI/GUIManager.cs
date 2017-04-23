@@ -5,7 +5,7 @@ public class GUIManager : MonoBehaviour {
 	public GameObject skillsMenu;
 	
 	void Start(){
-		skillsMenu.SetActive(false);
+		//skillsMenu.SetActive(false);
 	}
 	
 	/* Mini Menu button behaviours */

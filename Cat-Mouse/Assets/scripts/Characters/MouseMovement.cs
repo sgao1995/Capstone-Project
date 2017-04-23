@@ -226,12 +226,9 @@ public class MouseMovement : MonoBehaviour {
         yield return new WaitForSeconds(0.3f);
         Camera mouseCam = transform.Find("MouseCam").GetComponent<Camera>();
         Quaternion dartRot = Quaternion.Euler(0, 0, 0);
-        Vector3 dartPos = transform.localPosition;
-        Vector3 PosMod = new Vector3(0.5f, 1, 0);
-        Ray ray = mouseCam.ViewportPointToRay(new Vector3(0.5F, 0.5F, 0));
-        Quaternion rayRot = Quaternion.LookRotation(ray.direction, Vector3.up);
-        GameObject dart = PhotonNetwork.Instantiate("dart", dartPos+PosMod,rayRot,0,null);
-        dart.GetComponent<Rigidbody>().AddForce(transform.forward * 25f);
+        Vector3 dartPos = transform.position;
+        GameObject dart = PhotonNetwork.InstantiateSceneObject("dart", dartPos+(transform.up*0.6f) + (transform.right*0.5f) + (transform.forward*0.3f),dartRot,0);
+        dart.GetComponent<Rigidbody>().AddForce(transform.forward * 20f);
     }
     IEnumerator Brawler()//Explorer Skill (active): gains 50% damage and is immune to enemy abilities for 5 seconds
     {
@@ -497,7 +494,7 @@ public class MouseMovement : MonoBehaviour {
         if (GetComponent<PhotonView>().isMine)
         {
             /* If the Maximum Experience Points for the current Level is reached, Level Up the Character */
-            if (this.currentEXP >= this.maxEXP)
+            if (this.currentEXP >= this.maxEXP && level <= 3)
             {
                 this.LevelUp();
             }
@@ -584,10 +581,7 @@ public class MouseMovement : MonoBehaviour {
 				InteractWithObject();
 			}
 		}
-		if (Input.GetKeyDown(KeyCode.T))
-        {
-            transform.position = new Vector3(22, 0, 25);
-        }
+	
         if (Input.GetKeyDown("escape"))
         {
             Cursor.lockState = CursorLockMode.None; //if we press esc, cursor appears on screen
@@ -613,6 +607,39 @@ public class MouseMovement : MonoBehaviour {
 				transform.GetComponent<PhotonView>().RPC("uncloak", PhotonTargets.AllBuffered);
 			}
 		}
+		
+		
+		
+				
+		/* CHEATS */
+		/* move player to location */
+		if (Input.GetKeyDown(KeyCode.T))
+        {
+            transform.position = new Vector3(0, 0, 0);
+        }
+         /* F5 - Decrease Health */
+        if (Input.GetKeyDown(KeyCode.F5))
+        {
+            this.currentHealth -= 10;
+        }
+
+          /* F6 - Increase Health */
+        if (Input.GetKeyDown(KeyCode.F6))
+        {
+            this.currentHealth += 10;
+        }
+
+         /* F7 - Decrease Experience Points */
+        if (Input.GetKeyDown(KeyCode.F7))
+        {
+            this.currentEXP -= 20;
+        }
+
+         /* F8 - Increase Experience Points */
+        if (Input.GetKeyDown(KeyCode.F8))
+        {
+            this.currentEXP += 20;
+        }
 	}
 
     void FixedUpdate()

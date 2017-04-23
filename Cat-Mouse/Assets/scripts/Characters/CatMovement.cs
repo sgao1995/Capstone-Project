@@ -261,10 +261,24 @@ public class CatMovement : MonoBehaviour
         }
 	}
 	
-	/* refreshes cooldowns of all skills */
-	void useReload(){
-		
-	}
+	/* Reload Skill - Instantly resets the Cooldown Period of all Skills. All active Skills are usuable immediately */
+    void useReload()
+    {
+        /* For each enabled Skill Slot */
+        for (int i = 1; i <= catSkill.getNumSkillSlots(); i++)
+        {
+            Debug.Log("Skill Slot - 1 is: " + i);
+            if (catSkill.getSkillSlot(i).getSlotEnabled() == true)
+            {
+                /* Checks to see the Skill is not an Ultimate Skill */
+                if (catSkill.getSkillSlot(i).getSlotSkill().getSkillTier() == 0)
+                {
+                    catSkill.getSkillSlot(i).getSlotSkill().setSkillCooldownElapsed(catSkill.getSkillSlot(i).getSlotSkill().getSkillCooldownTotal());
+                    Debug.Log("The cooldown for Skill Slot " + i + " is now: " + catSkill.getSkillSlot(i).getSlotSkill().getSkillCooldownElapsed());
+                }
+            }
+        }
+    }
 	
 	/* Function that placed a trap on the ground in front of the player */
 	[PunRPC]
@@ -291,10 +305,8 @@ public class CatMovement : MonoBehaviour
 		Vector3 lassoPos = transform.position;
 		Lasso newLasso = ((GameObject)PhotonNetwork.InstantiateSceneObject("Lasso", lassoPos, lassoRot, 0)).GetComponent<Lasso>();
 		// range of 10 units
-		Camera catCam = transform.Find("CatCam").GetComponent<Camera>();
-		Ray ray = catCam.ViewportPointToRay(new Vector3(0.5F, 0.5F, 0));
-		Vector3 endPos = ray.origin + ray.direction * 10f;
-		newLasso.Initialize(transform.position + (transform.up*0.7f) + (transform.right*0.5f) + (transform.forward*0.5f), endPos, ray, transform.gameObject);
+		Vector3 endPos = transform.position + transform.forward * 10f;
+		newLasso.Initialize(transform.position + (transform.up*0.7f) + (transform.right*0.5f) + (transform.forward*0.5f), endPos, transform.gameObject);
     }
     IEnumerator lieInWait() //lieinwait skill, wait 3 seconds and become invisible
     {
@@ -471,7 +483,7 @@ public class CatMovement : MonoBehaviour
         if (GetComponent<PhotonView>().isMine)
         {
             /* If the Maximum Experience Points for the current Level is reached, Level Up the Character */
-            if (this.currentEXP >= this.maxEXP)
+            if (this.currentEXP >= this.maxEXP && level <= 3)
             {
                 this.LevelUp();
             }
@@ -556,9 +568,7 @@ public class CatMovement : MonoBehaviour
 				InteractWithObject();
 			}
 		}
-		if (Input.GetKeyDown(KeyCode.K)){
-			TakeDamage(5f);
-		}
+
 		if (Input.GetKeyDown("escape"))
         {
             Cursor.lockState = CursorLockMode.None; //if we press esc, cursor appears on screen
@@ -586,7 +596,38 @@ public class CatMovement : MonoBehaviour
 				transform.GetComponent<PhotonView>().RPC("InvisC", PhotonTargets.AllBuffered, 1f, 1f);
 			}
 		}
-        //Debug.Log("DEAL THIS MUCH DAMAGE:" + attackPowerM);
+
+		
+		
+		/* CHEATS */
+		/* move player to location */
+		if (Input.GetKeyDown(KeyCode.T))
+        {
+            transform.position = new Vector3(0, 0, 0);
+        }
+         /* F5 - Decrease Health */
+        if (Input.GetKeyDown(KeyCode.F5))
+        {
+            this.currentHealth -= 10;
+        }
+
+          /* F6 - Increase Health */
+        if (Input.GetKeyDown(KeyCode.F6))
+        {
+            this.currentHealth += 10;
+        }
+
+         /* F7 - Decrease Experience Points */
+        if (Input.GetKeyDown(KeyCode.F7))
+        {
+            this.currentEXP -= 20;
+        }
+
+         /* F8 - Increase Experience Points */
+        if (Input.GetKeyDown(KeyCode.F8))
+        {
+            this.currentEXP += 20;
+        }
 	}
     //heightenedSenses
     void heightenedSenses()
@@ -945,11 +986,6 @@ public class CatMovement : MonoBehaviour
 				TakeDamage(mine.mineSize * 50f);
 			}
         }
-        // if gets hit by a dart
-        if (collisionInfo.gameObject.tag == "dart")
-        {
-            transform.GetComponent<PhotonView>().RPC("Asleep", PhotonTargets.AllBuffered);
-        }
 	}
     [PunRPC]
     IEnumerator Asleep()//if is hit by a sleeping dart, is put to sleep for 5 seconds
@@ -1055,6 +1091,12 @@ public class CatMovement : MonoBehaviour
 			transform.GetComponent<PhotonView>().RPC("PlayAnim", PhotonTargets.All, "Unarmed-Death1");
 			WaitForAnimation(1.5f);
 		}
+		// if gets hit by a dart
+        if (obj.tag == "Dart")
+        {
+            transform.GetComponent<PhotonView>().RPC("Asleep", PhotonTargets.AllBuffered);
+			PhotonNetwork.Destroy(obj.gameObject);
+        }
 	}
     public float getHealth()
     {
