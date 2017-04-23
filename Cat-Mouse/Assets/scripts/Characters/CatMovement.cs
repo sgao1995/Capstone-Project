@@ -9,7 +9,6 @@ public class CatMovement : MonoBehaviour
     private int level = 0;
     private float currentEXP = 0;
     private float maxEXP;
-    public float power;
     private float speed = 3.0f; //speed value
     private float jumpForce;//amount of jump force
     public float currentHealth = 100;
@@ -256,9 +255,15 @@ public class CatMovement : MonoBehaviour
                 case 21:
                     Debug.Log("use 21");
                     //reload skill
+					useReload();
                     break;
             }
         }
+	}
+	
+	/* refreshes cooldowns of all skills */
+	void useReload(){
+		
 	}
 	
 	/* Function that placed a trap on the ground in front of the player */

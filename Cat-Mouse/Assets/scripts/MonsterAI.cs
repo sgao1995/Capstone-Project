@@ -37,8 +37,8 @@ public class MonsterAI : MonoBehaviour
     float patrolTimer = 5f;
     float turnTimer = 1.8f;
     // attack
-    float retargetTimer = 5f;
-    private float timeUntilRetarget = 1f;
+    float retargetTimer = 1f;
+    private float timeUntilRetarget = 0.5f;
 
     // utility variables
     NavMeshAgent agent;
@@ -392,7 +392,7 @@ public class MonsterAI : MonoBehaviour
             {
                 if (hitInfo.collider.transform.GetComponent<MouseMovement>().getHealth() > 0 && hitInfo.collider.transform.GetComponent<MouseMovement>().getHealth() - attackPower <= 0)
                 {
-                    GameObject.Find("WinObj").GetComponent<WinScript>().setMouseDeaths();
+                    GameObject.Find("GUI").GetComponent<WinScript>().setMouseDeaths();
                 }
                 hitInfo.collider.transform.GetComponent<MouseMovement>().SendMessage("TakeDamage", attackPower);
             }
@@ -409,7 +409,7 @@ public class MonsterAI : MonoBehaviour
         if (canMove)
         {
             currentPos = transform.position;
-            if (currentPos == lastPos)
+            if (Vector3.Distance(currentPos, lastPos) <= 0.001f)
             {
                 notmoving = true;
             }
@@ -448,8 +448,14 @@ public class MonsterAI : MonoBehaviour
             }
             else if (currentMode == "Attack")
             {
-
-                GetComponent<Animator>().SetBool("WalkForward", true);
+                if (!notmoving)
+                {
+                    GetComponent<Animator>().SetBool("WalkForward", true);
+                }
+                else
+                {
+                    GetComponent<Animator>().SetBool("WalkForward", false);
+                }
 
                 if (!soundPlayer.isPlaying)
                 {

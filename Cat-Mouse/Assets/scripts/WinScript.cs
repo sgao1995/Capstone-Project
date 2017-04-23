@@ -38,7 +38,7 @@ public class WinScript : MonoBehaviour {
     {
         Debug.Log("still leaving...");
         PhotonNetwork.isMessageQueueRunning = false;
-        PhotonNetwork.LoadLevel("lobby");
+        PhotonNetwork.LoadLevel("MainMenu");
     }
     void Awake()
     {
