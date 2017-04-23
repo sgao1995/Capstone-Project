@@ -67,6 +67,8 @@ public class MonsterAI : MonoBehaviour
 
     private GameObject trappedBy;
     private bool trapped = false;
+	
+	private float lastTime;
 
     // Use this for initialization
     void Start()
@@ -408,16 +410,6 @@ public class MonsterAI : MonoBehaviour
     {
         if (canMove)
         {
-            currentPos = transform.position;
-            if (Vector3.Distance(currentPos, lastPos) <= 0.001f)
-            {
-                notmoving = true;
-            }
-            else
-            {
-                notmoving = false;
-            }
-            lastPos = currentPos;
             if (trapped)
             {
                 transform.position = trappedBy.transform.position;
@@ -477,6 +469,19 @@ public class MonsterAI : MonoBehaviour
     // non motion based 
     void Update()
     {
+		// check if monster is moving based on position
+		currentPos = transform.position;
+		if (Time.time - lastTime > 0.01f && Vector3.Distance(currentPos, lastPos) <= 0.01f)
+		{
+			notmoving = true;
+		}
+		else
+		{
+			notmoving = false;
+		}
+		lastPos = currentPos;
+		lastTime = Time.time;
+		
         animDirection = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical")).normalized;
 
         if (canMove)
@@ -523,7 +528,7 @@ public class MonsterAI : MonoBehaviour
                     if (attackCooldownTimer < 0)
                     {
                         // if close enough then attack
-                        if (dist < 2f)
+                        if (dist < 1f)
                         {
                             attackChance = Random.Range(0, 1f);
                             if (attackChance < 0.2f)
@@ -539,7 +544,7 @@ public class MonsterAI : MonoBehaviour
                     if (attackCooldownTimer < 0)
                     {
                         // if close enough then attack
-                        if (dist < 2f)
+                        if (dist < 1f)
                         {
                             attackChance = Random.Range(0, 1f);
                             if (attackChance < 0.15f)
@@ -581,7 +586,7 @@ public class MonsterAI : MonoBehaviour
                     if (attackCooldownTimer < 0)
                     {
                         // if close enough then attack
-                        if (dist < 2f)
+                        if (dist < 1.5f)
                         {
                             attackChance = Random.Range(0, 1f);
                             if (attackChance < 0.1f)

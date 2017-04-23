@@ -479,7 +479,7 @@ public class Maze : MonoBehaviour {
 			}
 			// minefield
 			else if (puzzleType == 1){
-				float mineMultiplier = puzzleRooms[r].getCells().Count/25f;
+				float mineMultiplier = puzzleRooms[r].getCells().Count/20f;
 				// spawn mines of varying size and damage based on Perlin noise
 				// number of mines varies with room size
 				for (int c = 0; c < puzzleRooms[r].getCells().Count; c++){
@@ -510,7 +510,7 @@ public class Maze : MonoBehaviour {
 			}
 			// spike room
 			else if (puzzleType == 2){
-				float spikeMultiplier = puzzleRooms[r].getCells().Count/25f;
+				float spikeMultiplier = puzzleRooms[r].getCells().Count/15f;
 				// spawn spikes
 				for (int c = 0; c < puzzleRooms[r].getCells().Count; c++){
 					MazeCell currentCell = puzzleRooms[r].getCells()[c];

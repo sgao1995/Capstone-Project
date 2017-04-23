@@ -7,9 +7,13 @@ public class Chest : MonoBehaviour {
 	public bool chestOpening = false;
 	public float duration = 30f;
 	float newRot = 0;
-	public int whichPieceInside;
+	private int whichPieceInside;
 	public bool puzzlePieceSpawned = false;	
 	public PuzzlePiece[] puzzlePiecePrefabs;
+	
+	public void setWhichPieceInside(int wp){
+		whichPieceInside = wp;
+	}
 	
 	// open the chest
 	public int Interact(){

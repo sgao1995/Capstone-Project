@@ -28,6 +28,7 @@ public class lobby : Photon.MonoBehaviour
     void OnJoinedLobby()
     {
         Debug.Log("OnJoinedLobby");
+		GameObject.Find("ConnectionStatus").GetComponent<Text>().text = "Connected!";
         Invoke("Refresh", 0.1f);
         Refresh();
     }

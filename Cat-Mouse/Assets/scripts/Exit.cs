@@ -10,8 +10,8 @@ public class Exit : MazeWall {
 	
 	// interact with the door
 	public void Interact(){
-		if (GameObject.Find("WinObj").GetComponent<WinScript>().numPuzzlePiecesHeld() == 3){
-			GameObject.Find("WinObj").GetComponent<WinScript>().openExit();
+		if (GameObject.Find("GUI").GetComponent<WinScript>().numPuzzlePiecesHeld() == 3){
+			GameObject.Find("GUI").GetComponent<WinScript>().openExit();
 		}
 	}
 }

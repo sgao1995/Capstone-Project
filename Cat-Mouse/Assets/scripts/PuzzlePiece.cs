@@ -23,7 +23,7 @@ public class PuzzlePiece : MonoBehaviour {
 	}
 	
 	public void Interact(){
-		GameObject.Find("WinObj").GetComponent<WinScript>().pickedUpPuzzlePiece();
+		GameObject.Find("GUI").GetComponent<WinScript>().pickedUpPuzzlePiece();
 		PhotonNetwork.Destroy(this.gameObject);
 	}
 }

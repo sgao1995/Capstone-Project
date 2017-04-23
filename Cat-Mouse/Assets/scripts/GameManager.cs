@@ -170,14 +170,13 @@ public class GameManager : Photon.PunBehaviour
         }
 		// master client spawns the chests
 		// also spawns the puzzles that are global
+		List<int> tempTypes = new List<int>();
+		tempTypes.Add(1);
+		tempTypes.Add(2);
+		tempTypes.Add(4);
+		activePuzzleTypes = tempTypes;
         if (PhotonNetwork.isMasterClient)
         {
-            List<int> tempTypes = new List<int>();
-            tempTypes.Add(1);
-            tempTypes.Add(2);
-            tempTypes.Add(4);
-			activePuzzleTypes = tempTypes;
-			Debug.Log("length " + activePuzzleTypes.Count);
             mazeInstance.GenerateChestLocations();
             mazeInstance.GeneratePuzzles(activePuzzleTypes);
         }
@@ -302,7 +301,7 @@ public class GameManager : Photon.PunBehaviour
                 Quaternion chestRot = new Quaternion(0f, 0f, 0f, 0f);
                 GameObject chest = (GameObject)PhotonNetwork.InstantiateSceneObject("Chest", chestPos, chestRot, 0);
                 Chest newChest = chest.GetComponent<Chest>();
-                newChest.whichPieceInside = (i / 2) + 1;
+                newChest.setWhichPieceInside((i / 2) + 1);
             }
         }
     }
