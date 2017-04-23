@@ -422,7 +422,6 @@ public class MonsterAI : MonoBehaviour
             {
 
                 GetComponent<Animator>().SetBool("WalkForward", false);
-				agent.SetDestination(transform.position);
 
             }
             else if (currentMode == "Patrol")
@@ -614,7 +613,6 @@ public class MonsterAI : MonoBehaviour
             if (currentMode == "Sleeping")
             {
                 delayTimer = delayBetweenMovements;
-				agent.SetDestination(transform.position);
             }
             else if (currentMode == "Patrol")
             {
@@ -694,12 +692,5 @@ public class MonsterAI : MonoBehaviour
     {
         GetComponent<Animator>().SetTrigger(a);
     }
-	
-	[PunRPC]
-	void ForcePositionChange(Vector3 newPos){
-		transform.position = newPos;
-		agent.SetDestination(newPos);
-	}
-	
 
 }

@@ -199,13 +199,6 @@ public class MouseMovement : MonoBehaviour {
     {
         PhotonNetwork.Destroy(obj);
     }
-	
-	[PunRPC]
-	void ForcePositionChange(Vector3 newPos){
-		transform.position = newPos;
-	}
-	
-	
     void Disengage()//Explorer Skill (active): Player will jump backwards a certain amount
     {
         canMove = false;
