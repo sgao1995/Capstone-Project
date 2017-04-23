@@ -84,7 +84,7 @@ public class Lasso : MonoBehaviour {
 				if (target.tag != "Ball")
 					target.transform.position = new Vector3(current.x, 0f, current.z);
 				else{
-					target.transform.position = current;
+					target.GetComponent<PhotonView>().RPC("ForcePositionChange", PhotonTargets.AllBuffered, current);
 				}
 			}
 			
