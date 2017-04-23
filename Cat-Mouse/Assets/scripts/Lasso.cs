@@ -71,8 +71,8 @@ public class Lasso : MonoBehaviour {
 	void Update(){
 		if (begin){
 			if (hitUnpullable){
-				Debug.Log(Vector3.Distance(initialLocation + (10f * dir * (Time.time - startTime)), target.transform.parent.transform.position));
-				Vector3 distToWall = initialLocation + (10f * dir * (Time.time - startTime));
+				Debug.Log("pos of hit " + target.transform.parent.transform.position);
+				Vector3 distToWall = initialLocation + (7f * dir * (Time.time - startTime));
 				if (Vector3.Distance(new Vector3(distToWall.x, 0f, distToWall.z), target.transform.parent.transform.position) <= 1f){
 					Debug.Log("hit wall");
 					onWayBack = true;
