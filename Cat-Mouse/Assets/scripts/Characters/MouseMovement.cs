@@ -322,7 +322,7 @@ public class MouseMovement : MonoBehaviour {
         else
             skillPoints += 1;
 		damage = 8 + level * 2f;
-        jumpForce = 250f;
+        jumpForce = 600f;
         attackCooldownDelay = 1.1f;
 
         /* Sets Character Maximum Health for new Level */
@@ -873,9 +873,12 @@ public class MouseMovement : MonoBehaviour {
         if (Physics.SphereCast(transform.position, 0.2f, transform.forward, out hitInfo, 1))
         {
             Debug.Log("We hit: " + hitInfo.collider.name);
-            if (hitInfo.collider.tag == "Monster")
+            if (hitInfo.collider.tag == "Monster" || hitInfo.collider.tag == "MonsterElite" || hitInfo.collider.tag == "Boss" || hitInfo.collider.tag == "PuzzleRoomBoss")
             {
                 Debug.Log("Trying to hurt " + hitInfo.collider.transform.name + " by calling script " + hitInfo.collider.transform.GetComponent<MonsterAI>().name);
+				
+				// tell the monster to target this player
+				hitInfo.collider.transform.GetComponent<MonsterAI>().transform.GetComponent<PhotonView>().RPC("TargetMe", PhotonTargets.AllBuffered, this.gameObject.GetComponent<PhotonView>().viewID);
 				
 				if (hitInfo.collider.transform.GetComponent<MonsterAI>().getHealth() > 0 && hitInfo.collider.transform.GetComponent<MonsterAI>().getHealth() - damage*damageMod <= 0){
                     //currentEXP += hitInfo.collider.transform.GetComponent<MonsterAI>().getExpDrop();
@@ -886,64 +889,6 @@ public class MouseMovement : MonoBehaviour {
 				}
 
 				hitInfo.collider.transform.GetComponent<MonsterAI>().SendMessage("takeDamage", damage*damageMod);
-                if (isCrippled)
-                {
-                    hitInfo.collider.transform.GetComponent<PhotonView>().RPC("Crippled", PhotonTargets.AllBuffered);
-                    isCrippled = false;
-                }
-
-            }
-            if (hitInfo.collider.tag == "MonsterElite")
-            {
-                Debug.Log("Trying to hurt " + hitInfo.collider.transform.name + " by calling script " + hitInfo.collider.transform.GetComponent<MonsterAI>().name);
-
-                if (hitInfo.collider.transform.GetComponent<MonsterAI>().getHealth() > 0 && hitInfo.collider.transform.GetComponent<MonsterAI>().getHealth() - damage* damageMod <= 0)
-                {
-                    //currentEXP += hitInfo.collider.transform.GetComponent<MonsterAI>().getExpDrop();
-                    //mouseVitality.setCurrentExperiencePoints(currentEXP);
-                    currentEXP += 100;
-					
-                }
-
-                hitInfo.collider.transform.GetComponent<MonsterAI>().SendMessage("takeDamage", damage* damageMod);
-                if (isCrippled)
-                {
-                    hitInfo.collider.transform.GetComponent<PhotonView>().RPC("Crippled", PhotonTargets.AllBuffered);
-                    isCrippled = false;
-                }
-
-            }
-            if (hitInfo.collider.tag == "Boss")
-            {
-                Debug.Log("Trying to hurt " + hitInfo.collider.transform.name + " by calling script " + hitInfo.collider.transform.GetComponent<MonsterAI>().name);
-
-                if (hitInfo.collider.transform.GetComponent<MonsterAI>().getHealth() > 0 && hitInfo.collider.transform.GetComponent<MonsterAI>().getHealth() - damage* damageMod <= 0)
-                {
-                    //currentEXP += hitInfo.collider.transform.GetComponent<MonsterAI>().getExpDrop();
-                    //mouseVitality.setCurrentExperiencePoints(currentEXP);
-                    currentEXP += 500;
-                }
-
-                hitInfo.collider.transform.GetComponent<MonsterAI>().SendMessage("takeDamage", damage* damageMod);
-                if (isCrippled)
-                {
-                    hitInfo.collider.transform.GetComponent<PhotonView>().RPC("Crippled", PhotonTargets.AllBuffered);
-                    isCrippled = false;
-                }
-
-            }
-            if (hitInfo.collider.tag == "PuzzleRoomBoss")
-            {
-                Debug.Log("Trying to hurt " + hitInfo.collider.transform.name + " by calling script " + hitInfo.collider.transform.GetComponent<MonsterAI>().name);
-
-                if (hitInfo.collider.transform.GetComponent<MonsterAI>().getHealth() > 0 && hitInfo.collider.transform.GetComponent<MonsterAI>().getHealth() - damage* damageMod <= 0)
-                {
-                    //currentEXP += hitInfo.collider.transform.GetComponent<MonsterAI>().getExpDrop();
-                    //mouseVitality.setCurrentExperiencePoints(currentEXP);
-                    currentEXP += 250;
-                }
-
-                hitInfo.collider.transform.GetComponent<MonsterAI>().SendMessage("takeDamage", damage* damageMod);
                 if (isCrippled)
                 {
                     hitInfo.collider.transform.GetComponent<PhotonView>().RPC("Crippled", PhotonTargets.AllBuffered);

@@ -106,10 +106,10 @@ public class GameManager : Photon.PunBehaviour
 		}
 		Debug.Log("finished editng spawns");
         // spawn basic monsters and elite monsters
-        for (int i = 0; i < monsterSpawnList.Count; i++)
-        {
-            SpawnMonsters(i);
-        }
+        //for (int i = 0; i < monsterSpawnList.Count; i++)
+       // {
+            SpawnMonsters(10);
+       // }
         // spawn boss monster
         SpawnBoss();
 
@@ -340,7 +340,7 @@ public class GameManager : Photon.PunBehaviour
     void Update()
     {
         // spawn additional monsters when they die, difficulty scaling with time
-        if (numMonsters < 30 && startSpawnCountdown == false)
+        if (numMonsters < 0 && startSpawnCountdown == false)
         {
             startSpawnCountdown = true;
             delayUntilSpawn = 10f;

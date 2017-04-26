@@ -9,7 +9,6 @@ public class MonsterAI : MonoBehaviour
     private Vector3 currentPos;
     private Vector3 lastPos;
     // monster stats
-    private float speed = 2.0f; //speed value
     public float HP;
     public float attackPower;
     private float attackCooldownDelay;
@@ -19,7 +18,7 @@ public class MonsterAI : MonoBehaviour
 
     //animations:
     //  Animator animator;
-    Vector3 animDirection = Vector3.zero;
+    //Vector3 animDirection = Vector3.zero;
     /*  static int hitState = Animator.StringToHash("Base Layer.GetHit");
       static int deathState = Animator.StringToHash("Base Layer.Death");
       static int attackState = Animator.StringToHash("Base Layer.Attack");
@@ -29,16 +28,6 @@ public class MonsterAI : MonoBehaviour
       static int idleState = Animator.StringToHash("Base Layer.Idle");
       static int walkState = Animator.StringToHash("Base Layer.WalkForward");
       private AnimatorStateInfo currentState;*/
-
-    // list of the players in the game
-    private List<GameObject> playersInGame = new List<GameObject>();
-    public int targettedPlayer = 0;
-    // patrol
-    float patrolTimer = 5f;
-    float turnTimer = 1.8f;
-    // attack
-    float retargetTimer = 1f;
-    private float timeUntilRetarget = 0.5f;
 
     // utility variables
     NavMeshAgent agent;
@@ -54,7 +43,6 @@ public class MonsterAI : MonoBehaviour
     private float bashCooldownTimer = 30f;
     private float stompCooldownTimer = 20f;
     private float healCooldownTimer = 30f;
-    private float dist;
 
     public AudioClip footstepSound;
     public AudioClip attackMissSound;
@@ -69,6 +57,9 @@ public class MonsterAI : MonoBehaviour
     private bool trapped = false;
 	
 	private float lastTime;
+	
+	// keep track of the last player to hit this monster
+	private GameObject targettedPlayer;
 
     // Use this for initialization
     void Start()
@@ -77,29 +68,15 @@ public class MonsterAI : MonoBehaviour
         //       animator.enabled = true;
         monsterrb = GetComponent<Rigidbody>();
         delayTimer = delayBetweenMovements;
+		modes.Add("Sleeping");
         modes.Add("Patrol");
-        modes.Add("Attack");
-        modes.Add("Sleeping");
+		modes.Add("Attack");
 
         agent = GetComponent<NavMeshAgent>();
         currentMode = "Sleeping";
         soundPlayer = GetComponent<AudioSource>();
     }
-    // sets the player list with the players in the game
-    private void setPlayerList()
-    {
-        playersInGame = new List<GameObject>();
-        GameObject[] catArray = GameObject.FindGameObjectsWithTag("Cat");
-        for (int i = 0; i < catArray.Length; i++)
-        {
-            playersInGame.Add(catArray[i]);
-        }
-        GameObject[] mouseArray = GameObject.FindGameObjectsWithTag("Mouse");
-        for (int i = 0; i < mouseArray.Length; i++)
-        {
-            playersInGame.Add(mouseArray[i]);
-        }
-    }
+
 
     public void setMonsterType(string type)
     {
@@ -223,6 +200,17 @@ public class MonsterAI : MonoBehaviour
         agent.speed = 2f;
     }
 
+	[PunRPC]
+	void TargetMe(int thisPlayerHitMe){
+		targettedPlayer = PhotonView.Find(thisPlayerHitMe).gameObject;
+		// change modes to attack
+        if (currentMode != "Attack")
+        {
+            currentMode = "Attack";
+            delayTimer = delayBetweenMovements;
+        }
+	}
+	
     void takeDamage(float dmg)
     {
         if (HP - dmg > 0)
@@ -240,16 +228,7 @@ public class MonsterAI : MonoBehaviour
         transform.GetComponent<PhotonView>().RPC("changeHealth", PhotonTargets.AllBuffered, dmg);
         Debug.Log("take " + dmg + " damage");
         Debug.Log("hp is:" + HP);
-        retargetTimer = timeUntilRetarget;
         transform.GetComponent<PhotonView>().RPC("playSound", PhotonTargets.AllBuffered, 2, 1f);
-
-        // change modes to attack
-        if (currentMode != "Attack")
-        {
-            currentMode = "Attack";
-            delayTimer = delayBetweenMovements;
-            setPlayerList();
-        }
     }
     // take damage
     [PunRPC]
@@ -283,17 +262,6 @@ public class MonsterAI : MonoBehaviour
         // remove monster from the game
         PhotonNetwork.Destroy(this.gameObject);
 
-    }
-    // turn left 2 degrees
-    void TurnLeft()
-    {
-        transform.Rotate(transform.up, -2f, Space.World);
-    }
-
-    // turn right 2 degrees
-    void TurnRight()
-    {
-        transform.Rotate(transform.up, 2f, Space.World);
     }
 
     // attack in front of monster
@@ -457,9 +425,9 @@ public class MonsterAI : MonoBehaviour
                     transform.GetComponent<PhotonView>().RPC("playSound", PhotonTargets.AllBuffered, 0, 1f);
                 }
                 // face forward unless distance is short, then look at player
-                if (dist < 3f)
+                if (Vector3.Distance(this.transform.position, targettedPlayer.transform.position) < 3f)
                 {
-                    transform.LookAt(playersInGame[targettedPlayer].transform);
+                    transform.LookAt(targettedPlayer.transform);
                 }
                 else
                 {
@@ -485,44 +453,25 @@ public class MonsterAI : MonoBehaviour
 		lastPos = currentPos;
 		lastTime = Time.time;
 		
-        animDirection = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical")).normalized;
+       // animDirection = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical")).normalized;
 
         if (canMove)
         {
             if (currentMode == "Attack")
             {
-                dist = Vector3.Distance(this.transform.position, playersInGame[targettedPlayer].transform.position);
-                // target a player upon mode attack
-                if (retargetTimer < 0)
-                {
-                    retargetTimer = timeUntilRetarget;
-                }
-                // then retarget every .5 seconds
-                if (retargetTimer == timeUntilRetarget)
-                {
-					Vector3 offset;
-					if (monsterType == "Boss")
-					{
-						offset = 1.5f * Vector3.Normalize(this.transform.position - playersInGame[targettedPlayer].transform.position);
-					}
-					else
-					{
-						offset = Vector3.Normalize(this.transform.position - playersInGame[targettedPlayer].transform.position) / 3f;
-					}
-					agent.SetDestination(playersInGame[targettedPlayer].transform.position + offset);
-                    // find closest player
-                    float closestDist = float.MaxValue;
-                    for (int p = 0; p < playersInGame.Count; p++)
-                    {
-                        dist = Vector3.Distance(this.transform.position, playersInGame[p].transform.position);
-                        if (dist < closestDist)
-                        {
-                            targettedPlayer = p;
-                        }
-                    }
-                }
-                retargetTimer -= Time.deltaTime;
-
+				Vector3 offset;
+				if (monsterType == "Boss")
+				{
+					offset = 1.5f * Vector3.Normalize(this.transform.position - targettedPlayer.transform.position);
+				}
+				else
+				{
+					offset = Vector3.Normalize(this.transform.position - targettedPlayer.transform.position) / 3f;
+				}
+				agent.SetDestination(targettedPlayer.transform.position + offset);
+                    
+				Debug.Log("targetting player " + targettedPlayer + ", distance of " + Vector3.Distance(this.transform.position, targettedPlayer.transform.position));
+					
                 // type check
                 if (monsterType == "Monster")
                 {
@@ -530,7 +479,7 @@ public class MonsterAI : MonoBehaviour
                     if (attackCooldownTimer < 0)
                     {
                         // if close enough then attack
-                        if (dist < 1f)
+                        if (Vector3.Distance(this.transform.position, targettedPlayer.transform.position) < 1f)
                         {
                             attackChance = Random.Range(0, 1f);
                             if (attackChance < 0.2f)
@@ -546,7 +495,7 @@ public class MonsterAI : MonoBehaviour
                     if (attackCooldownTimer < 0)
                     {
                         // if close enough then attack
-                        if (dist < 1f)
+                        if (Vector3.Distance(this.transform.position, targettedPlayer.transform.position) < 1f)
                         {
                             attackChance = Random.Range(0, 1f);
                             if (attackChance < 0.15f)
@@ -567,7 +516,7 @@ public class MonsterAI : MonoBehaviour
                     if (attackCooldownTimer < 0)
                     {
                         // if close enough then attack
-                        if (dist < 4f)
+                        if (Vector3.Distance(this.transform.position, targettedPlayer.transform.position) < 4f)
                         {
                             attackChance = Random.Range(0, 1f);
                             if (attackChance < 0.15f)
@@ -588,7 +537,7 @@ public class MonsterAI : MonoBehaviour
                     if (attackCooldownTimer < 0)
                     {
                         // if close enough then attack
-                        if (dist < 1.5f)
+                        if (Vector3.Distance(this.transform.position, targettedPlayer.transform.position) < 1.5f)
                         {
                             attackChance = Random.Range(0, 1f);
                             if (attackChance < 0.1f)
@@ -609,7 +558,9 @@ public class MonsterAI : MonoBehaviour
         delayTimer -= Time.deltaTime;
         if (delayTimer < 0)
         {
-            currentMode = modes[Random.Range(0, modes.Count)];
+			// monsters can only switch between sleep and patrol
+            currentMode = modes[Random.Range(0,2)];
+			Debug.Log(currentMode);
             if (currentMode == "Sleeping")
             {
                 delayTimer = delayBetweenMovements;
@@ -623,11 +574,6 @@ public class MonsterAI : MonoBehaviour
                 // need to add 0.5 or else it will be on an edge
                 Vector3 targetLocation = new Vector3(0.5f + Random.Range(-mazeSize, mazeSize), 0.5f, 0.5f + Random.Range(-mazeSize, mazeSize));
                 agent.SetDestination(targetLocation);
-            }
-            else if (currentMode == "Attack")
-            {
-                delayTimer = delayBetweenMovements;
-                setPlayerList();
             }
         }
 

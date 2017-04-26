@@ -841,9 +841,12 @@ public class CatMovement : MonoBehaviour
         if (Physics.SphereCast(transform.position, 0.2f, transform.forward, out hitInfo, 1))
         {
             Debug.Log("We hit: " + hitInfo.collider.name);
-            if (hitInfo.collider.tag == "Monster")
+            if (hitInfo.collider.tag == "Monster" || hitInfo.collider.tag == "MonsterElite" || hitInfo.collider.tag == "Boss" || hitInfo.collider.tag == "PuzzleRoomBoss")
             {
                 Debug.Log("Trying to hurt " + hitInfo.collider.transform.name + " by calling script " + hitInfo.collider.transform.GetComponent<MonsterAI>().name);
+				
+				// tell the monster to target this player
+				hitInfo.collider.transform.GetComponent<MonsterAI>().transform.GetComponent<PhotonView>().RPC("TargetMe", PhotonTargets.AllBuffered, this.gameObject.GetComponent<PhotonView>().viewID);
 				
 				if (hitInfo.collider.transform.GetComponent<MonsterAI>().getHealth() > 0 && hitInfo.collider.transform.GetComponent<MonsterAI>().getHealth() - attackPowerM <= 0){
                     //currentEXP += hitInfo.collider.transform.GetComponent<MonsterAI>().getExpDrop();
@@ -860,70 +863,6 @@ public class CatMovement : MonoBehaviour
                 {
                     hitInfo.collider.transform.GetComponent<MonsterAI>().SendMessage("takeDamage", attackPowerM);
                 }	
-            }
-            if (hitInfo.collider.tag == "MonsterElite")
-            {
-                Debug.Log("Trying to hurt " + hitInfo.collider.transform.name + " by calling script " + hitInfo.collider.transform.GetComponent<MonsterAI>().name);
-
-                if (hitInfo.collider.transform.GetComponent<MonsterAI>().getHealth() > 0 && hitInfo.collider.transform.GetComponent<MonsterAI>().getHealth() - attackPowerM <= 0)
-                {
-                    //currentEXP += hitInfo.collider.transform.GetComponent<MonsterAI>().getExpDrop();
-                    //mouseVitality.setCurrentExperiencePoints(currentEXP);
-                    currentEXP += 100;
-					
-                }
-
-                if (bashActive)
-                {
-                    hitInfo.collider.transform.GetComponent<MonsterAI>().SendMessage("takeDamage", attackPowerM + 15f);
-                }
-                else
-                {
-                    hitInfo.collider.transform.GetComponent<MonsterAI>().SendMessage("takeDamage", attackPowerM);
-                }
-
-            }
-            if (hitInfo.collider.tag == "Boss")
-            {
-                Debug.Log("Trying to hurt " + hitInfo.collider.transform.name + " by calling script " + hitInfo.collider.transform.GetComponent<MonsterAI>().name);
-
-                if (hitInfo.collider.transform.GetComponent<MonsterAI>().getHealth() > 0 && hitInfo.collider.transform.GetComponent<MonsterAI>().getHealth() - attackPowerM <= 0)
-                {
-                    //currentEXP += hitInfo.collider.transform.GetComponent<MonsterAI>().getExpDrop();
-                    //mouseVitality.setCurrentExperiencePoints(currentEXP);
-                    currentEXP += 500;
-                }
-
-                if (bashActive)
-                {
-                    hitInfo.collider.transform.GetComponent<MonsterAI>().SendMessage("takeDamage", attackPowerM + 15f);
-                }
-                else
-                {
-                    hitInfo.collider.transform.GetComponent<MonsterAI>().SendMessage("takeDamage", attackPowerM);
-                }
-
-            }
-            if (hitInfo.collider.tag == "PuzzleRoomBoss")
-            {
-                Debug.Log("Trying to hurt " + hitInfo.collider.transform.name + " by calling script " + hitInfo.collider.transform.GetComponent<MonsterAI>().name);
-
-                if (hitInfo.collider.transform.GetComponent<MonsterAI>().getHealth() > 0 && hitInfo.collider.transform.GetComponent<MonsterAI>().getHealth() - attackPowerM <= 0)
-                {
-                    //currentEXP += hitInfo.collider.transform.GetComponent<MonsterAI>().getExpDrop();
-                    //mouseVitality.setCurrentExperiencePoints(currentEXP);
-                    currentEXP += 250;
-                }
-
-                if (bashActive)
-                {
-                    hitInfo.collider.transform.GetComponent<MonsterAI>().SendMessage("takeDamage", attackPowerM + 15f);
-                }
-                else
-                {
-                    hitInfo.collider.transform.GetComponent<MonsterAI>().SendMessage("takeDamage", attackPowerM);
-                }
-
             }
             if (hitInfo.collider.tag == "Mouse")
             {
