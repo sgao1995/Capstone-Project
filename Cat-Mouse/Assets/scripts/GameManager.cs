@@ -106,10 +106,10 @@ public class GameManager : Photon.PunBehaviour
 		}
 		Debug.Log("finished editng spawns");
         // spawn basic monsters and elite monsters
-        //for (int i = 0; i < monsterSpawnList.Count; i++)
-       // {
-            SpawnMonsters(10);
-       // }
+        for (int i = 0; i < monsterSpawnList.Count; i++)
+        {
+            SpawnMonsters(i);
+        }
         // spawn boss monster
         SpawnBoss();
 
@@ -267,13 +267,16 @@ public class GameManager : Photon.PunBehaviour
 
     void SpawnBoss()
     {
-        // pick a random spawn to spawn at
-        int location = Random.Range(0, monsterSpawnList.Count);
-        MonsterSpawn bossSpawn = monsterSpawnList[location];
-        GameObject monsterGO = (GameObject)PhotonNetwork.InstantiateSceneObject("Boss", bossSpawn.transform.position, bossSpawn.transform.rotation, 0);
-        monsterGO.GetComponent<MonsterAI>().enabled = true;
-        MonsterAI monster = monsterGO.GetComponent<MonsterAI>();
-        monster.setMonsterType("Boss");
+		if (PhotonNetwork.isMasterClient)
+        {
+			// pick a random spawn to spawn at
+			int location = Random.Range(0, monsterSpawnList.Count);
+			MonsterSpawn bossSpawn = monsterSpawnList[location];
+			GameObject monsterGO = (GameObject)PhotonNetwork.InstantiateSceneObject("Boss", bossSpawn.transform.position, bossSpawn.transform.rotation, 0);
+			monsterGO.GetComponent<MonsterAI>().enabled = true;
+			MonsterAI monster = monsterGO.GetComponent<MonsterAI>();
+			monster.setMonsterType("Boss");
+		}
     }
 
     // spawn the keys and chests in the puzzle rooms
@@ -340,7 +343,7 @@ public class GameManager : Photon.PunBehaviour
     void Update()
     {
         // spawn additional monsters when they die, difficulty scaling with time
-        if (numMonsters < 0 && startSpawnCountdown == false)
+        if (numMonsters < 30 && startSpawnCountdown == false)
         {
             startSpawnCountdown = true;
             delayUntilSpawn = 10f;

@@ -202,7 +202,7 @@ public class Maze : MonoBehaviour {
 		
 		MazeWall prefabType;
 		// torch
-		if (generatedNoise < 0.2){
+		if (generatedNoise < 0.27){
 			prefabType = wallPrefabs[1];
 		}
 		else{

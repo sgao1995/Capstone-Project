@@ -82,6 +82,7 @@ public class MouseMovement : MonoBehaviour {
 	public AudioClip[] dealDamageSound;
 	public AudioClip[] takeDamageSound;
 	public AudioClip smokescreenSound;
+	public AudioClip levelUpSound;
 	public AudioSource soundPlayer;
 
     //hit collider for attacking
@@ -316,6 +317,14 @@ public class MouseMovement : MonoBehaviour {
     // level up
     public void LevelUp()
     {
+		// play a level up particle effect and sound
+		Quaternion levelUpRot = Quaternion.Euler(-90, 0, 0);
+		Vector3 levelUpPos = new Vector3(transform.position.x, 0f, transform.position.z);
+		PhotonNetwork.InstantiateSceneObject("LevelUp", levelUpPos, levelUpRot, 0);
+		
+		if (level != 0)
+			transform.GetComponent<PhotonView>().RPC("playSound", PhotonTargets.AllBuffered, 10, 1f);
+		
         level += 1;
         if (level == 4)
             ultimateSkillPoints += 1;
@@ -441,6 +450,8 @@ public class MouseMovement : MonoBehaviour {
     [PunRPC]
     void playSound(int type, float t)
     {
+		soundPlayer.pitch = Random.Range(0.9f, 1.1f);
+				
 		switch(type){
 			case 0:
                 if (isHuntedActive)
@@ -471,6 +482,12 @@ public class MouseMovement : MonoBehaviour {
 				soundPlayer.PlayOneShot(smokescreenSound, t);
 				break;
 			case 6:
+				break;
+			// level up
+			case 10:
+				soundPlayer.PlayOneShot(levelUpSound, t);
+				soundPlayer.pitch = 1.0f;
+				
 				break;
 		}
     }
@@ -689,8 +706,7 @@ public class MouseMovement : MonoBehaviour {
 			if (isGrounded && !onSpikes)
 			{
 				moveV = new Vector3(0, 0, 0);
-				soundPlayer.pitch = Random.Range(0.9f, 1.1f);
-				
+
 				if (Input.GetKey(KeyCode.A))
 				{
 				//	animator.Play("MoveLeft");

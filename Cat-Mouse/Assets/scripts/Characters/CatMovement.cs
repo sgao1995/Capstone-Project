@@ -86,6 +86,7 @@ public class CatMovement : MonoBehaviour
 	public AudioClip attackMissSound;
 	public AudioClip[] dealDamageSound;
 	public AudioClip[] takeDamageSound;
+	public AudioClip levelUpSound;
 	public AudioSource soundPlayer;
 
     private Collider[] hitCollider;
@@ -143,6 +144,14 @@ public class CatMovement : MonoBehaviour
 
 	// level up
 	public void LevelUp(){
+		// play a level up particle effect and sound
+		Quaternion levelUpRot = Quaternion.Euler(-90, 0, 0);
+		Vector3 levelUpPos = new Vector3(transform.position.x, 0f, transform.position.z);
+		PhotonNetwork.InstantiateSceneObject("LevelUp", levelUpPos, levelUpRot, 0);
+		
+		if (level != 0)
+			transform.GetComponent<PhotonView>().RPC("playSound", PhotonTargets.AllBuffered, 10, 3.5f);
+		
 		level += 1;
 		if (level == 4)
 			ultimateSkillPoints += 1;
@@ -290,7 +299,7 @@ public class CatMovement : MonoBehaviour
 		yield return new WaitForSeconds(0.3f);
 		Quaternion trapRot = Quaternion.Euler(0, 0, 0);
 		Vector3 trapPos = new Vector3(transform.position.x, -0.051f, transform.position.z) + transform.forward;
-		GameObject trapGO = (GameObject)PhotonNetwork.Instantiate("SteelTrap", trapPos, trapRot, 0, null);
+		GameObject trapGO = (GameObject)PhotonNetwork.InstantiateSceneObject("SteelTrap", trapPos, trapRot, 0);
 		//GameObject trapGO = (GameObject)PhotonNetwork.InstantiateSceneObject("SteelTrap", trapPos, trapRot, 0);
 		steelTrapsList.Add(trapGO);
 		// if there are more than 5 traps, remove the earliest placed one
@@ -400,6 +409,7 @@ public class CatMovement : MonoBehaviour
 	[PunRPC]
     void playSound(int type, float t)
     {
+		soundPlayer.pitch = Random.Range(0.9f, 1.1f);
 		switch(type){
 			case 0:
                 if (isStalkerActive)
@@ -429,6 +439,11 @@ public class CatMovement : MonoBehaviour
 				//soundPlayer.PlayOneShot(smokescreenSound, t);
 				break;
 			case 6:
+				break;
+			// level up
+			case 10:
+				soundPlayer.PlayOneShot(levelUpSound, t);
+				soundPlayer.pitch = 1.0f;
 				break;
 		}
     }
@@ -688,7 +703,6 @@ public class CatMovement : MonoBehaviour
 			if (isGrounded && !onSpikes)
 			{
 				moveV = new Vector3(0, 0, 0);
-				soundPlayer.pitch = Random.Range(0.9f, 1.1f);
 				if (Input.GetKey(KeyCode.A))
 				{
                     //animator.Play("MoveLeft");
