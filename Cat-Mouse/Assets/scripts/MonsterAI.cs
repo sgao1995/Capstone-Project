@@ -52,9 +52,6 @@ public class MonsterAI : MonoBehaviour
     public AudioClip healSound;
     public AudioClip stompSound;
     public AudioSource soundPlayer;
-
-    private GameObject trappedBy;
-    private bool trapped = false;
 	
 	private float lastTime;
 	
@@ -381,10 +378,6 @@ public class MonsterAI : MonoBehaviour
     {
         if (canMove)
         {
-            if (trapped)
-            {
-                transform.position = trappedBy.transform.position;
-            }
 
             if (currentMode == "Sleeping")
             {
@@ -470,7 +463,7 @@ public class MonsterAI : MonoBehaviour
 				}
 				agent.SetDestination(targettedPlayer.transform.position + offset);
                     
-				Debug.Log("targetting player " + targettedPlayer + ", distance of " + Vector3.Distance(this.transform.position, targettedPlayer.transform.position));
+				//Debug.Log("targetting player " + targettedPlayer + ", distance of " + Vector3.Distance(this.transform.position, targettedPlayer.transform.position));
 					
                 // type check
                 if (monsterType == "Monster")
@@ -607,18 +600,10 @@ public class MonsterAI : MonoBehaviour
         canMove = true;
     }
 
-    public void releaseFromTrap()
-    {
-        trapped = false;
-        trappedBy = null;
-    }
-
     void OnTriggerEnter(Collider obj)
     {
         if (obj.tag == "SteelTrap")
         {
-            trappedBy = obj.gameObject;
-            trapped = true;
             // trap just stops movement for 5 seconds, can use the wait for animation function for this
             WaitForAnimation(5f);
             takeDamage(5f);
@@ -638,5 +623,12 @@ public class MonsterAI : MonoBehaviour
     {
         GetComponent<Animator>().SetTrigger(a);
     }
+	
+	/* Forces the monster to have position changed. Sometimes causes NavMeshAgent errors (SetDestination can only be called on an active agent that has been placed on a NavMesh) but this is fine */
+	[PunRPC]
+	void ForcePositionChange(Vector3 newPos){
+		agent.SetDestination(newPos);
+		transform.position = newPos;
+	}
 
 }

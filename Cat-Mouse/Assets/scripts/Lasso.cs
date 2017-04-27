@@ -60,11 +60,7 @@ public class Lasso : MonoBehaviour {
 				hitUnpullable = true;
 			}
 		}
-	}
-
-	
-	
-	void Awake(){
+		
 		begin = true;
 	}
 	
@@ -81,10 +77,11 @@ public class Lasso : MonoBehaviour {
 			
 			cat.GetComponent<CatMovement>().denyPlayerMovement();
 			if (pullObject && onWayBack){
-				if (target.tag != "Ball")
-					target.transform.position = new Vector3(current.x, 0f, current.z);
-				else{
+				if (target.tag == "Ball"){
 					target.transform.position = current;
+				}
+				else{
+					target.GetComponent<PhotonView>().RPC("ForcePositionChange", PhotonTargets.AllBuffered, new Vector3(current.x, 0f, current.z));
 				}
 			}
 			
@@ -93,7 +90,7 @@ public class Lasso : MonoBehaviour {
 				length = (current - start).magnitude;
 				if (Vector3.Distance(current, end) >= maxLength-1.5f){
 					if (pullObject){
-						if (target.tag == "Mouse(Clone)"){
+						if (target.tag == "Mouse"){
 							target.GetComponent<MouseMovement>().allowPlayerMovement();
 						}
 						else if (target.tag == "Monster" || target.tag == "MonsterElite" || target.tag == "Boss"){

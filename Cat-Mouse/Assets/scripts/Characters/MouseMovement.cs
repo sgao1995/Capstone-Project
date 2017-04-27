@@ -229,7 +229,7 @@ public class MouseMovement : MonoBehaviour {
         isHuntedActive = false;
         movementModifier2 = 1f;
     }
-    [PunRPC]
+    //[PunRPC]
     IEnumerator SleepDart()//Explorer Skill (active): shoot a dart which stuns for 5 seconds (enemies will be able to move again if damaged)
     {
         yield return new WaitForSeconds(0.3f);
@@ -432,7 +432,8 @@ public class MouseMovement : MonoBehaviour {
                     //Sleep dart skill
                     transform.GetComponent<PhotonView>().RPC("PlayAnim", PhotonTargets.All, "Throw");
                     WaitForAnimation(0.7f);
-                    transform.GetComponent<PhotonView>().RPC("SleepDart", PhotonTargets.AllBuffered);
+					StartCoroutine(SleepDart());
+                    //transform.GetComponent<PhotonView>().RPC("SleepDart", PhotonTargets.AllBuffered);
                     break;
             }
         }     
@@ -1129,7 +1130,8 @@ public class MouseMovement : MonoBehaviour {
 		}
 		if (obj.tag == "SteelTrap"){
 			// trap just stops movement for 5 seconds, can use the wait for animation function for this
-			transform.position = new Vector3(obj.transform.position.x, transform.position.y, obj.transform.position.z);
+			
+			//transform.position = new Vector3(obj.transform.position.x, transform.position.y, obj.transform.position.z);
 			if (!brawlerActive){
 				WaitForAnimation(5f);
 			}
@@ -1246,4 +1248,11 @@ public class MouseMovement : MonoBehaviour {
         cam.enabled = true;
         transform.GetComponent<PhotonView>().RPC("PlayAnim", PhotonTargets.All, "Unarmed-Idle");
     }
+	
+	[PunRPC]
+	void ForcePositionChange(Vector3 newPos){
+		if (!brawlerActive){
+			transform.position = newPos;
+		}
+	}
 }

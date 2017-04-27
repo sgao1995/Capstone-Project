@@ -242,12 +242,14 @@ public class CatMovement : MonoBehaviour
                     Debug.Log("use 18");
                     transform.GetComponent<PhotonView>().RPC("PlayAnim", PhotonTargets.All, "Throw");
                     WaitForAnimation(0.7f);
-                    transform.GetComponent<PhotonView>().RPC("Lasso", PhotonTargets.AllBuffered);
+					StartCoroutine(Lasso());
+                    //transform.GetComponent<PhotonView>().RPC("Lasso", PhotonTargets.AllBuffered);
                     break;
                 case 19:
                     Debug.Log("use 19");
                     /* "Trap - Lay down a steel trap that lasts 300 seconds that will snare the first enemy that steps on it for 4 seconds. Maximum of 5 traps at once. 10 second cooldown. */
-                    transform.GetComponent<PhotonView>().RPC("PlaceTrap", PhotonTargets.AllBuffered);
+					StartCoroutine(PlaceTrap());
+                    //transform.GetComponent<PhotonView>().RPC("PlaceTrap", PhotonTargets.AllBuffered);
                     break;
                 case 20:
                     Debug.Log("use 20");
@@ -283,29 +285,31 @@ public class CatMovement : MonoBehaviour
     }
 	
 	/* Function that placed a trap on the ground in front of the player */
-	[PunRPC]
+	//[PunRPC]
 	IEnumerator PlaceTrap(){
 		yield return new WaitForSeconds(0.3f);
 		Quaternion trapRot = Quaternion.Euler(0, 0, 0);
 		Vector3 trapPos = new Vector3(transform.position.x, -0.051f, transform.position.z) + transform.forward;
-		GameObject trapGO = (GameObject)PhotonNetwork.InstantiateSceneObject("SteelTrap", trapPos, trapRot, 0);
+		GameObject trapGO = (GameObject)PhotonNetwork.Instantiate("SteelTrap", trapPos, trapRot, 0, null);
+		//GameObject trapGO = (GameObject)PhotonNetwork.InstantiateSceneObject("SteelTrap", trapPos, trapRot, 0);
 		steelTrapsList.Add(trapGO);
 		// if there are more than 5 traps, remove the earliest placed one
 		if (steelTrapsList.Count > 5){
-			transform.GetComponent<PhotonView>().RPC("destroyObj", PhotonTargets.MasterClient, steelTrapsList[0]);
+			transform.GetComponent<PhotonView>().RPC("destroyObj", PhotonTargets.AllBuffered, steelTrapsList[0].GetComponent<PhotonView>().viewID);
 			// and cleanse the trap list
 			steelTrapsList.RemoveAt(0);
 		}
 	}
 
 	/* Throws a lasso in front of the player, pulling monsters and players towards the cat if connected*/
-	[PunRPC]
+	//[PunRPC]
     IEnumerator Lasso()
     {	                
 		yield return new WaitForSeconds(0.3f);
 		Quaternion lassoRot = Quaternion.Euler(0, 0, 0);
 		Vector3 lassoPos = transform.position;
 		Lasso newLasso = ((GameObject)PhotonNetwork.InstantiateSceneObject("Lasso", lassoPos, lassoRot, 0)).GetComponent<Lasso>();
+		//Lasso newLasso = ((GameObject)PhotonNetwork.InstantiateSceneObject("Lasso", lassoPos, lassoRot, 0)).GetComponent<Lasso>();
 		// range of 10 units
 		Vector3 endPos = transform.position + transform.forward * 10f;
 		newLasso.Initialize(transform.position + (transform.up*0.7f) + (transform.right*0.5f) + (transform.forward*0.5f), endPos, transform.gameObject);
@@ -949,7 +953,8 @@ public class CatMovement : MonoBehaviour
         PhotonNetwork.Destroy(obj.gameObject);
     }
 	[PunRPC]
-	void destroyObj(GameObject go){
+	void destroyObj(int goID){
+		GameObject go = PhotonView.Find(goID).gameObject;
 		PhotonNetwork.Destroy(go);
 	}
 	
